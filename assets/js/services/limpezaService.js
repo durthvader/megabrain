@@ -2,20 +2,23 @@
 // MEGABRAIN — services/limpezaService.js
 // Rotinas de limpeza para manter o projeto no plano gratuito.
 // Regra de ouro: exportar antes de apagar.
+//
+// Bases são reutilizáveis entre demandas (ver sql/007): limpar uma
+// demanda desvincula as bases (demanda_bases), mas NÃO apaga
+// bases/base_linhas nem arquivos do Storage — isso é feito por base,
+// em baseService.apagarBase, para não afetar outras demandas.
 // ============================================================
 
 import { supabase } from "../supabaseClient.js";
-
-const BUCKET = "megabrain-bases";
 
 async function apagarPorDemanda(tabela, demandaId) {
   const { error } = await supabase.from(tabela).delete().eq("demanda_id", demandaId);
   if (error) throw error;
 }
 
-export async function apagarBasesDaDemanda(demandaId) {
-  await apagarPorDemanda("base_linhas", demandaId);
-  await apagarPorDemanda("bases", demandaId);
+export async function desvincularBasesDaDemanda(demandaId) {
+  const { error } = await supabase.from("demanda_bases").delete().eq("demanda_id", demandaId);
+  if (error) throw error;
 }
 
 export function apagarRespostasDaDemanda(demandaId) {
@@ -30,19 +33,8 @@ export function apagarPlanosDaDemanda(demandaId) {
   return apagarPorDemanda("planos_acao", demandaId);
 }
 
-export async function apagarArquivosStorageDaDemanda(demandaId) {
-  const { data, error } = await supabase.storage.from(BUCKET).list(String(demandaId));
-  if (error || !data || data.length === 0) return 0;
-
-  const caminhos = data.map((arquivo) => `${demandaId}/${arquivo.name}`);
-  const { error: erroRemocao } = await supabase.storage.from(BUCKET).remove(caminhos);
-  if (erroRemocao) throw erroRemocao;
-  return caminhos.length;
-}
-
 export async function limparDemanda(demandaId) {
-  await apagarArquivosStorageDaDemanda(demandaId);
-  await apagarBasesDaDemanda(demandaId);
+  await desvincularBasesDaDemanda(demandaId);
   await apagarRespostasDaDemanda(demandaId);
   await apagarAnalisesDaDemanda(demandaId);
   await apagarPlanosDaDemanda(demandaId);

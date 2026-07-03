@@ -15,11 +15,16 @@ Unidade central de organização.
 | token_publico | text unique | usado em `formulario.html?token=…` |
 | data_inicio, data_fim | date | período da demanda |
 | status | text | `ativa` \| `concluida` \| `arquivada` \| `apagada` |
+| pagina_resultado | text | nome do arquivo `.html` gerado pela IA para o resultado desta demanda (`null` = ainda em branco) |
 | criado_em, atualizado_em | timestamptz | `atualizado_em` mantido por trigger |
 
 ## bases
 
-Metadados de cada arquivo importado (o conteúdo vai para `base_linhas`). Guarda contagens, colunas originais/normalizadas (jsonb) e, se o usuário optou, o `caminho_storage` do arquivo original.
+Metadados de cada arquivo importado (o conteúdo vai para `base_linhas`). Guarda contagens, colunas originais/normalizadas (jsonb) e, se o usuário optou, o `caminho_storage` do arquivo original. **Bases são independentes de demanda** (upload não exige escolher uma demanda) e podem ser reutilizadas por várias demandas via `demanda_bases`. Os campos `bases.demanda_id` e `base_linhas.demanda_id` continuam existindo só por compatibilidade com dados anteriores à migração `007`.
+
+## demanda_bases
+
+Tabela de junção N:N entre `demandas` e `bases` — define quais bases uma demanda usa. Apagar a demanda remove só o vínculo (a base continua existindo); apagar a base remove o vínculo em qualquer demanda que a usasse.
 
 ## base_linhas
 

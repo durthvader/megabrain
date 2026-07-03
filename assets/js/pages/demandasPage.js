@@ -1,10 +1,12 @@
 // ============================================================
 // MEGABRAIN — pages/demandasPage.js
-// Criação e listagem de demandas, com token e link públicos.
+// Criação e listagem de demandas: período (com opção indeterminada),
+// checklist de bases a vincular e link público de resultado.
 // ============================================================
 
 import "../main.js";
 import { criarDemanda, listarDemandas, arquivarDemanda } from "../services/demandaService.js";
+import { listarBasesDisponiveis, vincularBases } from "../services/baseService.js";
 import { montarLinkPublico } from "../utils/tokens.js";
 import { formatarDataBR } from "../utils/datas.js";
 import { formatarStatus } from "../utils/formatadores.js";
@@ -13,6 +15,14 @@ import { mostrarSucesso, mostrarErro } from "../utils/mensagens.js";
 const formulario = document.getElementById("form-demanda");
 const corpoTabela = document.getElementById("tabela-demandas-corpo");
 const placeholderVazio = document.getElementById("demandas-vazio");
+const checkboxIndeterminada = document.getElementById("demanda-indeterminada");
+const inputDataFim = document.getElementById("demanda-fim");
+const inputFiltroBases = document.getElementById("filtro-bases-disponiveis");
+const listaBasesDisponiveis = document.getElementById("lista-bases-disponiveis");
+const filtroTipo = document.getElementById("filtro-tipo");
+const filtroStatus = document.getElementById("filtro-status");
+
+let basesDisponiveis = [];
 
 async function copiarLink(demanda) {
   const link = montarLinkPublico(demanda);
@@ -29,7 +39,7 @@ function montarLinhaTabela(demanda) {
 
   const periodo =
     demanda.data_inicio || demanda.data_fim
-      ? `${formatarDataBR(demanda.data_inicio) || "…"} → ${formatarDataBR(demanda.data_fim) || "…"}`
+      ? `${formatarDataBR(demanda.data_inicio) || "…"} → ${formatarDataBR(demanda.data_fim) || "indeterminada"}`
       : "—";
 
   tr.innerHTML = `
@@ -80,7 +90,10 @@ function montarLinhaTabela(demanda) {
 
 async function carregarLista() {
   try {
-    const demandas = await listarDemandas();
+    const demandas = await listarDemandas({
+      tipo: filtroTipo.value || undefined,
+      status: filtroStatus.value || undefined,
+    });
     corpoTabela.innerHTML = "";
 
     placeholderVazio.classList.toggle("oculto", demandas.length > 0);
@@ -92,9 +105,66 @@ async function carregarLista() {
   }
 }
 
+function renderizarChecklistBases(filtroTexto = "") {
+  const texto = filtroTexto.trim().toLowerCase();
+  const bases = basesDisponiveis.filter(
+    (base) =>
+      !texto ||
+      base.nome_arquivo.toLowerCase().includes(texto) ||
+      base.tipo_base.toLowerCase().includes(texto)
+  );
+
+  listaBasesDisponiveis.innerHTML = "";
+
+  if (!basesDisponiveis.length) {
+    listaBasesDisponiveis.innerHTML =
+      '<p class="texto-mudo">Nenhuma base importada ainda. Suba uma em "Upload de bases".</p>';
+    return;
+  }
+  if (!bases.length) {
+    listaBasesDisponiveis.innerHTML = '<p class="texto-mudo">Nenhuma base corresponde ao filtro.</p>';
+    return;
+  }
+
+  for (const base of bases) {
+    const linha = document.createElement("div");
+    linha.className = "campo campo-checkbox";
+    linha.innerHTML = `
+      <input type="checkbox" id="base-${base.id}" value="${base.id}" />
+      <label for="base-${base.id}">${base.nome_arquivo} — ${base.tipo_base} (${base.qtd_linhas} linhas)</label>
+    `;
+    listaBasesDisponiveis.appendChild(linha);
+  }
+}
+
+async function carregarBasesDisponiveis() {
+  try {
+    basesDisponiveis = await listarBasesDisponiveis();
+    renderizarChecklistBases(inputFiltroBases.value);
+  } catch (erro) {
+    mostrarErro(`Erro ao listar bases disponíveis: ${erro.message}`);
+  }
+}
+
+function baseIdsMarcados() {
+  return [...listaBasesDisponiveis.querySelectorAll('input[type="checkbox"]:checked')].map(
+    (input) => input.value
+  );
+}
+
+checkboxIndeterminada.addEventListener("change", () => {
+  inputDataFim.disabled = checkboxIndeterminada.checked;
+  if (checkboxIndeterminada.checked) inputDataFim.value = "";
+});
+
+inputFiltroBases.addEventListener("input", () => renderizarChecklistBases(inputFiltroBases.value));
+
+[filtroTipo, filtroStatus].forEach((select) => select.addEventListener("change", carregarLista));
+
 formulario.addEventListener("submit", async (evento) => {
   evento.preventDefault();
   const dadosFormulario = new FormData(formulario);
+  const baseIds = baseIdsMarcados();
 
   try {
     const demanda = await criarDemanda({
@@ -103,15 +173,23 @@ formulario.addEventListener("submit", async (evento) => {
       descricao: dadosFormulario.get("descricao").trim(),
       responsavel: dadosFormulario.get("responsavel").trim(),
       data_inicio: dadosFormulario.get("data_inicio") || null,
-      data_fim: dadosFormulario.get("data_fim") || null,
+      data_fim: checkboxIndeterminada.checked ? null : dadosFormulario.get("data_fim") || null,
     });
 
-    mostrarSucesso(`Demanda criada. Token público: ${demanda.token_publico}`);
+    if (baseIds.length) {
+      await vincularBases(demanda.id, baseIds);
+    }
+
+    const link = montarLinkPublico(demanda);
+    mostrarSucesso(`Demanda criada. Link de resultado: ${link}`);
     formulario.reset();
+    inputDataFim.disabled = false;
+    renderizarChecklistBases();
     await carregarLista();
   } catch (erro) {
     mostrarErro(`Erro ao criar demanda: ${erro.message}`);
   }
 });
 
+carregarBasesDisponiveis();
 carregarLista();

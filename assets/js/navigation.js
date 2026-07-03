@@ -4,12 +4,13 @@
 // o item ativo a partir de <body data-page="...">.
 // ============================================================
 
+// Escala e Custos deixaram de ser seções de topo: são painéis
+// acessados a partir do detalhe de uma demanda (demanda-detalhe.html),
+// não concorrem no menu principal com Demandas/Upload.
 const LINKS = [
   { pagina: "index", rotulo: "Início", href: "index.html", icone: "🏠" },
   { pagina: "demandas", rotulo: "Demandas", href: "demandas.html", icone: "📋" },
   { pagina: "upload", rotulo: "Upload de bases", href: "upload.html", icone: "📤" },
-  { pagina: "escala", rotulo: "Escala", href: "escala.html", icone: "🗓️" },
-  { pagina: "custos", rotulo: "Custos", href: "custos.html", icone: "💰" },
   { pagina: "analises", rotulo: "Análises", href: "analises.html", icone: "🔎" },
   { pagina: "planos", rotulo: "Planos de ação", href: "planos.html", icone: "✅" },
   { pagina: "configuracoes", rotulo: "Configurações", href: "configuracoes.html", icone: "⚙️" },

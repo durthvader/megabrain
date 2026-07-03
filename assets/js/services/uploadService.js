@@ -75,14 +75,13 @@ export function obterPrevia(dados, limite = 20) {
   return (dados || []).slice(0, limite);
 }
 
-export async function importarDados(demandaId, baseId, tipoBase, dados) {
+export async function importarDados(baseId, tipoBase, dados) {
   let importadas = 0;
   let erros = 0;
   const mensagensErro = [];
 
   for (let i = 0; i < dados.length; i += TAMANHO_LOTE) {
     const lote = dados.slice(i, i + TAMANHO_LOTE).map((linha, indice) => ({
-      demanda_id: demandaId,
       base_id: baseId,
       tipo_base: tipoBase,
       linha_numero: i + indice + 1,
@@ -101,24 +100,24 @@ export async function importarDados(demandaId, baseId, tipoBase, dados) {
   return { importadas, erros, mensagensErro };
 }
 
-export async function salvarArquivoStorage(arquivo, demandaId) {
+export async function salvarArquivoStorage(arquivo, tipoBase) {
   const nomeSeguro = arquivo.name.replace(/[^\w.\-]+/g, "_");
-  const caminho = `${demandaId}/${Date.now()}_${nomeSeguro}`;
+  const caminho = `${tipoBase}/${Date.now()}_${nomeSeguro}`;
 
   const { error } = await supabase.storage.from(BUCKET).upload(caminho, arquivo);
   if (error) throw error;
   return caminho;
 }
 
-export async function registrarLog(demandaId, baseId, tipo, mensagem, detalhes = null) {
+export async function registrarLog(baseId, tipo, mensagem, detalhes = null) {
   // Log é auxiliar: falha aqui não deve derrubar a importação.
   const { error } = await supabase
     .from("logs")
-    .insert({ demanda_id: demandaId, base_id: baseId, tipo, mensagem, detalhes });
+    .insert({ base_id: baseId, tipo, mensagem, detalhes });
   if (error) console.warn("[Megabrain] Falha ao registrar log:", error.message);
 }
 
-export async function processarUpload({ demandaId, tipoBase, descricao, arquivo, guardarArquivo }) {
+export async function processarUpload({ tipoBase, descricao, arquivo, guardarArquivo }) {
   const validacao = validarArquivo(arquivo);
   if (!validacao.valido) throw new Error(validacao.erro);
 
@@ -131,11 +130,10 @@ export async function processarUpload({ demandaId, tipoBase, descricao, arquivo,
 
   let caminhoStorage = null;
   if (guardarArquivo) {
-    caminhoStorage = await salvarArquivoStorage(arquivo, demandaId);
+    caminhoStorage = await salvarArquivoStorage(arquivo, tipoBase);
   }
 
   const base = await criarBase({
-    demanda_id: demandaId,
     nome_arquivo: arquivo.name,
     tipo_base: tipoBase,
     descricao: descricao || null,
@@ -148,10 +146,9 @@ export async function processarUpload({ demandaId, tipoBase, descricao, arquivo,
     caminho_storage: caminhoStorage,
   });
 
-  const resultado = await importarDados(demandaId, base.id, tipoBase, linhas);
+  const resultado = await importarDados(base.id, tipoBase, linhas);
 
   await registrarLog(
-    demandaId,
     base.id,
     "upload",
     `Importação de "${arquivo.name}": ${resultado.importadas} linhas, ${resultado.erros} erros.`,

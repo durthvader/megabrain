@@ -24,12 +24,12 @@
       </header>
       <main class="conteudo">
         <section class="secao card">
-          <h2 class="card-titulo">1. Selecione a demanda e o arquivo</h2>
+          <h2 class="card-titulo">1. Selecione o tipo e o arquivo</h2>
+          <p class="campo-ajuda">
+            A base fica disponível para ser usada em uma ou mais demandas — a
+            vinculação é feita na criação da demanda (ou depois, no detalhe dela).
+          </p>
           <div class="linha-campos">
-            <div class="campo">
-              <label for="select-demanda">Demanda *</label>
-              <select id="select-demanda"><option value="">Carregando…</option></select>
-            </div>
             <div class="campo">
               <label for="select-tipo">Tipo de base *</label>
               <select id="select-tipo">
@@ -87,6 +87,22 @@
             <div class="kpi"><div class="kpi-valor" id="resumo-tamanho">—</div><div class="kpi-rotulo">Tamanho do arquivo</div></div>
             <div class="kpi"><div class="kpi-valor" id="resumo-storage">—</div><div class="kpi-rotulo">Original no Storage</div></div>
           </div>
+        </section>
+
+        <section class="secao">
+          <h2>Bases importadas</h2>
+          <p class="campo-ajuda">Biblioteca de bases já importadas, prontas para serem usadas em qualquer demanda.</p>
+          <div class="tabela-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Arquivo</th><th>Tipo</th><th class="numero">Linhas</th><th>Importada em</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-bases-corpo"></tbody>
+            </table>
+          </div>
+          <div class="vazio oculto" id="bases-vazio">Nenhuma base importada ainda.</div>
         </section>
       </main>
     </div>

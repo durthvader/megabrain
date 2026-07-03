@@ -52,19 +52,53 @@
                 <input id="demanda-fim" name="data_fim" type="date" />
               </div>
             </div>
+            <div class="campo campo-checkbox">
+              <input id="demanda-indeterminada" type="checkbox" />
+              <label for="demanda-indeterminada">Sem data de término definida (indeterminada)</label>
+            </div>
             <div class="campo">
               <label for="demanda-descricao">Descrição</label>
               <textarea id="demanda-descricao" name="descricao" placeholder="Contexto e objetivo da demanda"></textarea>
             </div>
+            <div class="campo">
+              <label for="filtro-bases-disponiveis">Bases a utilizar</label>
+              <input id="filtro-bases-disponiveis" placeholder="Filtrar por nome ou tipo de base…" />
+              <div class="lista-checklist" id="lista-bases-disponiveis">
+                <p class="texto-mudo">Carregando bases…</p>
+              </div>
+              <p class="campo-ajuda">Marque as bases (já importadas em Upload) que esta demanda vai usar. É possível vincular mais bases depois, no detalhe da demanda.</p>
+            </div>
             <div class="acoes-formulario">
               <button class="btn btn-primario" type="submit">Criar demanda</button>
             </div>
-            <p class="campo-ajuda">O token público e o link do formulário são gerados automaticamente.</p>
+            <p class="campo-ajuda">O token público e o link de resultado são gerados automaticamente.</p>
           </form>
         </section>
 
         <section class="secao">
           <h2>Demandas existentes</h2>
+          <div class="filtros">
+            <div class="campo">
+              <label for="filtro-tipo">Tipo</label>
+              <select id="filtro-tipo">
+                <option value="">Todos</option>
+                <option value="escala">escala</option>
+                <option value="custos">custos</option>
+                <option value="indicadores">indicadores</option>
+                <option value="formulario">formulario</option>
+                <option value="analise_livre">analise_livre</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="filtro-status">Status</label>
+              <select id="filtro-status">
+                <option value="">Todos</option>
+                <option value="ativa">ativa</option>
+                <option value="concluida">concluida</option>
+                <option value="arquivada">arquivada</option>
+              </select>
+            </div>
+          </div>
           <div class="tabela-container">
             <table>
               <thead>

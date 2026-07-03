@@ -89,3 +89,16 @@
   gap: 0.5rem;
   flex: 0 0 auto;
 }
+
+/* Checklist rolável (ex.: bases a vincular a uma demanda) */
+.lista-checklist {
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.lista-checklist .campo-checkbox { margin-bottom: 0.5rem; }
+.lista-checklist .campo-checkbox:last-child { margin-bottom: 0; }

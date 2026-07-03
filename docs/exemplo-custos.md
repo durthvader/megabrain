@@ -11,7 +11,7 @@ Cenário real: a companhia precisa reduzir banco de horas, hora extra, sobreavis
 
 ## 2. Subir as bases
 
-**Upload de bases.** Duas formas aceitas:
+**Upload de bases** (independente da demanda) e depois vincule à demanda criada acima (checklist na criação ou "Vincular base existente" no detalhe). Duas formas aceitas:
 
 **a) Uma base única** com tipo `custos` e a coluna `tipo_custo` preenchida por linha:
 
@@ -25,7 +25,7 @@ Valores em formato brasileiro (`1.234,56`) são convertidos automaticamente. Os 
 
 ## 3. Analisar no painel
 
-**Custos → selecionar a demanda:**
+**Detalhe da demanda → "Painel de custos (admin)"** (Custos não fica mais no menu principal):
 
 - **Cards:** total por tipo de custo + técnico e supervisor ofensores nº 1;
 - **Gráficos:** custo por tipo, por supervisor (top 10), por empresa, por técnico (top 10) e evolução mensal;

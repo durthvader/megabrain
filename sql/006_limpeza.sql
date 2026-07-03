@@ -22,9 +22,10 @@ where schemaname = 'public'
 order by pg_total_relation_size(relid) desc;
 
 -- ------------------------------------------------------------
--- 1) Função de limpeza por demanda: apaga bases, linhas,
---    respostas, análises, planos, logs e arquivos do Storage.
---    A demanda em si permanece (mude o status depois, se quiser).
+-- 1) Função de limpeza por demanda: DESVINCULA as bases (sem
+--    apagá-las — são reutilizáveis por outras demandas, ver
+--    sql/007) e apaga respostas, análises, planos e logs. A
+--    demanda em si permanece (mude o status depois, se quiser).
 -- ------------------------------------------------------------
 create or replace function public.limpar_demanda(p_demanda_id uuid)
 returns void
@@ -33,16 +34,11 @@ security definer
 set search_path = public
 as $$
 begin
-  delete from public.base_linhas where demanda_id = p_demanda_id;
-  delete from public.bases where demanda_id = p_demanda_id;
+  delete from public.demanda_bases where demanda_id = p_demanda_id;
   delete from public.formulario_respostas where demanda_id = p_demanda_id;
   delete from public.analises where demanda_id = p_demanda_id;
   delete from public.planos_acao where demanda_id = p_demanda_id;
   delete from public.logs where demanda_id = p_demanda_id;
-  -- Arquivos do Storage guardados como <demanda_id>/<arquivo>:
-  delete from storage.objects
-   where bucket_id = 'megabrain-bases'
-     and name like p_demanda_id::text || '/%';
 end;
 $$;
 
@@ -50,24 +46,38 @@ $$;
 -- select public.limpar_demanda('COLE-AQUI-O-UUID-DA-DEMANDA');
 
 -- ------------------------------------------------------------
--- 2) Apagar completamente as demandas ARQUIVADAS (dados + a
---    própria demanda). O delete em cascata cuida dos vínculos.
+-- 2) Apagar completamente as demandas ARQUIVADAS (a própria
+--    demanda + vínculos/respostas/análises/planos/logs via
+--    cascata). As bases NÃO são apagadas — continuam disponíveis
+--    para qualquer outra demanda que as use.
 -- ------------------------------------------------------------
--- Primeiro os arquivos do Storage das arquivadas:
-delete from storage.objects
- where bucket_id = 'megabrain-bases'
-   and split_part(name, '/', 1) in (
-     select id::text from public.demandas where status = 'arquivada'
-   );
-
--- Depois as demandas (cascata apaga o resto):
 delete from public.demandas where status = 'arquivada';
+
+-- ------------------------------------------------------------
+-- 2b) Apagar bases "órfãs" (sem nenhuma demanda vinculada) e seus
+--     arquivos no Storage — rode só se quiser liberar espaço de
+--     bases que não serão mais usadas por ninguém.
+-- ------------------------------------------------------------
+-- Confira antes quais seriam apagadas:
+-- select id, nome_arquivo, tipo_base, caminho_storage from public.bases b
+--  where not exists (select 1 from public.demanda_bases db where db.base_id = b.id);
+
+-- delete from storage.objects
+--  where bucket_id = 'megabrain-bases'
+--    and name in (
+--      select caminho_storage from public.bases b
+--       where caminho_storage is not null
+--         and not exists (select 1 from public.demanda_bases db where db.base_id = b.id)
+--    );
+--
+-- delete from public.bases b
+--  where not exists (select 1 from public.demanda_bases db where db.base_id = b.id);
 
 -- ------------------------------------------------------------
 -- 3) Limpezas pontuais úteis.
 -- ------------------------------------------------------------
--- Apagar só as linhas importadas de uma demanda (mantém metadados):
--- delete from public.base_linhas where demanda_id = 'UUID-DA-DEMANDA';
+-- Apagar as linhas de uma base específica (mantém metadados da base):
+-- delete from public.base_linhas where base_id = 'UUID-DA-BASE';
 
 -- Apagar logs com mais de 30 dias:
 delete from public.logs where criado_em < now() - interval '30 days';

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Megabrain · Resultado da demanda</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/formularios.css" />
+</head>
+<body>
+  <div class="pagina-publica">
+    <div class="pagina-publica-cartao">
+      <div class="pagina-publica-marca">🧠 Megabrain</div>
+
+      <div id="bloco-carregando">
+        <p class="texto-suave">Carregando…</p>
+      </div>
+
+      <div id="bloco-erro" class="oculto">
+        <div class="alerta alerta-erro">
+          <strong>Não foi possível abrir esta página.</strong>
+          <p id="mensagem-erro-token" style="margin: 0.4rem 0 0;"></p>
+        </div>
+      </div>
+
+      <div id="bloco-resultado" class="oculto">
+        <h2 id="titulo-demanda"></h2>
+        <span id="status-demanda"></span>
+        <p class="texto-suave" id="descricao-demanda"></p>
+
+        <div id="bloco-com-resultado" class="oculto acoes-formulario" style="margin-top: 1rem;">
+          <a class="btn btn-primario" id="link-pagina-resultado" href="#">Ver resultado</a>
+        </div>
+
+        <div id="bloco-sem-resultado" class="oculto alerta" style="margin-top: 1rem;">
+          Ainda não há um resultado disponível para esta demanda.
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="assets/js/pages/resultadoPage.js"></script>
+</body>
+</html>

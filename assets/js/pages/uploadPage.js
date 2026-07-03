@@ -4,7 +4,6 @@
 // ============================================================
 
 import "../main.js";
-import { listarDemandas } from "../services/demandaService.js";
 import {
   validarArquivo,
   lerArquivo,
@@ -12,12 +11,13 @@ import {
   obterPrevia,
   processarUpload,
 } from "../services/uploadService.js";
+import { listarBasesDisponiveis, vincularBases } from "../services/baseService.js";
 import { normalizarNomeColuna, normalizarLinhas } from "../utils/normalizarColunas.js";
 import { formatarNumero } from "../utils/formatadores.js";
+import { formatarDataBR } from "../utils/datas.js";
 import { obterParametroUrl } from "../utils/tokens.js";
 import { mostrarSucesso, mostrarErro, mostrarAviso } from "../utils/mensagens.js";
 
-const selectDemanda = document.getElementById("select-demanda");
 const selectTipo = document.getElementById("select-tipo");
 const inputDescricao = document.getElementById("input-descricao");
 const inputArquivo = document.getElementById("input-arquivo");
@@ -28,25 +28,34 @@ const secaoPrevia = document.getElementById("secao-previa");
 const chipsColunas = document.getElementById("chips-colunas");
 const tabelaPrevia = document.getElementById("tabela-previa");
 const secaoResumo = document.getElementById("secao-resumo");
+const corpoTabelaBases = document.getElementById("tabela-bases-corpo");
+const placeholderBasesVazio = document.getElementById("bases-vazio");
+
+// Se a página foi aberta a partir do detalhe de uma demanda
+// (upload.html?demanda=UUID), a base recém-importada é vinculada
+// automaticamente a ela — conveniência, não obrigação.
+const demandaContexto = obterParametroUrl("demanda");
 
 let dadosBrutos = null;
 
-async function carregarDemandas() {
+async function carregarBasesImportadas() {
   try {
-    const demandas = await listarDemandas();
-    selectDemanda.innerHTML = '<option value="">Selecione…</option>';
-    for (const demanda of demandas) {
-      if (demanda.status === "arquivada") continue;
-      const opcao = document.createElement("option");
-      opcao.value = demanda.id;
-      opcao.textContent = `${demanda.nome} (${demanda.tipo})`;
-      selectDemanda.appendChild(opcao);
-    }
+    const bases = await listarBasesDisponiveis();
+    corpoTabelaBases.innerHTML = "";
+    placeholderBasesVazio.classList.toggle("oculto", bases.length > 0);
 
-    const demandaUrl = obterParametroUrl("demanda");
-    if (demandaUrl) selectDemanda.value = demandaUrl;
+    for (const base of bases) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${base.nome_arquivo}</td>
+        <td>${base.tipo_base}</td>
+        <td class="numero">${formatarNumero(base.qtd_linhas)}</td>
+        <td>${formatarDataBR(base.criado_em)}</td>
+      `;
+      corpoTabelaBases.appendChild(tr);
+    }
   } catch (erro) {
-    mostrarErro(`Erro ao carregar demandas: ${erro.message}`);
+    mostrarErro(`Erro ao listar bases importadas: ${erro.message}`);
   }
 }
 
@@ -118,10 +127,8 @@ inputArquivo.addEventListener("change", async () => {
 
 botaoImportar.addEventListener("click", async () => {
   const arquivo = inputArquivo.files[0];
-  const demandaId = selectDemanda.value;
   const tipoBase = selectTipo.value;
 
-  if (!demandaId) return mostrarAviso("Selecione a demanda.");
   if (!tipoBase) return mostrarAviso("Selecione o tipo de base.");
   if (!arquivo || !dadosBrutos) return mostrarAviso("Selecione e leia um arquivo primeiro.");
 
@@ -130,12 +137,15 @@ botaoImportar.addEventListener("click", async () => {
 
   try {
     const resultado = await processarUpload({
-      demandaId,
       tipoBase,
       descricao: inputDescricao.value.trim(),
       arquivo,
       guardarArquivo: checkboxGuardar.checked,
     });
+
+    if (demandaContexto) {
+      await vincularBases(demandaContexto, [resultado.base.id]);
+    }
 
     document.getElementById("resumo-linhas").textContent = formatarNumero(resultado.importadas);
     document.getElementById("resumo-erros").textContent = formatarNumero(resultado.erros);
@@ -151,8 +161,12 @@ botaoImportar.addEventListener("click", async () => {
       );
       console.warn("[Megabrain] Erros de importação:", resultado.mensagensErro);
     } else {
-      mostrarSucesso(`Importação concluída: ${resultado.importadas} linhas.`);
+      mostrarSucesso(
+        `Importação concluída: ${resultado.importadas} linhas.` +
+          (demandaContexto ? " Base vinculada à demanda." : "")
+      );
     }
+    await carregarBasesImportadas();
   } catch (erro) {
     mostrarErro(`Erro na importação: ${erro.message}`);
   } finally {
@@ -161,4 +175,4 @@ botaoImportar.addEventListener("click", async () => {
   }
 });
 
-carregarDemandas();
+carregarBasesImportadas();

@@ -6,8 +6,15 @@
 // ============================================================
 
 import "../main.js";
-import { buscarDemandaPorId, arquivarDemanda } from "../services/demandaService.js";
-import { listarBasesPorDemanda, listarLinhasPorBase, apagarBase } from "../services/baseService.js";
+import { buscarDemandaPorId, arquivarDemanda, atualizarDemanda } from "../services/demandaService.js";
+import {
+  listarBasesVinculadas,
+  listarBasesDisponiveis,
+  listarLinhasPorBase,
+  apagarBase,
+  vincularBases,
+  desvincularBase,
+} from "../services/baseService.js";
 import { listarRespostasPorDemanda } from "../services/formularioService.js";
 import { listarAnalisesPorDemanda } from "../services/analiseService.js";
 import { listarPlanosPorDemanda } from "../services/planoService.js";
@@ -43,18 +50,24 @@ function renderizarCabecalho() {
   linkEl.href = link;
   linkEl.textContent = link;
 
+  el("demanda-pagina-resultado").value = demanda.pagina_resultado || "";
+
   // Botões de navegação contextual
   el("btn-ir-upload").href = `upload.html?demanda=${demanda.id}`;
-  const botaoAbrirLink = el("btn-abrir-formulario");
-  botaoAbrirLink.href = link;
-  botaoAbrirLink.textContent =
-    demanda.tipo === "escala" ? "🗓️ Abrir painel público de escala" : "📝 Abrir formulário público";
+  el("btn-abrir-formulario").href = link;
+
+  const botaoEscalaPublica = el("btn-abrir-escala-publica");
+  botaoEscalaPublica.classList.toggle("oculto", demanda.tipo !== "escala");
+  if (demanda.tipo === "escala") {
+    botaoEscalaPublica.href = `escala-publica.html?token=${encodeURIComponent(demanda.token_publico)}`;
+  }
+
   el("btn-abrir-escala").href = `escala.html?demanda=${demanda.id}`;
   el("btn-abrir-custos").href = `custos.html?demanda=${demanda.id}`;
 }
 
 async function renderizarBases() {
-  const bases = await listarBasesPorDemanda(demanda.id);
+  const bases = await listarBasesVinculadas(demanda.id);
   const corpo = el("tabela-bases-corpo");
   corpo.innerHTML = "";
   el("bases-vazio").classList.toggle("oculto", bases.length > 0);
@@ -89,23 +102,60 @@ async function renderizarBases() {
       }
     });
 
+    const botaoDesvincular = document.createElement("button");
+    botaoDesvincular.className = "btn btn-pequeno";
+    botaoDesvincular.textContent = "Desvincular";
+    botaoDesvincular.addEventListener("click", async () => {
+      if (!window.confirm(`Desvincular "${base.nome_arquivo}" desta demanda? A base continua existindo.`)) return;
+      try {
+        await desvincularBase(demanda.id, base.id);
+        mostrarSucesso("Base desvinculada.");
+        await Promise.all([renderizarBases(), renderizarSelecaoVincular()]);
+      } catch (erro) {
+        mostrarErro(`Erro ao desvincular base: ${erro.message}`);
+      }
+    });
+
     const botaoApagar = document.createElement("button");
     botaoApagar.className = "btn btn-pequeno btn-perigo";
     botaoApagar.textContent = "Apagar";
     botaoApagar.addEventListener("click", async () => {
-      if (!window.confirm(`Apagar a base "${base.nome_arquivo}" e todas as suas linhas?`)) return;
+      if (
+        !window.confirm(
+          `Apagar a base "${base.nome_arquivo}" e todas as suas linhas? Isso afeta QUALQUER demanda que use esta base.`
+        )
+      )
+        return;
       try {
         await apagarBase(base.id);
         mostrarSucesso("Base apagada.");
-        await renderizarBases();
+        await Promise.all([renderizarBases(), renderizarSelecaoVincular()]);
       } catch (erro) {
         mostrarErro(`Erro ao apagar base: ${erro.message}`);
       }
     });
 
-    acoes.append(botaoExportar, botaoApagar);
+    acoes.append(botaoExportar, botaoDesvincular, botaoApagar);
     tr.lastElementChild.appendChild(acoes);
     corpo.appendChild(tr);
+  }
+}
+
+async function renderizarSelecaoVincular() {
+  const [todasBases, basesVinculadas] = await Promise.all([
+    listarBasesDisponiveis(),
+    listarBasesVinculadas(demanda.id),
+  ]);
+  const idsVinculados = new Set(basesVinculadas.map((base) => base.id));
+  const disponiveis = todasBases.filter((base) => !idsVinculados.has(base.id));
+
+  const select = el("select-vincular-base");
+  select.innerHTML = '<option value="">Selecione…</option>';
+  for (const base of disponiveis) {
+    const opcao = document.createElement("option");
+    opcao.value = base.id;
+    opcao.textContent = `${base.nome_arquivo} — ${base.tipo_base}`;
+    select.appendChild(opcao);
   }
 }
 
@@ -189,6 +239,28 @@ async function renderizarPlanos() {
 }
 
 function configurarAcoes() {
+  el("btn-salvar-pagina-resultado").addEventListener("click", async () => {
+    const valor = el("demanda-pagina-resultado").value.trim();
+    try {
+      demanda = await atualizarDemanda(demanda.id, { pagina_resultado: valor || null });
+      mostrarSucesso(valor ? "Página de resultado salva." : "Página de resultado removida — link volta ao estado em branco.");
+    } catch (erro) {
+      mostrarErro(`Erro ao salvar página de resultado: ${erro.message}`);
+    }
+  });
+
+  el("btn-vincular-base").addEventListener("click", async () => {
+    const baseId = el("select-vincular-base").value;
+    if (!baseId) return mostrarAviso("Selecione uma base para vincular.");
+    try {
+      await vincularBases(demanda.id, [baseId]);
+      mostrarSucesso("Base vinculada.");
+      await Promise.all([renderizarBases(), renderizarSelecaoVincular()]);
+    } catch (erro) {
+      mostrarErro(`Erro ao vincular base: ${erro.message}`);
+    }
+  });
+
   el("btn-copiar-link").addEventListener("click", async () => {
     const link = montarLinkPublico(demanda);
     try {
@@ -201,7 +273,7 @@ function configurarAcoes() {
 
   el("btn-limpar-demanda").addEventListener("click", async () => {
     const confirmacao = window.prompt(
-      `Isso apaga TODAS as bases, linhas, respostas, análises, planos, logs e arquivos desta demanda (a demanda em si permanece).\n\nExporte antes, se precisar. Digite LIMPAR para confirmar:`
+      `Isso desvincula todas as bases desta demanda (sem apagá-las — elas continuam disponíveis para outras demandas) e apaga respostas, análises, planos e logs desta demanda (a demanda em si permanece).\n\nExporte antes, se precisar. Digite LIMPAR para confirmar:`
     );
     if (confirmacao !== "LIMPAR") {
       mostrarAviso("Limpeza cancelada.");
@@ -212,6 +284,7 @@ function configurarAcoes() {
       mostrarSucesso("Dados da demanda apagados.");
       await Promise.all([
         renderizarBases(),
+        renderizarSelecaoVincular(),
         renderizarRespostas(),
         renderizarAnalises(),
         renderizarPlanos(),
@@ -250,6 +323,7 @@ async function iniciar() {
     configurarAcoes();
     await Promise.all([
       renderizarBases(),
+      renderizarSelecaoVincular(),
       renderizarRespostas(),
       renderizarAnalises(),
       renderizarPlanos(),

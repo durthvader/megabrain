@@ -20,10 +20,10 @@ export function obterParametroUrl(nome) {
   return new URLSearchParams(window.location.search).get(nome);
 }
 
-// Demandas de escala apontam para o painel público completo
-// (escala-publica.html); as demais, para o formulário genérico.
+// O link público sempre aponta para a página de resultado — em
+// branco (só título + descrição) até a IA gerar o conteúdo daquela
+// demanda e a página ser registrada em `demandas.pagina_resultado`.
 export function montarLinkPublico(demanda) {
   const base = window.location.href.split("?")[0].replace(/[^/]*$/, "");
-  const pagina = demanda.tipo === "escala" ? "escala-publica.html" : "formulario.html";
-  return `${base}${pagina}?token=${encodeURIComponent(demanda.token_publico)}`;
+  return `${base}resultado.html?token=${encodeURIComponent(demanda.token_publico)}`;
 }

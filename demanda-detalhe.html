@@ -36,15 +36,26 @@
               <div><code id="demanda-token">—</code></div>
             </div>
             <div class="campo">
-              <label>Link público do formulário</label>
+              <label>Link público de resultado</label>
               <div><a id="demanda-link" href="#" target="_blank" rel="noopener">—</a></div>
+            </div>
+          </div>
+          <div class="linha-campos">
+            <div class="campo">
+              <label for="demanda-pagina-resultado">Página de resultado (gerada pela IA)</label>
+              <input id="demanda-pagina-resultado" placeholder="Ex.: resultado-escala-abc.html" />
+              <p class="campo-ajuda">Nome do arquivo criado ao "executar" esta demanda. Em branco = o link público mostra só título/descrição.</p>
+            </div>
+            <div class="campo" style="display: flex; align-items: flex-end;">
+              <button class="btn" id="btn-salvar-pagina-resultado" type="button">Salvar página de resultado</button>
             </div>
           </div>
           <div class="acoes-formulario">
             <a class="btn" id="btn-ir-upload" href="#">📤 Ir para upload</a>
-            <a class="btn" id="btn-abrir-formulario" href="#" target="_blank" rel="noopener">📝 Abrir formulário público</a>
-            <a class="btn" id="btn-abrir-escala" href="#">🗓️ Painel de escala</a>
-            <a class="btn" id="btn-abrir-custos" href="#">💰 Painel de custos</a>
+            <a class="btn" id="btn-abrir-formulario" href="#" target="_blank" rel="noopener">🔗 Abrir link público (resultado)</a>
+            <a class="btn oculto" id="btn-abrir-escala-publica" href="#" target="_blank" rel="noopener">🗓️ Abrir painel público de escala</a>
+            <a class="btn" id="btn-abrir-escala" href="#">🗓️ Painel de escala (admin)</a>
+            <a class="btn" id="btn-abrir-custos" href="#">💰 Painel de custos (admin)</a>
             <button class="btn" id="btn-copiar-link" type="button">🔗 Copiar link</button>
             <button class="btn" id="btn-arquivar" type="button">📦 Arquivar demanda</button>
             <button class="btn btn-perigo" id="btn-limpar-demanda" type="button">🧹 Limpar dados da demanda</button>
@@ -53,6 +64,7 @@
 
         <section class="secao">
           <h2>Bases vinculadas</h2>
+          <p class="campo-ajuda">Bases são reutilizáveis: "Desvincular" remove só o uso nesta demanda; "Apagar" remove a base de vez (afeta qualquer outra demanda que a use).</p>
           <div class="tabela-container">
             <table>
               <thead>
@@ -64,7 +76,16 @@
               <tbody id="tabela-bases-corpo"></tbody>
             </table>
           </div>
-          <div class="vazio oculto" id="bases-vazio">Nenhuma base importada para esta demanda.</div>
+          <div class="vazio oculto" id="bases-vazio">Nenhuma base vinculada a esta demanda.</div>
+          <div class="linha-campos" style="margin-top: 0.75rem;">
+            <div class="campo">
+              <label for="select-vincular-base">Vincular base existente</label>
+              <select id="select-vincular-base"><option value="">Selecione…</option></select>
+            </div>
+            <div class="campo" style="display: flex; align-items: flex-end;">
+              <button class="btn" id="btn-vincular-base" type="button">+ Vincular</button>
+            </div>
+          </div>
         </section>
 
         <section class="secao">

@@ -12,10 +12,15 @@ supabaseClient.js  ←  config.js (URL + anon/publishable key)
 Supabase (plano gratuito)
         │  Row Level Security (002_rls.sql)
         ▼
-Tabelas temporárias por demanda (demandas, bases, base_linhas,
-formulario_respostas, analises, planos_acao, logs)
+demandas ←→ bases (N:N via demanda_bases) → base_linhas
+        │        (bases são reutilizáveis, não pertencem a 1 demanda)
+        ├─ formulario_respostas, analises, planos_acao, logs (por demanda,
+        │  apagados junto com ela)
         │
-        ├─ Páginas/painéis por demanda (escala.html, custos.html, …)
+        ├─ Link público de resultado (resultado.html?token=…), em branco
+        │  até `demandas.pagina_resultado` apontar para uma página gerada
+        ├─ Páginas/painéis reutilizáveis (escala.html, custos.html, …),
+        │  acessadas a partir do detalhe da demanda, não do menu principal
         ├─ Formulário público por token (formulario.html?token=…)
         └─ Exportação CSV → limpeza (006_limpeza.sql / Configurações)
 ```
@@ -28,7 +33,7 @@ formulario_respostas, analises, planos_acao, logs)
    - `assets/js/utils/` — funções puras (datas, CSV, normalização, filtros).
    - `assets/js/services/` — todo acesso ao Supabase.
    - `assets/js/pages/` — um módulo por página; só orquestra DOM + services.
-4. **Dados temporários por demanda.** `demanda_id` amarra tudo; FK `on delete cascade` garante que apagar a demanda limpa o restante.
+4. **Bases reutilizáveis, dados de demanda temporários.** Bases (`bases`/`base_linhas`) são independentes de demanda e vinculadas via `demanda_bases`; apagar uma demanda remove só o vínculo. Já `formulario_respostas`, `analises`, `planos_acao` e `logs` têm `demanda_id` com FK `on delete cascade` — apagar a demanda limpa esses.
 5. **JSONB flexível.** `base_linhas.dados` guarda qualquer estrutura de planilha. Trade-off documentado em [modelo-dados.md](modelo-dados.md).
 6. **Token público como chave de acesso da interface**, não como criptografia. Riscos em [seguranca.md](seguranca.md).
 

@@ -78,7 +78,7 @@ document.getElementById("btn-testar-conexao").addEventListener("click", testarCo
 
 document.getElementById("btn-limpar-arquivadas").addEventListener("click", async () => {
   const confirmacao = window.prompt(
-    "Isso apaga DEFINITIVAMENTE todas as demandas arquivadas e seus dados (bases, respostas, análises, planos, arquivos).\n\nExporte antes, se precisar. Digite LIMPAR para confirmar:"
+    "Isso apaga DEFINITIVAMENTE todas as demandas arquivadas e seus dados (vínculos com bases, respostas, análises, planos, logs). As bases em si NÃO são apagadas — continuam disponíveis para outras demandas.\n\nExporte antes, se precisar. Digite LIMPAR para confirmar:"
   );
   if (confirmacao !== "LIMPAR") return mostrarAviso("Limpeza cancelada.");
 
@@ -96,7 +96,7 @@ document.getElementById("btn-limpar-demanda").addEventListener("click", async ()
   if (!demandaId) return mostrarAviso("Selecione a demanda a limpar.");
 
   const confirmacao = window.prompt(
-    "Isso apaga bases, linhas, respostas, análises, planos, logs e arquivos da demanda selecionada (a demanda em si permanece).\n\nDigite LIMPAR para confirmar:"
+    "Isso desvincula as bases da demanda selecionada (sem apagá-las — continuam disponíveis para outras demandas) e apaga respostas, análises, planos e logs (a demanda em si permanece).\n\nDigite LIMPAR para confirmar:"
   );
   if (confirmacao !== "LIMPAR") return mostrarAviso("Limpeza cancelada.");
 

@@ -14,7 +14,7 @@ O token público é gerado (ex.: `k7m2p9x4w3ab`).
 
 ## 2. Subir as bases
 
-**Upload de bases**, uma por vez, sempre nesta demanda:
+**Upload de bases** (independente da demanda — a base fica numa biblioteca reutilizável). Depois, vincule cada uma à demanda criada acima, no checklist de "Bases a utilizar" (se já subiu antes de criar a demanda) ou no detalhe da demanda, em "Vincular base existente":
 
 | Tipo | Colunas esperadas (após normalização) |
 |---|---|
@@ -40,7 +40,7 @@ O clique só afeta o que o próprio supervisor marcou — nunca apaga férias, t
 
 ## 4. Acompanhar a grade
 
-**Escala** (menu do portal) → selecionar a demanda. É o mesmo painel do link público, com a mesma UX de clique instantâneo, mais o seletor de demanda:
+**Detalhe da demanda → "Painel de escala (admin)"** (Escala não fica mais no menu principal — é acessada a partir da demanda). É o mesmo painel do link público, com a mesma UX de clique instantâneo, mais o seletor de demanda:
 
 - técnicos nas linhas (com supervisor/empresa/cidade), 30 dias nas colunas;
 - células coloridas + letra: `FE` férias, `T` treinamento, `EX` exame, `FO` folga, `!` conflito (dois eventos no mesmo dia), branco = disponível;

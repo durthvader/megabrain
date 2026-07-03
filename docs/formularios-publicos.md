@@ -2,20 +2,21 @@
 
 ## Como funcionam
 
-Cada demanda nasce com um `token_publico` único. O link muda conforme o **tipo da demanda** (`montarLinkPublico` decide isso automaticamente ao gerar/copiar o link no portal):
+Cada demanda nasce com um `token_publico` único. Existem três páginas públicas, cada uma com seu próprio propósito — todas usam o mesmo token:
 
-| Tipo da demanda | Link público | O que abre |
+| Link | O que abre | Quando usar |
 |---|---|---|
-| `escala` | `escala-publica.html?token=abc123` | painel completo de escala (grade + clique instantâneo), sem menu do portal |
-| demais tipos | `formulario.html?token=abc123` | formulário genérico linha a linha |
+| `resultado.html?token=abc123` | título + descrição da demanda; um botão "Ver resultado" se `demandas.pagina_resultado` estiver preenchido, senão um aviso de "ainda em branco" | É o link gerado **automaticamente** na criação da demanda (`montarLinkPublico`) — o ponto de entrada padrão |
+| `escala-publica.html?token=abc123` | painel completo de escala (grade + clique instantâneo), sem menu do portal | Compartilhe manualmente com supervisores quando a demanda for do tipo `escala` (também acessível pelo botão "Abrir painel público de escala" no detalhe da demanda) |
+| `formulario.html?token=abc123` | formulário genérico linha a linha | Compartilhe manualmente quando a demanda precisar de respostas via formulário (botão "Abrir link público (resultado)" no detalhe aponta para `resultado.html`; o link do formulário em si é copiado à parte) |
 
-Ambas as páginas são **sem login** e seguem o mesmo contrato:
+As três páginas são **sem login** e seguem o mesmo contrato:
 
 1. Lêem o token da URL.
 2. Buscam a demanda pelo token (`buscarDemandaPorToken`).
-3. Token inválido ou demanda não-ativa → mensagem de erro, nada é exibido.
-4. Token válido → exibe só o que aquele link permite (painel de escala OU formulário genérico — nunca o menu do portal, nunca outras demandas).
-5. Grava em `formulario_respostas` vinculado à demanda.
+3. Token inválido ou demanda não-ativa/apagada → mensagem de erro, nada é exibido.
+4. Token válido → exibe só o que aquele link permite (resultado, painel de escala ou formulário genérico — nunca o menu do portal, nunca outras demandas).
+5. `formulario.html` grava em `formulario_respostas` vinculado à demanda.
 
 Um link antigo de `formulario.html?token=...` para uma demanda `escala` continua funcionando: a página redireciona automaticamente para `escala-publica.html?token=...`.
 

@@ -6,7 +6,8 @@
 -- Os dados já ficam importados em base_linhas; o Storage do
 -- plano gratuito (1 GB) deve ser poupado. O upload só grava
 -- aqui se a opção "Guardar arquivo original" for marcada.
--- Arquivos são organizados por demanda: <demanda_id>/<arquivo>.
+-- Arquivos são organizados por tipo de base: <tipo_base>/<arquivo>
+-- (bases são independentes de demanda desde a migração 007).
 -- ============================================================
 
 -- Bucket privado (acesso via anon key + policies abaixo).
