@@ -95,8 +95,45 @@
   display: inline-block;
 }
 
-/* Editor de folga (abre ao clicar numa célula) */
-.editor-folga {
-  border: 1px solid var(--cor-primaria);
+/* Seletor de ocorrência: escolhe o "pincel" para o clique instantâneo */
+.seletor-ocorrencia {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.opcao-ocorrencia {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-superficie);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--cor-texto);
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+}
+
+.opcao-ocorrencia::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--cor-opcao, #ffffff);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.opcao-ocorrencia:hover { border-color: var(--cor-primaria); }
+
+.opcao-ocorrencia.ativa {
+  border-color: var(--cor-primaria);
   background: var(--cor-primaria-clara);
+  color: var(--cor-primaria-escura);
 }

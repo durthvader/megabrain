@@ -138,6 +138,21 @@
   color: var(--cor-primaria-escura);
 }
 
+/* ---------- Painel público de escala (mais largo, sem sidebar) ---------- */
+.pagina-publica-escala {
+  min-height: 100vh;
+}
+
+.topo-publico {
+  padding: 1.1rem 1.5rem;
+  background: var(--cor-superficie);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.topo-publico .pagina-publica-marca { margin-bottom: 0.15rem; }
+
+.topo-publico .topo-titulo { color: var(--cor-texto-suave); font-weight: 500; }
+
 /* ---------- Responsivo ---------- */
 @media (max-width: 900px) {
   .sidebar {

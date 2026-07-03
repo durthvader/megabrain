@@ -2,23 +2,32 @@
 
 ## Como funcionam
 
-Cada demanda nasce com um `token_publico` único. O link:
+Cada demanda nasce com um `token_publico` único. O link muda conforme o **tipo da demanda** (`montarLinkPublico` decide isso automaticamente ao gerar/copiar o link no portal):
 
-```
-https://…/formulario.html?token=abc123xyz456
-```
+| Tipo da demanda | Link público | O que abre |
+|---|---|---|
+| `escala` | `escala-publica.html?token=abc123` | painel completo de escala (grade + clique instantâneo), sem menu do portal |
+| demais tipos | `formulario.html?token=abc123` | formulário genérico linha a linha |
 
-abre uma página **sem login** que:
+Ambas as páginas são **sem login** e seguem o mesmo contrato:
 
-1. Lê o token da URL.
-2. Busca a demanda pelo token (`buscarDemandaPorToken`).
+1. Lêem o token da URL.
+2. Buscam a demanda pelo token (`buscarDemandaPorToken`).
 3. Token inválido ou demanda não-ativa → mensagem de erro, nada é exibido.
-4. Token válido → exibe o formulário conforme o tipo:
-   - demanda `escala` → formulário de folga (supervisor, técnico, data, tipo, observação);
-   - demais tipos → formulário genérico (nome, perfil, supervisor, técnico, empresa, cidade, data, observação + campos dinâmicos `campo: valor`).
+4. Token válido → exibe só o que aquele link permite (painel de escala OU formulário genérico — nunca o menu do portal, nunca outras demandas).
 5. Grava em `formulario_respostas` vinculado à demanda.
 
+Um link antigo de `formulario.html?token=...` para uma demanda `escala` continua funcionando: a página redireciona automaticamente para `escala-publica.html?token=...`.
+
 No banco, a única regra imposta de verdade ao público é: **INSERT de resposta exige token de demanda ativa** (policy `respostas_insert_publico`).
+
+### O painel de escala público
+
+`escala-publica.html` é a mesma grade e o mesmo gráfico do painel administrativo (`escala.html`), só que restrita a uma única demanda (fixada pelo token) e sem acesso a nenhuma outra página do portal — quem recebe o link só enxerga aquele painel.
+
+Fluxo pensado para o mínimo de cliques: o supervisor escolhe o tipo de ocorrência num seletor (Disponível, Férias, Folga, Treinamento, Exame) e depois clica direto nas células da grade — a marcação é salva instantaneamente, sem formulário nem botão de confirmar. Clicar de novo na mesma célula desmarca.
+
+**Importante para segurança dos dados:** o clique só grava/apaga registros em `formulario_respostas` (o que o próprio supervisor marcou). Ele nunca altera os eventos vindos de bases importadas (férias, treinamentos e exames subidos via planilha) — esses só podem ser corrigidos reimportando a base.
 
 ## O que é público neste MVP
 

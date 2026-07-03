@@ -1,11 +1,15 @@
 // ============================================================
 // MEGABRAIN — pages/formularioPage.js
-// Página PÚBLICA de preenchimento (sem login, via token na URL).
+// Página PÚBLICA de preenchimento genérico (sem login, via token).
 // formulario.html?token=TOKEN
+//
+// Demandas do tipo "escala" são redirecionadas automaticamente
+// para o painel completo (escala-publica.html), que tem a UX de
+// clique instantâneo na grade em vez deste formulário linha a linha.
 // ============================================================
 
 import { buscarDemandaPorToken } from "../services/demandaService.js";
-import { salvarResposta, salvarFolgaEscala } from "../services/formularioService.js";
+import { salvarResposta } from "../services/formularioService.js";
 import { obterParametroUrl } from "../utils/tokens.js";
 import { mostrarSucesso, mostrarErro } from "../utils/mensagens.js";
 
@@ -14,7 +18,6 @@ const blocoErro = document.getElementById("bloco-erro");
 const blocoFormulario = document.getElementById("bloco-formulario");
 const tituloDemanda = document.getElementById("titulo-demanda");
 const descricaoDemanda = document.getElementById("descricao-demanda");
-const formEscala = document.getElementById("form-escala");
 const formGenerico = document.getElementById("form-generico");
 
 let demandaAtual = null;
@@ -37,31 +40,6 @@ function interpretarCamposDinamicos(texto) {
     if (chave) extras[chave] = valor;
   }
   return extras;
-}
-
-async function enviarFormularioEscala(evento) {
-  evento.preventDefault();
-  const dados = new FormData(formEscala);
-  const botao = formEscala.querySelector("button[type=submit]");
-  botao.disabled = true;
-
-  try {
-    await salvarFolgaEscala({
-      demandaId: demandaAtual.id,
-      tokenPublico: demandaAtual.token_publico,
-      supervisor: dados.get("supervisor").trim(),
-      tecnico: dados.get("tecnico").trim(),
-      data: dados.get("data"),
-      tipoFolga: dados.get("tipo_folga"),
-      observacao: dados.get("observacao").trim(),
-    });
-    mostrarSucesso("Folga registrada. Obrigado!");
-    formEscala.reset();
-  } catch (erro) {
-    mostrarErro(`Erro ao enviar: ${erro.message}`);
-  } finally {
-    botao.disabled = false;
-  }
 }
 
 async function enviarFormularioGenerico(evento) {
@@ -122,19 +100,20 @@ async function iniciar() {
     return;
   }
 
+  // Links antigos de demandas de escala continuam funcionando: redireciona
+  // para o painel completo em vez do formulário linha a linha.
+  if (demandaAtual.tipo === "escala") {
+    window.location.replace(`escala-publica.html?token=${encodeURIComponent(token)}`);
+    return;
+  }
+
   tituloDemanda.textContent = demandaAtual.nome;
   descricaoDemanda.textContent = demandaAtual.descricao || "";
 
   blocoCarregando.classList.add("oculto");
   blocoFormulario.classList.remove("oculto");
-
-  if (demandaAtual.tipo === "escala") {
-    formEscala.classList.remove("oculto");
-    formEscala.addEventListener("submit", enviarFormularioEscala);
-  } else {
-    formGenerico.classList.remove("oculto");
-    formGenerico.addEventListener("submit", enviarFormularioGenerico);
-  }
+  formGenerico.classList.remove("oculto");
+  formGenerico.addEventListener("submit", enviarFormularioGenerico);
 }
 
 iniciar();

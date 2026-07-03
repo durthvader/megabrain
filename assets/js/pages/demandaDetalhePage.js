@@ -13,7 +13,7 @@ import { listarAnalisesPorDemanda } from "../services/analiseService.js";
 import { listarPlanosPorDemanda } from "../services/planoService.js";
 import { limparDemanda } from "../services/limpezaService.js";
 import { exportarArrayParaCsv } from "../services/exportService.js";
-import { montarLinkFormulario, obterParametroUrl } from "../utils/tokens.js";
+import { montarLinkPublico, obterParametroUrl } from "../utils/tokens.js";
 import { formatarDataBR } from "../utils/datas.js";
 import { formatarNumero, formatarStatus } from "../utils/formatadores.js";
 import { mostrarSucesso, mostrarErro, mostrarAviso } from "../utils/mensagens.js";
@@ -38,14 +38,17 @@ function renderizarCabecalho() {
   el("demanda-descricao").textContent = demanda.descricao || "—";
   el("demanda-token").textContent = demanda.token_publico;
 
-  const link = montarLinkFormulario(demanda.token_publico);
+  const link = montarLinkPublico(demanda);
   const linkEl = el("demanda-link");
   linkEl.href = link;
   linkEl.textContent = link;
 
   // Botões de navegação contextual
   el("btn-ir-upload").href = `upload.html?demanda=${demanda.id}`;
-  el("btn-abrir-formulario").href = link;
+  const botaoAbrirLink = el("btn-abrir-formulario");
+  botaoAbrirLink.href = link;
+  botaoAbrirLink.textContent =
+    demanda.tipo === "escala" ? "🗓️ Abrir painel público de escala" : "📝 Abrir formulário público";
   el("btn-abrir-escala").href = `escala.html?demanda=${demanda.id}`;
   el("btn-abrir-custos").href = `custos.html?demanda=${demanda.id}`;
 }
@@ -187,7 +190,7 @@ async function renderizarPlanos() {
 
 function configurarAcoes() {
   el("btn-copiar-link").addEventListener("click", async () => {
-    const link = montarLinkFormulario(demanda.token_publico);
+    const link = montarLinkPublico(demanda);
     try {
       await navigator.clipboard.writeText(link);
       mostrarSucesso("Link copiado.");

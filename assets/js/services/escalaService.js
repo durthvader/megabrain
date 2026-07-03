@@ -71,13 +71,16 @@ export async function carregarDadosEscala(demandaId) {
 
   for (const resposta of respostas) {
     if (!resposta.tecnico || !resposta.data_referencia) continue;
+    const tipoOcorrencia = resposta.dados?.tipo_ocorrencia || resposta.dados?.tipo_folga || "folga";
+    const descricaoBase = ROTULOS_OCORRENCIA[tipoOcorrencia] || "Ocorrência";
     eventos.push({
-      tipo: "folga",
+      tipo: tipoOcorrencia,
       tecnico: resposta.tecnico,
       inicio: resposta.data_referencia,
       fim: resposta.data_referencia,
-      descricao: resposta.dados?.tipo_folga || "Folga (formulário)",
+      descricao: resposta.dados?.observacao ? `${descricaoBase} — ${resposta.dados.observacao}` : descricaoBase,
       origem: "formulario",
+      respostaId: resposta.id,
     });
   }
 
@@ -87,8 +90,28 @@ export async function carregarDadosEscala(demandaId) {
   };
 }
 
-function chaveTecnico(nome) {
+const ROTULOS_OCORRENCIA = {
+  disponivel: "Disponível",
+  ferias: "Férias",
+  treinamento: "Treinamento",
+  exame: "Exame periódico",
+  folga: "Folga",
+};
+
+export function chaveTecnico(nome) {
   return String(nome || "").trim().toLowerCase();
+}
+
+// Localiza o evento marcado pelo supervisor (origem "formulario") para um
+// técnico/dia — os eventos vindos de bases importadas (origem "base") nunca
+// são retornados aqui, pois o clique instantâneo do painel não os altera.
+export function encontrarEventoFormulario(eventos, tecnico, dataIso) {
+  return (eventos || []).find(
+    (evento) =>
+      evento.origem === "formulario" &&
+      chaveTecnico(evento.tecnico) === chaveTecnico(tecnico) &&
+      evento.inicio === dataIso
+  );
 }
 
 function eventoCobreDia(evento, dia) {

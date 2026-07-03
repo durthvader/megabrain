@@ -5,7 +5,7 @@
 
 import "../main.js";
 import { criarDemanda, listarDemandas, arquivarDemanda } from "../services/demandaService.js";
-import { montarLinkFormulario } from "../utils/tokens.js";
+import { montarLinkPublico } from "../utils/tokens.js";
 import { formatarDataBR } from "../utils/datas.js";
 import { formatarStatus } from "../utils/formatadores.js";
 import { mostrarSucesso, mostrarErro } from "../utils/mensagens.js";
@@ -14,8 +14,8 @@ const formulario = document.getElementById("form-demanda");
 const corpoTabela = document.getElementById("tabela-demandas-corpo");
 const placeholderVazio = document.getElementById("demandas-vazio");
 
-async function copiarLink(token) {
-  const link = montarLinkFormulario(token);
+async function copiarLink(demanda) {
+  const link = montarLinkPublico(demanda);
   try {
     await navigator.clipboard.writeText(link);
     mostrarSucesso("Link público copiado para a área de transferência.");
@@ -55,7 +55,7 @@ function montarLinhaTabela(demanda) {
   botaoLink.className = "btn btn-pequeno";
   botaoLink.type = "button";
   botaoLink.textContent = "Copiar link";
-  botaoLink.addEventListener("click", () => copiarLink(demanda.token_publico));
+  botaoLink.addEventListener("click", () => copiarLink(demanda));
 
   const botaoArquivar = document.createElement("button");
   botaoArquivar.className = "btn btn-pequeno";

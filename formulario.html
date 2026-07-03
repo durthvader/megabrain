@@ -28,43 +28,8 @@
         <h2 id="titulo-demanda"></h2>
         <p class="texto-suave" id="descricao-demanda"></p>
 
-        <!-- Formulário de escala (demanda tipo "escala") -->
-        <form id="form-escala" class="oculto">
-          <div class="linha-campos">
-            <div class="campo">
-              <label for="escala-supervisor">Supervisor *</label>
-              <input id="escala-supervisor" name="supervisor" required />
-            </div>
-            <div class="campo">
-              <label for="escala-tecnico">Técnico *</label>
-              <input id="escala-tecnico" name="tecnico" required />
-            </div>
-          </div>
-          <div class="linha-campos">
-            <div class="campo">
-              <label for="escala-data">Data da folga *</label>
-              <input id="escala-data" name="data" type="date" required />
-            </div>
-            <div class="campo">
-              <label for="escala-tipo">Tipo de folga *</label>
-              <select id="escala-tipo" name="tipo_folga" required>
-                <option value="folga">Folga</option>
-                <option value="compensacao">Compensação</option>
-                <option value="banco_horas">Banco de horas</option>
-                <option value="outro">Outro</option>
-              </select>
-            </div>
-          </div>
-          <div class="campo">
-            <label for="escala-observacao">Observação</label>
-            <textarea id="escala-observacao" name="observacao"></textarea>
-          </div>
-          <div class="acoes-formulario">
-            <button class="btn btn-primario" type="submit">Registrar folga</button>
-          </div>
-        </form>
-
-        <!-- Formulário genérico (demais tipos de demanda) -->
+        <!-- Formulário genérico (demandas que não são do tipo "escala";
+             demandas de escala são redirecionadas para o painel público) -->
         <form id="form-generico" class="oculto">
           <div class="linha-campos">
             <div class="campo">

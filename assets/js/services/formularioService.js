@@ -35,28 +35,35 @@ export async function listarRespostasPorToken(token) {
   return data || [];
 }
 
-export async function salvarFolgaEscala({
+// Painel de escala (admin e público): grava uma ocorrência marcada por
+// clique direto na grade — ferias | folga | treinamento | exame.
+export async function salvarOcorrenciaEscala({
   demandaId,
   tokenPublico,
   supervisor,
   tecnico,
-  data,
-  tipoFolga,
+  dataReferencia,
+  tipoOcorrencia,
   observacao,
   respondenteNome,
 }) {
   return salvarResposta({
     demanda_id: demandaId,
     token_publico: tokenPublico,
-    tipo_formulario: "escala_folga",
+    tipo_formulario: "escala_ocorrencia",
     respondente_nome: respondenteNome || supervisor || null,
     respondente_perfil: "supervisor",
     supervisor: supervisor || null,
     tecnico,
-    data_referencia: data,
+    data_referencia: dataReferencia,
     dados: {
-      tipo_folga: tipoFolga || "folga",
+      tipo_ocorrencia: tipoOcorrencia || "folga",
       observacao: observacao || "",
     },
   });
+}
+
+export async function removerRespostaPorId(id) {
+  const { error } = await supabase.from("formulario_respostas").delete().eq("id", id);
+  if (error) throw error;
 }

@@ -20,8 +20,10 @@ export function obterParametroUrl(nome) {
   return new URLSearchParams(window.location.search).get(nome);
 }
 
-export function montarLinkFormulario(token) {
-  // Troca o nome do arquivo atual por formulario.html, preservando a pasta.
+// Demandas de escala apontam para o painel público completo
+// (escala-publica.html); as demais, para o formulário genérico.
+export function montarLinkPublico(demanda) {
   const base = window.location.href.split("?")[0].replace(/[^/]*$/, "");
-  return `${base}formulario.html?token=${encodeURIComponent(token)}`;
+  const pagina = demanda.tipo === "escala" ? "escala-publica.html" : "formulario.html";
+  return `${base}${pagina}?token=${encodeURIComponent(demanda.token_publico)}`;
 }
