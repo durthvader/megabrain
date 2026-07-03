@@ -1,0 +1,125 @@
+/* ============================================================
+   MEGABRAIN — cards.css
+   Cards genéricos, cards de acesso rápido e KPIs.
+   ============================================================ */
+
+.card {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.card-titulo {
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.grade-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Cards de acesso rápido (index) */
+.card-acesso {
+  display: block;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 1.1rem;
+  color: var(--cor-texto);
+  transition: border-color 0.15s, transform 0.1s;
+}
+
+.card-acesso:hover {
+  border-color: var(--cor-primaria);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.card-acesso-icone { font-size: 1.6rem; }
+
+.card-acesso-titulo {
+  font-weight: 600;
+  margin: 0.4rem 0 0.2rem;
+}
+
+.card-acesso-descricao {
+  font-size: 0.83rem;
+  color: var(--cor-texto-suave);
+}
+
+/* KPIs */
+.grade-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.kpi {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 0.9rem 1.1rem;
+}
+
+.kpi-valor {
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.kpi-rotulo {
+  font-size: 0.82rem;
+  color: var(--cor-texto-suave);
+  margin-top: 0.15rem;
+}
+
+.kpi-detalhe {
+  font-size: 0.78rem;
+  color: var(--cor-texto-mudo);
+  margin-top: 0.3rem;
+}
+
+/* Lista de cards (análises, planos) */
+.lista-cartoes { display: flex; flex-direction: column; gap: 0.9rem; }
+
+.cartao-item {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 1rem 1.15rem;
+}
+
+.cartao-item-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+
+.cartao-item h3 { margin-bottom: 0.15rem; }
+
+.cartao-item dl { margin: 0.5rem 0 0; }
+
+.cartao-item dt {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--cor-texto-mudo);
+  margin-top: 0.5rem;
+}
+
+.cartao-item dd {
+  margin: 0.1rem 0 0;
+  white-space: pre-wrap;
+}

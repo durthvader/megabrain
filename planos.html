@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Megabrain · Planos de ação</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/cards.css" />
+  <link rel="stylesheet" href="assets/css/tabelas.css" />
+  <link rel="stylesheet" href="assets/css/formularios.css" />
+</head>
+<body data-page="planos">
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="area-principal">
+      <header class="topo">
+        <button class="btn-menu" id="btn-menu" aria-label="Abrir menu">☰</button>
+        <h1 class="topo-titulo">Planos de ação</h1>
+      </header>
+      <main class="conteudo">
+        <section class="secao card">
+          <h2 class="card-titulo" id="titulo-form-plano">Novo plano de ação</h2>
+          <form id="form-plano">
+            <input type="hidden" id="plano-id-edicao" />
+            <div class="linha-campos">
+              <div class="campo">
+                <label for="select-demanda">Demanda *</label>
+                <select id="select-demanda" required><option value="">Carregando…</option></select>
+              </div>
+              <div class="campo">
+                <label for="plano-tema">Tema</label>
+                <input id="plano-tema" name="tema" placeholder="Ex.: Redução de hora extra" />
+              </div>
+              <div class="campo">
+                <label for="plano-responsavel">Responsável</label>
+                <input id="plano-responsavel" name="responsavel" />
+              </div>
+              <div class="campo">
+                <label for="plano-prazo">Prazo</label>
+                <input id="plano-prazo" name="prazo" type="date" />
+              </div>
+            </div>
+            <div class="linha-campos">
+              <div class="campo">
+                <label for="plano-problema">Problema</label>
+                <textarea id="plano-problema" name="problema"></textarea>
+              </div>
+              <div class="campo">
+                <label for="plano-causa">Causa</label>
+                <textarea id="plano-causa" name="causa"></textarea>
+              </div>
+            </div>
+            <div class="campo">
+              <label for="plano-acao">Ação *</label>
+              <textarea id="plano-acao" name="acao" required></textarea>
+            </div>
+            <div class="linha-campos">
+              <div class="campo">
+                <label for="plano-impacto-esperado">Impacto esperado</label>
+                <input id="plano-impacto-esperado" name="impacto_esperado" />
+              </div>
+              <div class="campo">
+                <label for="plano-impacto-realizado">Impacto realizado</label>
+                <input id="plano-impacto-realizado" name="impacto_realizado" />
+              </div>
+            </div>
+            <div class="campo">
+              <label for="plano-observacao">Observação</label>
+              <input id="plano-observacao" name="observacao" />
+            </div>
+            <div class="acoes-formulario">
+              <button class="btn btn-primario" type="submit">Salvar plano</button>
+              <button class="btn oculto" id="btn-cancelar-edicao" type="button">Cancelar edição</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="secao">
+          <div class="filtros">
+            <div class="campo">
+              <label for="filtro-status">Status</label>
+              <select id="filtro-status">
+                <option value="">Todos</option>
+                <option value="pendente">Pendente</option>
+                <option value="em_andamento">Em andamento</option>
+                <option value="concluido">Concluído</option>
+                <option value="cancelado">Cancelado</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="filtro-responsavel">Responsável</label>
+              <input id="filtro-responsavel" placeholder="Filtrar por responsável…" />
+            </div>
+          </div>
+
+          <div class="tabela-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tema</th><th>Problema</th><th>Ação</th><th>Responsável</th>
+                  <th>Prazo</th><th>Status</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="tabela-planos-corpo"></tbody>
+            </table>
+          </div>
+          <div class="vazio" id="planos-vazio">Selecione uma demanda para ver os planos.</div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="assets/js/pages/planosPage.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+/* ============================================================
+   MEGABRAIN — layout.css
+   Estrutura: sidebar fixa + topo + conteúdo. Responsivo.
+   ============================================================ */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background: #16273f;
+  color: #d7e0ec;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar-marca {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.1rem 1.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 0.5rem;
+  gap: 2px;
+  flex: 1;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--raio);
+  color: #d7e0ec;
+  font-size: 0.92rem;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+}
+
+.sidebar-link.ativo {
+  background: var(--cor-primaria);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.sidebar-icone { width: 1.3rem; text-align: center; }
+
+.sidebar-rodape {
+  padding: 1rem 1.25rem;
+  font-size: 0.75rem;
+  color: rgba(215, 224, 236, 0.55);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- Área principal ---------- */
+.area-principal {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.5rem;
+  background: var(--cor-superficie);
+  border-bottom: 1px solid var(--cor-borda);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.topo-titulo {
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.btn-menu {
+  display: none;
+  border: 1px solid var(--cor-borda);
+  background: var(--cor-superficie);
+  border-radius: var(--raio);
+  padding: 0.3rem 0.6rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.conteudo {
+  padding: 1.5rem;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ---------- Página pública (formulário) ---------- */
+.pagina-publica {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.pagina-publica-cartao {
+  width: 100%;
+  max-width: 640px;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 1.5rem;
+}
+
+.pagina-publica-marca {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--cor-primaria-escura);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+  }
+
+  .sidebar.aberta { transform: translateX(0); }
+
+  .btn-menu { display: inline-flex; }
+
+  .conteudo { padding: 1rem; }
+}

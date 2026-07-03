@@ -1,5 +1,14 @@
+# Segredos — NUNCA versionar (contém senha do banco / connection string)
 .env
 .env.local
+
+# Dependências e artefatos
 node_modules/
+
+# Sistema operacional
 .DS_Store
 Thumbs.db
+
+# Observação: assets/js/config.js contém apenas a URL do projeto e a chave
+# publishable/anon, que são públicas por design (protegidas por RLS).
+# Ela é versionada de propósito para o GitHub Pages funcionar.

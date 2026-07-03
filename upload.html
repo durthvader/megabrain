@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Megabrain · Upload de bases</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/cards.css" />
+  <link rel="stylesheet" href="assets/css/tabelas.css" />
+  <link rel="stylesheet" href="assets/css/formularios.css" />
+  <link rel="stylesheet" href="assets/css/upload.css" />
+  <!-- Leitura de arquivos no navegador (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body data-page="upload">
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="area-principal">
+      <header class="topo">
+        <button class="btn-menu" id="btn-menu" aria-label="Abrir menu">☰</button>
+        <h1 class="topo-titulo">Upload de bases</h1>
+      </header>
+      <main class="conteudo">
+        <section class="secao card">
+          <h2 class="card-titulo">1. Selecione a demanda e o arquivo</h2>
+          <div class="linha-campos">
+            <div class="campo">
+              <label for="select-demanda">Demanda *</label>
+              <select id="select-demanda"><option value="">Carregando…</option></select>
+            </div>
+            <div class="campo">
+              <label for="select-tipo">Tipo de base *</label>
+              <select id="select-tipo">
+                <option value="">Selecione…</option>
+                <option value="tecnicos">tecnicos</option>
+                <option value="ferias">ferias</option>
+                <option value="treinamentos">treinamentos</option>
+                <option value="exames">exames</option>
+                <option value="folgas">folgas</option>
+                <option value="custos">custos</option>
+                <option value="horas_extras">horas_extras</option>
+                <option value="banco_horas">banco_horas</option>
+                <option value="sobreaviso">sobreaviso</option>
+                <option value="adicional_noturno">adicional_noturno</option>
+                <option value="indicadores">indicadores</option>
+                <option value="ordens_servico">ordens_servico</option>
+                <option value="outros">outros</option>
+              </select>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="input-descricao">Descrição da base</label>
+            <input id="input-descricao" placeholder="Ex.: Base de técnicos ativos em julho" />
+          </div>
+          <div class="area-arquivo" id="area-arquivo">
+            <input id="input-arquivo" type="file" accept=".csv,.xlsx,.xls" />
+            <p class="campo-ajuda">CSV, XLSX ou XLS · máximo 10 MB · a primeira linha deve ser o cabeçalho</p>
+          </div>
+          <div class="campo campo-checkbox">
+            <input id="check-guardar-arquivo" type="checkbox" />
+            <label for="check-guardar-arquivo">
+              Guardar arquivo original no Storage
+              <span class="campo-ajuda">Recomendado deixar desmarcado: os dados já ficam importados no banco e o Storage do plano gratuito é limitado.</span>
+            </label>
+          </div>
+        </section>
+
+        <section class="secao card oculto" id="secao-previa">
+          <h2 class="card-titulo">2. Prévia e colunas normalizadas</h2>
+          <p class="texto-mudo" id="previa-info"></p>
+          <div class="chips" id="chips-colunas"></div>
+          <div class="tabela-container previa-container">
+            <table id="tabela-previa"></table>
+          </div>
+          <div class="acoes-formulario">
+            <button class="btn btn-primario" id="btn-importar" type="button" disabled>Importar para o Supabase</button>
+          </div>
+        </section>
+
+        <section class="secao card oculto" id="secao-resumo">
+          <h2 class="card-titulo">3. Resultado da importação</h2>
+          <div class="resumo-importacao">
+            <div class="kpi"><div class="kpi-valor" id="resumo-linhas">—</div><div class="kpi-rotulo">Linhas importadas</div></div>
+            <div class="kpi"><div class="kpi-valor" id="resumo-erros">—</div><div class="kpi-rotulo">Erros</div></div>
+            <div class="kpi"><div class="kpi-valor" id="resumo-tamanho">—</div><div class="kpi-rotulo">Tamanho do arquivo</div></div>
+            <div class="kpi"><div class="kpi-valor" id="resumo-storage">—</div><div class="kpi-rotulo">Original no Storage</div></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="assets/js/pages/uploadPage.js"></script>
+</body>
+</html>

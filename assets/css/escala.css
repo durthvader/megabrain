@@ -1,0 +1,102 @@
+/* ============================================================
+   MEGABRAIN — escala.css
+   Grade visual de 30 dias: técnicos nas linhas, dias nas colunas.
+   ============================================================ */
+
+.grade-escala-container {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  overflow: auto;
+  max-height: 70vh;
+  margin-bottom: 1.25rem;
+}
+
+.grade-escala {
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  width: max-content;
+  min-width: 100%;
+}
+
+.grade-escala th,
+.grade-escala td {
+  border: 1px solid #edf1f5;
+  padding: 0.25rem 0.3rem;
+  text-align: center;
+}
+
+.grade-escala thead th {
+  background: #f7f9fc;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  min-width: 34px;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+}
+
+.grade-escala thead th .dia-semana {
+  display: block;
+  font-weight: 400;
+  font-size: 0.68rem;
+  color: var(--cor-texto-mudo);
+}
+
+.grade-escala .col-tecnico {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--cor-superficie);
+  text-align: left;
+  min-width: 170px;
+  max-width: 220px;
+  padding: 0.3rem 0.55rem;
+}
+
+.grade-escala thead .col-tecnico { z-index: 4; background: #f7f9fc; }
+
+.grade-escala .col-tecnico .tecnico-nome { font-weight: 600; display: block; }
+
+.grade-escala .col-tecnico .tecnico-detalhe {
+  font-size: 0.7rem;
+  color: var(--cor-texto-mudo);
+  display: block;
+}
+
+/* Células por status (cor + letra, para não depender só da cor) */
+.grade-escala td.celula { cursor: pointer; height: 30px; min-width: 34px; }
+
+.celula-disponivel { background: var(--escala-disponivel); color: #c3c2b7; }
+.celula-ferias { background: var(--escala-ferias); color: #0d366b; font-weight: 600; }
+.celula-treinamento { background: var(--escala-treinamento); color: #7a4a00; font-weight: 600; }
+.celula-exame { background: var(--escala-exame); color: #3a2d85; font-weight: 600; }
+.celula-folga { background: var(--escala-folga); color: #1d5e20; font-weight: 600; }
+.celula-conflito { background: var(--escala-conflito); color: #8e1c1c; font-weight: 700; }
+
+.grade-escala td.celula:hover { outline: 2px solid var(--cor-primaria); outline-offset: -2px; }
+
+/* Legenda */
+.legenda-escala {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+  font-size: 0.83rem;
+}
+
+.legenda-item { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+.legenda-cor {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  display: inline-block;
+}
+
+/* Editor de folga (abre ao clicar numa célula) */
+.editor-folga {
+  border: 1px solid var(--cor-primaria);
+  background: var(--cor-primaria-clara);
+}

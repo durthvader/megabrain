@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Megabrain · Custos operacionais</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/cards.css" />
+  <link rel="stylesheet" href="assets/css/tabelas.css" />
+  <link rel="stylesheet" href="assets/css/formularios.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+  <!-- Gráficos (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body data-page="custos">
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="area-principal">
+      <header class="topo">
+        <button class="btn-menu" id="btn-menu" aria-label="Abrir menu">☰</button>
+        <h1 class="topo-titulo">Custos operacionais <span class="selo-simulado oculto" id="selo-simulado">dados simulados</span></h1>
+      </header>
+      <main class="conteudo">
+        <div class="filtros">
+          <div class="campo">
+            <label for="select-demanda">Demanda (tipo custos)</label>
+            <select id="select-demanda"><option value="">Carregando…</option></select>
+          </div>
+          <div class="campo">
+            <label for="filtro-inicio">Período — de</label>
+            <input id="filtro-inicio" type="date" />
+          </div>
+          <div class="campo">
+            <label for="filtro-fim">até</label>
+            <input id="filtro-fim" type="date" />
+          </div>
+          <div class="campo">
+            <label for="filtro-regional">Regional</label>
+            <select id="filtro-regional"><option value="">Todas</option></select>
+          </div>
+          <div class="campo">
+            <label for="filtro-cidade">Cidade</label>
+            <select id="filtro-cidade"><option value="">Todas</option></select>
+          </div>
+          <div class="campo">
+            <label for="filtro-empresa">Empresa</label>
+            <select id="filtro-empresa"><option value="">Todas</option></select>
+          </div>
+          <div class="campo">
+            <label for="filtro-supervisor">Supervisor</label>
+            <select id="filtro-supervisor"><option value="">Todos</option></select>
+          </div>
+          <div class="campo">
+            <label for="filtro-tecnico">Técnico</label>
+            <select id="filtro-tecnico"><option value="">Todos</option></select>
+          </div>
+          <div class="campo">
+            <label for="filtro-tipo">Tipo de custo</label>
+            <select id="filtro-tipo"><option value="">Todos</option></select>
+          </div>
+          <div class="acoes-filtros">
+            <button class="btn btn-primario" id="btn-aplicar-filtros" type="button">Aplicar</button>
+            <button class="btn" id="btn-limpar-filtros" type="button">Limpar</button>
+            <button class="btn" id="btn-exportar-custos" type="button">Exportar CSV</button>
+          </div>
+        </div>
+
+        <div class="grade-kpis">
+          <div class="kpi"><div class="kpi-valor" id="card-hora-extra">—</div><div class="kpi-rotulo">Hora extra</div></div>
+          <div class="kpi"><div class="kpi-valor" id="card-banco-horas">—</div><div class="kpi-rotulo">Banco de horas</div></div>
+          <div class="kpi"><div class="kpi-valor" id="card-sobreaviso">—</div><div class="kpi-rotulo">Sobreaviso</div></div>
+          <div class="kpi"><div class="kpi-valor" id="card-acionamento">—</div><div class="kpi-rotulo">Acionamento em sobreaviso</div></div>
+          <div class="kpi"><div class="kpi-valor" id="card-noturno">—</div><div class="kpi-rotulo">Adicional noturno</div></div>
+          <div class="kpi">
+            <div class="kpi-valor" id="card-ofensor-tecnico">—</div>
+            <div class="kpi-rotulo">Técnico ofensor nº 1</div>
+            <div class="kpi-detalhe" id="card-ofensor-tecnico-valor"></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-valor" id="card-ofensor-supervisor">—</div>
+            <div class="kpi-rotulo">Supervisor ofensor nº 1</div>
+            <div class="kpi-detalhe" id="card-ofensor-supervisor-valor"></div>
+          </div>
+        </div>
+
+        <div class="grade-graficos">
+          <div class="grafico-card">
+            <h3>Custo por tipo</h3>
+            <div class="grafico-area"><canvas id="grafico-tipo"></canvas></div>
+          </div>
+          <div class="grafico-card">
+            <h3>Custo por supervisor (top 10)</h3>
+            <div class="grafico-area"><canvas id="grafico-supervisor"></canvas></div>
+          </div>
+          <div class="grafico-card">
+            <h3>Custo por empresa</h3>
+            <div class="grafico-area"><canvas id="grafico-empresa"></canvas></div>
+          </div>
+          <div class="grafico-card">
+            <h3>Custo por técnico (top 10)</h3>
+            <div class="grafico-area"><canvas id="grafico-tecnico"></canvas></div>
+          </div>
+          <div class="grafico-card grafico-largo">
+            <h3>Evolução por competência</h3>
+            <div class="grafico-area"><canvas id="grafico-evolucao"></canvas></div>
+          </div>
+        </div>
+
+        <section class="secao">
+          <h2>Ofensores (top 15 técnicos)</h2>
+          <div class="tabela-container">
+            <table id="tabela-ofensores">
+              <thead>
+                <tr>
+                  <th class="numero">#</th><th>Técnico</th><th class="numero">Horas</th>
+                  <th class="numero">Registros</th><th class="numero">Valor total</th><th class="numero">% do total</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-ofensores-corpo"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="assets/js/pages/custosPage.js"></script>
+</body>
+</html>

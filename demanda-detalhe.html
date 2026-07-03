@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Megabrain · Detalhe da demanda</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/cards.css" />
+  <link rel="stylesheet" href="assets/css/tabelas.css" />
+  <link rel="stylesheet" href="assets/css/formularios.css" />
+</head>
+<body data-page="demandas">
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="area-principal">
+      <header class="topo">
+        <button class="btn-menu" id="btn-menu" aria-label="Abrir menu">☰</button>
+        <h1 class="topo-titulo">Detalhe da demanda</h1>
+      </header>
+      <main class="conteudo">
+        <section class="secao card">
+          <div class="secao-titulo">
+            <h2 id="demanda-nome">Carregando…</h2>
+            <span id="demanda-status"></span>
+          </div>
+          <div class="linha-campos">
+            <div class="campo"><label>Tipo</label><div id="demanda-tipo">—</div></div>
+            <div class="campo"><label>Responsável</label><div id="demanda-responsavel">—</div></div>
+            <div class="campo"><label>Período</label><div id="demanda-periodo">—</div></div>
+          </div>
+          <div class="campo"><label>Descrição</label><div id="demanda-descricao">—</div></div>
+          <div class="linha-campos">
+            <div class="campo">
+              <label>Token público</label>
+              <div><code id="demanda-token">—</code></div>
+            </div>
+            <div class="campo">
+              <label>Link público do formulário</label>
+              <div><a id="demanda-link" href="#" target="_blank" rel="noopener">—</a></div>
+            </div>
+          </div>
+          <div class="acoes-formulario">
+            <a class="btn" id="btn-ir-upload" href="#">📤 Ir para upload</a>
+            <a class="btn" id="btn-abrir-formulario" href="#" target="_blank" rel="noopener">📝 Abrir formulário público</a>
+            <a class="btn" id="btn-abrir-escala" href="#">🗓️ Painel de escala</a>
+            <a class="btn" id="btn-abrir-custos" href="#">💰 Painel de custos</a>
+            <button class="btn" id="btn-copiar-link" type="button">🔗 Copiar link</button>
+            <button class="btn" id="btn-arquivar" type="button">📦 Arquivar demanda</button>
+            <button class="btn btn-perigo" id="btn-limpar-demanda" type="button">🧹 Limpar dados da demanda</button>
+          </div>
+        </section>
+
+        <section class="secao">
+          <h2>Bases vinculadas</h2>
+          <div class="tabela-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Arquivo</th><th>Tipo</th><th class="numero">Linhas</th>
+                  <th class="numero">Tamanho</th><th>Importada em</th><th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-bases-corpo"></tbody>
+            </table>
+          </div>
+          <div class="vazio oculto" id="bases-vazio">Nenhuma base importada para esta demanda.</div>
+        </section>
+
+        <section class="secao">
+          <div class="secao-titulo">
+            <h2>Respostas recebidas</h2>
+            <button class="btn btn-pequeno" id="btn-exportar-respostas" type="button">Exportar CSV</button>
+          </div>
+          <div class="tabela-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Recebida em</th><th>Respondente</th><th>Técnico</th>
+                  <th>Supervisor</th><th>Data ref.</th><th>Dados</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-respostas-corpo"></tbody>
+            </table>
+          </div>
+          <div class="vazio oculto" id="respostas-vazio">Nenhuma resposta recebida ainda.</div>
+        </section>
+
+        <section class="secao">
+          <div class="secao-titulo">
+            <h2>Análises salvas</h2>
+            <a class="btn btn-pequeno" href="analises.html">Nova análise</a>
+          </div>
+          <div class="lista-cartoes" id="lista-analises"></div>
+          <div class="vazio oculto" id="analises-vazio">Nenhuma análise registrada.</div>
+        </section>
+
+        <section class="secao">
+          <div class="secao-titulo">
+            <h2>Planos de ação</h2>
+            <a class="btn btn-pequeno" href="planos.html">Novo plano</a>
+          </div>
+          <div class="tabela-container">
+            <table>
+              <thead>
+                <tr><th>Tema</th><th>Ação</th><th>Responsável</th><th>Prazo</th><th>Status</th></tr>
+              </thead>
+              <tbody id="tabela-planos-corpo"></tbody>
+            </table>
+          </div>
+          <div class="vazio oculto" id="planos-vazio">Nenhum plano de ação.</div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="assets/js/pages/demandaDetalhePage.js"></script>
+</body>
+</html>

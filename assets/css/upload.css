@@ -1,0 +1,55 @@
+/* ============================================================
+   MEGABRAIN — upload.css
+   Área de upload, prévia e resumo da importação.
+   ============================================================ */
+
+.area-arquivo {
+  border: 2px dashed var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 1.25rem;
+  text-align: center;
+  background: #fafbfd;
+  margin-bottom: 0.9rem;
+}
+
+.area-arquivo input[type="file"] { max-width: 100%; }
+
+.area-arquivo.com-arquivo {
+  border-color: var(--cor-primaria);
+  background: var(--cor-primaria-clara);
+}
+
+/* Chips de colunas detectadas */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.chip {
+  background: #eef1f5;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  padding: 0.15rem 0.65rem;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.chip-renomeada {
+  background: var(--cor-primaria-clara);
+  border-color: #bcd2f0;
+  color: var(--cor-primaria-escura);
+}
+
+/* Prévia */
+.previa-container { max-height: 420px; overflow: auto; }
+
+/* Resumo da importação */
+.resumo-importacao {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.resumo-importacao .kpi { margin: 0; }

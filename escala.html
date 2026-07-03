@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Megabrain · Escala 30 dias</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/cards.css" />
+  <link rel="stylesheet" href="assets/css/tabelas.css" />
+  <link rel="stylesheet" href="assets/css/formularios.css" />
+  <link rel="stylesheet" href="assets/css/escala.css" />
+</head>
+<body data-page="escala">
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="area-principal">
+      <header class="topo">
+        <button class="btn-menu" id="btn-menu" aria-label="Abrir menu">☰</button>
+        <h1 class="topo-titulo">Escala · próximos 30 dias</h1>
+      </header>
+      <main class="conteudo">
+        <div class="filtros">
+          <div class="campo">
+            <label for="select-demanda">Demanda (tipo escala)</label>
+            <select id="select-demanda"><option value="">Carregando…</option></select>
+          </div>
+          <div class="campo">
+            <label for="filtro-supervisor">Supervisor</label>
+            <select id="filtro-supervisor"><option value="">Todos</option></select>
+          </div>
+          <div class="campo">
+            <label for="filtro-empresa">Empresa</label>
+            <select id="filtro-empresa"><option value="">Todas</option></select>
+          </div>
+          <div class="campo">
+            <label for="filtro-cidade">Cidade</label>
+            <select id="filtro-cidade"><option value="">Todas</option></select>
+          </div>
+          <div class="acoes-filtros">
+            <button class="btn" id="btn-exportar-escala" type="button">Exportar CSV</button>
+          </div>
+        </div>
+
+        <div id="secao-escala" class="oculto">
+          <div class="legenda-escala">
+            <span class="legenda-item"><span class="legenda-cor" style="background: var(--escala-disponivel)"></span>Disponível</span>
+            <span class="legenda-item"><span class="legenda-cor" style="background: var(--escala-ferias)"></span>FE — Férias</span>
+            <span class="legenda-item"><span class="legenda-cor" style="background: var(--escala-treinamento)"></span>T — Treinamento</span>
+            <span class="legenda-item"><span class="legenda-cor" style="background: var(--escala-exame)"></span>EX — Exame</span>
+            <span class="legenda-item"><span class="legenda-cor" style="background: var(--escala-folga)"></span>FO — Folga</span>
+            <span class="legenda-item"><span class="legenda-cor" style="background: var(--escala-conflito)"></span>! — Conflito</span>
+          </div>
+          <p class="texto-mudo">Clique em qualquer célula para registrar uma folga para aquele técnico/dia.</p>
+
+          <div class="grade-escala-container">
+            <table class="grade-escala" id="grade-escala"></table>
+          </div>
+
+          <section class="secao card oculto editor-folga" id="editor-folga">
+            <div class="secao-titulo">
+              <h2 class="card-titulo" style="margin: 0;">Registrar folga</h2>
+              <button class="btn btn-pequeno" id="btn-fechar-editor" type="button">Fechar</button>
+            </div>
+            <form id="form-folga">
+              <div class="linha-campos">
+                <div class="campo">
+                  <label for="folga-tecnico">Técnico</label>
+                  <input id="folga-tecnico" name="tecnico" required readonly />
+                </div>
+                <div class="campo">
+                  <label for="folga-supervisor">Supervisor</label>
+                  <input id="folga-supervisor" name="supervisor" />
+                </div>
+                <div class="campo">
+                  <label for="folga-data">Data</label>
+                  <input id="folga-data" name="data" type="date" required />
+                </div>
+                <div class="campo">
+                  <label for="folga-tipo">Tipo</label>
+                  <select id="folga-tipo" name="tipo_folga">
+                    <option value="folga">Folga</option>
+                    <option value="compensacao">Compensação</option>
+                    <option value="banco_horas">Banco de horas</option>
+                    <option value="outro">Outro</option>
+                  </select>
+                </div>
+              </div>
+              <div class="campo">
+                <label for="folga-observacao">Observação</label>
+                <input id="folga-observacao" name="observacao" />
+              </div>
+              <div class="acoes-formulario">
+                <button class="btn btn-primario" type="submit">Salvar folga</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="secao">
+            <h2>Consolidado por dia</h2>
+            <div class="tabela-container" style="max-height: 420px; overflow-y: auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Dia</th>
+                    <th class="numero">Disponíveis</th>
+                    <th class="numero">Férias</th>
+                    <th class="numero">Treinamento</th>
+                    <th class="numero">Exame</th>
+                    <th class="numero">Folga</th>
+                    <th class="numero">Conflitos</th>
+                  </tr>
+                </thead>
+                <tbody id="tabela-consolidado-corpo"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="secao oculto" id="secao-conflitos">
+            <h2 class="texto-erro">⚠️ Conflitos encontrados</h2>
+            <div class="tabela-container">
+              <table>
+                <thead>
+                  <tr><th>Técnico</th><th>Supervisor</th><th>Data</th><th>Eventos em conflito</th></tr>
+                </thead>
+                <tbody id="tabela-conflitos-corpo"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <div class="vazio" id="escala-instrucao">
+          Selecione uma demanda do tipo <strong>escala</strong> acima. A grade usa as bases
+          <code>tecnicos</code>, <code>ferias</code>, <code>treinamentos</code>, <code>exames</code>,
+          <code>folgas</code> e as respostas do formulário público.
+        </div>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="assets/js/pages/escalaPage.js"></script>
+</body>
+</html>

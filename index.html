@@ -1,30 +1,82 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Megabrain</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Megabrain · Início</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/cards.css" />
 </head>
-<body>
-  <header>
-    <h1>Megabrain</h1>
-    <nav>
-      <a href="index.html">Início</a>
-      <a href="home.html">Home</a>
-    </nav>
-  </header>
+<body data-page="index">
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="area-principal">
+      <header class="topo">
+        <button class="btn-menu" id="btn-menu" aria-label="Abrir menu">☰</button>
+        <h1 class="topo-titulo">🧠 Megabrain</h1>
+      </header>
+      <main class="conteudo">
+        <section class="secao">
+          <p class="texto-suave">
+            Portal leve de demandas operacionais: crie uma demanda, suba bases,
+            colete respostas por link público, consolide, exporte e limpe.
+          </p>
+        </section>
 
-  <main>
-    <p>Bem-vindo ao Megabrain.</p>
-  </main>
+        <section class="secao">
+          <h2>Indicadores</h2>
+          <div class="grade-kpis">
+            <div class="kpi"><div class="kpi-valor" id="kpi-demandas">…</div><div class="kpi-rotulo">Demandas ativas</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-bases">…</div><div class="kpi-rotulo">Bases carregadas</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-respostas">…</div><div class="kpi-rotulo">Respostas recebidas</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-planos">…</div><div class="kpi-rotulo">Planos pendentes</div></div>
+          </div>
+        </section>
 
-  <footer>
-    <p>&copy; 2026 Megabrain</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabaseClient.js"></script>
-  <script src="js/main.js"></script>
+        <section class="secao">
+          <h2>Acesso rápido</h2>
+          <div class="grade-cards">
+            <a class="card-acesso" href="demandas.html">
+              <div class="card-acesso-icone">📋</div>
+              <div class="card-acesso-titulo">Demandas</div>
+              <div class="card-acesso-descricao">Criar e gerenciar demandas com token público</div>
+            </a>
+            <a class="card-acesso" href="upload.html">
+              <div class="card-acesso-icone">📤</div>
+              <div class="card-acesso-titulo">Upload de bases</div>
+              <div class="card-acesso-descricao">Importar CSV/Excel com prévia e normalização</div>
+            </a>
+            <a class="card-acesso" href="escala.html">
+              <div class="card-acesso-icone">🗓️</div>
+              <div class="card-acesso-titulo">Escala</div>
+              <div class="card-acesso-descricao">Grade visual de 30 dias por técnico</div>
+            </a>
+            <a class="card-acesso" href="custos.html">
+              <div class="card-acesso-icone">💰</div>
+              <div class="card-acesso-titulo">Custos</div>
+              <div class="card-acesso-descricao">Hora extra, banco de horas, sobreaviso e ofensores</div>
+            </a>
+            <a class="card-acesso" href="analises.html">
+              <div class="card-acesso-icone">🔎</div>
+              <div class="card-acesso-titulo">Análises</div>
+              <div class="card-acesso-descricao">Registrar análises feitas com o Codex</div>
+            </a>
+            <a class="card-acesso" href="planos.html">
+              <div class="card-acesso-icone">✅</div>
+              <div class="card-acesso-titulo">Planos de ação</div>
+              <div class="card-acesso-descricao">Acompanhar ações, responsáveis e prazos</div>
+            </a>
+            <a class="card-acesso" href="configuracoes.html">
+              <div class="card-acesso-icone">⚙️</div>
+              <div class="card-acesso-titulo">Configurações</div>
+              <div class="card-acesso-descricao">Conexão, contagens e rotinas de limpeza</div>
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="assets/js/pages/indexPage.js"></script>
 </body>
 </html>

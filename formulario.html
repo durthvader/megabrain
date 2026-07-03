@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Megabrain · Formulário</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/formularios.css" />
+</head>
+<body>
+  <div class="pagina-publica">
+    <div class="pagina-publica-cartao">
+      <div class="pagina-publica-marca">🧠 Megabrain</div>
+
+      <div id="bloco-carregando">
+        <p class="texto-suave">Carregando formulário…</p>
+      </div>
+
+      <div id="bloco-erro" class="oculto">
+        <div class="alerta alerta-erro">
+          <strong>Não foi possível abrir o formulário.</strong>
+          <p id="mensagem-erro-token" style="margin: 0.4rem 0 0;"></p>
+        </div>
+      </div>
+
+      <div id="bloco-formulario" class="oculto">
+        <h2 id="titulo-demanda"></h2>
+        <p class="texto-suave" id="descricao-demanda"></p>
+
+        <!-- Formulário de escala (demanda tipo "escala") -->
+        <form id="form-escala" class="oculto">
+          <div class="linha-campos">
+            <div class="campo">
+              <label for="escala-supervisor">Supervisor *</label>
+              <input id="escala-supervisor" name="supervisor" required />
+            </div>
+            <div class="campo">
+              <label for="escala-tecnico">Técnico *</label>
+              <input id="escala-tecnico" name="tecnico" required />
+            </div>
+          </div>
+          <div class="linha-campos">
+            <div class="campo">
+              <label for="escala-data">Data da folga *</label>
+              <input id="escala-data" name="data" type="date" required />
+            </div>
+            <div class="campo">
+              <label for="escala-tipo">Tipo de folga *</label>
+              <select id="escala-tipo" name="tipo_folga" required>
+                <option value="folga">Folga</option>
+                <option value="compensacao">Compensação</option>
+                <option value="banco_horas">Banco de horas</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="escala-observacao">Observação</label>
+            <textarea id="escala-observacao" name="observacao"></textarea>
+          </div>
+          <div class="acoes-formulario">
+            <button class="btn btn-primario" type="submit">Registrar folga</button>
+          </div>
+        </form>
+
+        <!-- Formulário genérico (demais tipos de demanda) -->
+        <form id="form-generico" class="oculto">
+          <div class="linha-campos">
+            <div class="campo">
+              <label for="gen-nome">Seu nome *</label>
+              <input id="gen-nome" name="nome" required />
+            </div>
+            <div class="campo">
+              <label for="gen-perfil">Perfil</label>
+              <input id="gen-perfil" name="perfil" placeholder="Ex.: supervisor, técnico, coordenador" />
+            </div>
+          </div>
+          <div class="linha-campos">
+            <div class="campo">
+              <label for="gen-supervisor">Supervisor</label>
+              <input id="gen-supervisor" name="supervisor" />
+            </div>
+            <div class="campo">
+              <label for="gen-tecnico">Técnico</label>
+              <input id="gen-tecnico" name="tecnico" />
+            </div>
+          </div>
+          <div class="linha-campos">
+            <div class="campo">
+              <label for="gen-empresa">Empresa</label>
+              <input id="gen-empresa" name="empresa" />
+            </div>
+            <div class="campo">
+              <label for="gen-cidade">Cidade</label>
+              <input id="gen-cidade" name="cidade" />
+            </div>
+            <div class="campo">
+              <label for="gen-data">Data</label>
+              <input id="gen-data" name="data" type="date" />
+            </div>
+          </div>
+          <div class="campo">
+            <label for="gen-observacao">Observação</label>
+            <textarea id="gen-observacao" name="observacao"></textarea>
+          </div>
+          <div class="campo">
+            <label for="gen-dinamicos">Campos adicionais</label>
+            <textarea id="gen-dinamicos" name="campos_dinamicos" placeholder="Um por linha, no formato campo: valor&#10;Ex.:&#10;placa_veiculo: ABC1D23&#10;km_rodado: 120"></textarea>
+            <p class="campo-ajuda">Opcional. Cada linha vira um campo extra na resposta.</p>
+          </div>
+          <div class="acoes-formulario">
+            <button class="btn btn-primario" type="submit">Enviar resposta</button>
+          </div>
+        </form>
+      </div>
+
+      <p class="texto-mudo" style="margin-top: 1rem;">
+        Este link é público para quem o recebeu. Não informe dados sensíveis (CPF, telefone, endereço).
+      </p>
+    </div>
+  </div>
+  <script type="module" src="assets/js/pages/formularioPage.js"></script>
+</body>
+</html>
