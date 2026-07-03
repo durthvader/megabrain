@@ -15,6 +15,17 @@ values ('megabrain-bases', 'megabrain-bases', false)
 on conflict (id) do nothing;
 
 -- ------------------------------------------------------------
+-- Policy da tabela storage.buckets: sem isso, a API de Storage
+-- responde "Bucket not found" para a anon key mesmo com o bucket
+-- existindo — storage.buckets também tem RLS própria, separada
+-- de storage.objects.
+-- ------------------------------------------------------------
+drop policy if exists megabrain_buckets_select on storage.buckets;
+create policy megabrain_buckets_select on storage.buckets
+  for select to anon, authenticated
+  using (id = 'megabrain-bases');
+
+-- ------------------------------------------------------------
 -- Policies do bucket (MVP: anon pode gravar, listar e apagar
 -- dentro do bucket — mesmo modelo permissivo do 002_rls.sql).
 --
