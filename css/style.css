@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: #1a1a1a;
+}
+
+header {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+nav a {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+main {
+  padding: 2rem;
+}
+
+footer {
+  padding: 1rem 2rem;
+  color: #666;
+  font-size: 0.875rem;
+}
