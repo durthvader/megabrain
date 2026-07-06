@@ -357,14 +357,15 @@ gas = [
 ]
 for index, (label, value, ratio, color) in enumerate(gas):
     hbar(slide, label, value, 78, 202 + index * 32, 172, 180, ratio, color=color)
-add_rect(slide, 78, 372, 408, 152, "F1F9F1")
-add_rect(slide, 78, 372, 5, 152, GREEN)
-add_text(slide, "26%", 94, 386, 80, 30, size=22, color=GREEN_DARK, bold=True)
+add_rect(slide, 78, 366, 408, 168, "F1F9F1")
+add_rect(slide, 78, 366, 5, 168, GREEN)
+add_text(slide, "26%", 94, 378, 80, 30, size=22, color=GREEN_DARK, bold=True)
 add_text(
     slide,
-    "de toda a perda do Ceará está numa única área: a de Pedro Henrique, com 21 dos 22 técnicos abaixo da meta. "
-    "A mesma área lidera as visitas improdutivas (82 de 328). É por ela que a recuperação começa.",
-    94, 418, 376, 100, size=11.5, color="4A5B52",
+    "de toda a perda do Ceará está numa única área — que também perde 27% da própria capacidade esperada "
+    "(167 de 230 OS possíveis), quase 50% pior que a média do Ceará (19%). 21 dos 22 técnicos estão abaixo da "
+    "meta; mesma área lidera as visitas improdutivas (82 de 328).",
+    94, 410, 376, 116, size=10.5, color="4A5B52",
 )
 
 table = add_table(slide, 6, 3, 528, 148, 696, 396, [232, 240, 224])

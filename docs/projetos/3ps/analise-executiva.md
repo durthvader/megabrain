@@ -70,6 +70,7 @@ A verificação nominal dos oito técnicos NP (sem produção) mostrou que o ró
 ### 2.3.2 Concentração nominal do gap
 
 - **Por área de gestão (GA):** a área de Pedro Henrique Marques Ferreira (C.27) tem 21 dos 22 técnicos abaixo da meta e 63 OS de gap — 26% de toda a perda do Ceará — além de liderar o ranking de improdutivas por GA (82 de 328). As três maiores áreas (Pedro Henrique, Romildo Albuquerque e Agenor Vieira) somam 121 OS, 49% do gap estadual.
+- **O gap de 63 não é só o maior em volume, é desproporcional ao tamanho da equipe:** a área executou 167 das 230 OS esperadas (meta × dias trabalhados), uma perda de 27,5% da própria capacidade — contra 19,2% de perda média no Ceará (1.101 executadas de 1.279 esperadas). Com 17% dos técnicos do estado, a área responde por 26% do gap; produz em média 2,65 OS/dia por técnico, a taxa mais baixa entre todas as GAs (a segunda pior, Romildo Albuquerque, entrega 3,18).
 - **Por técnico:** os 8 maiores desvios individuais somam 65,5 OS (27% do gap). Entre os 86 abaixo da meta, 38 estão a até 2 OS da meta no período (menos de 1 OS/dia) — casos de ajuste fino de carga e rota, não de plano intensivo.
 - **Referências:** Carlos André (7,3 OS/dia), Miguel Gomes (7,0) e Francisco Wagner (6,0) entregam quase o dobro da meta nas mesmas condições — evidência de que a meta de 4 OS/dia é atingível.
 
