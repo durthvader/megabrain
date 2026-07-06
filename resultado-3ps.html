@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>3Ps Ceará · Painel executivo</title>
+  <link rel="stylesheet" href="assets/css/resultado-3ps.css" />
+</head>
+<body>
+  <nav class="deck-nav" aria-label="Navegação da apresentação">
+    <button class="nav-dot ativo" data-slide="slide-1" aria-label="Ir para visão executiva">1</button>
+    <button class="nav-dot" data-slide="slide-2" aria-label="Ir para diagnóstico de produção">2</button>
+    <button class="nav-dot" data-slide="slide-3" aria-label="Ir para gestão nominal">3</button>
+    <button class="nav-dot" data-slide="slide-4" aria-label="Ir para FCA">4</button>
+  </nav>
+
+  <div class="deck-actions">
+    <a class="action-link" href="outputs/3ps/3Ps_Ceara_Executivo.pptx">PowerPoint</a>
+    <button class="action-link" id="btn-print" type="button">Imprimir</button>
+  </div>
+
+  <main class="deck">
+    <section class="slide" id="slide-1" aria-labelledby="titulo-slide-1">
+      <header class="slide-header">
+        <div>
+          <p class="eyebrow">OPERAÇÕES · CEARÁ · 06/07/2026</p>
+          <h1 id="titulo-slide-1">Fortaleza concentra o risco; o Interior precisa proteger o Prazo</h1>
+        </div>
+        <div class="brand" aria-label="Alloha Fibra"><span>alloha</span><small>FIBRA</small></div>
+      </header>
+
+      <p class="lead">Fortaleza (C.27) está abaixo da meta nos três indicadores. O Interior (C.26) cumpre Presença e fechou o Prazo no limite, mas começou a semana com fila de ordens acima de um dia de trabalho.</p>
+
+      <div class="status-grid" role="table" aria-label="Resumo dos 3 Ps por cluster">
+        <div class="status-head">Cluster</div>
+        <div class="status-head">Presença <small>meta mínima 95%</small></div>
+        <div class="status-head">Produção OK <small>semana 29/06–05/07</small></div>
+        <div class="status-head">Prazo 24h <small>meta 85% das ordens</small></div>
+        <div class="status-head">Fila acumulada <small>em dias de trabalho, 06/07</small></div>
+
+        <div class="cluster-name"><strong>C.26</strong><span>Ceará Interior</span></div>
+        <div class="metric ok"><strong>102,5%</strong><span>acima da meta</span></div>
+        <div class="metric warn"><strong>3,5 OS/dia</strong><span>veteranos abaixo da meta de 4</span></div>
+        <div class="metric warn"><strong>85,2%</strong><span>só 0,2 p.p. acima da meta</span></div>
+        <div class="metric risk"><strong>1,125 dia</strong><span>acima do limite de 1 dia</span></div>
+
+        <div class="cluster-name focus"><strong>C.27</strong><span>Fortaleza</span></div>
+        <div class="metric risk"><strong>94,5%</strong><span>0,5 p.p. abaixo da meta</span></div>
+        <div class="metric risk"><strong>3,2 OS/dia</strong><span>61 dos 81 técnicos abaixo</span></div>
+        <div class="metric risk"><strong>83,2%</strong><span>1,8 p.p. abaixo da meta</span></div>
+        <div class="metric ok"><strong>0,820 dia</strong><span>dentro do limite</span></div>
+      </div>
+
+      <p class="reading-note">Como ler: Produção OK conta apenas ordens de serviço concluídas com sucesso. Fila de 1,125 dia significa que, se nenhuma ordem nova entrar, a equipe do Interior precisa de mais de um dia inteiro só para zerar o que já está aberto.</p>
+
+      <div class="slide-bottom two-cols">
+        <article class="decision-block primary">
+          <p class="block-label">DECISÃO OPERACIONAL</p>
+          <h2>Concentrar a semana em Fortaleza e proteger o Prazo no Interior. A execução começa nominal: 3 áreas e 15 técnicos definem metade da recuperação.</h2>
+        </article>
+        <article class="evidence-block">
+          <div><strong>86 de 127</strong><span>técnicos ficaram abaixo da própria meta de produção em 01–03/07</span></div>
+          <div><strong>245,5 OS</strong><span>deixaram de ser executadas — o equivalente a 20 técnicos parados por 3 dias</span></div>
+          <div><strong>49%</strong><span>dessa perda está em apenas 3 das 12 áreas de gestão (GAs)</span></div>
+        </article>
+      </div>
+
+      <footer class="slide-footer"><span>Fonte: BI operacional e bases nominais do projeto 3Ps · OS = ordem de serviço concluída com baixa OK</span><span>1 / 4</span></footer>
+    </section>
+
+    <section class="slide" id="slide-2" aria-labelledby="titulo-slide-2">
+      <header class="slide-header compact">
+        <div>
+          <p class="eyebrow">DIAGNÓSTICO DE PRODUÇÃO</p>
+          <h1 id="titulo-slide-2">O desvio está no time veterano — e boa parte nasce antes de o técnico sair para a rua</h1>
+        </div>
+        <div class="brand" aria-label="Alloha Fibra"><span>alloha</span><small>FIBRA</small></div>
+      </header>
+
+      <div class="diagnostic-layout">
+        <article class="panel workforce-panel">
+          <div class="panel-title"><span>127 técnicos elegíveis</span><strong>86 abaixo da meta (68%)</strong></div>
+          <p class="panel-note">Meta individual por tempo de casa: 3 OS/dia até 59 dias, 3,5 de 60 a 89 dias e 4 acima de 90 dias.</p>
+          <div class="stacked-bar" aria-label="Distribuição dos técnicos por situação">
+            <span class="bar green" style="width:32.3%" title="41 na meta"></span>
+            <span class="bar yellow" style="width:7.9%" title="10 novatos abaixo da meta"></span>
+            <span class="bar orange" style="width:53.5%" title="68 veteranos abaixo da meta"></span>
+            <span class="bar red" style="width:6.3%" title="8 sem produção"></span>
+          </div>
+          <div class="legend-grid">
+            <div><i class="green"></i><strong>41</strong><span>na meta</span></div>
+            <div><i class="yellow"></i><strong>10</strong><span>novatos abaixo (&lt;90 dias de casa)</span></div>
+            <div><i class="orange"></i><strong>68</strong><span>veteranos abaixo (&gt;90 dias)</span></div>
+            <div><i class="red"></i><strong>8</strong><span>sem produção no período</span></div>
+          </div>
+          <div class="insight-box">91% do quadro (115 de 127) é veterano. O problema não é rampa de novato: está no time que já deveria entregar a meta cheia.</div>
+
+          <div class="gap-title"><span>OS não executadas por cluster (gap)</span><strong>245,5 OS em 3 dias</strong></div>
+          <div class="hbar-row"><span>C.27 Fortaleza</span><div><b style="width:100%"></b></div><strong>162</strong></div>
+          <div class="hbar-row secondary"><span>C.26 Interior</span><div><b style="width:51.5%"></b></div><strong>83,5</strong></div>
+          <p class="panel-note tight">Gap = soma do que faltou para cada técnico bater a própria meta. Exemplo: meta de 4 OS/dia × 3 dias = 12; quem entregou 8 deixou 4 OS de gap.</p>
+        </article>
+
+        <article class="panel causes-panel">
+          <div class="panel-title"><span>328 visitas improdutivas</span><strong>só 212 têm motivo registrado</strong></div>
+          <p class="panel-note">Visita improdutiva: o técnico foi ao endereço e voltou sem executar o serviço. Motivos registrados nos 4 maiores grupos:</p>
+          <div class="cause-row"><span>OS aberta sem necessidade</span><div><b style="width:100%"></b></div><strong>59</strong></div>
+          <div class="cause-row"><span>Cliente ausente</span><div><b style="width:88.1%"></b></div><strong>52</strong></div>
+          <div class="cause-row"><span>Cliente pediu reagendamento</span><div><b style="width:61%"></b></div><strong>36</strong></div>
+          <div class="cause-row"><span>Falha massiva na rede</span><div><b style="width:39%"></b></div><strong>23</strong></div>
+          <div class="cause-callout"><strong>8 em 10</strong><span>improdutivas classificadas nascem antes do despacho: OS mal aberta, cliente não confirmado ou falha de rede já conhecida. Cobrar só o técnico não resolve.</span></div>
+          <p class="panel-note tight">As outras 116 visitas ainda estão sem motivo registrado — classificação completa até 08/07.</p>
+        </article>
+      </div>
+
+      <div class="solution-strip">
+        <div><span>01</span><strong>Controle diário em 3 horários</strong><small>9h: quem está em campo e com carga. 12h: quem ainda não concluiu a primeira OS. 16h30: quem vai fechar o dia sem produção. Cada caso com motivo e providência no mesmo dia.</small></div>
+        <div><span>02</span><strong>Plano individual por técnico</strong><small>Prioridade para os 15 casos que definem metade da recuperação: 7 parados, 2 fora da agenda B2C e os maiores desvios. Detalhe nominal na página seguinte.</small></div>
+        <div><span>03</span><strong>Qualidade da demanda</strong><small>Travar abertura de OS sem validação técnica, confirmar o cliente antes do despacho e suspender despachos em áreas com falha massiva ativa.</small></div>
+      </div>
+
+      <footer class="slide-footer"><span>Fonte: Analítico Nominal 01–03/07/2026 e painel de improdutividade de 06/07 · Produtividade OK é a métrica oficial; Baremo OK é visão complementar</span><span>2 / 4</span></footer>
+    </section>
+
+    <section class="slide" id="slide-3" aria-labelledby="titulo-slide-3">
+      <header class="slide-header compact">
+        <div>
+          <p class="eyebrow">GESTÃO NOMINAL · 01 A 03/07/2026</p>
+          <h1 id="titulo-slide-3">A recuperação tem nome: 3 áreas e 15 técnicos concentram metade da perda</h1>
+        </div>
+        <div class="brand" aria-label="Alloha Fibra"><span>alloha</span><small>FIBRA</small></div>
+      </header>
+
+      <div class="nominal-layout">
+        <article class="panel ga-panel">
+          <div class="panel-title"><span>Perda por área de gestão (GA)</span><strong>em OS não executadas</strong></div>
+          <div class="hbar-row"><span>Pedro Henrique · C.27</span><div><b style="width:100%"></b></div><strong>63</strong></div>
+          <div class="hbar-row"><span>Romildo Albuquerque · C.26</span><div><b style="width:58.7%"></b></div><strong>37</strong></div>
+          <div class="hbar-row"><span>Agenor Vieira · C.27</span><div><b style="width:33.3%"></b></div><strong>21</strong></div>
+          <div class="hbar-row secondary"><span>Thiago Rabelo · C.27</span><div><b style="width:31.7%"></b></div><strong>20</strong></div>
+          <div class="hbar-row secondary"><span>José Orlando · C.27</span><div><b style="width:30.2%"></b></div><strong>19</strong></div>
+          <div class="cause-callout"><strong>26%</strong><span>de toda a perda do Ceará está numa única área: a de Pedro Henrique, com 21 dos 22 técnicos abaixo da meta. A mesma área lidera as visitas improdutivas (82 de 328). É por ela que a recuperação começa.</span></div>
+        </article>
+
+        <article class="panel nominal-panel">
+          <div class="panel-title"><span>Casos que exigem decisão individual</span></div>
+          <div class="nominal-table" role="table" aria-label="Casos nominais e ações">
+            <div class="nominal-head">Técnicos</div><div class="nominal-head">O que os dados mostram</div><div class="nominal-head">Ação imediata</div>
+
+            <div><strong>7 técnicos parados</strong><span>Anderson Saraiva, Genilson Nogueira e Felipe Morais (C.26); Emanoel Dias, Egtonio Nunes, Felipe Damasceno e Otávio Dantas (C.27)</span></div>
+            <div>Nenhum dia trabalhado entre 01 e 03/07. Não é baixa produtividade: é capacidade fora de campo.</div>
+            <div>Confirmar com RH e escala, em 24h, se é férias, atestado ou vaga a repor — e devolver a capacidade ao campo.</div>
+
+            <div><strong>2 técnicos fora da agenda B2C</strong><span>John Wayne Queiroz (C.27) e Jean Carlos Freitas (C.26)</span></div>
+            <div>Trabalharam os 3 dias, mas quase só em OEM, B2B e apoio — atividades que não contam para a meta. Aparecem como os piores do ranking sem serem.</div>
+            <div>Decidir a alocação: devolver à agenda B2C ou formalizar a função atual e tirá-los desta medição.</div>
+
+            <div><strong>6 técnicos com maior desvio em rota</strong><span>José Danrley (0,7 OS/dia), Jackson Lima (1,3), Daniel Anderson (2,0) — C.26; Matheus Silva (0,5), Antonio Valgleison (2,0), Douglas Maciel (1,7) — C.27</span></div>
+            <div>Menor entrega entre quem ficou em rota o período todo. Junto com os 2 casos de agenda, os 8 maiores desvios somam 27% da perda.</div>
+            <div>Conversa individual gestor-técnico esta semana, com plano simples de recuperação e acompanhamento diário.</div>
+
+            <div><strong>4 técnicos travados pela demanda</strong><span>André Jefferson, Jadson Araújo, Adriano Sousa e Luiz Nauá (C.27)</span></div>
+            <div>6 a 7 visitas improdutivas cada um em 3 dias — o dia foi consumido por cliente ausente e OS aberta sem necessidade.</div>
+            <div>Tratar pela frente de qualidade da demanda (confirmação de cliente e trava de abertura); não é caso de cobrança individual.</div>
+
+            <div class="ref-row"><strong>Referências a replicar</strong><span>Carlos André (7,3 OS/dia), Miguel Gomes (7,0) — C.26; Francisco Wagner (6,0) — C.27</span></div>
+            <div class="ref-row">Quase o dobro da meta, nas mesmas condições de campo. A meta de 4 OS/dia é atingível.</div>
+            <div class="ref-row">Mapear rota, carga e método desses técnicos e usar como padrão nos planos individuais.</div>
+          </div>
+        </article>
+      </div>
+
+      <div class="tier-strip">
+        <div class="t-red"><strong>7</strong><span>parados<br />resolver em 24h</span></div>
+        <div class="t-red"><strong>8</strong><span>desvio crítico · 27% da perda<br />plano individual já</span></div>
+        <div class="t-orange"><strong>33</strong><span>desvio médio (2,5 a 5 OS)<br />conversa até 10/07</span></div>
+        <div class="t-yellow"><strong>38</strong><span>quase na meta (até 2 OS)<br />ajuste de carga e rota</span></div>
+        <div class="t-green"><strong>41</strong><span>na meta<br />reconhecer e usar de referência</span></div>
+      </div>
+
+      <footer class="slide-footer"><span>Fonte: Analítico Nominal por técnico, 01 a 03/07/2026 · 127 técnicos elegíveis · valores em OS OK</span><span>3 / 4</span></footer>
+    </section>
+
+    <section class="slide" id="slide-4" aria-labelledby="titulo-slide-4">
+      <header class="slide-header compact">
+        <div>
+          <p class="eyebrow">FCA · FATO, CAUSA E AÇÃO</p>
+          <h1 id="titulo-slide-4">Quatro frentes colocam a recuperação em execução nesta semana</h1>
+        </div>
+        <div class="brand" aria-label="Alloha Fibra"><span>alloha</span><small>FIBRA</small></div>
+      </header>
+
+      <div class="fca-table" role="table" aria-label="FCA do projeto 3Ps Ceará">
+        <div class="fca-head">Fato</div><div class="fca-head">Causa</div><div class="fca-head">Ação</div><div class="fca-head">Prazo</div><div class="fca-head">Responsável</div><div class="fca-head">Status</div>
+
+        <div><strong>Fortaleza abaixo nos 3 Ps</strong><span>Presença 94,5% · Produção 3,2 OS/dia · Prazo 83,2%</span></div>
+        <div>Em Produção, 61 dos 81 técnicos estão abaixo da meta, com metade da perda em 3 áreas (Pedro Henrique, Agenor e Thiago Rabelo). Para Presença e Prazo a causa ainda está em levantamento.</div>
+        <div>Controle diário em 3 horários — 9h presença e carga, 12h primeira OS concluída, 16h30 risco de dia sem produção — com lista nominal e providência no mesmo dia.</div>
+        <div><strong>07/07</strong><span>1ª revisão 13/07</span></div>
+        <div>José Nilton (GO), Jefferson Oliveira e GAs de Fortaleza</div>
+        <div><span class="status-pill start">A iniciar</span></div>
+
+        <div><strong>245,5 OS não executadas</strong><span>86 dos 127 técnicos abaixo da meta em 01–03/07</span></div>
+        <div>Três perfis distintos: 7 técnicos sem nenhum dia trabalhado, 2 alocados fora da agenda B2C e 8 casos críticos que somam 27% da perda; os demais estão a menos de 5 OS da meta.</div>
+        <div>Confirmar com RH a situação dos 7 parados; decidir a alocação dos 2 desviados; plano individual para os 8 críticos; ajuste de carga e rota para os demais.</div>
+        <div><strong>08/07</strong><span>planos até 10/07</span></div>
+        <div>GAs dos dois clusters, coordenados pelos GOs</div>
+        <div><span class="status-pill urgent">Imediato</span></div>
+
+        <div><strong>328 visitas improdutivas</strong><span>apenas 212 têm motivo registrado</span></div>
+        <div>Entre as registradas, 8 em 10 nascem antes do despacho: OS aberta sem necessidade, cliente não confirmado, reagendamento não retirado da fila e falha massiva na rede.</div>
+        <div>Registrar o motivo das 116 restantes; travar abertura de OS sem validação técnica; confirmar o cliente antes do despacho; suspender despacho em área com falha massiva ativa.</div>
+        <div><strong>08/07</strong><span>travas até 10/07</span></div>
+        <div>Biondillo (Performance), Davi dos Reis Luz (BI) e GOs do Ceará</div>
+        <div><span class="status-pill validate">Em validação</span></div>
+
+        <div><strong>Fila do Interior acima do limite</strong><span>1,125 dia de trabalho acumulado em 06/07</span></div>
+        <div>Ainda sem dados de entrada de ordens por hora — não é possível afirmar se é excesso de demanda ou perda de capacidade. Causa em validação.</div>
+        <div>Toda manhã, atacar primeiro as ordens abertas há mais de 20 horas, antes de estourarem o prazo de 24h, e medir a fila no fim do dia até voltar a 1 dia ou menos.</div>
+        <div><strong>07/07</strong><span>fila ≤ 1 dia até 10/07</span></div>
+        <div>José Geraldo (GO), Francisco Cleiton e GAs do Interior</div>
+        <div><span class="status-pill watch">Atenção</span></div>
+      </div>
+
+      <div class="decision-request">
+        <strong>Decisões solicitadas</strong>
+        <span>Confirmar responsáveis e prazos</span>
+        <span>Ratificar 85% como meta do Prazo 24h</span>
+        <span>Manter Produtividade OK como métrica oficial</span>
+      </div>
+
+      <footer class="slide-footer"><span>Causas não comprovadas pelos dados permanecem marcadas como “em validação”</span><span>4 / 4</span></footer>
+    </section>
+  </main>
+
+  <script src="assets/js/pages/resultado3psPage.js"></script>
+</body>
+</html>

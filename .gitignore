@@ -12,3 +12,7 @@ Thumbs.db
 # Observação: assets/js/config.js contém apenas a URL do projeto e a chave
 # publishable/anon, que são públicas por design (protegidas por RLS).
 # Ela é versionada de propósito para o GitHub Pages funcionar.
+
+# Python e artefatos de inspecao
+__pycache__/
+*.inspect.ndjson
