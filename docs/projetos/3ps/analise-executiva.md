@@ -2,7 +2,7 @@
 
 ## Mensagem central
 
-Fortaleza (C.27) concentra o risco operacional porque está abaixo nos três Ps. Ceará Interior (C.26) mantém Presença e fechou Prazo no limite, mas abriu 06/07 com fila acima de um dia de trabalho. A recuperação começa nominal: 3 áreas de gestão e 15 técnicos definem metade do desvio de Produção. Combina-se a isso a conversão diária de presença em produção e a redução das visitas improdutivas geradas antes do despacho — OS aberta sem necessidade, cliente não confirmado e falha massiva.
+Fortaleza (C.27) concentra o risco operacional: está abaixo nos três Ps e também abriu 06/07 com fila acima de um dia de trabalho (1,125 dia). Ceará Interior (C.26) está bem em quase tudo — Presença acima da meta e fila dentro do limite (0,820 dia) —, fechando o Prazo apenas por margem mínima. A recuperação começa nominal: 3 áreas de gestão e 15 técnicos definem metade do desvio de Produção. Combina-se a isso a conversão diária de presença em produção e a redução das visitas improdutivas geradas antes do despacho — OS aberta sem necessidade, cliente não confirmado e falha massiva.
 
 ## Escopo e metodologia
 
@@ -22,12 +22,12 @@ Fortaleza (C.27) concentra o risco operacional porque está abaixo nos três Ps.
 | Presença em 03/07 | 95,0% | 102,5% | Acima | 94,5% | Abaixo em 0,5 p.p. |
 | Produção OK S27 | Meta por tempo de casa | 3,5 OS/dia agregado | Desvio nas faixas de 60–89 e >90 dias | 3,2 OS/dia agregado | Desvio nas três faixas |
 | Prazo 24h S27 | 85,0% | 85,2% | Apenas 0,2 p.p. acima | 83,2% | Abaixo em 1,8 p.p. |
-| Dias de estoque em 06/07 | ≤ 1 dia | 1,125 | Risco de deterioração | 0,820 | Dentro do limite |
+| Dias de estoque em 06/07 | ≤ 1 dia | 0,820 | Dentro do limite | 1,125 | Risco de deterioração |
 
 ### Implicação
 
-- **C.27 Fortaleza é a regional crítica:** falha nos três Ps e concentra 66% do gap estimado de Produção.
-- **C.26 Interior precisa proteger Prazo:** o fechamento semanal atingiu a meta por margem mínima, mas a fila acumulada no início de 06/07 já superava um dia de trabalho.
+- **C.27 Fortaleza é a regional crítica:** falha nos três Ps, concentra 66% do gap estimado de Produção e também estourou o limite de fila em 06/07 (1,125 dia) — falha nos quatro indicadores acompanhados.
+- **C.26 Interior está bem em quase tudo, mas sem folga no Prazo:** Presença acima da meta e fila dentro do limite (0,820 dia); o fechamento semanal do Prazo atingiu a meta por margem mínima (+0,2 p.p.), sem espaço para regredir.
 - Presença acima de 100% no Interior indica realizado superior ao planejamento e exige apenas validação do denominador; não deve ser interpretada como disponibilidade ilimitada.
 
 ## 2. Produção do macro ao micro
@@ -170,8 +170,8 @@ Saída diária: técnico, fato, causa padronizada, ação, dono, prazo e evidên
 
 ### Frente 4 — Proteção de Prazo
 
-- C.26: todo início de manhã, puxar a lista das ordens abertas no dia anterior que ainda não foram atendidas e priorizar as com mais de 20 horas, antes que estourem o prazo de 24h, até a fila voltar a um dia ou menos.
-- C.27: manter a fila abaixo de um dia e elevar o atendimento em 24h em pelo menos 1,8 p.p.
+- C.27: todo início de manhã, puxar a lista das ordens abertas no dia anterior que ainda não foram atendidas e priorizar as com mais de 20 horas, antes que estourem o prazo de 24h, até a fila voltar a um dia ou menos (hoje em 1,125); elevar o atendimento em 24h em pelo menos 1,8 p.p.
+- C.26: manter a fila abaixo de um dia (hoje em 0,820) e proteger a margem mínima do Prazo (+0,2 p.p.) para não regredir.
 - Não deslocar capacidade para Produção sem avaliar o efeito sobre Prazo.
 
 ### Frente 5 — Governança e fonte única
@@ -187,8 +187,8 @@ Saída diária: técnico, fato, causa padronizada, ação, dono, prazo e evidên
 |---|---|---|---|---|---|
 | Fortaleza abaixo nos três Ps: Presença 94,5%, Produção 3,2 OS/dia e Prazo 83,2% | Em Produção, 61 dos 81 técnicos abaixo da meta, com metade da perda em 3 áreas (Pedro Henrique, Agenor e Thiago Rabelo). Presença e Prazo com causa em levantamento | Controle diário em 3 horários — 9h presença e carga, 12h primeira OS concluída, 16h30 risco de dia sem produção — com lista nominal e providência no mesmo dia | Início 07/07; 1ª revisão 13/07 | José Nilton (GO), Jefferson Oliveira e GAs de Fortaleza | A iniciar |
 | 245,5 OS não executadas: 86 dos 127 técnicos abaixo da meta em 01–03/07 | Três perfis distintos: 7 técnicos sem nenhum dia trabalhado, 2 alocados fora da agenda B2C e 8 casos críticos que somam 27% da perda; os demais estão a menos de 5 OS da meta | Confirmar com RH a situação dos 7 parados; decidir a alocação dos 2 desviados; plano individual para os 8 críticos; ajuste de carga e rota para os demais | Parados e desviados: 08/07; planos: 10/07 | GAs dos dois clusters, coordenados pelos GOs | Imediato |
-| 328 visitas improdutivas; apenas 212 têm motivo registrado | Entre as registradas, 8 em 10 nascem antes do despacho: OS aberta sem necessidade, cliente não confirmado, reagendamento não retirado da fila e falha massiva | Registrar o motivo das 116 restantes; travar abertura de OS sem validação técnica; confirmar o cliente antes do despacho; suspender despacho em área com falha massiva ativa | Classificação: 08/07; travas: 10/07 | Biondillo (Performance), Davi dos Reis Luz (BI) e GOs do Ceará | Em validação |
-| Interior fechou Prazo em 85,2%, mas abriu 06/07 com fila de 1,125 dia de trabalho | Sem dados de entrada de ordens por hora; não é possível afirmar se é excesso de demanda ou perda de capacidade — causa em validação | Toda manhã, atacar primeiro as ordens abertas há mais de 20 horas, antes de estourarem o prazo de 24h, e medir a fila no fim do dia até voltar a 1 dia ou menos | Início 07/07; fila ≤ 1 dia até 10/07 | José Geraldo (GO), Francisco Cleiton e GAs do Interior | Atenção |
+| 328 visitas improdutivas; 217 têm motivo e submotivo registrado | Entre as 217 classificadas, 78% nascem antes do despacho: OS aberta sem necessidade, cliente não confirmado, reagendamento não retirado da fila e falha massiva. As outras 111 (34%) não têm motivo no BI — lacuna real do sistema, não recorte de tela | Reconciliar com o BI por que 111 baixas não têm motivo registrado; travar abertura de OS sem validação técnica; confirmar o cliente antes do despacho; suspender despacho em área com falha massiva ativa | Classificação: 08/07; travas: 10/07 | Biondillo (Performance), Davi dos Reis Luz (BI) e GOs do Ceará | Em validação |
+| Fortaleza abriu 06/07 com fila de 1,125 dia de trabalho (Interior está em 0,820, dentro do limite) | Sem dados de entrada de ordens por hora; não é possível afirmar se é excesso de demanda ou perda de capacidade — causa em validação | Toda manhã, atacar primeiro as ordens abertas há mais de 20 horas, antes de estourarem o prazo de 24h, e medir a fila no fim do dia até voltar a 1 dia ou menos | Início 07/07; fila ≤ 1 dia até 10/07 | José Nilton (GO), Jefferson Oliveira e GAs de Fortaleza | Atenção |
 
 ## 8. Informações faltantes para fechar causa raiz
 
@@ -196,7 +196,7 @@ Saída diária: técnico, fato, causa padronizada, ação, dono, prazo e evidên
 2. Confirmação formal da meta de 85% para Prazo 24h, pois a ata registra o indicador, mas não o percentual.
 3. Mapeamento completo das 328 improdutivas para motivo, submotivo, técnico, OS e data.
 4. Base de ordens com abertura, despacho, chegada, conclusão e baixa para ligar Prazo à capacidade e à produtividade.
-5. Entrada de ordens por hora, idade da fila e capacidade disponível para explicar a fila acumulada de C.26.
+5. Entrada de ordens por hora, idade da fila e capacidade disponível para explicar a fila acumulada de C.27.
 6. Confirmação dos responsáveis e aceite dos prazos propostos no FCA.
 7. Decisão formal de governança sobre Produtividade OK versus Baremo OK.
 

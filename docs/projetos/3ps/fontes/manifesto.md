@@ -70,6 +70,15 @@
 - O histórico de presença usa planejamento estático por cluster e inclui finais de semana e feriado. A apresentação deve utilizar o indicador executivo já consolidado da aba `painel` para comparação com a meta de 95%.
 - As causas apontadas em observações — ferramental, estoque, treinamento, operação assistida e RH — permanecem como hipóteses até o cruzamento com as próximas bases e validação dos gestores.
 
+### Correção — fila/estoque de 06/07 estava atribuída ao cluster errado
+
+A análise e a apresentação inicial (06/07) atribuíam 1,125 dia de fila ao C.26 Ceará Interior e 0,820 dia ao C.27 Fortaleza. Ao reconciliar com o registro bruto (`base_linhas`, base `b84703a6-7167-48ec-a224-32c7045d6945`, tipo `backlog_diario`, fonte `hist Backlog!CT24`/`CT25`), os dois valores estavam trocados entre os clusters:
+
+- `cluster_codigo: "C.26"`, `cluster: "Ceara Interior"` → `valor: 0,8198` → `status_meta: "atingida"`.
+- `cluster_codigo: "C.27"`, `cluster: "Fortaleza"` → `valor: 1,1250` → `status_meta: "abaixo"`.
+
+Ou seja, **C.27 Fortaleza é quem estourou o limite de 1 dia**, e **C.26 Interior está dentro do limite**. Corrigido em 06/07 em todos os materiais (análise executiva, portal e PPTX). Os demais indicadores (Presença, Produção, Prazo, via `indicador_executivo`) foram conferidos contra a mesma base e batem com o que já estava publicado — o erro estava isolado ao backlog.
+
 ## Fontes complementares de produtividade
 
 As cinco fontes abaixo foram incorporadas em 06/07/2026. Todas estão filtradas para R6 Ceará e usam o período de 01/07/2026 a 03/07/2026, embora o arquivo de share identifique o recorte como S27.

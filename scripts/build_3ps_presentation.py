@@ -157,9 +157,10 @@ chrome(slide, 1, 4, "Fonte: BI operacional e bases nominais do projeto 3Ps · OS
 title_block(
     slide,
     "OPERAÇÕES · CEARÁ · 06/07/2026",
-    "Fortaleza concentra o risco; o Interior precisa proteger o Prazo",
-    "Fortaleza (C.27) está abaixo da meta nos três indicadores. O Interior (C.26) cumpre Presença e fechou o Prazo "
-    "no limite, mas começou a semana com fila de ordens acima de um dia de trabalho.",
+    "Fortaleza concentra o risco nos quatro indicadores; o Interior está estável",
+    "Fortaleza (C.27) está abaixo da meta em Presença, Produção e Prazo, e também começou a semana com fila de "
+    "ordens acima de um dia de trabalho. O Interior (C.26) está dentro da meta em Presença e fila, e fechou o "
+    "Prazo apenas no limite.",
     title_size=32,
     lead_top=152,
 )
@@ -183,14 +184,14 @@ row_c26 = [
     [("102,5%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("acima da meta", {"size": 10, "color": MUTED})],
     [("3,5 OS/dia", {"size": 16, "bold": True, "color": "9A6200"}), ("veteranos abaixo da meta de 4", {"size": 10, "color": MUTED})],
     [("85,2%", {"size": 16, "bold": True, "color": "9A6200"}), ("só 0,2 p.p. acima da meta", {"size": 10, "color": MUTED})],
-    [("1,125 dia", {"size": 16, "bold": True, "color": RED}), ("acima do limite de 1 dia", {"size": 10, "color": MUTED})],
+    [("0,820 dia", {"size": 16, "bold": True, "color": GREEN_DARK}), ("dentro do limite", {"size": 10, "color": MUTED})],
 ]
 row_c27 = [
     [("C.27", {"size": 16, "bold": True, "color": NAVY}), ("Fortaleza", {"size": 10, "color": MUTED})],
     [("94,5%", {"size": 16, "bold": True, "color": RED}), ("0,5 p.p. abaixo da meta", {"size": 10, "color": MUTED})],
     [("3,2 OS/dia", {"size": 16, "bold": True, "color": RED}), ("61 dos 81 técnicos abaixo", {"size": 10, "color": MUTED})],
     [("83,2%", {"size": 16, "bold": True, "color": RED}), ("1,8 p.p. abaixo da meta", {"size": 10, "color": MUTED})],
-    [("0,820 dia", {"size": 16, "bold": True, "color": GREEN_DARK}), ("dentro do limite", {"size": 10, "color": MUTED})],
+    [("1,125 dia", {"size": 16, "bold": True, "color": RED}), ("acima do limite de 1 dia", {"size": 10, "color": MUTED})],
 ]
 for col, lines in enumerate(row_c26):
     set_cell(table.cell(1, col), lines, fill=WHITE)
@@ -200,17 +201,17 @@ for col, lines in enumerate(row_c27):
 add_text(
     slide,
     "Como ler: Produção OK conta apenas ordens de serviço concluídas com sucesso. Fila de 1,125 dia significa que, "
-    "se nenhuma ordem nova entrar, a equipe do Interior precisa de mais de um dia inteiro só para zerar o que já está aberto.",
+    "se nenhuma ordem nova entrar, a equipe de Fortaleza precisa de mais de um dia inteiro só para zerar o que já está aberto.",
     56, 416, 1130, 34, size=10.5, color=MUTED,
 )
 
-add_rect(slide, 56, 470, 545, 148, NAVY, round_corners=True)
+add_rect(slide, 56, 470, 545, 168, NAVY, round_corners=True)
 add_text(slide, "DECISÃO OPERACIONAL", 80, 484, 320, 18, size=11, color="9FC9EE", bold=True)
 add_text(
     slide,
-    "Concentrar a semana em Fortaleza e proteger o Prazo no Interior. A execução começa nominal: "
-    "3 áreas e 15 técnicos definem metade da recuperação.",
-    80, 506, 498, 100, size=15.5, color=WHITE, bold=True,
+    "Concentrar a semana em Fortaleza — também na fila, que estourou o limite — e proteger a margem mínima do "
+    "Prazo no Interior. Execução nominal: 3 áreas e 15 técnicos definem metade da recuperação.",
+    80, 506, 498, 118, size=14.5, color=WHITE, bold=True,
 )
 
 kpis = [
@@ -220,9 +221,9 @@ kpis = [
 ]
 for index, (value, label) in enumerate(kpis):
     left = 625 + index * 202
-    add_rect(slide, left, 470, 190, 148, WHITE, line=LINE, round_corners=True)
+    add_rect(slide, left, 470, 190, 168, WHITE, line=LINE, round_corners=True)
     add_text(slide, value, left + 15, 486, 162, 32, size=23, color=BLUE, bold=True)
-    add_text(slide, label, left + 15, 522, 162, 84, size=11, color=MUTED)
+    add_text(slide, label, left + 15, 522, 162, 104, size=11, color=MUTED)
 
 # ---------------------------------------------------------------- Slide 2
 slide = prs.slides.add_slide(blank)
@@ -477,12 +478,12 @@ fca_rows = [
         WHITE,
     ),
     (
-        [("Fila do Interior acima do limite", {"size": 11, "bold": True, "color": NAVY}),
-         ("1,125 dia de trabalho acumulado em 06/07", {"size": 9, "color": MUTED})],
+        [("Fila de Fortaleza acima do limite", {"size": 11, "bold": True, "color": NAVY}),
+         ("1,125 dia em 06/07 (Interior em 0,820, dentro do limite)", {"size": 9, "color": MUTED})],
         [("Ainda sem dados de entrada de ordens por hora — não é possível afirmar se é excesso de demanda ou perda de capacidade. Causa em validação.", {"size": 9.5})],
         [("Toda manhã, atacar primeiro as ordens abertas há mais de 20 horas, antes de estourarem o prazo de 24h, e medir a fila no fim do dia até voltar a 1 dia ou menos.", {"size": 9.5})],
         [("07/07", {"size": 11, "bold": True, "color": NAVY}), ("fila ≤ 1 dia até 10/07", {"size": 9, "color": MUTED})],
-        [("José Geraldo (GO), Francisco Cleiton e GAs do Interior", {"size": 9.5})],
+        [("José Nilton (GO), Jefferson Oliveira e GAs de Fortaleza", {"size": 9.5})],
         ("Atenção", "FFE5CB", "8A4C00"),
         "F8FAFD",
     ),
