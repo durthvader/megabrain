@@ -172,8 +172,8 @@ Esses valores substituem, sem acumulação, o snapshot anterior da S27 para a le
 
 ### Evidência causal do dashboard
 
-- O volume de 328 improdutivas foi validado pelo ranking do painel: 213 sob Jose Nilton, 95 sob Jose Geraldo e 20 sob Jefferson.
-- Foram visíveis 212 baixas com motivo classificado.
-- Abertura indevida, cliente ausente, reagendamento e falha massiva somam 170 registros — **80,2%** das baixas classificadas.
-- Como 212 é menor que 328, a cobertura dos motivos deve ser validada antes de generalizar a causa para toda a improdutividade.
-- A transcrição completa do recorte está em `evidencia-dashboard-improdutividade-2026-07-06.md`.
+- O volume de 328 improdutivas foi validado pelo ranking do painel: 213 sob Jose Nilton, 95 sob Jose Geraldo e 20 sob Jefferson. Esse total também bate, de forma independente, com a soma do campo `volume_improdutivo` na base nominal por técnico.
+- A transcrição inicial do print está em `evidencia-dashboard-improdutividade-2026-07-06.md` e mostrava 212 baixas com motivo classificado, com a ressalva de que a lista podia estar cortada pela rolagem da tela.
+- Em 06/07 foram obtidos os arquivos reais do BI (`Improdutivas Motivos Baixa.xlsx` e `Improdutivas Submotivos Baixa.xlsx`), documentados em `motivos-submotivos-improdutividade-2026-07-06.md`. Eles confirmam a suspeita: o total real é **217**, não 212 — 5 motivos adicionais (1 ocorrência cada) não apareciam no print.
+- Abertura indevida, cliente ausente, reagendamento e falha massiva somam 170 registros — **78,3%** das 217 baixas classificadas.
+- Como 217 é menor que 328, ainda restam 111 improdutivas (33,8%) sem motivo nem submotivo atribuído. Agora que a fonte é um arquivo completo do BI, essa lacuna é uma pendência real de classificação no sistema, não mais uma limitação de transcrição — e continua sem reconciliação.

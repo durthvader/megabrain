@@ -100,20 +100,20 @@ O ritual diário deve separar essas perdas até o nível nominal; tratar tudo co
 
 ## 4. Improdutividade e causas
 
-O volume nominal registrou 328 improdutivas. O print do dashboard reproduz exatamente esse total por GO, confirmando que não é uma nova base a ser somada:
+O volume nominal registrou 328 improdutivas. Esse total está confirmado de duas formas independentes: pelo ranking do painel (por GO) e pela soma do campo `volume_improdutivo` na base nominal por técnico — as duas batem exatamente:
 
-- Jose Nilton Mendes Lima: 213, ou 64,9%.
-- Jose Geraldo Barbosa da Silva: 95, ou 29,0%.
-- Jefferson Oliveira da Silva: 20, ou 6,1%.
+- Jose Nilton Mendes Lima (GO, C.27 Fortaleza): 213, ou 64,9%.
+- Jose Geraldo Barbosa da Silva (GO, C.26 Interior): 95, ou 29,0%.
+- Jefferson Oliveira da Silva (GO, C.27 Fortaleza): 20, ou 6,1%.
 
-Foram visíveis 212 baixas com motivo classificado. Os quatro principais somam 170, ou 80,2% desse recorte:
+Em 06/07 foram obtidos os arquivos reais de motivo e submotivo (`Improdutivas Motivos Baixa.xlsx` e `Improdutivas Submotivos Baixa.xlsx`, detalhados em `fontes/motivos-submotivos-improdutividade-2026-07-06.md`), que substituem a transcrição do print usada até então. Eles confirmam **217 baixas com motivo e submotivo classificado** — 5 a mais do que os 212 visíveis no print, que estava de fato cortado pela rolagem da tela, como já havíamos sinalizado. Os quatro motivos principais somam 170, ou 78,3% das 217 classificadas:
 
-| Motivo | Quantidade | Share das 212 classificadas |
+| Motivo | Quantidade | Share das 217 classificadas |
 |---|---:|---:|
-| Abertura indevida | 59 | 27,8% |
-| Cliente ausente | 52 | 24,5% |
-| Solicitação de reagendamento | 36 | 17,0% |
-| Falha massiva | 23 | 10,8% |
+| Abertura indevida | 59 | 27,2% |
+| Cliente ausente | 52 | 24,0% |
+| Solicitação de reagendamento | 36 | 16,6% |
+| Falha massiva | 23 | 10,6% |
 
 ### Interpretação
 
@@ -126,7 +126,7 @@ Essa leitura não absolve a execução individual, mas mostra que cobrança de t
 
 ### Limite da evidência
 
-O print mostra 212 motivos para 328 improdutivas. A cobertura pode estar incompleta por recorte ou rolagem. Antes de usar 80,2% como proporção de todo o volume, é necessário reconciliar evento a evento.
+Com os arquivos reais, a cobertura sobe de 212/328 (64,6%) para **217/328 (66,2%)**. Ainda restam **111 improdutivas (33,8%) sem motivo nem submotivo atribuído**. Como os dois arquivos agora são exportações completas do BI — não mais um print sujeito a corte de tela — essa lacuna deixou de ser um problema de transcrição e passou a ser uma lacuna real de classificação no sistema de origem, ainda não explicada. Antes de tratar os 78,3% como proporção de todo o volume de improdutivas, é necessário reconciliar os 111 casos restantes com o BI.
 
 ## 5. Sensibilidade do Baremo OK
 

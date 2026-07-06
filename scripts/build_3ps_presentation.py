@@ -280,14 +280,14 @@ add_text(
 )
 add_text(
     slide,
-    "As outras 116 visitas do painel ao lado ainda estão sem motivo registrado — classificação completa até 08/07.",
+    "As outras 111 visitas do painel ao lado ainda estão sem motivo registrado — reconciliação com o BI até 08/07.",
     78, 456, 566, 30, size=9.5, color=MUTED,
 )
 
 # painel direito
 add_rect(slide, 686, 150, 538, 372, WHITE, line=LINE, round_corners=True)
-add_text(slide, "328 visitas improdutivas", 708, 166, 300, 20, size=15, color=NAVY, bold=True)
-add_text(slide, "só 212 têm motivo registrado", 940, 168, 264, 18, size=12, color=RED, bold=True, align=PP_ALIGN.RIGHT)
+add_text(slide, "328 visitas improdutivas", 708, 166, 320, 20, size=15, color=NAVY, bold=True)
+add_text(slide, "217 têm motivo e submotivo", 926, 168, 278, 18, size=12, color=RED, bold=True, align=PP_ALIGN.RIGHT)
 add_text(
     slide,
     "Visita improdutiva: o técnico foi ao endereço e voltou sem executar o serviço. Motivos registrados nos 4 maiores grupos:",
@@ -301,14 +301,19 @@ causes = [
 ]
 for index, (label, value, ratio) in enumerate(causes):
     hbar(slide, label, value, 708, 236 + index * 34, 190, 240, ratio, color=ORANGE)
-add_rect(slide, 708, 380, 494, 74, "F1F9F1")
-add_rect(slide, 708, 380, 5, 74, GREEN)
-add_text(slide, "8 em 10", 724, 402, 104, 30, size=19, color=GREEN_DARK, bold=True)
+add_rect(slide, 708, 380, 494, 92, "F1F9F1")
+add_rect(slide, 708, 380, 5, 92, GREEN)
+add_text(slide, "78%", 724, 392, 90, 30, size=19, color=GREEN_DARK, bold=True)
 add_text(
     slide,
-    "improdutivas classificadas nascem antes do despacho: OS mal aberta, cliente não confirmado ou falha de rede "
-    "já conhecida. Cobrar só o técnico não resolve.",
-    834, 388, 358, 60, size=10.5, color="4A5B52",
+    "das improdutivas classificadas nascem antes do despacho: OS mal aberta, cliente não confirmado ou falha de "
+    "rede já conhecida. Cobrar só o técnico não resolve.",
+    822, 388, 368, 44, size=10.5, color="4A5B52",
+)
+add_text(
+    slide,
+    "As outras 111 (34%) não têm motivo no BI — não é mais recorte de tela, é lacuna real do sistema, ainda sem explicação.",
+    724, 434, 466, 32, size=9, color="4A5B52",
 )
 
 solutions = [
@@ -462,9 +467,9 @@ fca_rows = [
     ),
     (
         [("328 visitas improdutivas", {"size": 11, "bold": True, "color": NAVY}),
-         ("apenas 212 têm motivo registrado", {"size": 9, "color": MUTED})],
-        [("Entre as registradas, 8 em 10 nascem antes do despacho: OS aberta sem necessidade, cliente não confirmado, reagendamento não retirado da fila e falha massiva na rede.", {"size": 9.5})],
-        [("Registrar o motivo das 116 restantes; travar abertura de OS sem validação técnica; confirmar o cliente antes do despacho; suspender despacho em área com falha massiva ativa.", {"size": 9.5})],
+         ("217 têm motivo e submotivo registrado", {"size": 9, "color": MUTED})],
+        [("Entre as 217 classificadas, 78% nascem antes do despacho: OS aberta sem necessidade, cliente não confirmado, reagendamento não retirado da fila e falha massiva. As outras 111 (34%) não têm motivo no BI — lacuna real, não recorte de tela.", {"size": 9.5})],
+        [("Reconciliar com o BI por que 111 baixas não têm motivo registrado; travar abertura de OS sem validação técnica; confirmar o cliente antes do despacho; suspender despacho em área com falha massiva ativa.", {"size": 9.5})],
         [("08/07", {"size": 11, "bold": True, "color": NAVY}), ("travas até 10/07", {"size": 9, "color": MUTED})],
         [("Biondillo (Performance), Davi dos Reis Luz (BI) e GOs do Ceará", {"size": 9.5})],
         ("Em validação", "FFF0C7", "765400"),
