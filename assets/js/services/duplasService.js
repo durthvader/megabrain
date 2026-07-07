@@ -117,6 +117,54 @@ export function montarResumoPorGA(hierarquia, duplas, solos) {
   return resumo.sort((a, b) => a.go.localeCompare(b.go, "pt-BR") || a.ga.localeCompare(b.ga, "pt-BR"));
 }
 
+// Uma linha por pessoa/situação, pronta para exportar (Excel/CSV).
+export function montarLinhasExportacao(hierarquia, duplas, solos) {
+  const linhas = [];
+
+  for (const resposta of duplas) {
+    linhas.push({
+      GO: resposta.dados?.go || "",
+      GA: resposta.dados?.ga || "",
+      "Nome 1": resposta.tecnico || "",
+      "Nome 2": resposta.dados?.parceiro || "",
+      Status: "Dupla",
+      "Fora da hierarquia": (resposta.dados?.fora_da_hierarquia || []).join(", "),
+      ID: resposta.id,
+    });
+  }
+
+  for (const resposta of solos) {
+    linhas.push({
+      GO: resposta.dados?.go || "",
+      GA: resposta.dados?.ga || "",
+      "Nome 1": resposta.tecnico || "",
+      "Nome 2": "",
+      Status: "Sozinho",
+      "Fora da hierarquia": (resposta.dados?.fora_da_hierarquia || []).join(", "),
+      ID: resposta.id,
+    });
+  }
+
+  const ocupados = mapaNomesOcupados(duplas, solos);
+  for (const pessoa of hierarquia) {
+    if (ocupados.has(chaveNome(pessoa.nome))) continue;
+    linhas.push({
+      GO: pessoa.go,
+      GA: pessoa.ga,
+      "Nome 1": pessoa.nome,
+      "Nome 2": "",
+      Status: "Faltando classificar",
+      "Fora da hierarquia": "",
+      ID: "",
+    });
+  }
+
+  return linhas.sort(
+    (a, b) =>
+      a.GO.localeCompare(b.GO, "pt-BR") || a.GA.localeCompare(b.GA, "pt-BR") || a["Nome 1"].localeCompare(b["Nome 1"], "pt-BR")
+  );
+}
+
 export function montarTotais(hierarquia, duplas, solos) {
   const ocupados = mapaNomesOcupados(duplas, solos);
   const faltando = hierarquia.filter((pessoa) => !ocupados.has(chaveNome(pessoa.nome)));

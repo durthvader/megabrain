@@ -6,9 +6,18 @@
 // ============================================================
 
 import { buscarDemandaPorToken } from "../services/demandaService.js";
-import { carregarDadosDuplas, listarGOs, listarGAs, montarResumoPorGA, montarTotais } from "../services/duplasService.js";
+import {
+  carregarDadosDuplas,
+  listarGOs,
+  listarGAs,
+  montarResumoPorGA,
+  montarTotais,
+  montarLinhasExportacao,
+} from "../services/duplasService.js";
 import { obterParametroUrl } from "../utils/tokens.js";
 import { preencherSelect } from "../utils/filtros.js";
+import { baixarCsv } from "../utils/csv.js";
+import { mostrarSucesso, mostrarAviso } from "../utils/mensagens.js";
 
 const blocoCarregando = document.getElementById("bloco-carregando");
 const blocoErro = document.getElementById("bloco-erro");
@@ -20,7 +29,9 @@ const filtroGo = document.getElementById("filtro-go");
 const filtroGa = document.getElementById("filtro-ga");
 const listaGAs = document.getElementById("lista-gas");
 const gasVazio = document.getElementById("gas-vazio");
+const botaoExportar = document.getElementById("btn-exportar-duplas");
 
+let demandaAtual = null;
 let hierarquia = [];
 let duplas = [];
 let solos = [];
@@ -77,6 +88,13 @@ filtroGo.addEventListener("change", () => {
 });
 filtroGa.addEventListener("change", renderizar);
 
+botaoExportar.addEventListener("click", () => {
+  if (!hierarquia.length) return mostrarAviso("Aguarde o carregamento do resultado.");
+  const linhas = montarLinhasExportacao(hierarquia, duplas, solos);
+  baixarCsv(`duplas_${demandaAtual?.nome || "resultado"}`, linhas);
+  mostrarSucesso("Planilha exportada — abra com o Excel.");
+});
+
 async function iniciar() {
   const token = obterParametroUrl("token");
   if (!token) {
@@ -87,6 +105,7 @@ async function iniciar() {
   let demanda;
   try {
     demanda = await buscarDemandaPorToken(token);
+    demandaAtual = demanda;
   } catch (erro) {
     mostrarErroToken(`Erro ao consultar a demanda: ${erro.message}`);
     return;
