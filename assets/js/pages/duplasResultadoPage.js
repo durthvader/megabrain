@@ -48,11 +48,18 @@ function montarCardGA(grupo) {
   const cartao = document.createElement("div");
   cartao.className = "cartao-item";
 
+  const tagManual = (r) => {
+    const manuais = r.dados?.adicionado_manualmente || [];
+    return manuais.length ? ` <span class="texto-erro">(manual: ${manuais.join(", ")})</span>` : "";
+  };
+
   const linhasDuplas = grupo.duplas
-    .map((r) => `<li>${r.tecnico} + ${r.dados?.parceiro || "?"}</li>`)
+    .map((r) => `<li>${r.tecnico} + ${r.dados?.parceiro || "?"}${tagManual(r)}</li>`)
     .join("");
-  const linhasSolos = grupo.solos.map((r) => `<li>${r.tecnico} — sozinho</li>`).join("");
-  const linhasAfastados = grupo.afastados.map((r) => `<li>${r.tecnico} — afastado/desligado</li>`).join("");
+  const linhasSolos = grupo.solos.map((r) => `<li>${r.tecnico} — sozinho${tagManual(r)}</li>`).join("");
+  const linhasAfastados = grupo.afastados
+    .map((r) => `<li>${r.tecnico} — afastado/desligado${tagManual(r)}</li>`)
+    .join("");
   const linhasFaltando = grupo.faltando.map((pessoa) => `<li>${pessoa.nome}</li>`).join("");
 
   cartao.innerHTML = `

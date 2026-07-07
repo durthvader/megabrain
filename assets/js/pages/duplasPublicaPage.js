@@ -144,11 +144,14 @@ function montarCardRegistro(registro, tipo) {
   const card = document.createElement("div");
   card.className = `duplas-card ${tipo}`;
 
+  const manuais = registro.dados?.adicionado_manualmente || [];
+  const tagManual = manuais.length ? ` · adicionado manualmente (${manuais.join(", ")})` : "";
+
   if (tipo === "dupla") {
     card.innerHTML = `
       <div>
         <div class="duplas-card-nomes">${registro.tecnico} + ${registro.dados?.parceiro || "?"}</div>
-        <div class="duplas-card-tag">Dupla</div>
+        <div class="duplas-card-tag">Dupla${tagManual}</div>
       </div>
       <div class="duplas-card-desfazer">toque para desfazer</div>
     `;
@@ -156,7 +159,7 @@ function montarCardRegistro(registro, tipo) {
     card.innerHTML = `
       <div>
         <div class="duplas-card-nomes">${registro.tecnico}</div>
-        <div class="duplas-card-tag">Afastado/desligado</div>
+        <div class="duplas-card-tag">Afastado/desligado${tagManual}</div>
       </div>
       <div class="duplas-card-desfazer">toque para desfazer</div>
     `;
@@ -164,7 +167,7 @@ function montarCardRegistro(registro, tipo) {
     card.innerHTML = `
       <div>
         <div class="duplas-card-nomes">${registro.tecnico}</div>
-        <div class="duplas-card-tag">Sozinho (sem dupla)</div>
+        <div class="duplas-card-tag">Sozinho (sem dupla)${tagManual}</div>
       </div>
       <div class="duplas-card-desfazer">toque para desfazer</div>
     `;
@@ -219,11 +222,11 @@ function renderizarGA() {
   inputBuscaFora.value = "";
 }
 
-async function aoTocarPessoa(pessoa, foraHierarquia) {
+async function aoTocarPessoa(pessoa, foraHierarquia, manual = false) {
   if (operacaoEmAndamento) return;
 
   if (!selecionado) {
-    selecionado = { ...pessoa, foraHierarquia };
+    selecionado = { ...pessoa, foraHierarquia, manual };
     dicaSelecao.textContent = `${pessoa.nome} selecionado(a). Toque no colega para formar a dupla, ou marque como sozinho abaixo.`;
     renderizarGA();
     return;
@@ -236,10 +239,11 @@ async function aoTocarPessoa(pessoa, foraHierarquia) {
   }
 
   const primeiro = selecionado;
-  const segundo = { ...pessoa, foraHierarquia };
+  const segundo = { ...pessoa, foraHierarquia, manual };
   operacaoEmAndamento = true;
   try {
     const foraDaHierarquia = [primeiro, segundo].filter((p) => p.foraHierarquia).map((p) => p.nome);
+    const adicionadoManualmente = [primeiro, segundo].filter((p) => p.manual).map((p) => p.nome);
     await salvarDupla({
       demandaId: demandaAtual.id,
       tokenPublico: demandaAtual.token_publico,
@@ -249,6 +253,7 @@ async function aoTocarPessoa(pessoa, foraHierarquia) {
       nomeB: segundo.nome,
       respondenteNome: inputSeuNome.value.trim(),
       foraDaHierarquia,
+      adicionadoManualmente,
     });
     limparSelecao();
     await recarregarDados();
@@ -288,6 +293,7 @@ botaoMarcarSozinho.addEventListener("click", async () => {
       nome: selecionado.nome,
       respondenteNome: inputSeuNome.value.trim(),
       foraDaHierarquia: selecionado.foraHierarquia ? [selecionado.nome] : [],
+      adicionadoManualmente: selecionado.manual ? [selecionado.nome] : [],
     });
     const nome = selecionado.nome;
     limparSelecao();
@@ -314,6 +320,7 @@ botaoMarcarAfastado.addEventListener("click", async () => {
       nome: selecionado.nome,
       respondenteNome: inputSeuNome.value.trim(),
       foraDaHierarquia: selecionado.foraHierarquia ? [selecionado.nome] : [],
+      adicionadoManualmente: selecionado.manual ? [selecionado.nome] : [],
     });
     const nome = selecionado.nome;
     limparSelecao();
@@ -360,7 +367,7 @@ botaoAdicionarManual.addEventListener("click", () => {
     return;
   }
 
-  aoTocarPessoa({ nome, funcao: "", go: "", ga: "" }, true);
+  aoTocarPessoa({ nome, funcao: "", go: "", ga: "" }, true, true);
   inputNomeManual.value = "";
 });
 

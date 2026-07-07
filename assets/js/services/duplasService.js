@@ -141,6 +141,7 @@ export function montarLinhasExportacao(hierarquia, duplas, solos, afastados = []
       "Nome 2": resposta.dados?.parceiro || "",
       Status: "Dupla",
       "Fora da hierarquia": (resposta.dados?.fora_da_hierarquia || []).join(", "),
+      "Adicionado manualmente": (resposta.dados?.adicionado_manualmente || []).join(", "),
       ID: resposta.id,
     });
   }
@@ -153,6 +154,7 @@ export function montarLinhasExportacao(hierarquia, duplas, solos, afastados = []
       "Nome 2": "",
       Status: "Sozinho",
       "Fora da hierarquia": (resposta.dados?.fora_da_hierarquia || []).join(", "),
+      "Adicionado manualmente": (resposta.dados?.adicionado_manualmente || []).join(", "),
       ID: resposta.id,
     });
   }
@@ -165,6 +167,7 @@ export function montarLinhasExportacao(hierarquia, duplas, solos, afastados = []
       "Nome 2": "",
       Status: "Afastado/desligado",
       "Fora da hierarquia": (resposta.dados?.fora_da_hierarquia || []).join(", "),
+      "Adicionado manualmente": (resposta.dados?.adicionado_manualmente || []).join(", "),
       ID: resposta.id,
     });
   }
@@ -179,6 +182,7 @@ export function montarLinhasExportacao(hierarquia, duplas, solos, afastados = []
       "Nome 2": "",
       Status: "Faltando classificar",
       "Fora da hierarquia": "",
+      "Adicionado manualmente": "",
       ID: "",
     });
   }
@@ -211,6 +215,7 @@ export async function salvarDupla({
   nomeB,
   respondenteNome,
   foraDaHierarquia,
+  adicionadoManualmente,
 }) {
   return salvarResposta({
     demanda_id: demandaId,
@@ -224,11 +229,21 @@ export async function salvarDupla({
       ga: ga || "",
       parceiro: nomeB,
       fora_da_hierarquia: foraDaHierarquia || [],
+      adicionado_manualmente: adicionadoManualmente || [],
     },
   });
 }
 
-export async function salvarSozinho({ demandaId, tokenPublico, go, ga, nome, respondenteNome, foraDaHierarquia }) {
+export async function salvarSozinho({
+  demandaId,
+  tokenPublico,
+  go,
+  ga,
+  nome,
+  respondenteNome,
+  foraDaHierarquia,
+  adicionadoManualmente,
+}) {
   return salvarResposta({
     demanda_id: demandaId,
     token_publico: tokenPublico,
@@ -240,11 +255,21 @@ export async function salvarSozinho({ demandaId, tokenPublico, go, ga, nome, res
       go: go || "",
       ga: ga || "",
       fora_da_hierarquia: foraDaHierarquia || [],
+      adicionado_manualmente: adicionadoManualmente || [],
     },
   });
 }
 
-export async function salvarAfastado({ demandaId, tokenPublico, go, ga, nome, respondenteNome, foraDaHierarquia }) {
+export async function salvarAfastado({
+  demandaId,
+  tokenPublico,
+  go,
+  ga,
+  nome,
+  respondenteNome,
+  foraDaHierarquia,
+  adicionadoManualmente,
+}) {
   return salvarResposta({
     demanda_id: demandaId,
     token_publico: tokenPublico,
@@ -256,6 +281,7 @@ export async function salvarAfastado({ demandaId, tokenPublico, go, ga, nome, re
       go: go || "",
       ga: ga || "",
       fora_da_hierarquia: foraDaHierarquia || [],
+      adicionado_manualmente: adicionadoManualmente || [],
     },
   });
 }
