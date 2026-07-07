@@ -64,6 +64,8 @@ function renderizarCabecalho() {
 
   el("btn-abrir-escala").href = `escala.html?demanda=${demanda.id}`;
   el("btn-abrir-custos").href = `custos.html?demanda=${demanda.id}`;
+  el("link-nova-analise").href = `analises.html?demanda=${demanda.id}`;
+  el("link-novo-plano").href = `planos.html?demanda=${demanda.id}`;
 }
 
 async function renderizarBases() {

@@ -18,24 +18,31 @@
         <h1 class="topo-titulo">Análises</h1>
       </header>
       <main class="conteudo">
-        <div class="alerta alerta-info">
-          Fluxo sugerido: use o <strong>Codex/Claude no VS Code</strong> para analisar as tabelas da demanda
-          no Supabase e registre aqui o resultado. Prompts prontos em <code>docs/prompts-codex.md</code>.
-        </div>
+        <section class="secao" id="secao-menu-demandas">
+          <h2>Escolha uma demanda</h2>
+          <p class="texto-suave">Selecione a demanda para registrar ou ver as análises feitas nela.</p>
+          <div class="grade-cards" id="grade-demandas"></div>
+          <div class="vazio oculto" id="demandas-menu-vazio">Nenhuma demanda cadastrada ainda.</div>
+        </section>
 
-        <section class="secao card">
-          <h2 class="card-titulo">Nova análise</h2>
-          <form id="form-analise">
-            <div class="linha-campos">
-              <div class="campo">
-                <label for="select-demanda">Demanda *</label>
-                <select id="select-demanda" required><option value="">Carregando…</option></select>
+        <div class="oculto" id="secao-analise-demanda">
+          <div class="alerta alerta-info">
+            Fluxo sugerido: use o <strong>Codex/Claude no VS Code</strong> para analisar as tabelas da demanda
+            no Supabase e registre aqui o resultado. Prompts prontos em <code>docs/prompts-codex.md</code>.
+          </div>
+
+          <p><a class="btn btn-pequeno" id="btn-voltar-menu" href="analises.html">← Voltar para todas as demandas</a></p>
+
+          <section class="secao card">
+            <h2 class="card-titulo">Nova análise <span id="analise-demanda-nome"></span></h2>
+            <form id="form-analise">
+              <input type="hidden" id="select-demanda" />
+              <div class="linha-campos">
+                <div class="campo">
+                  <label for="analise-titulo">Título *</label>
+                  <input id="analise-titulo" name="titulo" required placeholder="Ex.: Ofensores de hora extra em junho" />
+                </div>
               </div>
-              <div class="campo">
-                <label for="analise-titulo">Título *</label>
-                <input id="analise-titulo" name="titulo" required placeholder="Ex.: Ofensores de hora extra em junho" />
-              </div>
-            </div>
             <div class="campo">
               <label for="analise-pergunta">Pergunta</label>
               <input id="analise-pergunta" name="pergunta" placeholder="O que esta análise responde?" />
@@ -67,14 +74,15 @@
             <div class="acoes-formulario">
               <button class="btn btn-primario" type="submit">Salvar análise</button>
             </div>
-          </form>
-        </section>
+            </form>
+          </section>
 
-        <section class="secao">
-          <h2>Análises da demanda</h2>
-          <div class="lista-cartoes" id="lista-analises"></div>
-          <div class="vazio" id="analises-vazio">Selecione uma demanda para ver as análises.</div>
-        </section>
+          <section class="secao">
+            <h2>Análises da demanda</h2>
+            <div class="lista-cartoes" id="lista-analises"></div>
+            <div class="vazio oculto" id="analises-vazio">Nenhuma análise registrada ainda.</div>
+          </section>
+        </div>
       </main>
     </div>
   </div>

@@ -16,6 +16,31 @@ const selectDemanda = document.getElementById("select-demanda");
 const formulario = document.getElementById("form-analise");
 const lista = document.getElementById("lista-analises");
 const placeholderVazio = document.getElementById("analises-vazio");
+const secaoMenuDemandas = document.getElementById("secao-menu-demandas");
+const secaoAnaliseDemanda = document.getElementById("secao-analise-demanda");
+const gradeDemandas = document.getElementById("grade-demandas");
+const menuDemandasVazio = document.getElementById("demandas-menu-vazio");
+const analiseDemandaNome = document.getElementById("analise-demanda-nome");
+
+const ICONES_TIPO = {
+  escala: "🗓️",
+  custos: "💰",
+  indicadores: "📈",
+  formulario: "📝",
+  analise_livre: "🔎",
+};
+
+function montarCardDemanda(demanda) {
+  const link = document.createElement("a");
+  link.className = "card-acesso";
+  link.href = `analises.html?demanda=${demanda.id}`;
+  link.innerHTML = `
+    <div class="card-acesso-icone">${ICONES_TIPO[demanda.tipo] || "🔎"}</div>
+    <div class="card-acesso-titulo">${demanda.nome}</div>
+    <div class="card-acesso-descricao">${demanda.tipo}${demanda.responsavel ? " · " + demanda.responsavel : ""}</div>
+  `;
+  return link;
+}
 
 const CAMPOS_TEXTO = [
   ["pergunta", "Pergunta"],
@@ -29,18 +54,24 @@ const CAMPOS_TEXTO = [
 async function carregarDemandas() {
   try {
     const demandas = await listarDemandas();
-    selectDemanda.innerHTML = '<option value="">Selecione…</option>';
+    const demandaUrl = obterParametroUrl("demanda");
+
+    gradeDemandas.innerHTML = "";
+    menuDemandasVazio.classList.toggle("oculto", demandas.length > 0);
     for (const demanda of demandas) {
-      const opcao = document.createElement("option");
-      opcao.value = demanda.id;
-      opcao.textContent = `${demanda.nome} (${demanda.tipo})`;
-      selectDemanda.appendChild(opcao);
+      gradeDemandas.appendChild(montarCardDemanda(demanda));
     }
 
-    const demandaUrl = obterParametroUrl("demanda");
-    if (demandaUrl) {
-      selectDemanda.value = demandaUrl;
-      if (selectDemanda.value === demandaUrl) await carregarAnalises();
+    const demandaAtual = demandas.find((demanda) => String(demanda.id) === String(demandaUrl));
+    if (demandaAtual) {
+      secaoMenuDemandas.classList.add("oculto");
+      secaoAnaliseDemanda.classList.remove("oculto");
+      selectDemanda.value = demandaAtual.id;
+      analiseDemandaNome.textContent = `— ${demandaAtual.nome}`;
+      await carregarAnalises();
+    } else {
+      secaoMenuDemandas.classList.remove("oculto");
+      secaoAnaliseDemanda.classList.add("oculto");
     }
   } catch (erro) {
     mostrarErro(`Erro ao carregar demandas: ${erro.message}`);
@@ -130,5 +161,4 @@ formulario.addEventListener("submit", async (evento) => {
   }
 });
 
-selectDemanda.addEventListener("change", carregarAnalises);
 carregarDemandas();
