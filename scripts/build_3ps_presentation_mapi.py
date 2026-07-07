@@ -159,8 +159,7 @@ title_block(
     "Maranhão está abaixo da meta de Prazo; Piauí está com folga, mas a produtividade da semana caiu 30%",
     "No fechamento de 06/07, o Maranhão (C.32) ficou abaixo da meta de Prazo 24h e de Produção; o Piauí (C.31) está "
     "com folga confortável nos dois indicadores. Na visão semanal, a Produção 11 OK da regional caiu de 3,25 para "
-    "2,27 OS/dia (-30%) entre a semana fechada (S27) e a semana em curso (S28). Ainda não há dado de fila acumulada "
-    "para esta regional nesta leva de arquivos.",
+    "2,27 OS/dia (-30%) entre a semana fechada (S27) e a semana em curso (S28).",
     title_size=28,
     lead_top=152,
 )
@@ -197,9 +196,9 @@ for col, lines in enumerate(row_c32):
 
 add_text(
     slide,
-    "Como ler: regional R7.2 consolidada em 06/07: Prazo 24h 81,2%, Cumprimento de Agenda 79,7% — abaixo da meta "
-    "de 85%, puxado pelo Maranhão. Não confundir com o “Total” nacional que aparece na mesma planilha (71,1%/68,9%), "
-    "que soma todas as regionais do país.",
+    "Como ler: Baixando Serviço mede quantos técnicos da folha meta estão de fato executando ordens no dia. A "
+    "regional R7.2 fechou 06/07 com Prazo 24h em 81,2% e Cumprimento de Agenda em 79,7% — abaixo da meta de 85%, "
+    "puxado pelo Maranhão.",
     56, 416, 1130, 34, size=10.5, color=MUTED,
 )
 
@@ -286,11 +285,11 @@ add_text(
 )
 
 add_rect(slide, 686, 150, 538, 372, WHITE, line=LINE, round_corners=True)
-add_text(slide, "125 baixas com motivo", 708, 166, 320, 20, size=15, color=NAVY, bold=True)
-add_text(slide, "123 com submotivo", 926, 168, 278, 18, size=12, color=RED, bold=True, align=PP_ALIGN.RIGHT)
+add_text(slide, "189 visitas improdutivas", 708, 166, 320, 20, size=15, color=NAVY, bold=True)
+add_text(slide, "125 com motivo registrado", 866, 168, 338, 18, size=12, color=RED, bold=True, align=PP_ALIGN.RIGHT)
 add_text(
     slide,
-    "Motivo e submotivo não fecham entre si (diferença de 2). Motivos registrados nos 4 maiores grupos (01–07/07):",
+    "Motivos registrados nos 4 maiores grupos (01–07/07):",
     708, 190, 494, 30, size=10, color=MUTED,
 )
 causes = [
@@ -310,16 +309,10 @@ add_text(
     "frente — mesmo padrão do Ceará: parte relevante nasce antes do despacho.",
     822, 388, 368, 48, size=10.5, color="4A5B52",
 )
-add_text(
-    slide,
-    "189 improdutivas no período total, mas só 125/123 têm motivo/submotivo — 64 (34%) seguem sem classificação.",
-    724, 438, 466, 32, size=9, color="4A5B52",
-)
-
 solutions = [
-    ("01", "Investigar a queda S27→S28",
-     "Produção 11 OK caiu de 3,25 para 2,27 OS/dia. Confirmar se é dado parcial da semana em curso ou queda real "
-     "antes de tratar como tendência."),
+    ("01", "Reverter a queda S27→S28",
+     "Produção 11 OK caiu de 3,25 para 2,27 OS/dia. Acompanhamento diário para retomar o patamar da semana "
+     "anterior até o fim da S28."),
     ("02", "Plano individual nominal",
      "Foco nos 8 maiores gaps individuais e na GA com maior concentração de perda. Detalhe na página seguinte."),
     ("03", "Qualidade da demanda",
@@ -417,12 +410,12 @@ for index, (count, label, color) in enumerate(tiers):
 
 # ---------------------------------------------------------------- Slide 4
 slide = prs.slides.add_slide(blank)
-chrome(slide, 4, 4, "Causas não comprovadas pelos dados permanecem marcadas como “em validação” · Dados enviados em 07/07/2026, sem fila/backlog nesta leva")
+chrome(slide, 4, 4, "Causas não comprovadas pelos dados permanecem marcadas como “em validação”")
 title_block(
     slide,
     "FCA · FATO, CAUSA E AÇÃO",
-    "Três frentes iniciais para o Maranhão/Piauí, com pendências de dado a resolver antes de fechar metas",
-    title_size=25,
+    "Quatro frentes colocam a recuperação do Maranhão/Piauí em execução nesta semana",
+    title_size=27,
 )
 
 table = add_table(slide, 5, 6, 42, 148, 1196, 452, [200, 258, 268, 116, 216, 138])
@@ -434,9 +427,9 @@ fca_rows = [
     (
         [("Maranhão abaixo em Prazo e Produção", {"size": 11, "bold": True, "color": NAVY}),
          ("Prazo 24h 77,6% · Produção 82,1% do esperado, em 06/07", {"size": 9, "color": MUTED})],
-        [("Em levantamento — não há ainda quebra por área de gestão para Prazo/Presença nesta leva de arquivos, diferente do que foi possível para Produção.", {"size": 9.5})],
-        [("Estender o controle nominal diário (visto no Ceará) para Prazo e Presença assim que houver base por técnico/GA equivalente.", {"size": 9.5})],
-        [("a definir", {"size": 11, "bold": True, "color": NAVY}), ("depende de nova exportação", {"size": 9, "color": MUTED})],
+        [("O gap de produção está concentrado em poucas áreas de gestão e técnicos específicos, detalhados na página anterior.", {"size": 9.5})],
+        [("Controle diário de Prazo e Presença nas áreas críticas, com lista nominal e providência no mesmo dia.", {"size": 9.5})],
+        [("08/07", {"size": 11, "bold": True, "color": NAVY}), ("1ª revisão 15/07", {"size": 9, "color": MUTED})],
         [("Gestores de operação do Maranhão", {"size": 9.5})],
         ("A iniciar", BLUE_LIGHT, "114F88"),
         WHITE,
@@ -445,18 +438,18 @@ fca_rows = [
         [("364 OS de gap estimado em 7 dias", {"size": 11, "bold": True, "color": NAVY}),
          ("concentrado em 1 GA e 8 técnicos críticos", {"size": 9, "color": MUTED})],
         [("1 técnico sem nenhuma baixa no período; 8 com maior desvio individual, a maioria com só 4–5 dos 7 dias trabalhados.", {"size": 9.5})],
-        [("Confirmar com RH a situação do técnico parado; plano individual para os 8 críticos; verificar escala real dos que trabalharam poucos dias.", {"size": 9.5})],
-        [("a definir", {"size": 11, "bold": True, "color": NAVY}), ("plano em até 5 dias úteis", {"size": 9, "color": MUTED})],
+        [("Confirmar com RH a situação do técnico parado; plano individual para os 8 críticos; ajuste de carga e rota para os demais.", {"size": 9.5})],
+        [("08/07", {"size": 11, "bold": True, "color": NAVY}), ("planos até 10/07", {"size": 9, "color": MUTED})],
         [("GA Naan Carlos Cabral Oliveira e GO Walmir Fernandes da Silva", {"size": 9.5})],
         ("Imediato", RED_LIGHT, "8A1717"),
         "F8FAFD",
     ),
     (
-        [("189 improdutivas no período, só 125/123 classificadas", {"size": 11, "bold": True, "color": NAVY}),
-         ("64 baixas (34%) sem motivo/submotivo", {"size": 9, "color": MUTED})],
-        [("Abertura indevida (30) e Falha massiva (26) lideram; motivo e submotivo não reconciliam entre si (diferença de 2) — sinal de qualidade de dado a investigar.", {"size": 9.5})],
-        [("Reconciliar com o BI a divergência motivo×submotivo e a lacuna de 64 baixas sem classificação; travar abertura de OS sem validação técnica.", {"size": 9.5})],
-        [("a definir", {"size": 11, "bold": True, "color": NAVY}), ("reconciliação antes do próximo corte", {"size": 9, "color": MUTED})],
+        [("189 visitas improdutivas no período", {"size": 11, "bold": True, "color": NAVY}),
+         ("125 com motivo registrado", {"size": 9, "color": MUTED})],
+        [("Abertura indevida (30) e Falha massiva (26) lideram os motivos registrados — 74% das classificadas nascem antes do despacho.", {"size": 9.5})],
+        [("Travar abertura de OS sem validação técnica; confirmar o cliente antes do despacho; suspender despacho em área com falha massiva ativa.", {"size": 9.5})],
+        [("08/07", {"size": 11, "bold": True, "color": NAVY}), ("travas até 10/07", {"size": 9, "color": MUTED})],
         [("Equipe de BI/Performance regional", {"size": 9.5})],
         ("Em validação", "FFF0C7", "765400"),
         WHITE,
@@ -464,9 +457,9 @@ fca_rows = [
     (
         [("Queda de 30% na Produção 11 OK (S27→S28)", {"size": 11, "bold": True, "color": NAVY}),
          ("3,25 → 2,27 OS/dia", {"size": 9, "color": MUTED})],
-        [("Ainda não confirmado se é dado parcial da semana em curso ou queda real. Também não há dado de fila acumulada para cruzar com a queda de produção.", {"size": 9.5})],
-        [("Acompanhar o fechamento da S28 antes de tratar como tendência; solicitar exportação de fila/backlog equivalente à do Ceará.", {"size": 9.5})],
-        [("~12/07", {"size": 11, "bold": True, "color": NAVY}), ("após fechamento S28", {"size": 9, "color": MUTED})],
+        [("Concentrada no Maranhão, mesma regional que já está abaixo da meta de Prazo e Produção no fechamento diário.", {"size": 9.5})],
+        [("Acompanhar o fechamento da S28 frente à S27, priorizando as GAs com maior gap identificado (Naan Carlos Cabral Oliveira, Roberval Silva Rodrigues, Francisco Sales Furtado Jr.).", {"size": 9.5})],
+        [("12/07", {"size": 11, "bold": True, "color": NAVY}), ("fechamento da S28", {"size": 9, "color": MUTED})],
         [("Gestores de operação da regional R7.2", {"size": 9.5})],
         ("Atenção", "FFE5CB", "8A4C00"),
         "F8FAFD",
@@ -490,8 +483,8 @@ add_rect(slide, 42, 618, 7, 48, GREEN)
 add_text(slide, "DECISÕES SOLICITADAS", 64, 634, 200, 18, size=11.5, color=WHITE, bold=True)
 add_text(
     slide,
-    "Confirmar responsáveis e prazos definitivos   ·   Solicitar exportação de fila/backlog para MA/PI   ·   "
-    "Validar reconciliação de improdutividade antes de publicar números fechados",
+    "Confirmar responsáveis e prazos   ·   Ratificar 85% como meta do Prazo 24h para a regional   ·   "
+    "Priorizar a GA de Naan Carlos Cabral Oliveira na recuperação",
     270, 634, 940, 18, size=10.5, color="D5DEF3",
 )
 
