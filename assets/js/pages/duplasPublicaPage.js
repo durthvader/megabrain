@@ -17,6 +17,7 @@ import {
   infoOcupacao,
   salvarDupla,
   salvarSozinho,
+  salvarAfastado,
   desfazerRegistro,
   chaveNome,
 } from "../services/duplasService.js";
@@ -41,6 +42,7 @@ const disponiveisVazio = document.getElementById("disponiveis-vazio");
 const dicaSelecao = document.getElementById("dica-selecao");
 const acaoSozinho = document.getElementById("acao-sozinho");
 const botaoMarcarSozinho = document.getElementById("btn-marcar-sozinho");
+const botaoMarcarAfastado = document.getElementById("btn-marcar-afastado");
 
 const listaDuplas = document.getElementById("lista-duplas");
 const duplasVazio = document.getElementById("duplas-vazio");
@@ -58,6 +60,7 @@ let demandaAtual = null;
 let hierarquia = [];
 let duplas = [];
 let solos = [];
+let afastados = [];
 let selecionado = null;
 let operacaoEmAndamento = false;
 
@@ -83,6 +86,7 @@ async function recarregarDados() {
   hierarquia = dados.hierarquia;
   duplas = dados.duplas;
   solos = dados.solos;
+  afastados = dados.afastados;
 }
 
 function montarChipPessoa(pessoa, { foraHierarquia = false, ocupacao = null } = {}) {
@@ -100,10 +104,13 @@ function montarChipPessoa(pessoa, { foraHierarquia = false, ocupacao = null } = 
   if (ocupacao) {
     botao.classList.add("ocupado");
     botao.disabled = true;
-    notaFuncao =
-      ocupacao.tipoFormulario === "dupla"
-        ? `já duplado com ${ocupacao.parceiro}`
-        : "já marcado como sozinho";
+    if (ocupacao.tipoFormulario === "dupla") {
+      notaFuncao = `já duplado com ${ocupacao.parceiro}`;
+    } else if (ocupacao.tipoFormulario === "dupla_afastado") {
+      notaFuncao = "já marcado como afastado/desligado";
+    } else {
+      notaFuncao = "já marcado como sozinho";
+    }
   }
 
   botao.innerHTML = `
@@ -145,6 +152,14 @@ function montarCardRegistro(registro, tipo) {
       </div>
       <div class="duplas-card-desfazer">toque para desfazer</div>
     `;
+  } else if (tipo === "afastado") {
+    card.innerHTML = `
+      <div>
+        <div class="duplas-card-nomes">${registro.tecnico}</div>
+        <div class="duplas-card-tag">Afastado/desligado</div>
+      </div>
+      <div class="duplas-card-desfazer">toque para desfazer</div>
+    `;
   } else {
     card.innerHTML = `
       <div>
@@ -172,11 +187,12 @@ function renderizarGA() {
   duplasInstrucao.classList.add("oculto");
   secaoDuplas.classList.remove("oculto");
 
-  const ocupados = mapaNomesOcupados(duplas, solos);
+  const ocupados = mapaNomesOcupados(duplas, solos, afastados);
   const pessoasGA = hierarquia.filter((pessoa) => pessoa.ga === ga);
   const disponiveis = pessoasGA.filter((pessoa) => !ocupados.has(chaveNome(pessoa.nome)));
   const duplasGA = duplas.filter((registro) => registro.dados?.ga === ga);
   const solosGA = solos.filter((registro) => registro.dados?.ga === ga);
+  const afastadosGA = afastados.filter((registro) => registro.dados?.ga === ga);
 
   listaDisponiveis.innerHTML = "";
   disponiveisVazio.classList.toggle("oculto", disponiveis.length > 0);
@@ -185,15 +201,17 @@ function renderizarGA() {
   }
 
   listaDuplas.innerHTML = "";
-  const registros = [...duplasGA.map((r) => ({ r, tipo: "dupla" })), ...solosGA.map((r) => ({ r, tipo: "sozinho" }))].sort(
-    (a, b) => (a.r.tecnico || "").localeCompare(b.r.tecnico || "", "pt-BR")
-  );
+  const registros = [
+    ...duplasGA.map((r) => ({ r, tipo: "dupla" })),
+    ...solosGA.map((r) => ({ r, tipo: "sozinho" })),
+    ...afastadosGA.map((r) => ({ r, tipo: "afastado" })),
+  ].sort((a, b) => (a.r.tecnico || "").localeCompare(b.r.tecnico || "", "pt-BR"));
   duplasVazio.classList.toggle("oculto", registros.length > 0);
   for (const { r, tipo } of registros) {
     listaDuplas.appendChild(montarCardRegistro(r, tipo));
   }
 
-  montarAvisoForaHierarquia([...duplasGA, ...solosGA]);
+  montarAvisoForaHierarquia([...duplasGA, ...solosGA, ...afastadosGA]);
 
   acaoSozinho.classList.toggle("oculto", !selecionado);
 
@@ -283,6 +301,32 @@ botaoMarcarSozinho.addEventListener("click", async () => {
   }
 });
 
+botaoMarcarAfastado.addEventListener("click", async () => {
+  if (!selecionado || operacaoEmAndamento) return;
+  if (!window.confirm(`Marcar ${selecionado.nome} como afastado/desligado?`)) return;
+  operacaoEmAndamento = true;
+  try {
+    await salvarAfastado({
+      demandaId: demandaAtual.id,
+      tokenPublico: demandaAtual.token_publico,
+      go: filtroGo.value,
+      ga: filtroGa.value,
+      nome: selecionado.nome,
+      respondenteNome: inputSeuNome.value.trim(),
+      foraDaHierarquia: selecionado.foraHierarquia ? [selecionado.nome] : [],
+    });
+    const nome = selecionado.nome;
+    limparSelecao();
+    await recarregarDados();
+    renderizarGA();
+    mostrarSucesso(`${nome} marcado(a) como afastado/desligado.`);
+  } catch (erro) {
+    mostrarErro(`Erro ao marcar afastado: ${erro.message}`);
+  } finally {
+    operacaoEmAndamento = false;
+  }
+});
+
 inputBuscaFora.addEventListener("input", () => {
   const texto = inputBuscaFora.value.trim();
   resultadosBuscaFora.innerHTML = "";
@@ -298,7 +342,7 @@ inputBuscaFora.addEventListener("input", () => {
     return;
   }
   for (const pessoa of encontrados) {
-    const ocupacao = infoOcupacao(pessoa.nome, duplas, solos);
+    const ocupacao = infoOcupacao(pessoa.nome, duplas, solos, afastados);
     resultadosBuscaFora.appendChild(montarChipPessoa(pessoa, { foraHierarquia: true, ocupacao }));
   }
 });
@@ -307,13 +351,12 @@ botaoAdicionarManual.addEventListener("click", () => {
   const nome = inputNomeManual.value.trim();
   if (!nome) return;
 
-  const ocupacao = infoOcupacao(nome, duplas, solos);
+  const ocupacao = infoOcupacao(nome, duplas, solos, afastados);
   if (ocupacao) {
-    mostrarErro(
-      ocupacao.tipoFormulario === "dupla"
-        ? `${nome} já está duplado com ${ocupacao.parceiro}.`
-        : `${nome} já está marcado como sozinho.`
-    );
+    let motivo = "já está marcado como sozinho";
+    if (ocupacao.tipoFormulario === "dupla") motivo = `já está duplado com ${ocupacao.parceiro}`;
+    else if (ocupacao.tipoFormulario === "dupla_afastado") motivo = "já está marcado como afastado/desligado";
+    mostrarErro(`${nome} ${motivo}.`);
     return;
   }
 

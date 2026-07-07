@@ -35,6 +35,7 @@ let demandaAtual = null;
 let hierarquia = [];
 let duplas = [];
 let solos = [];
+let afastados = [];
 
 function mostrarErroToken(mensagem) {
   blocoCarregando.classList.add("oculto");
@@ -51,6 +52,7 @@ function montarCardGA(grupo) {
     .map((r) => `<li>${r.tecnico} + ${r.dados?.parceiro || "?"}</li>`)
     .join("");
   const linhasSolos = grupo.solos.map((r) => `<li>${r.tecnico} — sozinho</li>`).join("");
+  const linhasAfastados = grupo.afastados.map((r) => `<li>${r.tecnico} — afastado/desligado</li>`).join("");
   const linhasFaltando = grupo.faltando.map((pessoa) => `<li>${pessoa.nome}</li>`).join("");
 
   cartao.innerHTML = `
@@ -63,6 +65,8 @@ function montarCardGA(grupo) {
       <dd>${linhasDuplas ? `<ul>${linhasDuplas}</ul>` : "Nenhuma."}</dd>
       <dt>Sozinhos (${grupo.solos.length})</dt>
       <dd>${linhasSolos ? `<ul>${linhasSolos}</ul>` : "Nenhum."}</dd>
+      <dt>Afastados/desligados (${grupo.afastados.length})</dt>
+      <dd>${linhasAfastados ? `<ul>${linhasAfastados}</ul>` : "Nenhum."}</dd>
       <dt>Faltando classificar (${grupo.faltando.length})</dt>
       <dd>${linhasFaltando ? `<ul>${linhasFaltando}</ul>` : "Ninguém — GA completo."}</dd>
     </dl>
@@ -71,7 +75,7 @@ function montarCardGA(grupo) {
 }
 
 function renderizar() {
-  const resumo = montarResumoPorGA(hierarquia, duplas, solos).filter(
+  const resumo = montarResumoPorGA(hierarquia, duplas, solos, afastados).filter(
     (grupo) => (!filtroGo.value || grupo.go === filtroGo.value) && (!filtroGa.value || grupo.ga === filtroGa.value)
   );
 
@@ -90,7 +94,7 @@ filtroGa.addEventListener("change", renderizar);
 
 botaoExportar.addEventListener("click", () => {
   if (!hierarquia.length) return mostrarAviso("Aguarde o carregamento do resultado.");
-  const linhas = montarLinhasExportacao(hierarquia, duplas, solos);
+  const linhas = montarLinhasExportacao(hierarquia, duplas, solos, afastados);
   baixarCsv(`duplas_${demandaAtual?.nome || "resultado"}`, linhas);
   mostrarSucesso("Planilha exportada — abra com o Excel.");
 });
@@ -129,16 +133,18 @@ async function iniciar() {
     hierarquia = dados.hierarquia;
     duplas = dados.duplas;
     solos = dados.solos;
+    afastados = dados.afastados;
 
     if (!hierarquia.length) {
       mostrarErroToken('Esta demanda ainda não tem uma base do tipo "hierarquia" cadastrada.');
       return;
     }
 
-    const totais = montarTotais(hierarquia, duplas, solos);
+    const totais = montarTotais(hierarquia, duplas, solos, afastados);
     document.getElementById("kpi-total").textContent = totais.totalPessoas;
     document.getElementById("kpi-duplas").textContent = totais.totalDuplas;
     document.getElementById("kpi-sozinhos").textContent = totais.totalSozinhos;
+    document.getElementById("kpi-afastados").textContent = totais.totalAfastados;
     document.getElementById("kpi-faltando").textContent = totais.totalFaltando;
 
     preencherSelect(filtroGo, listarGOs(hierarquia), "Todos");
