@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>3Ps Nordeste · Painel executivo</title>
+  <link rel="stylesheet" href="assets/css/resultado-3ps.css" />
+</head>
+<body>
+  <nav class="deck-nav" aria-label="Navegação da apresentação">
+    <button class="nav-dot ativo" data-slide="slide-1" aria-label="Ir para visão executiva">1</button>
+    <button class="nav-dot" data-slide="slide-2" aria-label="Ir para diagnóstico de produção">2</button>
+    <button class="nav-dot" data-slide="slide-3" aria-label="Ir para gestão nominal">3</button>
+    <button class="nav-dot" data-slide="slide-4" aria-label="Ir para FCA">4</button>
+  </nav>
+
+  <div class="deck-actions">
+    <a class="action-link" href="outputs/3ps/3Ps_Nordeste_Executivo.pptx">PowerPoint</a>
+    <button class="action-link" id="btn-print" type="button">Imprimir</button>
+  </div>
+
+  <main class="deck">
+    <section class="slide" id="slide-1" aria-labelledby="titulo-slide-1">
+      <header class="slide-header">
+        <div>
+          <p class="eyebrow">OPERAÇÕES · NORDESTE (R7.1) · 07/07/2026</p>
+          <h1 id="titulo-slide-1">Sergipe e Pernambuco fecham 06/07 acima da meta de Produção e Prazo, mas a produtividade da semana caiu 32% e Sergipe está abaixo na Agenda</h1>
+        </div>
+        <div class="brand" aria-label="Alloha Fibra"><span>alloha</span><small>FIBRA</small></div>
+      </header>
+
+      <p class="lead">No fechamento de 06/07, Sergipe (C.21) e Pernambuco (C.23) superaram a meta de Produção e de Prazo 24h; Pernambuco também está acima da meta de Cumprimento de Agenda, enquanto Sergipe fica 5 p.p. abaixo. Na visão semanal, a Produção 11 OK da regional caiu de 4,4 para 3,0 OS/dia (-32%) entre a semana fechada (S27) e a semana em curso (S28).</p>
+
+      <div class="status-grid" role="table" aria-label="Resumo dos 3 Ps por cluster">
+        <div class="status-head">Cluster</div>
+        <div class="status-head">Baixando serviço <small>vs. folha meta, 06/07</small></div>
+        <div class="status-head">Produção <small>% da meta esperada, 06/07</small></div>
+        <div class="status-head">Prazo 24h <small>meta 85% das ordens</small></div>
+        <div class="status-head">Cumprimento de agenda <small>06/07</small></div>
+
+        <div class="cluster-name"><strong>C.21</strong><span>Sergipe</span></div>
+        <div class="metric ok"><strong>87,5%</strong><span>14 de 16 da folha meta</span></div>
+        <div class="metric ok"><strong>118,1%</strong><span>acima do esperado</span></div>
+        <div class="metric ok"><strong>90,0%</strong><span>5 p.p. acima da meta</span></div>
+        <div class="metric risk"><strong>80,0%</strong><span>5 p.p. abaixo da meta</span></div>
+
+        <div class="cluster-name focus"><strong>C.23</strong><span>Pernambuco</span></div>
+        <div class="metric ok"><strong>94,1%</strong><span>16 de 17 da folha meta</span></div>
+        <div class="metric ok"><strong>110,7%</strong><span>acima do esperado</span></div>
+        <div class="metric ok"><strong>87,5%</strong><span>2,5 p.p. acima da meta</span></div>
+        <div class="metric ok"><strong>93,8%</strong><span>8,8 p.p. acima da meta</span></div>
+      </div>
+
+      <p class="reading-note">Como ler: Baixando Serviço mede quantos técnicos da folha meta estão de fato executando ordens no dia. A regional R7.1 fechou 06/07 com Prazo 24h em 88,9% e Cumprimento de Agenda em 86,1% — ambos acima da meta de 85%, puxados por Pernambuco.</p>
+
+      <div class="slide-bottom two-cols">
+        <article class="decision-block primary">
+          <p class="block-label">DECISÃO OPERACIONAL</p>
+          <h2>Reverter a queda de produtividade da S28 antes que vire tendência e fechar a lacuna de Cumprimento de Agenda em Sergipe (80% vs meta de 85%). A execução também começa nominal: a GA de Leandro Sousa de Lorena concentra o maior gap em Pernambuco, e 8 técnicos concentram os maiores desvios.</h2>
+        </article>
+        <article class="evidence-block">
+          <div><strong>6 de 64</strong><span>registros-semana em Q4/NP (produtividade mais baixa ou sem produção) no quartil 11 OK</span></div>
+          <div><strong>63 OS</strong><span>de gap estimado em 7 dias (01–07/07), considerando meta por tempo de casa</span></div>
+          <div><strong>-32%</strong><span>queda de Produção 11 OK entre a semana fechada e a semana em curso</span></div>
+        </article>
+      </div>
+
+      <footer class="slide-footer"><span>Fonte: exportações de BI operacional da regional R7.1 (AL/BA/PB/PE/RN/SE), 01–07/07/2026 · OS = ordem de serviço concluída com baixa OK</span><span>1 / 4</span></footer>
+    </section>
+
+    <section class="slide" id="slide-2" aria-labelledby="titulo-slide-2">
+      <header class="slide-header compact">
+        <div>
+          <p class="eyebrow">DIAGNÓSTICO DE PRODUÇÃO</p>
+          <h1 id="titulo-slide-2">O quadro está concentrado nos quartis mais produtivos — o desafio é sustentar o ritmo da S27 na semana em curso</h1>
+        </div>
+        <div class="brand" aria-label="Alloha Fibra"><span>alloha</span><small>FIBRA</small></div>
+      </header>
+
+      <div class="diagnostic-layout">
+        <article class="panel workforce-panel">
+          <div class="panel-title"><span>32 técnicos elegíveis</span><strong>Quadro 100% veterano</strong></div>
+          <p class="panel-note">Quartil de produtividade (11 OK), média das semanas S27 e S28. Todo o quadro tem mais de 90 dias de casa: 16 técnicos em Sergipe, 16 em Pernambuco.</p>
+          <div class="stacked-bar" aria-label="Distribuição dos técnicos por quartil">
+            <span class="bar green" style="width:43.8%" title="Q1: 28 registros-semana"></span>
+            <span class="bar yellow" style="width:25%" title="Q2: 16 registros-semana"></span>
+            <span class="bar orange" style="width:21.9%" title="Q3: 14 registros-semana"></span>
+            <span class="bar red" style="width:9.4%" title="Q4/NP: 6 registros-semana"></span>
+          </div>
+          <div class="legend-grid">
+            <div><i class="green"></i><strong>43,8%</strong><span>Q1 — produtividade mais alta</span></div>
+            <div><i class="yellow"></i><strong>25,0%</strong><span>Q2 — produtividade intermediária</span></div>
+            <div><i class="orange"></i><strong>21,9%</strong><span>Q3 — abaixo da intermediária</span></div>
+            <div><i class="red"></i><strong>9,4%</strong><span>Q4/NP — produtividade mais baixa ou sem produção</span></div>
+          </div>
+          <div class="insight-box">O quadro está concentrado nos quartis de maior produtividade — quase 70% dos registros-semana estão em Q1/Q2. O risco não está na distribuição do time: está na queda de ritmo entre a semana fechada e a semana em curso.</div>
+
+          <div class="gap-title"><span>Gap estimado por cluster (01–07/07)</span><strong>63 OS em 7 dias</strong></div>
+          <div class="hbar-row"><span>C.23 Pernambuco</span><div><b style="width:100%"></b></div><strong>40</strong></div>
+          <div class="hbar-row secondary"><span>C.21 Sergipe</span><div><b style="width:57.5%"></b></div><strong>23</strong></div>
+          <p class="panel-note tight">Gap = máximo(meta por faixa de tempo de casa × dias trabalhados − volume OK, 0), estimado a partir do Analítico Nominal (dias trabalhados inferidos por Volume OK / Prod. OK).</p>
+        </article>
+
+        <article class="panel causes-panel">
+          <div class="panel-title"><span>98 visitas improdutivas</span><strong>82 com motivo registrado</strong></div>
+          <p class="panel-note">Motivos registrados nos 4 maiores grupos (01–07/07):</p>
+          <div class="cause-row"><span>Cliente ausente</span><div><b style="width:100%"></b></div><strong>19</strong></div>
+          <div class="cause-row"><span>Abertura indevida</span><div><b style="width:78.9%"></b></div><strong>15</strong></div>
+          <div class="cause-row"><span>Solicitação de reagendamento</span><div><b style="width:63.2%"></b></div><strong>12</strong></div>
+          <div class="cause-row"><span>Falha massiva</span><div><b style="width:57.9%"></b></div><strong>11</strong></div>
+          <div class="cause-callout"><strong>70%</strong><span>das improdutivas classificadas concentradas nos 4 principais motivos, com "Cliente ausente" e "Abertura indevida" à frente — parte relevante nasce antes do despacho ou por ausência do cliente no momento da visita.</span></div>
+        </article>
+      </div>
+
+      <div class="solution-strip">
+        <div><span>01</span><strong>Reverter a queda S27→S28</strong><small>Produção 11 OK caiu de 4,4 para 3,0 OS/dia. Acompanhamento diário para retomar o patamar da semana anterior até o fim da S28.</small></div>
+        <div><span>02</span><strong>Plano individual nominal</strong><small>Foco nos 8 maiores gaps individuais e na GA de Pernambuco com maior concentração de perda. Detalhe na página seguinte.</small></div>
+        <div><span>03</span><strong>Qualidade da demanda</strong><small>Travar abertura de OS sem validação técnica e confirmar a presença do cliente antes do despacho — os dois motivos somam 34 das 82 baixas classificadas.</small></div>
+      </div>
+
+      <footer class="slide-footer"><span>Fonte: Analítico Nominal 01–07/07/2026, Quartil de Produtividade S27/S28 e exportações de motivo/submotivo de improdutividade da regional R7.1</span><span>2 / 4</span></footer>
+    </section>
+
+    <section class="slide" id="slide-3" aria-labelledby="titulo-slide-3">
+      <header class="slide-header compact">
+        <div>
+          <p class="eyebrow">GESTÃO NOMINAL · 01 A 07/07/2026</p>
+          <h1 id="titulo-slide-3">Uma área de gestão em Pernambuco e oito técnicos concentram a maior parte do gap da regional</h1>
+        </div>
+        <div class="brand" aria-label="Alloha Fibra"><span>alloha</span><small>FIBRA</small></div>
+      </header>
+
+      <div class="nominal-layout">
+        <article class="panel ga-panel">
+          <div class="panel-title"><span>Gap por área de gestão (GA)</span><strong>em OS não executadas, estimado</strong></div>
+          <div class="hbar-row"><span>Leandro Sousa de Lorena · C.23</span><div><b style="width:100%"></b></div><strong>37</strong></div>
+          <div class="hbar-row"><span>Caio Vinicius Rosendo dos Santos · C.21</span><div><b style="width:62.2%"></b></div><strong>23</strong></div>
+          <div class="hbar-row secondary"><span>Luiz Cavalcanti da Silva Neto · C.23</span><div><b style="width:8.1%"></b></div><strong>3</strong></div>
+          <div class="cause-callout"><strong>1 técnico</strong><span>ficou sem nenhuma baixa no período inteiro (01–07/07): Ramon dos Santos (C.21, GA Caio Vinicius Rosendo dos Santos) — perfil de capacidade fora de campo a confirmar com RH/escala.</span></div>
+        </article>
+
+        <article class="panel nominal-panel">
+          <div class="panel-title"><span>Casos que exigem decisão individual</span></div>
+          <div class="nominal-table" role="table" aria-label="Casos nominais e ações">
+            <div class="nominal-head">Técnicos</div><div class="nominal-head">O que os dados mostram</div><div class="nominal-head">Ação imediata</div>
+
+            <div><strong>1 técnico sem baixa no período</strong><span>Ramon dos Santos (C.21)</span></div>
+            <div>Nenhuma OS concluída entre 01 e 07/07. Não é baixa produtividade: é capacidade fora de campo.</div>
+            <div>Confirmar com RH e escala em 24h se é férias, atestado ou vaga a repor.</div>
+
+            <div><strong>8 maiores desvios individuais</strong><span>Idecacio Lucas dos Santos (gap 8); Anderson Henrique da Silva Ferreira, Heitor Cezar Costa da Silva e Tiago de Jesus Andrade (gap 6 cada); Fabio Santos Silva e Andre Felipe Luis (gap 5 cada); Ubiratan Rodrigues de Barros e Darlan de Oliveira Rocha (gap 4 cada) — C.21/C.23</span></div>
+            <div>Concentram 44 das 63 OS de gap da regional; a maioria com poucos dias trabalhados no período.</div>
+            <div>Conversa individual gestor-técnico esta semana, com plano simples de recuperação e verificação de dias efetivamente escalados.</div>
+
+            <div class="ref-row"><strong>Referências a replicar</strong><span>Edilson Pereira da Silva (6,0 OS/dia) e Jose Paulo de Sousa (5,67) — C.23; Gustavo da Silva Bonifacio (5,6), Erlan Cardoso da Silva (4,6) e Emanoel Santos Vieira (4,4) — C.21</span></div>
+            <div class="ref-row">Bem acima da meta de 4 OS/dia, nas mesmas condições de campo.</div>
+            <div class="ref-row">Mapear rota, carga e método desses técnicos e usar como padrão nos planos individuais, priorizando a GA de Leandro Sousa de Lorena.</div>
+          </div>
+        </article>
+      </div>
+
+      <footer class="slide-footer"><span>Fonte: Analítico Nominal por técnico, 01 a 07/07/2026 · 32 técnicos elegíveis · gap estimado, dias trabalhados inferidos</span><span>3 / 4</span></footer>
+    </section>
+
+    <section class="slide" id="slide-4" aria-labelledby="titulo-slide-4">
+      <header class="slide-header compact">
+        <div>
+          <p class="eyebrow">FCA · FATO, CAUSA E AÇÃO</p>
+          <h1 id="titulo-slide-4">Quatro frentes colocam a recuperação do Nordeste em execução nesta semana</h1>
+        </div>
+        <div class="brand" aria-label="Alloha Fibra"><span>alloha</span><small>FIBRA</small></div>
+      </header>
+
+      <div class="fca-table" role="table" aria-label="FCA do projeto 3Ps Nordeste">
+        <div class="fca-head">Fato</div><div class="fca-head">Causa</div><div class="fca-head">Ação</div><div class="fca-head">Prazo</div><div class="fca-head">Responsável</div><div class="fca-head">Status</div>
+
+        <div><strong>Sergipe abaixo na meta de Cumprimento de Agenda</strong><span>Cumprimento de Agenda 80,0% em Sergipe · 93,8% em Pernambuco, em 06/07</span></div>
+        <div>Produção e Prazo 24h seguem dentro da meta nos dois clusters — o desvio está concentrado na agenda de Sergipe.</div>
+        <div>Controle diário de Cumprimento de Agenda em Sergipe, com lista nominal de OS não atendidas e providência no mesmo dia.</div>
+        <div><strong>08/07</strong><span>1ª revisão 15/07</span></div>
+        <div>Gestores de operação de Sergipe</div>
+        <div><span class="status-pill start">A iniciar</span></div>
+
+        <div><strong>63 OS de gap estimado em 7 dias</strong><span>concentrado na GA de Leandro Sousa de Lorena (PE) e 8 técnicos críticos</span></div>
+        <div>1 técnico sem nenhuma baixa no período; 8 com maior desvio individual, a maioria com poucos dias trabalhados.</div>
+        <div>Confirmar com RH a situação do técnico parado; plano individual para os 8 críticos; ajuste de carga e rota para os demais.</div>
+        <div><strong>08/07</strong><span>planos até 10/07</span></div>
+        <div>GA Leandro Sousa de Lorena e GA Caio Vinicius Rosendo dos Santos</div>
+        <div><span class="status-pill urgent">Imediato</span></div>
+
+        <div><strong>98 visitas improdutivas no período</strong><span>82 com motivo registrado</span></div>
+        <div>Cliente ausente (19) e Abertura indevida (15) lideram os motivos registrados — 70% das classificadas concentradas nos 4 principais motivos.</div>
+        <div>Confirmar o cliente antes do despacho; travar abertura de OS sem validação técnica; revisar agendamento para reduzir reagendamento.</div>
+        <div><strong>08/07</strong><span>travas até 10/07</span></div>
+        <div>Equipe de BI/Performance regional</div>
+        <div><span class="status-pill validate">Em validação</span></div>
+
+        <div><strong>Queda de 32% na Produção 11 OK (S27→S28)</strong><span>4,4 → 3,0 OS/dia</span></div>
+        <div>Queda presente nos dois clusters, mais acentuada em Sergipe (-40%) do que em Pernambuco (-26%).</div>
+        <div>Acompanhar o fechamento da S28 frente à S27, priorizando as GAs com maior gap identificado (Leandro Sousa de Lorena e Caio Vinicius Rosendo dos Santos).</div>
+        <div><strong>12/07</strong><span>fechamento da S28</span></div>
+        <div>Gestores de operação da regional R7.1</div>
+        <div><span class="status-pill watch">Atenção</span></div>
+      </div>
+
+      <div class="decision-request">
+        <strong>Decisões solicitadas</strong>
+        <span>Confirmar responsáveis e prazos</span>
+        <span>Ratificar 85% como meta de Prazo 24h e Cumprimento de Agenda para a regional</span>
+        <span>Priorizar a GA de Leandro Sousa de Lorena na recuperação do gap de Pernambuco</span>
+      </div>
+
+      <footer class="slide-footer"><span>Causas não comprovadas pelos dados permanecem marcadas como "em validação"</span><span>4 / 4</span></footer>
+    </section>
+  </main>
+
+  <script src="assets/js/pages/resultado3psPage.js"></script>
+</body>
+</html>
