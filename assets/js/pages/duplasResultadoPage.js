@@ -42,6 +42,14 @@ let duplas = [];
 let solos = [];
 let afastados = [];
 
+// Esconde o cartão de KPI inteiro quando o valor é zero — só total de
+// pessoas fica sempre visível, mesmo que os demais números sejam 0.
+function preencherKpi(id, valor, { ocultarSeZero = true } = {}) {
+  const elemento = document.getElementById(id);
+  elemento.textContent = valor;
+  elemento.closest(".kpi").classList.toggle("oculto", ocultarSeZero && !valor);
+}
+
 function mostrarErroToken(mensagem) {
   blocoCarregando.classList.add("oculto");
   blocoResultado.classList.add("oculto");
@@ -121,8 +129,8 @@ function montarLinhaResumo(grupo) {
     <td>${grupo.go}</td>
     <td>${grupo.ga}</td>
     <td>${total}</td>
-    <td>${concluido}</td>
-    <td>${grupo.faltando.length ? grupo.faltando.length : "—"}</td>
+    <td>${concluido || "—"}</td>
+    <td>${grupo.faltando.length || "—"}</td>
     <td>
       <div class="duplas-barra-progresso" title="${percentual}% concluído">
         <div class="duplas-barra-progresso-preenchida" style="width: ${percentual}%"></div>
@@ -216,11 +224,11 @@ async function iniciar() {
     }
 
     const totais = montarTotais(hierarquia, duplas, solos, afastados);
-    document.getElementById("kpi-total").textContent = totais.totalPessoas;
-    document.getElementById("kpi-duplas").textContent = totais.totalDuplas;
-    document.getElementById("kpi-sozinhos").textContent = totais.totalSozinhos;
-    document.getElementById("kpi-afastados").textContent = totais.totalAfastados;
-    document.getElementById("kpi-faltando").textContent = totais.totalFaltando;
+    preencherKpi("kpi-total", totais.totalPessoas, { ocultarSeZero: false });
+    preencherKpi("kpi-duplas", totais.totalDuplas);
+    preencherKpi("kpi-sozinhos", totais.totalSozinhos);
+    preencherKpi("kpi-afastados", totais.totalAfastados);
+    preencherKpi("kpi-faltando", totais.totalFaltando);
 
     preencherSelect(filtroGo, listarGOs(hierarquia), "Todos");
     renderizar();
