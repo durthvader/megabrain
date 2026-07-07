@@ -42,6 +42,13 @@
 
 .duplas-pessoa.fora-hierarquia { border-style: dashed; }
 
+.duplas-pessoa.ocupado {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.duplas-pessoa.ocupado:active { transform: none; }
+
 .duplas-duplas-formadas {
   display: flex;
   flex-direction: column;
@@ -87,6 +94,13 @@
   border-radius: var(--raio);
   padding: 0.75rem;
   margin-top: 0.5rem;
+}
+
+.duplas-busca-fora .duplas-busca-fora {
+  margin-top: 0.6rem;
+  padding: 0.6rem 0.75rem;
+  border-left: 2px solid var(--cor-borda);
+  background: transparent;
 }
 
 .duplas-busca-resultados {

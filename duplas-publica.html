@@ -14,6 +14,7 @@
     <header class="topo-publico">
       <div class="pagina-publica-marca">🧠 Megabrain</div>
       <h1 class="topo-titulo" id="titulo-demanda">Painel de duplas</h1>
+      <a class="btn btn-pequeno" id="link-resultado-duplas" href="#" target="_blank" rel="noopener">📊 Ver resultado completo</a>
     </header>
 
     <main class="conteudo">
@@ -67,6 +68,15 @@
                 <input id="input-busca-fora" placeholder="Digite o nome do colega…" />
               </div>
               <div class="duplas-busca-resultados" id="resultados-busca-fora"></div>
+
+              <details class="duplas-busca-fora" id="duplas-manual-add">
+                <summary>Ainda não achei — adicionar manualmente (uso restrito)</summary>
+                <p class="campo-ajuda">Use só se a pessoa realmente não existir em nenhum GA da hierarquia. Isso fica registrado no aviso de "fora da hierarquia" para depois corrigirem a base.</p>
+                <div class="campo" style="margin-top: 0.5rem;">
+                  <input id="input-nome-manual" placeholder="Nome completo do colega" />
+                </div>
+                <button class="btn btn-pequeno" id="btn-adicionar-manual" type="button">Selecionar este nome</button>
+              </details>
             </details>
           </section>
 

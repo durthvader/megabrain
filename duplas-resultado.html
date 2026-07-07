@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Megabrain · Resultado das duplas</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/cards.css" />
+  <link rel="stylesheet" href="assets/css/formularios.css" />
+  <link rel="stylesheet" href="assets/css/duplas.css" />
+</head>
+<body>
+  <div class="pagina-publica-escala">
+    <header class="topo-publico">
+      <div class="pagina-publica-marca">🧠 Megabrain</div>
+      <h1 class="topo-titulo" id="titulo-demanda">Resultado das duplas</h1>
+      <a class="btn btn-pequeno" id="link-preencher-duplas" href="#">🤝 Ir para o painel de preenchimento</a>
+    </header>
+
+    <main class="conteudo">
+      <div id="bloco-carregando">
+        <p class="texto-suave">Carregando…</p>
+      </div>
+
+      <div id="bloco-erro" class="oculto">
+        <div class="alerta alerta-erro">
+          <strong>Não foi possível abrir o resultado.</strong>
+          <p id="mensagem-erro-token" style="margin: 0.4rem 0 0;"></p>
+        </div>
+      </div>
+
+      <div id="bloco-resultado" class="oculto">
+        <section class="secao">
+          <div class="grade-kpis">
+            <div class="kpi"><div class="kpi-valor" id="kpi-total">…</div><div class="kpi-rotulo">Pessoas na hierarquia</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-duplas">…</div><div class="kpi-rotulo">Duplas formadas</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-sozinhos">…</div><div class="kpi-rotulo">Sozinhos (sem dupla)</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-faltando">…</div><div class="kpi-rotulo">Ainda faltando classificar</div></div>
+          </div>
+        </section>
+
+        <section class="secao">
+          <div class="filtros">
+            <div class="campo">
+              <label for="filtro-go">GO</label>
+              <select id="filtro-go"><option value="">Todos</option></select>
+            </div>
+            <div class="campo">
+              <label for="filtro-ga">GA</label>
+              <select id="filtro-ga"><option value="">Todos</option></select>
+            </div>
+          </div>
+          <div class="lista-cartoes" id="lista-gas"></div>
+          <div class="vazio oculto" id="gas-vazio">Nenhum GA encontrado para o filtro selecionado.</div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="assets/js/pages/duplasResultadoPage.js"></script>
+</body>
+</html>

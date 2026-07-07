@@ -11,6 +11,8 @@ const SINONIMOS = {
   nome_colaborador: "tecnico",
   nome_do_tecnico: "tecnico",
   supervisor_responsavel: "supervisor",
+  cargo: "funcao",
+  cargo_funcao: "funcao",
   // Organização
   empreiteira: "empresa",
   fornecedor: "empresa",

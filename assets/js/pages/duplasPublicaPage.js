@@ -14,6 +14,7 @@ import {
   listarGAs,
   mapaNomesOcupados,
   buscarNaHierarquia,
+  infoOcupacao,
   salvarDupla,
   salvarSozinho,
   desfazerRegistro,
@@ -49,6 +50,9 @@ const textoForaHierarquia = document.getElementById("texto-fora-hierarquia");
 
 const inputBuscaFora = document.getElementById("input-busca-fora");
 const resultadosBuscaFora = document.getElementById("resultados-busca-fora");
+const inputNomeManual = document.getElementById("input-nome-manual");
+const botaoAdicionarManual = document.getElementById("btn-adicionar-manual");
+const linkResultadoDuplas = document.getElementById("link-resultado-duplas");
 
 let demandaAtual = null;
 let hierarquia = [];
@@ -81,7 +85,7 @@ async function recarregarDados() {
   solos = dados.solos;
 }
 
-function montarChipPessoa(pessoa, { foraHierarquia = false } = {}) {
+function montarChipPessoa(pessoa, { foraHierarquia = false, ocupacao = null } = {}) {
   const botao = document.createElement("button");
   botao.type = "button";
   botao.className = "duplas-pessoa";
@@ -89,11 +93,24 @@ function montarChipPessoa(pessoa, { foraHierarquia = false } = {}) {
   if (selecionado && chaveNome(selecionado.nome) === chaveNome(pessoa.nome)) {
     botao.classList.add("selecionada");
   }
+
+  let notaFuncao = pessoa.funcao || "—";
+  if (foraHierarquia) notaFuncao += " · fora do GA";
+
+  if (ocupacao) {
+    botao.classList.add("ocupado");
+    botao.disabled = true;
+    notaFuncao =
+      ocupacao.tipoFormulario === "dupla"
+        ? `já duplado com ${ocupacao.parceiro}`
+        : "já marcado como sozinho";
+  }
+
   botao.innerHTML = `
     <span class="duplas-pessoa-nome">${pessoa.nome}</span>
-    <span class="duplas-pessoa-funcao">${pessoa.funcao || "—"}${foraHierarquia ? " · fora do GA" : ""}</span>
+    <span class="duplas-pessoa-funcao">${notaFuncao}</span>
   `;
-  botao.addEventListener("click", () => aoTocarPessoa(pessoa, foraHierarquia));
+  if (!ocupacao) botao.addEventListener("click", () => aoTocarPessoa(pessoa, foraHierarquia));
   return botao;
 }
 
@@ -270,10 +287,8 @@ inputBuscaFora.addEventListener("input", () => {
   if (!texto) return;
 
   const ga = filtroGa.value;
-  const ocupados = mapaNomesOcupados(duplas, solos);
   const encontrados = buscarNaHierarquia(hierarquia, texto)
     .filter((pessoa) => pessoa.ga !== ga)
-    .filter((pessoa) => !ocupados.has(chaveNome(pessoa.nome)))
     .slice(0, 20);
 
   if (!encontrados.length) {
@@ -281,8 +296,27 @@ inputBuscaFora.addEventListener("input", () => {
     return;
   }
   for (const pessoa of encontrados) {
-    resultadosBuscaFora.appendChild(montarChipPessoa(pessoa, { foraHierarquia: true }));
+    const ocupacao = infoOcupacao(pessoa.nome, duplas, solos);
+    resultadosBuscaFora.appendChild(montarChipPessoa(pessoa, { foraHierarquia: true, ocupacao }));
   }
+});
+
+botaoAdicionarManual.addEventListener("click", () => {
+  const nome = inputNomeManual.value.trim();
+  if (!nome) return;
+
+  const ocupacao = infoOcupacao(nome, duplas, solos);
+  if (ocupacao) {
+    mostrarErro(
+      ocupacao.tipoFormulario === "dupla"
+        ? `${nome} já está duplado com ${ocupacao.parceiro}.`
+        : `${nome} já está marcado como sozinho.`
+    );
+    return;
+  }
+
+  aoTocarPessoa({ nome, funcao: "", go: "", ga: "" }, true);
+  inputNomeManual.value = "";
 });
 
 filtroGo.addEventListener("change", () => {
@@ -327,6 +361,7 @@ async function iniciar() {
   }
 
   tituloDemanda.textContent = demandaAtual.nome;
+  linkResultadoDuplas.href = `duplas-resultado.html?token=${encodeURIComponent(token)}`;
 
   try {
     await recarregarDados();

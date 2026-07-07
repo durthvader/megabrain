@@ -79,6 +79,56 @@ export function buscarNaHierarquia(hierarquia, texto) {
   return hierarquia.filter((pessoa) => chaveNome(pessoa.nome).includes(alvo));
 }
 
+// Se o nome já está em uma dupla ou marcado como sozinho (em qualquer GA),
+// retorna com quem — usado para mostrar (sem deixar marcar) na busca.
+export function infoOcupacao(nome, duplas, solos) {
+  const alvo = chaveNome(nome);
+  const dupla = duplas.find(
+    (resposta) => chaveNome(resposta.tecnico) === alvo || chaveNome(resposta.dados?.parceiro) === alvo
+  );
+  if (dupla) {
+    const parceiro = chaveNome(dupla.tecnico) === alvo ? dupla.dados?.parceiro : dupla.tecnico;
+    return { tipoFormulario: "dupla", parceiro };
+  }
+  const solo = solos.find((resposta) => chaveNome(resposta.tecnico) === alvo);
+  if (solo) return { tipoFormulario: "dupla_sozinho" };
+  return null;
+}
+
+// Resumo completo por GO/GA: duplas formadas, sozinhos e quem ainda falta
+// classificar — base para a página pública de resultado.
+export function montarResumoPorGA(hierarquia, duplas, solos) {
+  const ocupados = mapaNomesOcupados(duplas, solos);
+  const grupos = new Map();
+
+  for (const pessoa of hierarquia) {
+    const chave = `${pessoa.go}|||${pessoa.ga}`;
+    if (!grupos.has(chave)) grupos.set(chave, { go: pessoa.go, ga: pessoa.ga, pessoas: [] });
+    grupos.get(chave).pessoas.push(pessoa);
+  }
+
+  const resumo = [...grupos.values()].map((grupo) => {
+    const duplasGA = duplas.filter((r) => r.dados?.ga === grupo.ga && r.dados?.go === grupo.go);
+    const solosGA = solos.filter((r) => r.dados?.ga === grupo.ga && r.dados?.go === grupo.go);
+    const faltando = grupo.pessoas.filter((pessoa) => !ocupados.has(chaveNome(pessoa.nome)));
+    return { ...grupo, duplas: duplasGA, solos: solosGA, faltando };
+  });
+
+  return resumo.sort((a, b) => a.go.localeCompare(b.go, "pt-BR") || a.ga.localeCompare(b.ga, "pt-BR"));
+}
+
+export function montarTotais(hierarquia, duplas, solos) {
+  const ocupados = mapaNomesOcupados(duplas, solos);
+  const faltando = hierarquia.filter((pessoa) => !ocupados.has(chaveNome(pessoa.nome)));
+  return {
+    totalPessoas: hierarquia.length,
+    totalDuplas: duplas.length,
+    totalEmDupla: duplas.length * 2,
+    totalSozinhos: solos.length,
+    totalFaltando: faltando.length,
+  };
+}
+
 export async function salvarDupla({
   demandaId,
   tokenPublico,
