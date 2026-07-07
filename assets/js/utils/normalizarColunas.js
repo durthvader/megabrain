@@ -13,6 +13,8 @@ const SINONIMOS = {
   supervisor_responsavel: "supervisor",
   cargo: "funcao",
   cargo_funcao: "funcao",
+  nome_da_funcao: "funcao",
+  nome_funcao: "funcao",
   // Organização
   empreiteira: "empresa",
   fornecedor: "empresa",
