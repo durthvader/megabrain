@@ -195,3 +195,109 @@
 @media (max-width: 560px) {
   .duplas-pessoa { flex: 1 1 calc(50% - 0.5rem); }
 }
+
+/* ---- Resumo/resultado: visão executiva ---- */
+
+.duplas-titulo-secao {
+  font-size: 1.05rem;
+  margin: 0 0 0.75rem;
+}
+
+.duplas-titulo-pendente { color: var(--cor-aviso); }
+
+.duplas-titulo-concluido { color: var(--cor-sucesso-texto); }
+
+.duplas-tabela-wrap {
+  overflow-x: auto;
+  background: var(--cor-superficie);
+  border: 1.5px solid #a9b4c4;
+  border-radius: var(--raio);
+}
+
+.duplas-tabela-resumo {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.duplas-tabela-resumo th,
+.duplas-tabela-resumo td {
+  padding: 0.5rem 0.85rem;
+  text-align: left;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.duplas-tabela-resumo th {
+  color: var(--cor-texto-mudo);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.duplas-tabela-resumo tbody tr:last-child td { border-bottom: none; }
+
+.duplas-tabela-resumo tbody tr.duplas-linha-completa { background: #f3fbf3; }
+
+.duplas-barra-progresso {
+  position: relative;
+  width: 100px;
+  height: 1.15rem;
+  background: #eceff1;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.duplas-barra-progresso-preenchida {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--cor-sucesso);
+  border-radius: 999px;
+}
+
+.duplas-barra-progresso span {
+  position: relative;
+  z-index: 1;
+  display: block;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  color: var(--cor-texto);
+  mix-blend-mode: multiply;
+}
+
+.duplas-cartao-ga { position: relative; }
+
+.duplas-cartao-pendente { border-left: 4px solid var(--cor-aviso); }
+
+.duplas-cartao-completo { border-left: 4px solid var(--cor-sucesso); }
+
+.duplas-status-badge {
+  display: inline-block;
+  margin: 0.35rem 0 0.5rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.duplas-bloco + .duplas-bloco { margin-top: 0.6rem; }
+
+.duplas-bloco dt {
+  font-weight: 700;
+  font-size: 0.82rem;
+  margin-bottom: 0.2rem;
+}
+
+.duplas-bloco dd { margin: 0; }
+
+.duplas-bloco-faltando {
+  background: #fdecea;
+  border: 1px solid var(--cor-erro);
+  border-radius: var(--raio);
+  padding: 0.5rem 0.7rem;
+}
+
+.duplas-bloco-faltando dt { color: var(--cor-erro); }

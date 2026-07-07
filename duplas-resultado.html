@@ -55,8 +55,37 @@
               <button class="btn btn-primario" id="btn-exportar-duplas" type="button">⬇️ Exportar para Excel</button>
             </div>
           </div>
-          <div class="lista-cartoes" id="lista-gas"></div>
-          <div class="vazio oculto" id="gas-vazio">Nenhum GA encontrado para o filtro selecionado.</div>
+        </section>
+
+        <section class="secao">
+          <h2 class="duplas-titulo-secao">Resumo por GO/GA</h2>
+          <div class="duplas-tabela-wrap">
+            <table class="duplas-tabela-resumo">
+              <thead>
+                <tr>
+                  <th>GO</th>
+                  <th>GA</th>
+                  <th>Total</th>
+                  <th>Concluído</th>
+                  <th>Pendente</th>
+                  <th>% Concluído</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-resumo-corpo"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="secao">
+          <h2 class="duplas-titulo-secao duplas-titulo-pendente">🟠 Pendentes <span id="contagem-pendentes"></span></h2>
+          <div class="lista-cartoes" id="lista-gas-pendentes"></div>
+          <div class="vazio oculto" id="pendentes-vazio">Nenhum GA pendente para o filtro selecionado.</div>
+        </section>
+
+        <section class="secao">
+          <h2 class="duplas-titulo-secao duplas-titulo-concluido">✅ Concluídos <span id="contagem-concluidos"></span></h2>
+          <div class="lista-cartoes" id="lista-gas-concluidos"></div>
+          <div class="vazio oculto" id="concluidos-vazio">Nenhum GA concluído para o filtro selecionado.</div>
         </section>
       </div>
     </main>
