@@ -62,6 +62,12 @@ function renderizarCabecalho() {
     botaoEscalaPublica.href = `escala-publica.html?token=${encodeURIComponent(demanda.token_publico)}`;
   }
 
+  const botaoDuplasPublica = el("btn-abrir-duplas-publica");
+  botaoDuplasPublica.classList.toggle("oculto", demanda.tipo !== "duplas");
+  if (demanda.tipo === "duplas") {
+    botaoDuplasPublica.href = `duplas-publica.html?token=${encodeURIComponent(demanda.token_publico)}`;
+  }
+
   el("btn-abrir-escala").href = `escala.html?demanda=${demanda.id}`;
   el("btn-abrir-custos").href = `custos.html?demanda=${demanda.id}`;
   el("link-nova-analise").href = `analises.html?demanda=${demanda.id}`;

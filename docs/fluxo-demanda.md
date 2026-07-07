@@ -19,7 +19,7 @@ Detalhes em [fluxo-upload.md](fluxo-upload.md).
 ## 2. Criar a demanda e vincular bases
 
 **Demandas → Nova demanda.** Informe nome, tipo (`escala`, `custos`, `indicadores`,
-`formulario`, `analise_livre`), responsável, período (com opção "indeterminada", sem
+`formulario`, `duplas`, `analise_livre`), responsável, período (com opção "indeterminada", sem
 data de término) e descrição. Marque no checklist quais bases já importadas esta
 demanda vai usar — dá para vincular mais depois, no detalhe da demanda. Status
 inicial: `ativa`.
@@ -43,9 +43,14 @@ reaproveitar quando a demanda for desse tipo:
 
 - Tipo `escala` → **Escala** (`escala.html?demanda=UUID`) monta a grade de 30 dias.
 - Tipo `custos` → **Custos** (`custos.html?demanda=UUID`) consolida cards e gráficos.
+- Tipo `duplas` → **Painel de duplas** (`duplas-publica.html?token=SEU_TOKEN`), a
+  partir de uma base `hierarquia` (colunas `nome`, `funcao`, `go`, `ga`). Filtra por
+  GO/GA e permite marcar, por toque, quem trabalha duplado com quem — pensado para
+  celular. Gerente/gestor não entram na lista.
 
-Ambas ficam acessíveis pelos botões *Painel de escala (admin)* / *Painel de custos
-(admin)* no detalhe da demanda — não aparecem mais no menu principal.
+Ficam acessíveis pelos botões *Painel de escala (admin)* / *Painel de custos
+(admin)* / *Abrir painel público de duplas* no detalhe da demanda — não aparecem
+mais no menu principal.
 
 ## 6. Registrar a página de resultado
 

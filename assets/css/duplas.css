@@ -1,0 +1,115 @@
+/* ============================================================
+   MEGABRAIN — duplas.css
+   Painel mobile-friendly de formação de duplas por toque.
+   ============================================================ */
+
+.duplas-pessoas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.duplas-pessoa {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+
+.duplas-pessoa:active { transform: scale(0.97); }
+
+.duplas-pessoa-nome { font-weight: 600; }
+
+.duplas-pessoa-funcao {
+  font-size: 0.72rem;
+  color: var(--cor-texto-mudo);
+}
+
+.duplas-pessoa.selecionada {
+  background: var(--cor-primaria-clara);
+  border-color: var(--cor-primaria);
+}
+
+.duplas-pessoa.fora-hierarquia { border-style: dashed; }
+
+.duplas-duplas-formadas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.duplas-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+
+.duplas-card:active { transform: scale(0.99); }
+
+.duplas-card-nomes { font-weight: 600; }
+
+.duplas-card-tag {
+  font-size: 0.72rem;
+  color: var(--cor-texto-mudo);
+}
+
+.duplas-card-desfazer {
+  font-size: 0.78rem;
+  color: var(--cor-texto-mudo);
+  white-space: nowrap;
+}
+
+.duplas-card.dupla { border-left: 4px solid var(--cor-primaria); }
+
+.duplas-card.sozinho { border-left: 4px solid var(--cor-aviso); }
+
+.duplas-card.sozinho .duplas-card-tag { color: var(--cor-aviso); }
+
+.duplas-busca-fora {
+  background: var(--cor-pagina);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.duplas-busca-resultados {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.duplas-acao-flutuante {
+  position: sticky;
+  bottom: 0.75rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.duplas-acao-flutuante .btn {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 560px) {
+  .duplas-pessoa { flex: 1 1 calc(50% - 0.5rem); }
+}

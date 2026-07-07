@@ -1,0 +1,347 @@
+// ============================================================
+// MEGABRAIN — pages/duplasPublicaPage.js
+// Painel PÚBLICO de duplas (sem login, via token na URL).
+// duplas-publica.html?token=TOKEN
+//
+// Filtra a base "hierarquia" por GO/GA e permite marcar, por
+// toque, quem trabalha duplado com quem (ou sozinho).
+// ============================================================
+
+import { buscarDemandaPorToken } from "../services/demandaService.js";
+import {
+  carregarDadosDuplas,
+  listarGOs,
+  listarGAs,
+  mapaNomesOcupados,
+  buscarNaHierarquia,
+  salvarDupla,
+  salvarSozinho,
+  desfazerRegistro,
+  chaveNome,
+} from "../services/duplasService.js";
+import { obterParametroUrl } from "../utils/tokens.js";
+import { preencherSelect } from "../utils/filtros.js";
+import { mostrarSucesso, mostrarErro } from "../utils/mensagens.js";
+
+const blocoCarregando = document.getElementById("bloco-carregando");
+const blocoErro = document.getElementById("bloco-erro");
+const blocoPainel = document.getElementById("bloco-painel");
+const tituloDemanda = document.getElementById("titulo-demanda");
+const inputSeuNome = document.getElementById("input-seu-nome");
+
+const filtroGo = document.getElementById("filtro-go");
+const filtroGa = document.getElementById("filtro-ga");
+
+const secaoDuplas = document.getElementById("secao-duplas");
+const duplasInstrucao = document.getElementById("duplas-instrucao");
+
+const listaDisponiveis = document.getElementById("lista-disponiveis");
+const disponiveisVazio = document.getElementById("disponiveis-vazio");
+const dicaSelecao = document.getElementById("dica-selecao");
+const acaoSozinho = document.getElementById("acao-sozinho");
+const botaoMarcarSozinho = document.getElementById("btn-marcar-sozinho");
+
+const listaDuplas = document.getElementById("lista-duplas");
+const duplasVazio = document.getElementById("duplas-vazio");
+
+const alertaForaHierarquia = document.getElementById("alerta-fora-hierarquia");
+const textoForaHierarquia = document.getElementById("texto-fora-hierarquia");
+
+const inputBuscaFora = document.getElementById("input-busca-fora");
+const resultadosBuscaFora = document.getElementById("resultados-busca-fora");
+
+let demandaAtual = null;
+let hierarquia = [];
+let duplas = [];
+let solos = [];
+let selecionado = null;
+let operacaoEmAndamento = false;
+
+function mostrarErroToken(mensagem) {
+  blocoCarregando.classList.add("oculto");
+  blocoPainel.classList.add("oculto");
+  blocoErro.classList.remove("oculto");
+  document.getElementById("mensagem-erro-token").textContent = mensagem;
+}
+
+function pessoaPorNome(nome) {
+  return hierarquia.find((pessoa) => chaveNome(pessoa.nome) === chaveNome(nome));
+}
+
+function limparSelecao() {
+  selecionado = null;
+  acaoSozinho.classList.add("oculto");
+  dicaSelecao.textContent = "Toque em um nome e depois no colega dele para formar a dupla.";
+}
+
+async function recarregarDados() {
+  const dados = await carregarDadosDuplas(demandaAtual.id);
+  hierarquia = dados.hierarquia;
+  duplas = dados.duplas;
+  solos = dados.solos;
+}
+
+function montarChipPessoa(pessoa, { foraHierarquia = false } = {}) {
+  const botao = document.createElement("button");
+  botao.type = "button";
+  botao.className = "duplas-pessoa";
+  if (foraHierarquia) botao.classList.add("fora-hierarquia");
+  if (selecionado && chaveNome(selecionado.nome) === chaveNome(pessoa.nome)) {
+    botao.classList.add("selecionada");
+  }
+  botao.innerHTML = `
+    <span class="duplas-pessoa-nome">${pessoa.nome}</span>
+    <span class="duplas-pessoa-funcao">${pessoa.funcao || "—"}${foraHierarquia ? " · fora do GA" : ""}</span>
+  `;
+  botao.addEventListener("click", () => aoTocarPessoa(pessoa, foraHierarquia));
+  return botao;
+}
+
+function montarAvisoForaHierarquia(registros) {
+  const nomes = new Set();
+  for (const registro of registros) {
+    for (const nome of registro.dados?.fora_da_hierarquia || []) nomes.add(nome);
+  }
+  if (!nomes.size) {
+    alertaForaHierarquia.classList.add("oculto");
+    return;
+  }
+  const detalhes = [...nomes].map((nome) => {
+    const pessoa = pessoaPorNome(nome);
+    return pessoa
+      ? `${nome} (é do GA "${pessoa.ga}", GO "${pessoa.go}")`
+      : `${nome} (não encontrado em nenhuma hierarquia)`;
+  });
+  textoForaHierarquia.textContent = `${detalhes.join("; ")} — atualize a base de hierarquia.`;
+  alertaForaHierarquia.classList.remove("oculto");
+}
+
+function montarCardRegistro(registro, tipo) {
+  const card = document.createElement("div");
+  card.className = `duplas-card ${tipo}`;
+
+  if (tipo === "dupla") {
+    card.innerHTML = `
+      <div>
+        <div class="duplas-card-nomes">${registro.tecnico} + ${registro.dados?.parceiro || "?"}</div>
+        <div class="duplas-card-tag">Dupla</div>
+      </div>
+      <div class="duplas-card-desfazer">toque para desfazer</div>
+    `;
+  } else {
+    card.innerHTML = `
+      <div>
+        <div class="duplas-card-nomes">${registro.tecnico}</div>
+        <div class="duplas-card-tag">Sozinho (sem dupla)</div>
+      </div>
+      <div class="duplas-card-desfazer">toque para desfazer</div>
+    `;
+  }
+
+  card.addEventListener("click", () => aoDesfazer(registro.id));
+  return card;
+}
+
+function renderizarGA() {
+  const go = filtroGo.value;
+  const ga = filtroGa.value;
+
+  if (!go || !ga) {
+    secaoDuplas.classList.add("oculto");
+    duplasInstrucao.classList.remove("oculto");
+    return;
+  }
+
+  duplasInstrucao.classList.add("oculto");
+  secaoDuplas.classList.remove("oculto");
+
+  const ocupados = mapaNomesOcupados(duplas, solos);
+  const pessoasGA = hierarquia.filter((pessoa) => pessoa.ga === ga);
+  const disponiveis = pessoasGA.filter((pessoa) => !ocupados.has(chaveNome(pessoa.nome)));
+  const duplasGA = duplas.filter((registro) => registro.dados?.ga === ga);
+  const solosGA = solos.filter((registro) => registro.dados?.ga === ga);
+
+  listaDisponiveis.innerHTML = "";
+  disponiveisVazio.classList.toggle("oculto", disponiveis.length > 0);
+  for (const pessoa of disponiveis) {
+    listaDisponiveis.appendChild(montarChipPessoa(pessoa));
+  }
+
+  listaDuplas.innerHTML = "";
+  const registros = [...duplasGA.map((r) => ({ r, tipo: "dupla" })), ...solosGA.map((r) => ({ r, tipo: "sozinho" }))];
+  duplasVazio.classList.toggle("oculto", registros.length > 0);
+  for (const { r, tipo } of registros) {
+    listaDuplas.appendChild(montarCardRegistro(r, tipo));
+  }
+
+  montarAvisoForaHierarquia([...duplasGA, ...solosGA]);
+
+  acaoSozinho.classList.toggle("oculto", !selecionado);
+
+  resultadosBuscaFora.innerHTML = "";
+  inputBuscaFora.value = "";
+}
+
+async function aoTocarPessoa(pessoa, foraHierarquia) {
+  if (operacaoEmAndamento) return;
+
+  if (!selecionado) {
+    selecionado = { ...pessoa, foraHierarquia };
+    dicaSelecao.textContent = `${pessoa.nome} selecionado(a). Toque no colega para formar a dupla, ou marque como sozinho abaixo.`;
+    renderizarGA();
+    return;
+  }
+
+  if (chaveNome(selecionado.nome) === chaveNome(pessoa.nome)) {
+    limparSelecao();
+    renderizarGA();
+    return;
+  }
+
+  const primeiro = selecionado;
+  const segundo = { ...pessoa, foraHierarquia };
+  operacaoEmAndamento = true;
+  try {
+    const foraDaHierarquia = [primeiro, segundo].filter((p) => p.foraHierarquia).map((p) => p.nome);
+    await salvarDupla({
+      demandaId: demandaAtual.id,
+      tokenPublico: demandaAtual.token_publico,
+      go: filtroGo.value,
+      ga: filtroGa.value,
+      nomeA: primeiro.nome,
+      nomeB: segundo.nome,
+      respondenteNome: inputSeuNome.value.trim(),
+      foraDaHierarquia,
+    });
+    limparSelecao();
+    await recarregarDados();
+    renderizarGA();
+    mostrarSucesso(`Dupla formada: ${primeiro.nome} + ${segundo.nome}`);
+  } catch (erro) {
+    mostrarErro(`Erro ao salvar dupla: ${erro.message}`);
+  } finally {
+    operacaoEmAndamento = false;
+  }
+}
+
+async function aoDesfazer(respostaId) {
+  if (operacaoEmAndamento) return;
+  operacaoEmAndamento = true;
+  try {
+    await desfazerRegistro(respostaId);
+    await recarregarDados();
+    renderizarGA();
+    mostrarSucesso("Desfeito.");
+  } catch (erro) {
+    mostrarErro(`Erro ao desfazer: ${erro.message}`);
+  } finally {
+    operacaoEmAndamento = false;
+  }
+}
+
+botaoMarcarSozinho.addEventListener("click", async () => {
+  if (!selecionado || operacaoEmAndamento) return;
+  operacaoEmAndamento = true;
+  try {
+    await salvarSozinho({
+      demandaId: demandaAtual.id,
+      tokenPublico: demandaAtual.token_publico,
+      go: filtroGo.value,
+      ga: filtroGa.value,
+      nome: selecionado.nome,
+      respondenteNome: inputSeuNome.value.trim(),
+      foraDaHierarquia: selecionado.foraHierarquia ? [selecionado.nome] : [],
+    });
+    const nome = selecionado.nome;
+    limparSelecao();
+    await recarregarDados();
+    renderizarGA();
+    mostrarSucesso(`${nome} marcado(a) como sozinho(a).`);
+  } catch (erro) {
+    mostrarErro(`Erro ao marcar sozinho: ${erro.message}`);
+  } finally {
+    operacaoEmAndamento = false;
+  }
+});
+
+inputBuscaFora.addEventListener("input", () => {
+  const texto = inputBuscaFora.value.trim();
+  resultadosBuscaFora.innerHTML = "";
+  if (!texto) return;
+
+  const ga = filtroGa.value;
+  const ocupados = mapaNomesOcupados(duplas, solos);
+  const encontrados = buscarNaHierarquia(hierarquia, texto)
+    .filter((pessoa) => pessoa.ga !== ga)
+    .filter((pessoa) => !ocupados.has(chaveNome(pessoa.nome)))
+    .slice(0, 20);
+
+  if (!encontrados.length) {
+    resultadosBuscaFora.innerHTML = '<p class="texto-mudo">Ninguém encontrado com esse nome fora deste GA.</p>';
+    return;
+  }
+  for (const pessoa of encontrados) {
+    resultadosBuscaFora.appendChild(montarChipPessoa(pessoa, { foraHierarquia: true }));
+  }
+});
+
+filtroGo.addEventListener("change", () => {
+  const gas = listarGAs(hierarquia, filtroGo.value);
+  preencherSelect(filtroGa, gas, "Selecione…");
+  limparSelecao();
+  renderizarGA();
+});
+
+filtroGa.addEventListener("change", () => {
+  limparSelecao();
+  renderizarGA();
+});
+
+async function iniciar() {
+  const token = obterParametroUrl("token");
+  if (!token) {
+    mostrarErroToken("Link incompleto: o parâmetro ?token= não foi informado.");
+    return;
+  }
+
+  try {
+    demandaAtual = await buscarDemandaPorToken(token);
+  } catch (erro) {
+    mostrarErroToken(`Erro ao consultar a demanda: ${erro.message}`);
+    return;
+  }
+
+  if (!demandaAtual) {
+    mostrarErroToken("Token inválido ou demanda não encontrada. Confira o link recebido.");
+    return;
+  }
+
+  if (demandaAtual.status !== "ativa") {
+    mostrarErroToken(`Esta demanda está com status "${demandaAtual.status}" e não aceita mais alterações.`);
+    return;
+  }
+
+  if (demandaAtual.tipo !== "duplas") {
+    mostrarErroToken("Este link é de um painel de duplas, mas a demanda informada não é do tipo duplas.");
+    return;
+  }
+
+  tituloDemanda.textContent = demandaAtual.nome;
+
+  try {
+    await recarregarDados();
+    if (!hierarquia.length) {
+      mostrarErroToken('Esta demanda ainda não tem uma base do tipo "hierarquia" cadastrada.');
+      return;
+    }
+
+    preencherSelect(filtroGo, listarGOs(hierarquia), "Selecione…");
+
+    blocoCarregando.classList.add("oculto");
+    blocoPainel.classList.remove("oculto");
+  } catch (erro) {
+    mostrarErroToken(`Erro ao montar o painel: ${erro.message}`);
+  }
+}
+
+iniciar();

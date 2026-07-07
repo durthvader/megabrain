@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Megabrain · Painel de duplas</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/formularios.css" />
+  <link rel="stylesheet" href="assets/css/duplas.css" />
+</head>
+<body>
+  <div class="pagina-publica-escala">
+    <header class="topo-publico">
+      <div class="pagina-publica-marca">🧠 Megabrain</div>
+      <h1 class="topo-titulo" id="titulo-demanda">Painel de duplas</h1>
+    </header>
+
+    <main class="conteudo">
+      <div id="bloco-carregando">
+        <p class="texto-suave">Carregando…</p>
+      </div>
+
+      <div id="bloco-erro" class="oculto">
+        <div class="alerta alerta-erro">
+          <strong>Não foi possível abrir o painel.</strong>
+          <p id="mensagem-erro-token" style="margin: 0.4rem 0 0;"></p>
+        </div>
+      </div>
+
+      <div id="bloco-painel" class="oculto">
+        <div class="campo" style="max-width: 320px;">
+          <label for="input-seu-nome">Seu nome (opcional)</label>
+          <input id="input-seu-nome" placeholder="Para identificar quem preencheu" />
+        </div>
+
+        <div class="filtros">
+          <div class="campo">
+            <label for="filtro-go">GO *</label>
+            <select id="filtro-go"><option value="">Selecione…</option></select>
+          </div>
+          <div class="campo">
+            <label for="filtro-ga">GA *</label>
+            <select id="filtro-ga"><option value="">Selecione o GO primeiro</option></select>
+          </div>
+        </div>
+
+        <div id="secao-duplas" class="oculto">
+          <div class="alerta alerta-info oculto" id="alerta-fora-hierarquia">
+            <strong>Atenção:</strong>
+            <span id="texto-fora-hierarquia"></span>
+          </div>
+
+          <section class="secao">
+            <h2>Disponíveis</h2>
+            <p class="campo-ajuda" id="dica-selecao">Toque em um nome e depois no colega dele para formar a dupla.</p>
+            <div class="duplas-pessoas" id="lista-disponiveis"></div>
+            <div class="vazio oculto" id="disponiveis-vazio">Todo mundo já está em uma dupla ou marcado como sozinho.</div>
+
+            <div class="duplas-acao-flutuante oculto" id="acao-sozinho">
+              <button class="btn btn-primario" id="btn-marcar-sozinho" type="button">Marcar selecionado como sozinho (sem dupla)</button>
+            </div>
+
+            <details class="duplas-busca-fora">
+              <summary>Não achei o nome aqui — buscar em toda a hierarquia</summary>
+              <div class="campo" style="margin-top: 0.5rem;">
+                <input id="input-busca-fora" placeholder="Digite o nome do colega…" />
+              </div>
+              <div class="duplas-busca-resultados" id="resultados-busca-fora"></div>
+            </details>
+          </section>
+
+          <section class="secao">
+            <h2>Duplas formadas</h2>
+            <p class="campo-ajuda">Toque numa dupla ou num "sozinho" para desfazer.</p>
+            <div class="duplas-duplas-formadas" id="lista-duplas"></div>
+            <div class="vazio oculto" id="duplas-vazio">Nenhuma dupla formada ainda neste GA.</div>
+          </section>
+        </div>
+
+        <div class="vazio" id="duplas-instrucao">Selecione o GO e o GA acima para ver a equipe.</div>
+      </div>
+
+      <p class="texto-mudo" style="margin-top: 1rem;">
+        Este link é público para quem o recebeu. Ele dá acesso apenas ao painel de duplas desta demanda.
+      </p>
+    </main>
+  </div>
+  <script type="module" src="assets/js/pages/duplasPublicaPage.js"></script>
+</body>
+</html>
