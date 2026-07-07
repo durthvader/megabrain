@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>3Ps Maranhão/Piauí · Painel executivo</title>
+  <link rel="stylesheet" href="assets/css/resultado-3ps.css" />
+</head>
+<body>
+  <nav class="deck-nav" aria-label="Navegação da apresentação">
+    <button class="nav-dot ativo" data-slide="slide-1" aria-label="Ir para visão executiva">1</button>
+    <button class="nav-dot" data-slide="slide-2" aria-label="Ir para diagnóstico de produção">2</button>
+    <button class="nav-dot" data-slide="slide-3" aria-label="Ir para gestão nominal">3</button>
+    <button class="nav-dot" data-slide="slide-4" aria-label="Ir para FCA">4</button>
+  </nav>
+
+  <div class="deck-actions">
+    <button class="action-link" id="btn-print" type="button">Imprimir</button>
+  </div>
+
+  <main class="deck">
+    <section class="slide" id="slide-1" aria-labelledby="titulo-slide-1">
+      <header class="slide-header">
+        <div>
+          <p class="eyebrow">OPERAÇÕES · MARANHÃO/PIAUÍ (R7.2) · 07/07/2026</p>
+          <h1 id="titulo-slide-1">Maranhão está abaixo da meta de Prazo; Piauí está com folga, mas a produtividade da semana caiu 30%</h1>
+        </div>
+        <div class="brand" aria-label="Alloha Fibra"><span>alloha</span><small>FIBRA</small></div>
+      </header>
+
+      <p class="lead">No fechamento de 06/07, o Maranhão (C.32) ficou abaixo da meta de Prazo 24h e de Produção; o Piauí (C.31) está com folga confortável nos dois indicadores. Na visão semanal, a Produção 11 OK da regional caiu de 3,25 para 2,27 OS/dia (-30%) entre a semana fechada (S27) e a semana em curso (S28). Ainda não há dado de fila acumulada para esta regional nesta leva de arquivos.</p>
+
+      <div class="status-grid" role="table" aria-label="Resumo dos 3 Ps por cluster">
+        <div class="status-head">Cluster</div>
+        <div class="status-head">Baixando serviço <small>vs. folha meta, 06/07</small></div>
+        <div class="status-head">Produção <small>% da meta esperada, 06/07</small></div>
+        <div class="status-head">Prazo 24h <small>meta 85% das ordens</small></div>
+        <div class="status-head">Cumprimento de agenda <small>06/07</small></div>
+
+        <div class="cluster-name"><strong>C.31</strong><span>Piauí</span></div>
+        <div class="metric ok"><strong>78,9%</strong><span>15 de 19 da folha meta</span></div>
+        <div class="metric ok"><strong>128,5%</strong><span>acima do esperado</span></div>
+        <div class="metric ok"><strong>100%</strong><span>fechou o dia sem estouro</span></div>
+        <div class="metric warn"><strong>81,8%</strong><span>abaixo do Maranhão em volume, mas dentro da faixa</span></div>
+
+        <div class="cluster-name focus"><strong>C.32</strong><span>Maranhão</span></div>
+        <div class="metric warn"><strong>78,2%</strong><span>43 de 55 da folha meta</span></div>
+        <div class="metric risk"><strong>82,1%</strong><span>abaixo do esperado</span></div>
+        <div class="metric risk"><strong>77,6%</strong><span>7,4 p.p. abaixo da meta</span></div>
+        <div class="metric warn"><strong>79,3%</strong><span>abaixo do ideal</span></div>
+      </div>
+
+      <p class="reading-note">Como ler: estas planilhas usam métricas diferentes das do Ceará (lá, Presença e Prazo semanal fechado; aqui, Baixando Serviço e Prazo do último dia fechado, D-1). Regional R7.2 consolidada em 06/07: Prazo 24h 81,2%, Cumprimento de Agenda 79,7% — abaixo da meta de 85%, puxado pelo Maranhão. Não confundir com o "Total" nacional que aparece na mesma planilha (71,1%/68,9%), que soma todas as regionais do país.</p>
+
+      <div class="slide-bottom two-cols">
+        <article class="decision-block primary">
+          <p class="block-label">DECISÃO OPERACIONAL</p>
+          <h2>Concentrar a semana no Maranhão — Prazo e Produção abaixo da meta — e monitorar diariamente a queda de produtividade da S28 antes que vire tendência. A execução também começa nominal: 1 GA concentra o maior gap, 8 técnicos concentram os maiores desvios.</h2>
+        </article>
+        <article class="evidence-block">
+          <div><strong>29 de 70</strong><span>técnicos estão em Q1/NP (produtividade baixa ou sem classificação) no quartil 11 OK</span></div>
+          <div><strong>364 OS</strong><span>de gap estimado em 7 dias (01–07/07), considerando meta por tempo de casa</span></div>
+          <div><strong>-30%</strong><span>queda de Produção 11 OK entre a semana fechada e a semana em curso</span></div>
+        </article>
+      </div>
+
+      <footer class="slide-footer"><span>Fonte: exportações de BI operacional da regional R7.2 (MA/PI), 01–07/07/2026 · OS = ordem de serviço concluída com baixa OK</span><span>1 / 4</span></footer>
+    </section>
+
+    <section class="slide" id="slide-2" aria-labelledby="titulo-slide-2">
+      <header class="slide-header compact">
+        <div>
+          <p class="eyebrow">DIAGNÓSTICO DE PRODUÇÃO</p>
+          <h1 id="titulo-slide-2">A produtividade está concentrada na faixa mediana — o problema é a cauda, não o time inteiro</h1>
+        </div>
+        <div class="brand" aria-label="Alloha Fibra"><span>alloha</span><small>FIBRA</small></div>
+      </header>
+
+      <div class="diagnostic-layout">
+        <article class="panel workforce-panel">
+          <div class="panel-title"><span>70 técnicos elegíveis</span><strong>Perfil quase todo veterano</strong></div>
+          <p class="panel-note">Quartil de produtividade (11 OK), média das semanas S27 e S28. Quadro concentrado em &gt;90 dias de casa: 16 de 18 no Piauí, 48 de 52 no Maranhão.</p>
+          <div class="stacked-bar" aria-label="Distribuição dos técnicos por quartil">
+            <span class="bar green" style="width:38.6%" title="Q3: 54 registros-semana"></span>
+            <span class="bar yellow" style="width:22.9%" title="Q2: 32 registros-semana"></span>
+            <span class="bar orange" style="width:18.6%" title="Q1: 26 registros-semana"></span>
+            <span class="bar red" style="width:10.7%" title="NP: 15 registros-semana"></span>
+          </div>
+          <div class="legend-grid">
+            <div><i class="green"></i><strong>38,6%</strong><span>Q3 — produtividade acima da mediana</span></div>
+            <div><i class="yellow"></i><strong>22,9%</strong><span>Q2 — produtividade mediana</span></div>
+            <div><i class="orange"></i><strong>18,6%</strong><span>Q1 — abaixo da mediana</span></div>
+            <div><i class="red"></i><strong>10,7%</strong><span>NP — sem produção na semana</span></div>
+          </div>
+          <div class="insight-box">Diferente do Ceará (onde 68% do time estava abaixo da meta individual), aqui a maior parte do quadro está em Q2/Q3. O risco não é generalizado: está concentrado em poucos nomes e em uma área específica.</div>
+
+          <div class="gap-title"><span>Gap estimado por cluster (01–07/07)</span><strong>364 OS em 7 dias</strong></div>
+          <div class="hbar-row"><span>C.32 Maranhão</span><div><b style="width:100%"></b></div><strong>309</strong></div>
+          <div class="hbar-row secondary"><span>C.31 Piauí</span><div><b style="width:17.8%"></b></div><strong>55</strong></div>
+          <p class="panel-note tight">Gap = máximo(meta por faixa de tempo de casa × dias trabalhados − volume OK, 0), estimado a partir do Analítico Nominal (dias trabalhados inferidos por Volume OK / Prod. OK).</p>
+        </article>
+
+        <article class="panel causes-panel">
+          <div class="panel-title"><span>125 baixas com motivo</span><strong>123 com submotivo — não fecham entre si</strong></div>
+          <p class="panel-note">Motivos registrados nos 4 maiores grupos (01–07/07):</p>
+          <div class="cause-row"><span>Abertura indevida</span><div><b style="width:100%"></b></div><strong>30</strong></div>
+          <div class="cause-row"><span>Falha massiva</span><div><b style="width:86.7%"></b></div><strong>26</strong></div>
+          <div class="cause-row"><span>Cliente ausente</span><div><b style="width:46.7%"></b></div><strong>14</strong></div>
+          <div class="cause-row"><span>Desistiu do serviço</span><div><b style="width:40%"></b></div><strong>12</strong></div>
+          <div class="cause-callout"><strong>74%</strong><span>das improdutivas classificadas concentradas nos 5 principais motivos, com "Abertura indevida" e "Falha massiva" à frente — mesmo padrão do Ceará: parte relevante nasce antes do despacho.</span></div>
+          <p class="panel-note tight">O volume diário de improdutivas soma 189 no período, mas só 125/123 têm motivo/submotivo — 64 baixas (34%) seguem sem classificação, e motivo × submotivo nem sequer batem entre si (diferença de 2). Reconciliar com o BI antes de fechar números públicos.</p>
+        </article>
+      </div>
+
+      <div class="solution-strip">
+        <div><span>01</span><strong>Investigar a queda S27→S28</strong><small>Produção 11 OK caiu de 3,25 para 2,27 OS/dia. Confirmar se é dado parcial da semana em curso ou queda real antes de tratar como tendência.</small></div>
+        <div><span>02</span><strong>Plano individual nominal</strong><small>Foco nos 8 maiores gaps individuais e na GA com maior concentração de perda. Detalhe na página seguinte.</small></div>
+        <div><span>03</span><strong>Qualidade da demanda</strong><small>Mesma frente do Ceará: travar abertura de OS sem validação técnica e tratar falha massiva antes do despacho — os dois motivos somam 56 das 125 baixas classificadas.</small></div>
+      </div>
+
+      <footer class="slide-footer"><span>Fonte: Analítico Nominal 01–07/07/2026, Quartil de Produtividade S27/S28 e exportações de motivo/submotivo de improdutividade da regional R7.2</span><span>2 / 4</span></footer>
+    </section>
+
+    <section class="slide" id="slide-3" aria-labelledby="titulo-slide-3">
+      <header class="slide-header compact">
+        <div>
+          <p class="eyebrow">GESTÃO NOMINAL · 01 A 07/07/2026</p>
+          <h1 id="titulo-slide-3">Uma área e oito técnicos concentram a maior parte do gap do Maranhão</h1>
+        </div>
+        <div class="brand" aria-label="Alloha Fibra"><span>alloha</span><small>FIBRA</small></div>
+      </header>
+
+      <div class="nominal-layout">
+        <article class="panel ga-panel">
+          <div class="panel-title"><span>Gap por área de gestão (GA)</span><strong>em OS não executadas, estimado</strong></div>
+          <div class="hbar-row"><span>Naan Carlos Cabral Oliveira · C.32</span><div><b style="width:100%"></b></div><strong>76</strong></div>
+          <div class="hbar-row"><span>Roberval Silva Rodrigues · C.32</span><div><b style="width:94.7%"></b></div><strong>72</strong></div>
+          <div class="hbar-row"><span>Francisco Sales Furtado Jr. · C.32</span><div><b style="width:85.5%"></b></div><strong>65</strong></div>
+          <div class="hbar-row secondary"><span>Ruan Labre Gabriel da Silva · C.32</span><div><b style="width:56.6%"></b></div><strong>43</strong></div>
+          <div class="hbar-row secondary"><span>Leonardo Cardoso Silva · C.31/C.32</span><div><b style="width:50%"></b></div><strong>28 + 49</strong></div>
+          <div class="cause-callout"><strong>1 técnico</strong><span>ficou sem nenhuma baixa no período inteiro (01–07/07): Adrian Viana de França (C.32, GA Roberval Silva Rodrigues) — perfil de capacidade fora de campo a confirmar com RH/escala, igual ao padrão visto no Ceará, mas em escala muito menor (1 caso, não 7).</span></div>
+        </article>
+
+        <article class="panel nominal-panel">
+          <div class="panel-title"><span>Casos que exigem decisão individual</span></div>
+          <div class="nominal-table" role="table" aria-label="Casos nominais e ações">
+            <div class="nominal-head">Técnicos</div><div class="nominal-head">O que os dados mostram</div><div class="nominal-head">Ação imediata</div>
+
+            <div><strong>1 técnico sem baixa no período</strong><span>Adrian Viana de França (C.32)</span></div>
+            <div>Nenhuma OS concluída entre 01 e 07/07. Não é baixa produtividade: é capacidade fora de campo.</div>
+            <div>Confirmar com RH e escala em 24h se é férias, atestado ou vaga a repor.</div>
+
+            <div><strong>8 maiores desvios individuais</strong><span>David Wesllem de Sousa Baldez e Natan Padilha Pinheiro (gap 15 cada); Antonio Pedro de Oliveira (13); Alex Henrique Carvalho Duarte e Andre Santos Pereira (12); Felipe Sousa Quirino e Flavio Antonio Estevam Arouche (11); Emanuel Bezerra Lima (10) — todos C.32</span></div>
+            <div>Concentram boa parte do gap do Maranhão; todos com poucos dias trabalhados no período (4 a 5 de 7).</div>
+            <div>Conversa individual gestor-técnico esta semana, com plano simples de recuperação e verificação de dias efetivamente escalados.</div>
+
+            <div class="ref-row"><strong>Referências a replicar</strong><span>Emisson Barbosa Paiva (5,6 OS/dia) e Lucas Sousa Silva (5,4) — C.32; Werbert Pereira dos Santos (5,6), Claudiomir de Sousa (5,25) e Rafael Costa Lima (5,0) — C.31</span></div>
+            <div class="ref-row">Bem acima da meta de 4 OS/dia, nas mesmas condições de campo.</div>
+            <div class="ref-row">Mapear rota, carga e método desses técnicos e usar como padrão nos planos individuais, priorizando a GA de Naan Carlos Cabral Oliveira.</div>
+          </div>
+        </article>
+      </div>
+
+      <footer class="slide-footer"><span>Fonte: Analítico Nominal por técnico, 01 a 07/07/2026 · 70 técnicos elegíveis · gap estimado, dias trabalhados inferidos</span><span>3 / 4</span></footer>
+    </section>
+
+    <section class="slide" id="slide-4" aria-labelledby="titulo-slide-4">
+      <header class="slide-header compact">
+        <div>
+          <p class="eyebrow">FCA · FATO, CAUSA E AÇÃO</p>
+          <h1 id="titulo-slide-4">Três frentes iniciais para o Maranhão/Piauí, com pendências de dado a resolver antes de fechar metas</h1>
+        </div>
+        <div class="brand" aria-label="Alloha Fibra"><span>alloha</span><small>FIBRA</small></div>
+      </header>
+
+      <div class="fca-table" role="table" aria-label="FCA do projeto 3Ps Maranhão/Piauí">
+        <div class="fca-head">Fato</div><div class="fca-head">Causa</div><div class="fca-head">Ação</div><div class="fca-head">Prazo</div><div class="fca-head">Responsável</div><div class="fca-head">Status</div>
+
+        <div><strong>Maranhão abaixo em Prazo e Produção</strong><span>Prazo 24h 77,6% · Produção 82,1% do esperado, em 06/07</span></div>
+        <div>Em levantamento — não há ainda quebra por área de gestão para Prazo/Presença nesta leva de arquivos, diferente do que foi possível para Produção.</div>
+        <div>Estender o controle nominal diário (visto no Ceará) para Prazo e Presença assim que houver base por técnico/GA equivalente.</div>
+        <div><strong>a definir</strong><span>depende de nova exportação</span></div>
+        <div>Gestores de operação do Maranhão</div>
+        <div><span class="status-pill start">A iniciar</span></div>
+
+        <div><strong>364 OS de gap estimado em 7 dias</strong><span>concentrado em 1 GA (Naan Carlos Cabral Oliveira) e 8 técnicos críticos</span></div>
+        <div>1 técnico sem nenhuma baixa no período; 8 com maior desvio individual, a maioria com só 4–5 dos 7 dias trabalhados.</div>
+        <div>Confirmar com RH a situação do técnico parado; plano individual para os 8 críticos; verificar escala real dos que trabalharam poucos dias.</div>
+        <div><strong>a definir</strong><span>plano em até 5 dias úteis</span></div>
+        <div>GA Naan Carlos Cabral Oliveira e GO Walmir Fernandes da Silva</div>
+        <div><span class="status-pill urgent">Imediato</span></div>
+
+        <div><strong>189 improdutivas no período, só 125/123 classificadas</strong><span>64 baixas (34%) sem motivo/submotivo</span></div>
+        <div>Abertura indevida (30) e Falha massiva (26) lideram; motivo e submotivo não reconciliam entre si (diferença de 2) — sinal de qualidade de dado a investigar antes de qualquer número público.</div>
+        <div>Reconciliar com o BI a divergência motivo×submotivo e a lacuna de 64 baixas sem classificação; travar abertura de OS sem validação técnica.</div>
+        <div><strong>a definir</strong><span>reconciliação antes do próximo corte</span></div>
+        <div>Equipe de BI/Performance regional</div>
+        <div><span class="status-pill validate">Em validação</span></div>
+
+        <div><strong>Queda de 30% na Produção 11 OK (S27→S28)</strong><span>3,25 → 2,27 OS/dia</span></div>
+        <div>Ainda não confirmado se é dado parcial da semana em curso (S28 ainda não fechada) ou queda real. Também não há dado de fila acumulada nesta leva de arquivos para cruzar com a queda de produção.</div>
+        <div>Acompanhar o fechamento da S28 antes de tratar como tendência; solicitar exportação de fila/backlog equivalente à do Ceará.</div>
+        <div><strong>após fechamento S28</strong><span>~12/07</span></div>
+        <div>Gestores de operação da regional R7.2</div>
+        <div><span class="status-pill watch">Atenção</span></div>
+      </div>
+
+      <div class="decision-request">
+        <strong>Decisões solicitadas</strong>
+        <span>Confirmar responsáveis e prazos definitivos</span>
+        <span>Solicitar exportação de fila/backlog para MA/PI (inexistente nesta leva)</span>
+        <span>Validar reconciliação de improdutividade antes de publicar números fechados</span>
+      </div>
+
+      <footer class="slide-footer"><span>Causas não comprovadas pelos dados permanecem marcadas como "em validação" · Dados enviados em 07/07/2026, sem fila/backlog nesta leva</span><span>4 / 4</span></footer>
+    </section>
+  </main>
+
+  <script src="assets/js/pages/resultado3psPage.js"></script>
+</body>
+</html>
