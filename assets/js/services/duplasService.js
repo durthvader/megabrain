@@ -32,7 +32,7 @@ export async function carregarDadosDuplas(demandaId) {
     .map((linha) => linha.dados || {})
     .map((dados) => ({
       nome: textoOu(dados.nome, dados.tecnico, dados.colaborador),
-      funcao: textoOu(dados.funcao),
+      funcao: textoOu(dados.funcao, dados.cargo, dados.cargo_funcao),
       go: textoOu(dados.go),
       ga: textoOu(dados.ga),
     }))

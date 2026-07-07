@@ -3,6 +3,20 @@
    Painel mobile-friendly de formação de duplas por toque.
    ============================================================ */
 
+/* Mais contraste que o fundo padrão claro — só nas páginas de duplas. */
+.pagina-publica-escala { background: #e6eaf0; }
+
+.pagina-publica-escala .campo select,
+.pagina-publica-escala .campo input {
+  border: 1.5px solid #a9b4c4;
+  background: #ffffff;
+}
+
+.pagina-publica-escala .campo select:focus,
+.pagina-publica-escala .campo input:focus {
+  border-color: var(--cor-primaria);
+}
+
 .duplas-pessoas {
   display: flex;
   flex-wrap: wrap;
@@ -15,7 +29,7 @@
   align-items: flex-start;
   gap: 0.1rem;
   background: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
+  border: 1.5px solid #a9b4c4;
   border-radius: 999px;
   padding: 0.55rem 1rem;
   font: inherit;
@@ -23,6 +37,7 @@
   min-height: 44px;
   min-width: 44px;
   text-align: left;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
   transition: border-color 0.15s, background 0.15s, transform 0.1s;
 }
 
@@ -43,11 +58,17 @@
 .duplas-pessoa.fora-hierarquia { border-style: dashed; }
 
 .duplas-pessoa.ocupado {
-  opacity: 0.55;
+  opacity: 0.8;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .duplas-pessoa.ocupado:active { transform: none; }
+
+.duplas-pessoa.ocupado .duplas-pessoa-funcao {
+  color: var(--cor-erro);
+  font-weight: 700;
+}
 
 .duplas-duplas-formadas {
   display: flex;
@@ -61,10 +82,11 @@
   justify-content: space-between;
   gap: 0.75rem;
   background: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
+  border: 1.5px solid #a9b4c4;
   border-radius: var(--raio);
   padding: 0.75rem 1rem;
   cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
 }
 
 .duplas-card:active { transform: scale(0.99); }
@@ -89,19 +111,36 @@
 .duplas-card.sozinho .duplas-card-tag { color: var(--cor-aviso); }
 
 .duplas-busca-fora {
-  background: var(--cor-pagina);
-  border: 1px solid var(--cor-borda);
+  background: var(--cor-primaria-clara);
+  border: 1.5px solid var(--cor-primaria);
   border-radius: var(--raio);
-  padding: 0.75rem;
-  margin-top: 0.5rem;
+  padding: 0.85rem 1rem;
+  margin-top: 0.75rem;
 }
 
-.duplas-busca-fora .duplas-busca-fora {
-  margin-top: 0.6rem;
-  padding: 0.6rem 0.75rem;
-  border-left: 2px solid var(--cor-borda);
-  background: transparent;
+.duplas-busca-fora > summary {
+  font-weight: 700;
+  color: var(--cor-primaria-escura);
+  cursor: pointer;
+  list-style: none;
 }
+
+.duplas-busca-fora > summary::-webkit-details-marker { display: none; }
+
+.duplas-busca-fora > summary::before { content: "🔎 "; }
+
+.duplas-busca-fora .duplas-busca-fora {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #fdf0dc;
+  border-color: var(--cor-aviso);
+}
+
+.duplas-busca-fora .duplas-busca-fora > summary {
+  color: var(--cor-aviso);
+}
+
+.duplas-busca-fora .duplas-busca-fora > summary::before { content: "⚠️ "; }
 
 .duplas-busca-resultados {
   display: flex;
@@ -123,6 +162,18 @@
 .duplas-acao-flutuante .btn {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
+
+.pagina-publica-escala .kpi,
+.pagina-publica-escala .cartao-item,
+.pagina-publica-escala .vazio,
+.pagina-publica-escala .alerta {
+  border: 1.5px solid #a9b4c4;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.pagina-publica-escala .alerta-erro { border-color: var(--cor-erro); }
+
+.pagina-publica-escala .alerta-info { border-color: var(--cor-primaria); }
 
 @media (max-width: 560px) {
   .duplas-pessoa { flex: 1 1 calc(50% - 0.5rem); }
