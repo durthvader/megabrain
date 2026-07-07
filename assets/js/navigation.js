@@ -12,6 +12,7 @@ const LINKS = [
   { pagina: "demandas", rotulo: "Demandas", href: "demandas.html", icone: "📋" },
   { pagina: "upload", rotulo: "Upload de bases", href: "upload.html", icone: "📤" },
   { pagina: "analises", rotulo: "Análises", href: "analises.html", icone: "🔎" },
+  { pagina: "resultados", rotulo: "Resultados", href: "resultados.html", icone: "📊" },
   { pagina: "configuracoes", rotulo: "Configurações", href: "configuracoes.html", icone: "⚙️" },
 ];
 

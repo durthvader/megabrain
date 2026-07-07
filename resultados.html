@@ -14,24 +14,17 @@
     <div class="area-principal">
       <header class="topo">
         <button class="btn-menu" id="btn-menu" aria-label="Abrir menu">☰</button>
-        <h1 class="topo-titulo">Resultados publicados</h1>
+        <h1 class="topo-titulo">Resultados</h1>
       </header>
       <main class="conteudo">
         <section class="secao">
-          <p class="texto-suave">
-            Painéis executivos prontos, gerados a partir das análises de cada demanda.
-          </p>
-          <div class="grade-cards">
-            <a class="card-acesso" href="https://durthvader.github.io/megabrain/resultado-3ps.html" target="_blank" rel="noopener">
-              <div class="card-acesso-icone">📊</div>
-              <div class="card-acesso-titulo">3Ps Ceará</div>
-              <div class="card-acesso-descricao">Painel executivo de Presença, Produção e Prazo</div>
-            </a>
-          </div>
+          <p class="texto-suave">Cada card abre o link de resultado daquela demanda.</p>
+          <div class="grade-cards" id="grade-demandas"></div>
+          <div class="vazio oculto" id="demandas-vazio">Nenhuma demanda cadastrada ainda.</div>
         </section>
       </main>
     </div>
   </div>
-  <script type="module" src="assets/js/main.js"></script>
+  <script type="module" src="assets/js/pages/resultadosPage.js"></script>
 </body>
 </html>
