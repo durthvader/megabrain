@@ -185,7 +185,9 @@ function renderizarGA() {
   }
 
   listaDuplas.innerHTML = "";
-  const registros = [...duplasGA.map((r) => ({ r, tipo: "dupla" })), ...solosGA.map((r) => ({ r, tipo: "sozinho" }))];
+  const registros = [...duplasGA.map((r) => ({ r, tipo: "dupla" })), ...solosGA.map((r) => ({ r, tipo: "sozinho" }))].sort(
+    (a, b) => (a.r.tecnico || "").localeCompare(b.r.tecnico || "", "pt-BR")
+  );
   duplasVazio.classList.toggle("oculto", registros.length > 0);
   for (const { r, tipo } of registros) {
     listaDuplas.appendChild(montarCardRegistro(r, tipo));

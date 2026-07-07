@@ -36,7 +36,8 @@ export async function carregarDadosDuplas(demandaId) {
       go: textoOu(dados.go),
       ga: textoOu(dados.ga),
     }))
-    .filter((pessoa) => pessoa.nome && !FUNCOES_EXCLUIDAS.includes(chaveNome(pessoa.funcao)));
+    .filter((pessoa) => pessoa.nome && !FUNCOES_EXCLUIDAS.includes(chaveNome(pessoa.funcao)))
+    .sort((a, b) => a.nome.localeCompare(b.nome, "pt-BR"));
 
   const duplas = respostas.filter((resposta) => resposta.tipo_formulario === "dupla");
   const solos = respostas.filter((resposta) => resposta.tipo_formulario === "dupla_sozinho");
@@ -107,9 +108,11 @@ export function montarResumoPorGA(hierarquia, duplas, solos) {
     grupos.get(chave).pessoas.push(pessoa);
   }
 
+  const porNome = (a, b) => (a.tecnico || "").localeCompare(b.tecnico || "", "pt-BR");
+
   const resumo = [...grupos.values()].map((grupo) => {
-    const duplasGA = duplas.filter((r) => r.dados?.ga === grupo.ga && r.dados?.go === grupo.go);
-    const solosGA = solos.filter((r) => r.dados?.ga === grupo.ga && r.dados?.go === grupo.go);
+    const duplasGA = duplas.filter((r) => r.dados?.ga === grupo.ga && r.dados?.go === grupo.go).sort(porNome);
+    const solosGA = solos.filter((r) => r.dados?.ga === grupo.ga && r.dados?.go === grupo.go).sort(porNome);
     const faltando = grupo.pessoas.filter((pessoa) => !ocupados.has(chaveNome(pessoa.nome)));
     return { ...grupo, duplas: duplasGA, solos: solosGA, faltando };
   });
