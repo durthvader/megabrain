@@ -159,18 +159,20 @@ title_block(
     "Maranhão volta a cumprir o Prazo 24h; Produção e Cumprimento de Agenda seguem abaixo do ideal",
     "No fechamento de 08/07, o Maranhão (C.32) passou a cumprir a meta de Prazo 24h, mas segue abaixo do esperado "
     "em Produção; o Piauí (C.31) está com folga confortável em Produção e Prazo. O Cumprimento de Agenda caiu nos "
-    "dois clusters e é hoje o principal ponto de atenção. Na visão semanal, a Produção 11 OK da regional caiu de "
-    "3,25 para 3,02 OS/dia (-7,1%) entre a semana fechada (S27) e a semana em curso (S28).",
+    "dois clusters e é hoje o principal ponto de atenção — a fila de ordens, porém, está dentro do limite de 1 dia "
+    "nos dois clusters. Na visão semanal, a Produção 11 OK da regional caiu de 3,25 para 3,02 OS/dia (-7,1%) entre "
+    "a semana fechada (S27) e a semana em curso (S28).",
     title_size=28,
     lead_top=152,
 )
 
-table = add_table(slide, 3, 4, 56, 202, 1168, 204, [230, 306, 306, 326])
+table = add_table(slide, 3, 5, 56, 202, 1168, 204, [200, 236, 250, 236, 246])
 headers = [
     ("Cluster", ""),
     ("Presença", "meta mínima 95%"),
     ("Produção", "% da meta esperada, 08/07"),
     ("Prazo 24h", "meta 85% das ordens"),
+    ("Fila acumulada", "em dias de trabalho, 08/07"),
 ]
 for col, (head, sub) in enumerate(headers):
     lines = [(head, {"size": 13, "bold": True, "color": WHITE})]
@@ -183,12 +185,14 @@ row_c31 = [
     [("114,3%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("19,3 p.p. acima da meta", {"size": 10, "color": MUTED})],
     [("144,8%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("acima do esperado", {"size": 10, "color": MUTED})],
     [("92,0%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("7,0 p.p. acima da meta", {"size": 10, "color": MUTED})],
+    [("0,79 dia", {"size": 16, "bold": True, "color": GREEN_DARK}), ("dentro do limite", {"size": 10, "color": MUTED})],
 ]
 row_c32 = [
     [("C.32", {"size": 16, "bold": True, "color": NAVY}), ("Maranhão", {"size": 10, "color": MUTED})],
     [("100,0%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("5,0 p.p. acima da meta", {"size": 10, "color": MUTED})],
     [("88,4%", {"size": 16, "bold": True, "color": RED}), ("abaixo do esperado", {"size": 10, "color": MUTED})],
     [("89,4%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("4,4 p.p. acima da meta", {"size": 10, "color": MUTED})],
+    [("0,68 dia", {"size": 16, "bold": True, "color": GREEN_DARK}), ("dentro do limite", {"size": 10, "color": MUTED})],
 ]
 for col, lines in enumerate(row_c31):
     set_cell(table.cell(1, col), lines, fill=WHITE)
@@ -197,9 +201,10 @@ for col, lines in enumerate(row_c32):
 
 add_text(
     slide,
-    "Como ler: Presença mede o quadro efetivamente disponível para operar frente à necessidade mínima do dia. A "
-    "regional R7.2 fechou 08/07 com Prazo 24h em 90,3% (acima da meta) e Cumprimento de Agenda em 75,0% — abaixo "
-    "da meta de 85%, puxado pelo Maranhão.",
+    "Como ler: Presença mede o quadro efetivamente disponível para operar frente à necessidade mínima do dia; "
+    "Fila indica quantos dias de trabalho seriam necessários para zerar as ordens em aberto, sem entrada de novas "
+    "OS. A regional R7.2 fechou 08/07 com Prazo 24h em 90,3% (acima da meta) e Cumprimento de Agenda em 75,0% — "
+    "abaixo da meta de 85%, puxado pelo Maranhão.",
     56, 416, 1130, 34, size=10.5, color=MUTED,
 )
 
