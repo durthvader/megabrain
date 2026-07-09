@@ -214,7 +214,7 @@ add_text(
 )
 
 kpis = [
-    ("20 de 69", "técnicos estão em Q1/NP (produtividade baixa ou sem classificação) no quartil 11 OK"),
+    ("18 de 68", "técnicos estão em Q1/NP (produtividade baixa ou sem classificação) no quartil 11 OK"),
     ("419 OS", "de gap estimado em 9 dias (01–09/07), considerando meta por tempo de casa"),
     ("-7,1%", "queda de Produção 11 OK entre a semana fechada e a semana em curso"),
 ]
@@ -235,15 +235,15 @@ title_block(
 )
 
 add_rect(slide, 56, 150, 610, 372, WHITE, line=LINE, round_corners=True)
-add_text(slide, "69 técnicos elegíveis", 78, 166, 330, 20, size=15, color=NAVY, bold=True)
+add_text(slide, "68 técnicos elegíveis", 78, 166, 330, 20, size=15, color=NAVY, bold=True)
 add_text(slide, "Perfil quase todo veterano", 340, 168, 306, 18, size=12, color=MUTED, align=PP_ALIGN.RIGHT)
 add_text(
     slide,
     "Quartil de produtividade (11 OK), média das semanas S27 e S28. Quadro concentrado em >90 dias de casa: "
-    "16 de 18 no Piauí, 47 de 51 no Maranhão.",
+    "16 de 18 no Piauí, 46 de 50 no Maranhão.",
     78, 190, 566, 28, size=10, color=MUTED,
 )
-segments = [(34.1, GREEN_DARK), (29.7, AMBER), (27.5, ORANGE), (8.7, RED)]
+segments = [(35.6, GREEN_DARK), (31.1, AMBER), (28.8, ORANGE), (4.5, RED)]
 bar_left, bar_width = 78, 566
 offset = bar_left
 for pct, color in segments:
@@ -251,10 +251,10 @@ for pct, color in segments:
     add_rect(slide, offset, 222, seg_width, 20, color)
     offset += seg_width
 legend = [
-    ("34,1%", "Q3 — acima da mediana", GREEN_DARK),
-    ("29,7%", "Q2 — mediana", AMBER),
-    ("27,5%", "Q1 — abaixo da mediana", ORANGE),
-    ("8,7%", "NP — sem produção", RED),
+    ("35,6%", "Q3 — acima da mediana", GREEN_DARK),
+    ("31,1%", "Q2 — mediana", AMBER),
+    ("28,8%", "Q1 — abaixo da mediana", ORANGE),
+    ("4,5%", "NP — sem produção", RED),
 ]
 for index, (count, label, color) in enumerate(legend):
     left = 78 + index * 144
@@ -281,7 +281,7 @@ add_text(
 )
 add_text(
     slide,
-    "2 técnicos (Israel Costa da Silva e Luis Henrique Mendes Costa, C.32) ficaram sem nenhuma baixa no período "
+    "1 técnico (Israel Costa da Silva, C.32) ficou sem nenhuma baixa no período "
     "inteiro — confirmar com RH/escala.",
     78, 462, 566, 30, size=9.5, color=MUTED,
 )
@@ -331,7 +331,7 @@ for index, (number, head, body) in enumerate(solutions):
 
 # ---------------------------------------------------------------- Slide 3
 slide = prs.slides.add_slide(blank)
-chrome(slide, 3, 4, "Fonte: Analítico Nominal por técnico, 01 a 09/07/2026 · 69 técnicos elegíveis · gap estimado, dias trabalhados inferidos")
+chrome(slide, 3, 4, "Fonte: Analítico Nominal por técnico, 01 a 09/07/2026 · 68 técnicos elegíveis · gap estimado, dias trabalhados inferidos")
 title_block(
     slide,
     "GESTÃO NOMINAL · 01 A 09/07/2026",
@@ -353,12 +353,12 @@ for index, (label, value, ratio, color) in enumerate(gas):
     hbar(slide, label, value, 78, 202 + index * 32, 172, 180, ratio, color=color)
 add_rect(slide, 78, 366, 408, 168, "F1F9F1")
 add_rect(slide, 78, 366, 5, 168, GREEN)
-add_text(slide, "2 técnicos", 94, 378, 120, 30, size=18, color=GREEN_DARK, bold=True)
+add_text(slide, "1 técnico", 94, 378, 120, 30, size=18, color=GREEN_DARK, bold=True)
 add_text(
     slide,
-    "ficaram sem nenhuma baixa no período inteiro (01–09/07): Israel Costa da Silva (C.32, GA Naan Carlos Cabral "
-    "Oliveira) e Luis Henrique Mendes Costa (C.32, GA Francisco Sales Furtado Jr.) — capacidade fora de campo a "
-    "confirmar com RH/escala, mesmo padrão do Ceará, mas em escala muito menor (2 casos, não 7).",
+    "ficou sem nenhuma baixa no período inteiro (01–09/07): Israel Costa da Silva (C.32, GA Naan Carlos Cabral "
+    "Oliveira) — capacidade fora de campo a confirmar com RH/escala, mesmo padrão do Ceará, mas em escala muito "
+    "menor (1 caso, não 7).",
     94, 410, 376, 116, size=10.5, color="4A5B52",
 )
 
@@ -368,8 +368,8 @@ set_cell(table.cell(0, 1), [("O QUE OS DADOS MOSTRAM", {"size": 9.5, "bold": Tru
 set_cell(table.cell(0, 2), [("AÇÃO IMEDIATA", {"size": 9.5, "bold": True, "color": WHITE})], fill=NAVY, v_margin=4)
 nominal_rows = [
     (
-        [("2 técnicos sem baixa no período", {"size": 10, "bold": True, "color": NAVY}),
-         ("Israel Costa da Silva e Luis Henrique Mendes Costa (C.32)", {"size": 8, "color": MUTED})],
+        [("1 técnico sem baixa no período", {"size": 10, "bold": True, "color": NAVY}),
+         ("Israel Costa da Silva (C.32)", {"size": 8, "color": MUTED})],
         [("Nenhuma OS concluída entre 01 e 09/07. Não é baixa produtividade: é capacidade fora de campo.", {"size": 8.5})],
         [("Confirmar com RH e escala em 24h se é férias, atestado ou vaga a repor.", {"size": 8.5})],
         WHITE,
@@ -397,7 +397,7 @@ for row in table.rows:
     row.height = px(88)
 
 tiers = [
-    ("2", "sem baixa no período — resolver em 24h", RED),
+    ("1", "sem baixa no período — resolver em 24h", RED),
     ("8", "maior desvio individual — plano já", RED),
     ("38", "Q1 — abaixo da mediana", ORANGE),
     ("41", "Q2 — na mediana", AMBER),
@@ -439,8 +439,8 @@ fca_rows = [
     (
         [("419 OS de gap estimado em 9 dias", {"size": 11, "bold": True, "color": NAVY}),
          ("concentrado em 1 GA e 8 técnicos críticos", {"size": 9, "color": MUTED})],
-        [("2 técnicos sem nenhuma baixa no período; 8 com maior desvio individual, a maioria com 4 a 7 dos 9 dias trabalhados.", {"size": 9.5})],
-        [("Confirmar com RH a situação dos 2 técnicos parados; plano individual para os 8 críticos; ajuste de carga e rota para os demais.", {"size": 9.5})],
+        [("1 técnico sem nenhuma baixa no período; 8 com maior desvio individual, a maioria com 4 a 7 dos 9 dias trabalhados.", {"size": 9.5})],
+        [("Confirmar com RH a situação do técnico parado; plano individual para os 8 críticos; ajuste de carga e rota para os demais.", {"size": 9.5})],
         [("10/07", {"size": 11, "bold": True, "color": NAVY}), ("planos até 12/07", {"size": 9, "color": MUTED})],
         [("GA Naan Carlos Cabral Oliveira e GO Walmir Fernandes da Silva", {"size": 9.5})],
         ("Imediato", RED_LIGHT, "8A1717"),
