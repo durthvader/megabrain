@@ -63,6 +63,10 @@ h1 { margin: 0; color: var(--navy); font-size: 38px; line-height: 1.08; letter-s
 .status-grid > div { min-height: 74px; padding: 12px 15px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .status-grid > div:nth-child(5n) { border-right: 0; }
 .status-grid > div:nth-last-child(-n+5) { border-bottom: 0; }
+.status-grid.cols-4 { grid-template-columns: 1.28fr repeat(3, 1fr); }
+.status-grid.cols-4 > div { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.status-grid.cols-4 > div:nth-child(4n) { border-right: 0; }
+.status-grid.cols-4 > div:nth-last-child(-n+4) { border-bottom: 0; }
 .status-head { min-height: 48px !important; color: white; background: var(--navy); font-size: 14px; font-weight: 700; }
 .status-head small { display: block; margin-top: 2px; color: #bfc9e3; font-size: 11px; font-weight: 500; }
 .cluster-name { display: flex; flex-direction: column; justify-content: center; background: #f7f9fc; }

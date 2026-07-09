@@ -168,7 +168,7 @@ title_block(
 table = add_table(slide, 3, 4, 56, 202, 1168, 204, [230, 306, 306, 326])
 headers = [
     ("Cluster", ""),
-    ("Baixando serviço", "vs. folha meta, 08/07"),
+    ("Presença", "meta mínima 95%"),
     ("Produção", "% da meta esperada, 08/07"),
     ("Prazo 24h", "meta 85% das ordens"),
 ]
@@ -180,13 +180,13 @@ for col, (head, sub) in enumerate(headers):
 
 row_c31 = [
     [("C.31", {"size": 16, "bold": True, "color": NAVY}), ("Piauí", {"size": 10, "color": MUTED})],
-    [("78,9%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("15 de 19 da folha meta", {"size": 10, "color": MUTED})],
+    [("114,3%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("19,3 p.p. acima da meta", {"size": 10, "color": MUTED})],
     [("144,8%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("acima do esperado", {"size": 10, "color": MUTED})],
     [("92,0%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("7,0 p.p. acima da meta", {"size": 10, "color": MUTED})],
 ]
 row_c32 = [
     [("C.32", {"size": 16, "bold": True, "color": NAVY}), ("Maranhão", {"size": 10, "color": MUTED})],
-    [("78,2%", {"size": 16, "bold": True, "color": "9A6200"}), ("43 de 55 da folha meta", {"size": 10, "color": MUTED})],
+    [("100,0%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("5,0 p.p. acima da meta", {"size": 10, "color": MUTED})],
     [("88,4%", {"size": 16, "bold": True, "color": RED}), ("abaixo do esperado", {"size": 10, "color": MUTED})],
     [("89,4%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("4,4 p.p. acima da meta", {"size": 10, "color": MUTED})],
 ]
@@ -197,7 +197,7 @@ for col, lines in enumerate(row_c32):
 
 add_text(
     slide,
-    "Como ler: Baixando Serviço mede quantos técnicos da folha meta estão de fato executando ordens no dia. A "
+    "Como ler: Presença mede o quadro efetivamente disponível para operar frente à necessidade mínima do dia. A "
     "regional R7.2 fechou 08/07 com Prazo 24h em 90,3% (acima da meta) e Cumprimento de Agenda em 75,0% — abaixo "
     "da meta de 85%, puxado pelo Maranhão.",
     56, 416, 1130, 34, size=10.5, color=MUTED,
