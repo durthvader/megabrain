@@ -358,6 +358,145 @@ def parse_sobreaviso_por_ga(pasta: Pasta):
     return saida or None
 
 
+def parse_inteligencia_sobreaviso(pasta: Pasta):
+    """Análise de causa raiz sobre o analítico nominal de sobreaviso.
+
+    Responde: o acionamento diurno é fim de semana? Quais GAs acionam todo dia
+    (demanda estrutural — instrumento errado) vs raramente (sobreaviso correto)?
+    Qual o pico de acionados simultâneos por GA (piso de segurança)? Quem são os
+    técnicos mais acionados (turno fixo de fato)? Quanto custa a hora de cada tipo?
+    """
+    achados = pasta.achar("analitico", sub="sobreaviso")
+    if not achados:
+        return None
+    linhas = pasta.grade(achados[0])
+    h = achar_cabecalho(linhas, "gestor", "hora_inicio")
+    if h is None:
+        return None
+    cab = linhas[h]
+    c = {n: coluna(cab, n) for n in ("data", "funcid", "nome", "gestor",
+                                     "tipo_ocorrencia", "hora_inicio", "horas", "vlr")}
+    occ = []
+    for linha in linhas[h + 1:]:
+        d = linha[c["data"]] if c["data"] is not None and c["data"] < len(linha) else None
+        if not isinstance(d, datetime):
+            continue
+        mi = to_minutes(linha[c["hora_inicio"]]) if c["hora_inicio"] is not None else None
+        horas = num(linha[c["horas"]]) if c["horas"] is not None else None
+        occ.append({
+            "dia": d.date(), "dow": d.weekday(), "mi": mi,
+            "fid": str(linha[c["funcid"]] or ""), "nome": str(linha[c["nome"]] or ""),
+            "gestor": str(linha[c["gestor"]] or ""),
+            "aciona": "aciona" in norm(linha[c["tipo_ocorrencia"]] or ""),
+            "horas": horas or 0.0,
+            "vlr": num(linha[c["vlr"]]) if c["vlr"] is not None else 0.0,
+        })
+    if not occ:
+        return None
+
+    def faixa(mi):
+        if mi is None:
+            return None
+        hh = mi / 60
+        return ("Dia" if 6 <= hh < 12 else "Tarde" if 12 <= hh < 18
+                else "Noite" if 18 <= hh < 24 else "Madrugada")
+
+    AC = [o for o in occ if o["aciona"]]
+    ES = [o for o in occ if not o["aciona"]]
+
+    # --- custo por hora de cada tipo
+    esp_h = sum(o["horas"] for o in ES) or 1
+    esp_v = sum(o["vlr"] or 0 for o in ES)
+    ac_h = sum(o["horas"] for o in AC) or 1
+    ac_v = sum(o["vlr"] or 0 for o in AC)
+    custo = {"espera_rs_h": round(esp_v / esp_h, 2),
+             "acionamento_rs_h": round(ac_v / ac_h, 2),
+             # hora-base estimada: espera paga 1/3 da hora normal (CLT art. 244)
+             "turno_noturno_rs_h_estimado": round(esp_v / esp_h * 3 * 1.2, 2)}
+
+    # --- regimes: dia útil x FDS por faixa horária
+    regimes = {}
+    for f in ("Dia", "Tarde", "Noite", "Madrugada"):
+        util = sum(o["horas"] for o in AC if faixa(o["mi"]) == f and o["dow"] < 5)
+        fds = sum(o["horas"] for o in AC if faixa(o["mi"]) == f and o["dow"] >= 5)
+        regimes[f] = {"util": round(util, 1), "fds": round(fds, 1)}
+    h_fds = sum(o["horas"] for o in AC if o["dow"] >= 5)
+    regimes["pct_horas_fds"] = round(h_fds / ac_h, 4)
+    regimes["horas_util_noturno"] = round(sum(
+        o["horas"] for o in AC if o["dow"] < 5 and faixa(o["mi"]) in ("Noite", "Madrugada")), 1)
+    regimes["horas_fds_diurno"] = round(sum(
+        o["horas"] for o in AC if o["dow"] >= 5 and faixa(o["mi"]) in ("Dia", "Tarde")), 1)
+
+    # --- por GA: frequência de acionamento, picos simultâneos, plantão
+    gas = {}
+    for o in occ:
+        g = gas.setdefault(o["gestor"], {
+            "esc_dias": set(), "ac_dias": set(), "ac_por_dia": {},
+            "esp_por_dia": {}, "ac_h": 0.0, "ac_v": 0.0, "esp_h": 0.0, "esp_v": 0.0})
+        if o["aciona"]:
+            g["ac_dias"].add(o["dia"])
+            g["ac_por_dia"].setdefault(o["dia"], set()).add(o["fid"])
+            g["ac_h"] += o["horas"]; g["ac_v"] += o["vlr"] or 0
+        else:
+            g["esc_dias"].add(o["dia"])
+            g["esp_por_dia"].setdefault(o["dia"], set()).add(o["fid"])
+            g["esp_h"] += o["horas"]; g["esp_v"] += o["vlr"] or 0
+    saida_gas = []
+    for gestor, g in gas.items():
+        nd = len(g["esc_dias"]) or 1
+        pct_dias = len(g["ac_dias"]) / nd
+        acs = sorted((len(s) for s in g["ac_por_dia"].values()), reverse=True) or [0]
+        plantao = [len(s) for s in g["esp_por_dia"].values()] or [0]
+        classe = ("estrutural" if pct_dias >= 0.8 else
+                  "eventual" if pct_dias <= 0.4 else "intermediario")
+        saida_gas.append({
+            "gestor": gestor, "dias_escala": len(g["esc_dias"]),
+            "dias_acionamento": len(g["ac_dias"]), "pct_dias": round(pct_dias, 4),
+            "classe": classe,
+            "horas_acionamento": round(g["ac_h"], 1), "horas_espera": round(g["esp_h"], 1),
+            "custo_total": round(g["ac_v"] + g["esp_v"], 2),
+            "custo_acionamento": round(g["ac_v"], 2), "custo_espera": round(g["esp_v"], 2),
+            "plantao_medio": round(sum(plantao) / len(plantao), 1),
+            "acionados_max": acs[0], "acionados_p90": acs[max(0, len(acs) // 10)],
+            "acionados_mediana": acs[len(acs) // 2],
+        })
+    saida_gas.sort(key=lambda x: -x["custo_total"])
+
+    # --- técnicos mais acionados (turno fixo de fato)
+    tecs = {}
+    for o in AC:
+        t = tecs.setdefault(o["fid"], {"nome": o["nome"], "gestor": o["gestor"],
+                                       "dias": set(), "horas": 0.0, "vlr": 0.0})
+        t["dias"].add(o["dia"]); t["horas"] += o["horas"]; t["vlr"] += o["vlr"] or 0
+    top_tecnicos = sorted(({"nome": t["nome"], "gestor": t["gestor"],
+                            "dias_acionado": len(t["dias"]), "horas": round(t["horas"], 1),
+                            "vlr": round(t["vlr"], 2)} for t in tecs.values()),
+                          key=lambda x: -x["horas"])[:10]
+    pct_top10 = round(sum(t["horas"] for t in top_tecnicos) / ac_h, 4)
+
+    # --- técnicos em plantão frequente quase nunca acionados (ociosidade nominal)
+    raro = {}
+    for o in occ:
+        t = raro.setdefault(o["fid"], {"esp_d": set(), "ac_d": set(), "esp_v": 0.0})
+        if o["aciona"]:
+            t["ac_d"].add(o["dia"])
+        else:
+            t["esp_d"].add(o["dia"]); t["esp_v"] += o["vlr"] or 0
+    ofensores = [t for t in raro.values()
+                 if len(t["esp_d"]) >= 8 and len(t["ac_d"]) / max(len(t["esp_d"]), 1) < 0.15]
+    dias_periodo = len({o["dia"] for o in occ})
+    return {
+        "dias_periodo": dias_periodo,
+        "custo_hora": custo,
+        "regimes": regimes,
+        "gas": saida_gas,
+        "top_tecnicos": top_tecnicos,
+        "pct_horas_top10": pct_top10,
+        "ofensores_raros": {"qtd": len(ofensores),
+                            "custo_espera": round(sum(t["esp_v"] for t in ofensores), 2)},
+    }
+
+
 def parse_ocorrencias_por_gestor(pasta: Pasta):
     achados = pasta.achar("ocorrencias", "gestor", sub="analitogeral") or pasta.achar("por gestor")
     if not achados:
@@ -450,6 +589,7 @@ def extrair(pasta_dir: Path, regiao: str, fator_meta: float = 0.5) -> dict:
         "sintetico_regiao": parse_sintetico_regiao(pasta),
     }
     dados["ociosidade"] = parse_ociosidade(pasta, dados["sobreaviso_por_ga"])
+    dados["inteligencia"] = parse_inteligencia_sobreaviso(pasta)
 
     # meta = redução de <fator> sobre o orçado do ciclo
     orcado = None

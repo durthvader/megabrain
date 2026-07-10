@@ -580,6 +580,290 @@
     "dias": 25,
     "pct_acionamento_hc": 0.3508
   },
+  "inteligencia": {
+    "dias_periodo": 25,
+    "custo_hora": {
+      "espera_rs_h": 3.67,
+      "acionamento_rs_h": 28.54,
+      "turno_noturno_rs_h_estimado": 13.21
+    },
+    "regimes": {
+      "Dia": {
+        "util": 1.2,
+        "fds": 409.7
+      },
+      "Tarde": {
+        "util": 29.9,
+        "fds": 74.4
+      },
+      "Noite": {
+        "util": 148.7,
+        "fds": 78.8
+      },
+      "Madrugada": {
+        "util": 200.2,
+        "fds": 152.6
+      },
+      "pct_horas_fds": 0.6531,
+      "horas_util_noturno": 348.9,
+      "horas_fds_diurno": 484.1
+    },
+    "gas": [
+      {
+        "gestor": "MARCOS DAVI FREITAS DE SOUSA",
+        "dias_escala": 25,
+        "dias_acionamento": 22,
+        "pct_dias": 0.88,
+        "classe": "estrutural",
+        "horas_acionamento": 300.8,
+        "horas_espera": 1689.4,
+        "custo_total": 13920.22,
+        "custo_acionamento": 8153.53,
+        "custo_espera": 5766.69,
+        "plantao_medio": 8.7,
+        "acionados_max": 8,
+        "acionados_p90": 5,
+        "acionados_mediana": 3
+      },
+      {
+        "gestor": "GUILHERME MAGALHAES DA CRUZ",
+        "dias_escala": 25,
+        "dias_acionamento": 19,
+        "pct_dias": 0.76,
+        "classe": "intermediario",
+        "horas_acionamento": 197.6,
+        "horas_espera": 1159.8,
+        "custo_total": 11032.8,
+        "custo_acionamento": 6313.42,
+        "custo_espera": 4719.37,
+        "plantao_medio": 5.8,
+        "acionados_max": 7,
+        "acionados_p90": 4,
+        "acionados_mediana": 2
+      },
+      {
+        "gestor": "DAVID DE SOUSA GARCIA",
+        "dias_escala": 25,
+        "dias_acionamento": 16,
+        "pct_dias": 0.64,
+        "classe": "intermediario",
+        "horas_acionamento": 183.1,
+        "horas_espera": 757.6,
+        "custo_total": 7519.0,
+        "custo_acionamento": 4713.81,
+        "custo_espera": 2805.2,
+        "plantao_medio": 4.1,
+        "acionados_max": 5,
+        "acionados_p90": 3,
+        "acionados_mediana": 2
+      },
+      {
+        "gestor": "LINDEMBERG COSTA DE ALMEIDA",
+        "dias_escala": 15,
+        "dias_acionamento": 10,
+        "pct_dias": 0.6667,
+        "classe": "intermediario",
+        "horas_acionamento": 83.8,
+        "horas_espera": 156.9,
+        "custo_total": 3530.05,
+        "custo_acionamento": 2714.38,
+        "custo_espera": 815.68,
+        "plantao_medio": 1.6,
+        "acionados_max": 2,
+        "acionados_p90": 2,
+        "acionados_mediana": 1
+      },
+      {
+        "gestor": "BRUNO SANTOS LOPES",
+        "dias_escala": 23,
+        "dias_acionamento": 19,
+        "pct_dias": 0.8261,
+        "classe": "estrutural",
+        "horas_acionamento": 96.0,
+        "horas_espera": 235.8,
+        "custo_total": 3410.45,
+        "custo_acionamento": 2617.19,
+        "custo_espera": 793.26,
+        "plantao_medio": 1.7,
+        "acionados_max": 3,
+        "acionados_p90": 2,
+        "acionados_mediana": 1
+      },
+      {
+        "gestor": "MAX WEBER ALVES DE OLIVEIRA",
+        "dias_escala": 16,
+        "dias_acionamento": 14,
+        "pct_dias": 0.875,
+        "classe": "estrutural",
+        "horas_acionamento": 92.7,
+        "horas_espera": 86.9,
+        "custo_total": 3295.06,
+        "custo_acionamento": 3020.49,
+        "custo_espera": 274.57,
+        "plantao_medio": 1.2,
+        "acionados_max": 2,
+        "acionados_p90": 2,
+        "acionados_mediana": 1
+      },
+      {
+        "gestor": "MAURO JOSE DA COSTA JUNIOR",
+        "dias_escala": 10,
+        "dias_acionamento": 3,
+        "pct_dias": 0.3,
+        "classe": "eventual",
+        "horas_acionamento": 31.0,
+        "horas_espera": 116.8,
+        "custo_total": 1633.31,
+        "custo_acionamento": 1126.94,
+        "custo_espera": 506.37,
+        "plantao_medio": 1.7,
+        "acionados_max": 2,
+        "acionados_p90": 2,
+        "acionados_mediana": 1
+      },
+      {
+        "gestor": "PEDRO HENRIQUE MARQUES FERREIRA",
+        "dias_escala": 7,
+        "dias_acionamento": 2,
+        "pct_dias": 0.2857,
+        "classe": "eventual",
+        "horas_acionamento": 31.5,
+        "horas_espera": 92.2,
+        "custo_total": 1210.5,
+        "custo_acionamento": 884.27,
+        "custo_espera": 326.23,
+        "plantao_medio": 1.9,
+        "acionados_max": 2,
+        "acionados_p90": 2,
+        "acionados_mediana": 2
+      },
+      {
+        "gestor": "GABRIEL VIEIRA DO NASCIMENTO",
+        "dias_escala": 14,
+        "dias_acionamento": 6,
+        "pct_dias": 0.4286,
+        "classe": "intermediario",
+        "horas_acionamento": 27.3,
+        "horas_espera": 92.3,
+        "custo_total": 921.79,
+        "custo_acionamento": 635.71,
+        "custo_espera": 286.08,
+        "plantao_medio": 1.0,
+        "acionados_max": 1,
+        "acionados_p90": 1,
+        "acionados_mediana": 1
+      },
+      {
+        "gestor": "FABBIO MARDEM CHAGAS DE QUEIROZ",
+        "dias_escala": 16,
+        "dias_acionamento": 2,
+        "pct_dias": 0.125,
+        "classe": "eventual",
+        "horas_acionamento": 23.3,
+        "horas_espera": 128.2,
+        "custo_total": 862.0,
+        "custo_acionamento": 507.94,
+        "custo_espera": 354.06,
+        "plantao_medio": 1.0,
+        "acionados_max": 1,
+        "acionados_p90": 1,
+        "acionados_mediana": 1
+      },
+      {
+        "gestor": "MIGUEL BARROS DE CARVALHO JUNIOR",
+        "dias_escala": 13,
+        "dias_acionamento": 7,
+        "pct_dias": 0.5385,
+        "classe": "intermediario",
+        "horas_acionamento": 28.7,
+        "horas_espera": 82.0,
+        "custo_total": 807.56,
+        "custo_acionamento": 579.05,
+        "custo_espera": 228.51,
+        "plantao_medio": 1.0,
+        "acionados_max": 1,
+        "acionados_p90": 1,
+        "acionados_mediana": 1
+      }
+    ],
+    "top_tecnicos": [
+      {
+        "nome": "GLEYDSON GONCALVES NOGUEIRA",
+        "gestor": "MAX WEBER ALVES DE OLIVEIRA",
+        "dias_acionado": 12,
+        "horas": 69.2,
+        "vlr": 2535.73
+      },
+      {
+        "nome": "LAERTE DE CARVALHO COSTA",
+        "gestor": "DAVID DE SOUSA GARCIA",
+        "dias_acionado": 7,
+        "horas": 44.1,
+        "vlr": 1104.68
+      },
+      {
+        "nome": "FRANCISCO MARCIO BATISTA DOS ANJOS FILHO",
+        "gestor": "BRUNO SANTOS LOPES",
+        "dias_acionado": 12,
+        "horas": 42.6,
+        "vlr": 1242.74
+      },
+      {
+        "nome": "JOSE ROBERTO SOUSA SILVA",
+        "gestor": "DAVID DE SOUSA GARCIA",
+        "dias_acionado": 4,
+        "horas": 41.5,
+        "vlr": 1192.46
+      },
+      {
+        "nome": "ANTONIO MARCOS SANTANA DE ANDRADE",
+        "gestor": "LINDEMBERG COSTA DE ALMEIDA",
+        "dias_acionado": 5,
+        "horas": 39.4,
+        "vlr": 970.61
+      },
+      {
+        "nome": "ADRIANO DA SILVA GOMES",
+        "gestor": "MARCOS DAVI FREITAS DE SOUSA",
+        "dias_acionado": 10,
+        "horas": 32.3,
+        "vlr": 795.63
+      },
+      {
+        "nome": "GLEISON RODRIGUES DE SOUSA",
+        "gestor": "MIGUEL BARROS DE CARVALHO JUNIOR",
+        "dias_acionado": 7,
+        "horas": 28.7,
+        "vlr": 579.05
+      },
+      {
+        "nome": "ALEX FERREIRA DE SOUSA",
+        "gestor": "DAVID DE SOUSA GARCIA",
+        "dias_acionado": 6,
+        "horas": 28.5,
+        "vlr": 487.38
+      },
+      {
+        "nome": "FRANCISCO CLEILTON FERREIRA DA COSTA",
+        "gestor": "LINDEMBERG COSTA DE ALMEIDA",
+        "dias_acionado": 2,
+        "horas": 28.4,
+        "vlr": 1021.84
+      },
+      {
+        "nome": "JULIO CESAR LIMA OLIVEIRA",
+        "gestor": "MARCOS DAVI FREITAS DE SOUSA",
+        "dias_acionado": 2,
+        "horas": 27.3,
+        "vlr": 1064.09
+      }
+    ],
+    "pct_horas_top10": 0.3486,
+    "ofensores_raros": {
+      "qtd": 8,
+      "custo_espera": 3192.13
+    }
+  },
   "meta": {
     "base": "orcado",
     "fator": 0.5,
@@ -589,6 +873,6 @@
   "_fonte": {
     "pasta": "C:\\Users\\rogerio.fonseca\\Downloads\\hubhoras\\ce",
     "arquivos": 40,
-    "gerado_em": "2026-07-10T15:50:33"
+    "gerado_em": "2026-07-10T16:17:40"
   }
 }

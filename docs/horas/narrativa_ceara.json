@@ -7,63 +7,75 @@
   "s1": {
     "eyebrow": "CUSTO DE HORAS · {regiao} · {data_foto}",
     "titulo": "A meta é cortar o custo de horas pela metade — e o dinheiro está no sobreaviso",
-    "lead": "O orçado do ciclo é {orcado}/mês e o realizado já está em {real} — {var_orcado} abaixo do orçado. Mas a meta é dobrar essa economia: {meta}/mês, {gap_pct} menos que o realizado de hoje.",
-    "decisao": "Atacar o sobreaviso, que responde por {sobreaviso_pct} da cesta e é a parte mais controlável do custo. É onde o realizado historicamente estoura o orçado e onde há mais gordura de plantão ocioso para cortar sem afetar a operação."
+    "lead": "O orçado do ciclo é {orcado}/mês e o realizado já está em {real} — {var_orcado} do orçado. Mas a meta é dobrar essa economia: {meta}/mês, {gap_pct} menos que o realizado de hoje.",
+    "decisao": "Atacar o sobreaviso, que responde por {sobreaviso_pct} da cesta e é a parte mais controlável do custo. E o alvo principal aqui é o fim de semana: {pct_fds} das horas acionadas caem no sáb/dom — sinal de falta de escala regular de FDS, não de falta de plantão."
   },
   "s2": {
     "eyebrow": "DIAGNÓSTICO DO CUSTO · ONDE ESTÁ",
-    "titulo": "Paga-se muito plantão em espera e aciona-se pouco: só {ocio_pct_horas} do sobreaviso vira trabalho",
-    "insight": "A cada dia há em média {ocio_hc_espera} técnicos de sobreaviso e apenas {ocio_hc_acion} são acionados ({ocio_pct_hc}). Em horas, são {ocio_horas_espera} pagas em espera para {ocio_horas_acion} de acionamento efetivo. Redimensionar a escala pela demanda real é o maior lever de custo."
+    "titulo": "Paga-se muito plantão em espera — e o acionamento tem dois padrões distintos",
+    "insight": "No dia útil o acionamento é noturno ({h_util_noturno} pós-jornada). No fim de semana é diurno ({h_fds_diurno}), porque não há escala regular de sáb/dom — {pct_fds} das horas acionadas caem no FDS, pagas com adicional maior. Plantão noturno e cobertura de FDS são problemas diferentes, com soluções diferentes."
   },
   "s3": {
     "eyebrow": "ONDE DÓI · POR ÁREA DE GESTÃO (GA)",
-    "titulo": "O custo de sobreaviso está concentrado em poucas áreas — a recuperação começa por elas",
-    "callout": "As 3 primeiras GAs concentram {top3_ga_pct} de todas as horas de sobreaviso da regional. Não é problema difuso: é onde a escala precisa ser revista primeiro."
+    "titulo": "O custo está concentrado — e a frequência de acionamento diz qual é o remédio certo",
+    "callout": "As 3 primeiras GAs concentram {top3_ga_pct} das horas. Onde o acionamento é quase diário, o instrumento certo é turno fixo; nas demais, enxugar o plantão pela demanda real."
   },
   "s4": {
+    "eyebrow": "RISCO × CUSTO-BENEFÍCIO",
+    "titulo": "Trocar o instrumento sem perder cobertura: turno fixo onde a demanda é diária"
+  },
+  "s5": {
     "eyebrow": "PROPOSTA DO PRÓXIMO CICLO · FCA",
-    "titulo": "Fechar o gap de {gap}/mês com três alavancas sobre a escala de sobreaviso",
+    "titulo": "Fechar o gap de {gap}/mês com ações específicas por área — não com corte cego",
     "alavancas": [
       {
         "n": "01",
-        "t": "Dimensionar o plantão pela demanda real",
-        "d": "Só {ocio_pct_hc} dos técnicos de sobreaviso são acionados por dia. Reduzir o nº de plantonistas nas faixas de baixo acionamento, ajustando a escala ao histórico de chamados por dia e faixa horária."
+        "t": "Escala regular de fim de semana",
+        "d": "{pct_fds} das horas acionadas caem no sáb/dom, de dia ({h_fds_diurno}) — hoje cobertas por sobreaviso, a forma mais cara. Revezamento de FDS (folguista/12x36) nas GAs líderes elimina esse custo recorrente."
       },
       {
         "n": "02",
-        "t": "Concentrar a escala na faixa que aciona",
-        "d": "O acionamento se concentra na faixa {faixa_top} ({faixa_top_pct}). Enxugar plantão nas faixas de menor acionamento ({faixa_baixas}) e manter cobertura só onde a demanda real justifica."
+        "t": "Turno fixo onde a demanda é diária",
+        "d": "Nas GAs de acionamento quase diário: turno fixo cobre a mediana de acionados; sobreaviso residual cobre o p90. Hora acionada: {rs_acion_h} → turno: {rs_turno_h}. Economia: {economia_mes}/mês."
       },
       {
         "n": "03",
-        "t": "Cobrar as GAs que concentram o custo",
-        "d": "Meta global de redução distribuída como acompanhamento pelas áreas líderes de horas de sobreaviso, com revisão semanal de escala versus acionamento efetivo."
+        "t": "Enxugar o plantão pela demanda real",
+        "d": "Só {ocio_pct_hc} dos técnicos de sobreaviso são acionados por dia. Reduzir plantonistas nas GAs intermediárias/eventuais pelo p90 e retirar da escala os técnicos em plantão frequente quase nunca acionados."
       }
     ],
     "fca": [
       {
-        "fato": "Custo de horas em {real}/mês, ante meta de {meta}",
-        "causa": "Cesta puxada por DSR ({dsr_pct}) e sobreaviso ({sobreaviso_pct}); o sobreaviso é a parte controlável e onde o realizado supera o orçado.",
-        "acao": "Definir a meta de {meta}/mês por regional e abrir o gap de {gap} em plano de escala por GA.",
-        "prazo": "Início imediato",
-        "resp": "Gerência da regional + Planejamento",
+        "fato": "{pct_fds} das horas acionadas caem no fim de semana",
+        "causa": "Sem escala regular de sáb/dom, a cobertura diurna do FDS ({h_fds_diurno}) é feita via acionamento com adicional maior.",
+        "acao": "Implantar revezamento de fim de semana nas GAs líderes (folguista/12x36) e retirar o FDS diurno do sobreaviso.",
+        "prazo": "Próximo ciclo",
+        "resp": "Planejamento de escala + Coordenação de campo",
         "status": "urgent"
       },
       {
-        "fato": "Só {ocio_pct_horas} do sobreaviso vira acionamento",
-        "causa": "{ocio_hc_espera} técnicos/dia em espera para {ocio_hc_acion} acionados; escala dimensionada acima da demanda real.",
-        "acao": "Redimensionar a escala de sobreaviso pela demanda por dia e faixa horária; reduzir plantonistas nas faixas de baixo acionamento.",
+        "fato": "GAs com acionamento quase diário ({custo_estruturais_mes}/mês)",
+        "causa": "Demanda recorrente ({gas_estruturais}) paga como sobreaviso + HE de acionamento — instrumento errado para trabalho regular.",
+        "acao": "Dimensionar turno fixo pela mediana de acionados e formalizar primeiro os técnicos já acionados toda semana; sobreaviso residual para o excedente (p90).",
         "prazo": "Próximo ciclo",
-        "resp": "Coordenação de campo + Planejamento",
+        "resp": "Gerência regional + RH + Planejamento",
         "status": "start"
       },
       {
-        "fato": "Custo concentrado em poucas GAs",
-        "causa": "As 3 primeiras áreas concentram {top3_ga_pct} das horas de sobreaviso.",
-        "acao": "Revisão semanal de escala versus acionamento nas GAs líderes; meta de redução acompanhada por área.",
-        "prazo": "Semanal",
-        "resp": "Gestores das áreas (GA)",
-        "status": "watch"
+        "fato": "Só {ocio_pct_horas} do sobreaviso vira acionamento",
+        "causa": "{ocio_hc_espera} técnicos/dia em espera para {ocio_hc_acion} acionados; escala acima da demanda real nas GAs intermediárias e eventuais.",
+        "acao": "Reduzir plantonistas pelo p90 de acionados por GA; revisar nominalmente os técnicos em plantão frequente com acionamento raro.",
+        "prazo": "Próximo ciclo",
+        "resp": "Gestores das áreas (GA) + Planejamento",
+        "status": "start"
+      },
+      {
+        "fato": "Risco de descobertura se houver corte cego",
+        "causa": "Na maior GA o pico chegou a {pico_max} técnicos acionados no mesmo dia — margem apertada sobre o plantão atual.",
+        "acao": "Regra de piso: nenhuma GA reduz plantão abaixo do p90 de acionados simultâneos sem turno fixo no lugar; pico raro coberto por backup entre GAs vizinhas.",
+        "prazo": "Regra permanente",
+        "resp": "Gerência regional",
+        "status": "validate"
       }
     ]
   }

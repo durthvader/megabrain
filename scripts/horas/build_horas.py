@@ -5,8 +5,10 @@ Camada 2 da máquina (montador). Consome:
   - docs/horas/narrativa_<regiao>.json  (textos — títulos, causas, ações)
 e gera outputs/horas/Horas_<Regiao>_Executivo.pptx no padrão Alloha.
 
-Dinâmica dos 4 slides: Fato (indicador) -> Causa (ociosidade) -> Causa (por GA)
--> Ação (proposta do próximo ciclo + FCA).
+Dinâmica dos 5 slides: Fato (indicador) -> Causa/onde (ociosidade + regimes
+útil-noturno x FDS-diurno) -> Causa/quem (GA estrutural x eventual) ->
+Risco x custo-benefício (dimensionamento seguro + conta da conversão) ->
+Ação (proposta do próximo ciclo + FCA cirúrgico).
 
 Uso:
     python scripts/horas/build_horas.py --regiao ceara
@@ -274,7 +276,7 @@ def stacked_horizontal(slide, itens, left, top, width, height):
 def slide1(prs, dados, nar, ctx, blank):
     slide = prs.slides.add_slide(blank)
     s = nar["s1"]
-    chrome(slide, 1, 4, fmt(nar["fonte"], ctx))
+    chrome(slide, 1, 5, fmt(nar["fonte"], ctx))
     title_block(slide, fmt(s["eyebrow"], ctx), fmt(s["titulo"], ctx), title_size=28)
 
     # --- três KPIs
@@ -352,7 +354,7 @@ def slide2(prs, dados, nar, ctx, blank):
     slide = prs.slides.add_slide(blank)
     s = nar["s2"]
     o = dados["ociosidade"]
-    chrome(slide, 2, 4, fmt(nar["fonte"], ctx))
+    chrome(slide, 2, 5, fmt(nar["fonte"], ctx))
     title_block(slide, fmt(s["eyebrow"], ctx), fmt(s["titulo"], ctx), title_size=27)
 
     # painel A — ociosidade por headcount
@@ -397,37 +399,58 @@ def slide2(prs, dados, nar, ctx, blank):
     add_text(slide, "do custo de sobreaviso vira acionamento — o resto é plantão em espera.",
              776, 332, 406, 54, size=11.5, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
 
-    # painel C — faixa horária
+    # painel C — dois regimes: dia útil x fim de semana, por faixa horária
+    intel = dados.get("inteligencia") or {}
+    reg = intel.get("regimes") or {}
     add_rect(slide, 56, 416, 1166, 218, WHITE, line=LINE, round_corners=True)
-    add_text(slide, "Quando o acionamento realmente acontece — horas por faixa horária",
-             78, 430, 800, 18, size=13, color=NAVY, bold=True)
-    add_text(slide, "Base para redimensionar a escala: manter plantão onde a demanda existe, "
-                    "enxugar nas faixas de baixo acionamento.", 78, 452, 900, 16, size=10.5, color=MUTED)
-    faixas = dados["faixa_horaria"]
-    maxh = max(f["horas"] for f in faixas) or 1
-    total_faixa = sum(f["horas"] for f in faixas) or 1
+    add_text(slide, "Não é um problema só: no dia útil o acionamento é noturno; no fim de semana, diurno",
+             78, 430, 900, 18, size=13, color=NAVY, bold=True)
+    add_text(slide, "Horas de acionamento por faixa horária, separadas em dia útil × sábado/domingo.",
+             78, 452, 900, 16, size=10.5, color=MUTED)
+    faixas_nomes = ["Noite", "Madrugada", "Dia", "Tarde"]
+    maxf = max((reg.get(f, {}).get("util", 0) + reg.get(f, {}).get("fds", 0))
+               for f in faixas_nomes) or 1
     fy = 486
-    for f in faixas:
-        hbar(slide, f["faixa"], f"{f['horas']:.0f} h", 78, fy, 96, 470, f["horas"] / maxh,
-             color=BLUE if f["horas"] < maxh else NAVY)
-        add_text(slide, pct(f["horas"] / total_faixa), 748, fy - 2, 70, 16, size=10.5,
-                 color=MUTED, bold=True)
+    for f in faixas_nomes:
+        u = reg.get(f, {}).get("util", 0)
+        w = reg.get(f, {}).get("fds", 0)
+        tot_f = u + w
+        add_text(slide, f, 78, fy - 2, 92, 16, size=10.5, color=INK)
+        bar_l, bar_w = 174, 440
+        add_rect(slide, bar_l, fy, bar_w, 14, "E7EDF5")
+        wu = bar_w * u / maxf
+        ww = bar_w * w / maxf
+        if wu > 0:
+            add_rect(slide, bar_l, fy, max(wu, 2), 14, NAVY)
+        if ww > 0:
+            add_rect(slide, bar_l + wu, fy, max(ww, 2), 14, GREEN_DARK)
+        pf = (w / tot_f) if tot_f else 0
+        add_text(slide, f"{tot_f:.0f} h", bar_l + bar_w + 10, fy - 2, 64, 16,
+                 size=10.5, color=INK, bold=True)
+        add_text(slide, f"{pct(pf)} FDS", bar_l + bar_w + 76, fy - 2, 80, 16, size=10.5,
+                 color=GREEN_DARK if pf >= 0.5 else MUTED, bold=pf >= 0.5)
         fy += 34
+    # legenda mini
+    add_rect(slide, 174, fy + 2, 11, 11, NAVY)
+    add_text(slide, "dia útil", 190, fy, 70, 14, size=9.5, color=MUTED)
+    add_rect(slide, 254, fy + 2, 11, 11, GREEN_DARK)
+    add_text(slide, "fim de semana", 270, fy, 110, 14, size=9.5, color=MUTED)
 
-    # insight lateral
-    add_rect(slide, 930, 486, 268, 130, WASH, round_corners=True)
-    add_text(slide, "POR QUE IMPORTA", 950, 498, 230, 14, size=10, color=BLUE, bold=True)
-    add_text(slide, fmt(s["insight"], ctx), 950, 516, 232, 96, size=10.5, color=INK,
-             line_spacing=1.08)
+    # insight lateral — dois regimes
+    add_rect(slide, 850, 480, 348, 150, WASH, round_corners=True)
+    add_text(slide, "DOIS REGIMES, DUAS SOLUÇÕES", 870, 490, 310, 14, size=10, color=BLUE, bold=True)
+    add_text(slide, fmt(s["insight"], ctx), 870, 508, 312, 116, size=10, color=INK,
+             line_spacing=1.07)
 
-    add_notes(slide, "SLIDE 2 — CAUSA/ondе (ociosidade). HC/dia e horas de espera x acionamento; "
-                     "faixa horária orienta o redimensionamento. Números do JSON (ociosidade, faixa_horaria).")
+    add_notes(slide, "SLIDE 2 — CAUSA/onde (ociosidade + regimes). HC/dia e horas de espera x "
+                     "acionamento; painel C mostra dia útil (noturno) x FDS (diurno). "
+                     "Números do JSON (ociosidade, inteligencia.regimes).")
 
 
 def slide3(prs, dados, nar, ctx, blank):
     slide = prs.slides.add_slide(blank)
     s = nar["s3"]
-    chrome(slide, 3, 4, fmt(nar["fonte"], ctx))
+    chrome(slide, 3, 5, fmt(nar["fonte"], ctx))
     title_block(slide, fmt(s["eyebrow"], ctx), fmt(s["titulo"], ctx), title_size=27)
 
     gas = dados["sobreaviso_por_ga"][:8]
@@ -461,33 +484,124 @@ def slide3(prs, dados, nar, ctx, blank):
     add_text(slide, "CONCENTRAÇÃO", 722, 166, 300, 14, size=10.5, color="9FC9EE", bold=True)
     add_text(slide, ctx["top3_ga_pct"], 722, 186, 160, 48, size=38, color=GREEN,
              bold=True, font="Aptos Display")
-    add_text(slide, fmt(s["callout"], ctx), 722, 240, 480, 50, size=12, color=WHITE,
+    add_text(slide, fmt(s["callout"], ctx), 722, 238, 480, 56, size=11, color=WHITE,
              line_spacing=1.06)
 
-    # tabela top GAs
-    top = dados["sobreaviso_por_ga"][:6]
-    table = add_table(slide, len(top) + 1, 4, 700, 320, 522, 300, [230, 88, 100, 104])
-    cabec = ["Área de gestão (GA)", "Técnicos", "Horas", "% acion."]
+    # tabela por GA: frequência de acionamento define o instrumento certo
+    intel = dados.get("inteligencia") or {}
+    gas_i = (intel.get("gas") or [])[:6]
+    classes = {"estrutural": ("TODO DIA", RED),
+               "intermediario": ("FREQUENTE", WARN),
+               "eventual": ("EVENTUAL", GREEN_DARK)}
+    table = add_table(slide, len(gas_i) + 1, 4, 700, 320, 522, 300, [204, 112, 96, 110])
+    cabec = ["Área de gestão (GA)", "Aciona em", "Custo", "Padrão"]
     for c, h in enumerate(cabec):
         set_cell(table.cell(0, c), [(h, {"size": 10.5, "bold": True, "color": WHITE})],
                  fill=NAVY, anchor=MSO_ANCHOR.MIDDLE)
-    for r, g in enumerate(top, start=1):
-        pac = g["horas_acionamento"] / g["horas_total"] if g["horas_total"] else 0
+    for r, g in enumerate(gas_i, start=1):
+        rotulo, cor = classes.get(g["classe"], ("—", MUTED))
         fill = WHITE if r % 2 else WASH
         set_cell(table.cell(r, 0), [(encurtar_nome(g["gestor"], 3), {"size": 10.5})], fill=fill)
-        set_cell(table.cell(r, 1), [(f"{g['tecnicos']}", {"size": 10.5, "align": PP_ALIGN.CENTER})], fill=fill)
-        set_cell(table.cell(r, 2), [(f"{g['horas_total']:.0f} h", {"size": 10.5, "align": PP_ALIGN.CENTER, "bold": True})], fill=fill)
-        set_cell(table.cell(r, 3), [(pct(pac), {"size": 10.5, "align": PP_ALIGN.CENTER,
-                 "color": GREEN_DARK if pac >= 0.3 else RED})], fill=fill)
+        set_cell(table.cell(r, 1), [(f"{g['dias_acionamento']} de {g['dias_escala']} d",
+                 {"size": 10.5, "align": PP_ALIGN.CENTER, "bold": True})], fill=fill)
+        set_cell(table.cell(r, 2), [(moeda(g["custo_total"]), {"size": 10.5, "align": PP_ALIGN.CENTER})], fill=fill)
+        set_cell(table.cell(r, 3), [(rotulo, {"size": 9.5, "align": PP_ALIGN.CENTER,
+                 "bold": True, "color": cor})], fill=fill)
 
-    add_notes(slide, "SLIDE 3 — CAUSA/quem (por GA). Ranking de horas de sobreaviso por gestor, "
-                     "espera x acionamento, e a concentração nas 3 primeiras áreas. Do JSON (sobreaviso_por_ga).")
+    add_notes(slide, "SLIDE 3 — CAUSA/quem (por GA). Ranking de horas + frequência de acionamento: "
+                     "GA que aciona todo dia tem demanda estrutural (instrumento errado: sobreaviso); "
+                     "GA eventual usa sobreaviso corretamente. Do JSON (sobreaviso_por_ga, inteligencia.gas).")
 
 
 def slide4(prs, dados, nar, ctx, blank):
+    """Risco x custo-benefício: dimensionamento seguro por GA + a conta da conversão."""
     slide = prs.slides.add_slide(blank)
     s = nar["s4"]
-    chrome(slide, 4, 4, fmt(nar["fonte"], ctx))
+    intel = dados.get("inteligencia") or {}
+    chrome(slide, 4, 5, fmt(nar["fonte"], ctx))
+    title_block(slide, fmt(s["eyebrow"], ctx), fmt(s["titulo"], ctx), title_size=27)
+
+    # ---- esquerda: dimensionamento seguro por GA (plantão x demanda real)
+    add_text(slide, "Dimensionamento seguro por GA — plantão hoje × demanda real de acionados",
+             56, 152, 660, 18, size=13, color=NAVY, bold=True)
+    add_text(slide, "Mediana e pico (p90/máx) de técnicos acionados no mesmo dia. A cobertura não cai: muda o instrumento.",
+             56, 174, 660, 16, size=10, color=MUTED)
+    gas_i = (intel.get("gas") or [])[:6]
+    propostas = {
+        "estrutural": ("Turno fixo + SA p/ pico", RED),
+        "intermediario": ("SA enxuto (p90)", WARN),
+        "eventual": ("Manter SA mínimo", GREEN_DARK),
+    }
+    table = add_table(slide, len(gas_i) + 1, 5, 56, 200, 660, 300, [190, 106, 118, 82, 164])
+    cab = ["GA", "Plantão hoje", "Acionados/dia", "Pico", "Proposta"]
+    for c, h in enumerate(cab):
+        set_cell(table.cell(0, c), [(h, {"size": 10.5, "bold": True, "color": WHITE})],
+                 fill=NAVY, anchor=MSO_ANCHOR.MIDDLE)
+    for r, g in enumerate(gas_i, start=1):
+        rotulo, cor = propostas.get(g["classe"], ("—", MUTED))
+        fill = WHITE if r % 2 else WASH
+        set_cell(table.cell(r, 0), [(encurtar_nome(g["gestor"], 2), {"size": 10})], fill=fill)
+        set_cell(table.cell(r, 1), [(f"{g['plantao_medio']:.0f} téc/dia",
+                 {"size": 10, "align": PP_ALIGN.CENTER})], fill=fill)
+        set_cell(table.cell(r, 2), [(f"med {g['acionados_mediana']} · p90 {g['acionados_p90']}",
+                 {"size": 10, "align": PP_ALIGN.CENTER, "bold": True})], fill=fill)
+        set_cell(table.cell(r, 3), [(f"{g['acionados_max']}",
+                 {"size": 10, "align": PP_ALIGN.CENTER})], fill=fill)
+        set_cell(table.cell(r, 4), [(rotulo, {"size": 9.5, "bold": True, "color": cor})], fill=fill)
+
+    # régua de segurança
+    add_rect(slide, 56, 516, 660, 62, RED_LIGHT, round_corners=True)
+    add_text(slide, "REGRA DE PISO (RISCO)", 76, 526, 300, 14, size=10, color=RED, bold=True)
+    add_text(slide, "Nenhuma GA reduz plantão abaixo do p90 de acionados simultâneos sem turno fixo no lugar. "
+                    "O pico raro (máx) é coberto por backup combinado entre GAs vizinhas.",
+             76, 542, 622, 32, size=10.5, color=INK, line_spacing=1.06)
+
+    # ---- direita: a conta da conversão (número na coluna esquerda, rótulo na direita)
+    ch = intel.get("custo_hora") or {}
+    add_rect(slide, 740, 152, 482, 190, NAVY, round_corners=True)
+    add_text(slide, "A CONTA DA CONVERSÃO", 762, 164, 400, 14, size=10.5, color="9FC9EE", bold=True)
+    add_text(slide, f"R$ {ch.get('acionamento_rs_h', 0):.2f}".replace(".", ","),
+             762, 186, 118, 30, size=22, bold=True, color=WHITE, font="Aptos Display")
+    add_text(slide, "por hora acionada em sobreaviso (HE + adicionais)",
+             890, 186, 312, 30, size=10.5, color="C9D6EF", anchor=MSO_ANCHOR.MIDDLE)
+    add_text(slide, f"R$ {ch.get('turno_noturno_rs_h_estimado', 0):.2f}".replace(".", ","),
+             762, 222, 118, 30, size=22, bold=True, color=GREEN, font="Aptos Display")
+    add_text(slide, "por hora em turno fixo noturno (estimado*)",
+             890, 222, 312, 30, size=10.5, color="C9D6EF", anchor=MSO_ANCHOR.MIDDLE)
+    add_text(slide, fmt("Converter a demanda diária das GAs estruturais economiza "
+                        "{economia_mes}/mês — sem perder cobertura.", ctx),
+             762, 262, 440, 40, size=12.5, color=WHITE, bold=True, line_spacing=1.06)
+    add_text(slide, "*hora-base derivada da própria espera (1/3 da hora normal) + 20% de adicional noturno. Validar com RH.",
+             762, 312, 440, 24, size=8.5, color="8FA3CE")
+
+    # ---- direita: nominal — quem já é turno de fato
+    add_rect(slide, 740, 356, 482, 222, WHITE, line=LINE, round_corners=True)
+    add_text(slide, fmt("Quem já trabalha o turno — só que pago como HE", ctx),
+             762, 368, 440, 16, size=12, color=NAVY, bold=True)
+    add_text(slide, fmt("Top 10 técnicos = {pct_top10} de todas as horas de acionamento. Os 5 maiores:", ctx),
+             762, 388, 440, 16, size=10, color=MUTED)
+    top5 = (intel.get("top_tecnicos") or [])[:5]
+    ty = 408
+    maxh_t = max((t["horas"] for t in top5), default=1) or 1
+    for t in top5:
+        add_text(slide, encurtar_nome(t["nome"], 2), 762, ty - 2, 150, 16, size=10, color=INK)
+        add_rect(slide, 916, ty, 180, 12, "E7EDF5")
+        add_rect(slide, 916, ty, max(180 * t["horas"] / maxh_t, 3), 12, BLUE_MID)
+        add_text(slide, f"{t['horas']:.0f} h · {t['dias_acionado']} dias", 1104, ty - 2, 110, 16,
+                 size=9.5, color=INK, bold=True)
+        ty += 26
+    add_text(slide, "Formalizar o turno primeiro para esse grupo: a demanda já é diária e comprovada.",
+             762, ty + 2, 440, 18, size=10, color=MUTED)
+
+    add_notes(slide, "SLIDE 4 — RISCO x CUSTO-BENEFÍCIO. Dimensionamento por GA (mediana=turno fixo, "
+                     "p90=sobreaviso residual, máx=backup), regra de piso, conta da conversão e "
+                     "nominal dos técnicos mais acionados. Do JSON (inteligencia).")
+
+
+def slide5(prs, dados, nar, ctx, blank):
+    slide = prs.slides.add_slide(blank)
+    s = nar["s5"]
+    chrome(slide, 5, 5, fmt(nar["fonte"], ctx))
     title_block(slide, fmt(s["eyebrow"], ctx), fmt(s["titulo"], ctx), title_size=27)
 
     # comparativo Orçado -> Proposta
@@ -512,9 +626,9 @@ def slide4(prs, dados, nar, ctx, blank):
         ax += 262
 
     # tabela FCA
-    add_text(slide, "FCA — Fato · Causa · Ação", 56, 320, 600, 18, size=12.5, color=NAVY, bold=True)
+    add_text(slide, "FCA — Fato · Causa · Ação", 56, 316, 600, 18, size=12.5, color=NAVY, bold=True)
     fca = s["fca"]
-    table = add_table(slide, len(fca) + 1, 6, 56, 344, 1166, 288,
+    table = add_table(slide, len(fca) + 1, 6, 56, 340, 1166, 300,
                       [250, 300, 316, 110, 150, 40])
     cab = ["Fato", "Causa", "Ação", "Prazo", "Responsável", ""]
     for c, h in enumerate(cab):
@@ -533,8 +647,8 @@ def slide4(prs, dados, nar, ctx, blank):
         set_cell(table.cell(r, 5), [("●", {"size": 12, "color": cor, "align": PP_ALIGN.CENTER})],
                  fill=fill, anchor=MSO_ANCHOR.MIDDLE)
 
-    add_notes(slide, "SLIDE 4 — AÇÃO (proposta + FCA). Orçado->Proposta (-50%), 3 alavancas e a "
-                     "tabela FCA. Edite textos em narrativa_<regiao>.json (s4).")
+    add_notes(slide, "SLIDE 5 — AÇÃO (proposta + FCA cirúrgico). Orçado->Proposta (-50%), 3 alavancas "
+                     "e a tabela FCA com ações específicas por GA. Edite textos em narrativa_<regiao>.json (s5).")
 
 
 # ------------------------------------------------------------------- contexto
@@ -582,6 +696,32 @@ def montar_contexto(dados, nar):
         ctx["faixa_baixas"] = " e ".join(f["faixa"].lower() for f in faixas[-2:])
     else:
         ctx["faixa_top"] = ctx["faixa_top_pct"] = ctx["faixa_baixas"] = "—"
+
+    # inteligência: regimes, GAs estruturais, conversão p/ turno fixo
+    intel = dados.get("inteligencia") or {}
+    reg = intel.get("regimes") or {}
+    ch = intel.get("custo_hora") or {}
+    gas_i = intel.get("gas") or []
+    dias = intel.get("dias_periodo") or 30
+    estruturais = [g for g in gas_i if g["classe"] == "estrutural"]
+    eventuais = [g for g in gas_i if g["classe"] == "eventual"]
+    ctx["pct_fds"] = pct(reg.get("pct_horas_fds"))
+    ctx["h_util_noturno"] = f"{reg.get('horas_util_noturno', 0):,.0f} h".replace(",", ".")
+    ctx["h_fds_diurno"] = f"{reg.get('horas_fds_diurno', 0):,.0f} h".replace(",", ".")
+    ctx["n_estruturais"] = str(len(estruturais))
+    ctx["gas_estruturais"] = ", ".join(encurtar_nome(g["gestor"]) for g in estruturais[:3]) or "—"
+    ctx["gas_eventuais"] = ", ".join(encurtar_nome(g["gestor"]) for g in eventuais[:3]) or "—"
+    ctx["pct_top10"] = pct(intel.get("pct_horas_top10"))
+    ctx["rs_acion_h"] = f"R$ {ch.get('acionamento_rs_h', 0):.2f}".replace(".", ",")
+    ctx["rs_turno_h"] = f"R$ {ch.get('turno_noturno_rs_h_estimado', 0):.2f}".replace(".", ",")
+    ctx["pico_max"] = str(max((g["acionados_max"] for g in gas_i), default=0))
+    # economia estimada/mês da conversão nas GAs estruturais:
+    # horas acionadas × (R$/h acionamento − R$/h turno) + metade da espera eliminada
+    delta = (ch.get("acionamento_rs_h") or 0) - (ch.get("turno_noturno_rs_h_estimado") or 0)
+    econ_periodo = sum(g["horas_acionamento"] for g in estruturais) * max(delta, 0) \
+        + 0.5 * sum(g["custo_espera"] for g in estruturais)
+    ctx["economia_mes"] = moeda(econ_periodo / dias * 30)
+    ctx["custo_estruturais_mes"] = moeda(sum(g["custo_total"] for g in estruturais) / dias * 30)
     return ctx
 
 
@@ -607,6 +747,7 @@ def main():
     slide2(prs, dados, nar, ctx, blank)
     slide3(prs, dados, nar, ctx, blank)
     slide4(prs, dados, nar, ctx, blank)
+    slide5(prs, dados, nar, ctx, blank)
 
     slug = "".join(c for c in unicodedata.normalize("NFKD", args.regiao)
                    if not unicodedata.combining(c)).replace(" ", "_")

@@ -278,6 +278,210 @@
     "dias": 25,
     "pct_acionamento_hc": 0.4586
   },
+  "inteligencia": {
+    "dias_periodo": 25,
+    "custo_hora": {
+      "espera_rs_h": 3.45,
+      "acionamento_rs_h": 23.6,
+      "turno_noturno_rs_h_estimado": 12.43
+    },
+    "regimes": {
+      "Dia": {
+        "util": 60.5,
+        "fds": 190.4
+      },
+      "Tarde": {
+        "util": 0,
+        "fds": 504.6
+      },
+      "Noite": {
+        "util": 746.4,
+        "fds": 12.0
+      },
+      "Madrugada": {
+        "util": 140.6,
+        "fds": 113.5
+      },
+      "pct_horas_fds": 0.4641,
+      "horas_util_noturno": 886.9,
+      "horas_fds_diurno": 695.0
+    },
+    "gas": [
+      {
+        "gestor": "MIGUEL BARROS DE CARVALHO JUNIOR",
+        "dias_escala": 25,
+        "dias_acionamento": 25,
+        "pct_dias": 1.0,
+        "classe": "estrutural",
+        "horas_acionamento": 834.8,
+        "horas_espera": 2892.4,
+        "custo_total": 30084.21,
+        "custo_acionamento": 20060.36,
+        "custo_espera": 10023.86,
+        "plantao_medio": 16.6,
+        "acionados_max": 14,
+        "acionados_p90": 13,
+        "acionados_mediana": 8
+      },
+      {
+        "gestor": "RAFAEL NUNES DO NASCIMENTO",
+        "dias_escala": 25,
+        "dias_acionamento": 25,
+        "pct_dias": 1.0,
+        "classe": "estrutural",
+        "horas_acionamento": 549.1,
+        "horas_espera": 1337.9,
+        "custo_total": 16270.1,
+        "custo_acionamento": 12151.87,
+        "custo_espera": 4118.23,
+        "plantao_medio": 8.3,
+        "acionados_max": 9,
+        "acionados_p90": 8,
+        "acionados_mediana": 4
+      },
+      {
+        "gestor": "CLAUDIO DE SOUSA VISGUEIRA",
+        "dias_escala": 25,
+        "dias_acionamento": 24,
+        "pct_dias": 0.96,
+        "classe": "estrutural",
+        "horas_acionamento": 267.5,
+        "horas_espera": 1702.3,
+        "custo_total": 12360.71,
+        "custo_acionamento": 6337.75,
+        "custo_espera": 6022.96,
+        "plantao_medio": 7.7,
+        "acionados_max": 5,
+        "acionados_p90": 4,
+        "acionados_mediana": 2
+      },
+      {
+        "gestor": "WAGNER DA LUZ FIGUEIREDO",
+        "dias_escala": 24,
+        "dias_acionamento": 8,
+        "pct_dias": 0.3333,
+        "classe": "eventual",
+        "horas_acionamento": 51.6,
+        "horas_espera": 277.0,
+        "custo_total": 2626.56,
+        "custo_acionamento": 1474.52,
+        "custo_espera": 1152.04,
+        "plantao_medio": 1.2,
+        "acionados_max": 1,
+        "acionados_p90": 1,
+        "acionados_mediana": 1
+      },
+      {
+        "gestor": "DEJAMIR SOUSA SILVA",
+        "dias_escala": 25,
+        "dias_acionamento": 7,
+        "pct_dias": 0.28,
+        "classe": "eventual",
+        "horas_acionamento": 30.2,
+        "horas_espera": 473.5,
+        "custo_total": 2467.66,
+        "custo_acionamento": 743.19,
+        "custo_espera": 1724.47,
+        "plantao_medio": 1.6,
+        "acionados_max": 1,
+        "acionados_p90": 1,
+        "acionados_mediana": 1
+      },
+      {
+        "gestor": "ANDERSON ADELINO NERES SILVA DE SOUZA",
+        "dias_escala": 21,
+        "dias_acionamento": 10,
+        "pct_dias": 0.4762,
+        "classe": "intermediario",
+        "horas_acionamento": 34.6,
+        "horas_espera": 93.9,
+        "custo_total": 1311.95,
+        "custo_acionamento": 957.82,
+        "custo_espera": 354.13,
+        "plantao_medio": 1.0,
+        "acionados_max": 1,
+        "acionados_p90": 1,
+        "acionados_mediana": 1
+      }
+    ],
+    "top_tecnicos": [
+      {
+        "nome": "RICARDO WILATO SILVA COSTA",
+        "gestor": "MIGUEL BARROS DE CARVALHO JUNIOR",
+        "dias_acionado": 14,
+        "horas": 65.3,
+        "vlr": 1296.59
+      },
+      {
+        "nome": "VITOR HUGO RODRIGUES DE SOUSA",
+        "gestor": "RAFAEL NUNES DO NASCIMENTO",
+        "dias_acionado": 10,
+        "horas": 63.0,
+        "vlr": 1516.78
+      },
+      {
+        "nome": "JOSE DA ROCHA DIAS RODRIGUES",
+        "gestor": "MIGUEL BARROS DE CARVALHO JUNIOR",
+        "dias_acionado": 12,
+        "horas": 61.5,
+        "vlr": 1454.61
+      },
+      {
+        "nome": "TIAGO ALVES BARBOSA",
+        "gestor": "RAFAEL NUNES DO NASCIMENTO",
+        "dias_acionado": 10,
+        "horas": 61.3,
+        "vlr": 1143.52
+      },
+      {
+        "nome": "TARCILIO MENDES LEMOS",
+        "gestor": "MIGUEL BARROS DE CARVALHO JUNIOR",
+        "dias_acionado": 15,
+        "horas": 61.2,
+        "vlr": 1428.99
+      },
+      {
+        "nome": "ANDERSON BARBOSA MARINHO",
+        "gestor": "RAFAEL NUNES DO NASCIMENTO",
+        "dias_acionado": 11,
+        "horas": 61.0,
+        "vlr": 1488.05
+      },
+      {
+        "nome": "VITOR KELVIN CASTRO DA ROCHA",
+        "gestor": "CLAUDIO DE SOUSA VISGUEIRA",
+        "dias_acionado": 5,
+        "horas": 56.4,
+        "vlr": 1594.42
+      },
+      {
+        "nome": "KLERISON LUCAS NASCIMENTO SAMPAIO",
+        "gestor": "MIGUEL BARROS DE CARVALHO JUNIOR",
+        "dias_acionado": 11,
+        "horas": 54.6,
+        "vlr": 1477.72
+      },
+      {
+        "nome": "DZAJIC BORGES DE SOUZA",
+        "gestor": "CLAUDIO DE SOUSA VISGUEIRA",
+        "dias_acionado": 11,
+        "horas": 52.5,
+        "vlr": 1030.25
+      },
+      {
+        "nome": "SALOMAO FREITAS SILVA",
+        "gestor": "MIGUEL BARROS DE CARVALHO JUNIOR",
+        "dias_acionado": 10,
+        "horas": 51.5,
+        "vlr": 1244.22
+      }
+    ],
+    "pct_horas_top10": 0.3328,
+    "ofensores_raros": {
+      "qtd": 3,
+      "custo_espera": 2786.36
+    }
+  },
   "meta": {
     "base": "orcado",
     "fator": 0.5,
@@ -287,6 +491,6 @@
   "_fonte": {
     "pasta": "C:\\Users\\rogerio.fonseca\\Downloads\\hubhoras\\no",
     "arquivos": 40,
-    "gerado_em": "2026-07-10T15:56:34"
+    "gerado_em": "2026-07-10T16:17:36"
   }
 }
