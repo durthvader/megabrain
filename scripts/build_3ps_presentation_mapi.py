@@ -403,10 +403,10 @@ for row in table.rows:
 
 tiers = [
     ("1", "sem baixa no período — resolver em 24h", RED),
-    ("8", "maior desvio individual — plano já", RED),
-    ("38", "Q1 — abaixo da mediana", ORANGE),
-    ("41", "Q2 — na mediana", AMBER),
-    ("47", "Q3 — acima da mediana, usar de referência", GREEN_DARK),
+    ("8", "desvio crítico, 29% da perda — plano individual já", RED),
+    ("30", "desvio médio (5 a 13 OS) — conversa até 12/07", ORANGE),
+    ("15", "quase na meta (1 a 4 OS) — ajuste de carga e rota", AMBER),
+    ("14", "na meta — reconhecer e usar de referência", GREEN_DARK),
 ]
 for index, (count, label, color) in enumerate(tiers):
     left = 56 + index * 238
