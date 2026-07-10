@@ -319,17 +319,18 @@ def slide1(prs, dados, nar, ctx, blank):
              ("Feriados", cesta_get(dados["cesta"], "FERIADOS"), "C9D6E6")]
     ordem = [(n, v or 0, c) for n, v, c in ordem]
     total = sum(v for _, v, _ in ordem) or 1
-    limites = stacked_horizontal(slide, [(v, c) for _, v, c in ordem], 660, 326, 562, 40)
+    limites = stacked_horizontal(slide, [(v, c) for _, v, c in ordem], 660, 320, 562, 34)
 
-    # colchete "Sobreaviso" sobre Acionamento + Espera
+    # colchete "Sobreaviso" SOB Acionamento + Espera — abaixo da barra p/ nunca
+    # colidir com o título, independente do tamanho do DSR
     x_ac = limites[1][0]
     w_se = limites[1][1] + limites[2][1]
-    add_rect(slide, x_ac, 320, w_se, 3, GREEN_DARK)
+    add_rect(slide, x_ac, 358, w_se, 3, GREEN_DARK)
     add_text(slide, f"Sobreaviso = {ctx['sobreaviso_pct']}",
-             x_ac, 300, max(w_se, 160), 16, size=10.5, color=GREEN_DARK, bold=True)
+             x_ac, 362, w_se, 16, size=10.5, color=GREEN_DARK, bold=True, align=PP_ALIGN.CENTER)
 
     # legenda
-    ly = 384
+    ly = 388
     for nome, valor, cor in ordem:
         add_rect(slide, 660, ly + 2, 12, 12, cor)
         add_text(slide, nome, 680, ly, 300, 16, size=10.5, color=INK)
@@ -571,6 +572,16 @@ def montar_contexto(dados, nar):
         "ocio_pct_horas": pct(o.get("pct_horas_acionamento")),
         "top3_ga_pct": pct(top3),
     }
+
+    # faixa horária de maior/menor acionamento (data-driven, já ordenada desc)
+    faixas = dados.get("faixa_horaria") or []
+    if faixas:
+        tot_f = sum(f["horas"] for f in faixas) or 1
+        ctx["faixa_top"] = faixas[0]["faixa"]
+        ctx["faixa_top_pct"] = pct(faixas[0]["horas"] / tot_f)
+        ctx["faixa_baixas"] = " e ".join(f["faixa"].lower() for f in faixas[-2:])
+    else:
+        ctx["faixa_top"] = ctx["faixa_top_pct"] = ctx["faixa_baixas"] = "—"
     return ctx
 
 

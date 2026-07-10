@@ -1,14 +1,14 @@
 {
-  "regiao": "Ceará",
-  "codigo": "R6 - CEARA",
+  "regiao": "Norte",
+  "codigo": "R7.2 - NORTE: AP / MA / PA E PI",
   "mes_foto": "julho/2026",
   "data_foto": "10/07/2026",
-  "fonte": "HUB de Horas Extras · Power BI · SUB BU R6 - CEARA · foto de {data_foto}",
+  "fonte": "HUB de Horas Extras · Power BI · {codigo} · foto de {data_foto}",
   "s1": {
     "eyebrow": "CUSTO DE HORAS · {regiao} · {data_foto}",
-    "titulo": "A meta é cortar o custo de horas pela metade — e o dinheiro está no sobreaviso",
-    "lead": "O orçado do ciclo é {orcado}/mês e o realizado já está em {real} — {var_orcado} abaixo do orçado. Mas a meta é dobrar essa economia: {meta}/mês, {gap_pct} menos que o realizado de hoje.",
-    "decisao": "Atacar o sobreaviso, que responde por {sobreaviso_pct} da cesta e é a parte mais controlável do custo. É onde o realizado historicamente estoura o orçado e onde há mais gordura de plantão ocioso para cortar sem afetar a operação."
+    "titulo": "A meta é cortar o custo de horas pela metade — e quase tudo é sobreaviso",
+    "lead": "O orçado do ciclo é {orcado}/mês e o realizado já está em {real} — {var_orcado} do orçado. A meta é reduzir para {meta}/mês, {gap_pct} menos que o realizado de hoje.",
+    "decisao": "Atacar o sobreaviso, que sozinho responde por {sobreaviso_pct} da cesta e é a parte controlável do custo. Aqui o realizado já supera o orçado, e é onde há mais plantão ocioso para cortar sem afetar a operação."
   },
   "s2": {
     "eyebrow": "DIAGNÓSTICO DO CUSTO · ONDE ESTÁ",
@@ -43,7 +43,7 @@
     "fca": [
       {
         "fato": "Custo de horas em {real}/mês, ante meta de {meta}",
-        "causa": "Cesta puxada por DSR ({dsr_pct}) e sobreaviso ({sobreaviso_pct}); o sobreaviso é a parte controlável e onde o realizado supera o orçado.",
+        "causa": "Sobreaviso responde por {sobreaviso_pct} da cesta e o realizado já supera o orçado ({var_orcado}). É a parte controlável do custo.",
         "acao": "Definir a meta de {meta}/mês por regional e abrir o gap de {gap} em plano de escala por GA.",
         "prazo": "Início imediato",
         "resp": "Gerência da regional + Planejamento",

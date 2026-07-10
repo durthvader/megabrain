@@ -1,0 +1,292 @@
+{
+  "regiao": "norte",
+  "cesta": {
+    "ACIONAMENTO SOBRE AVISO": 41725.510376673046,
+    "BH": 1883.0164950141605,
+    "DSR": 6452.339486700872,
+    "ESPERA SOBRE AVISO": 23395.681616213315,
+    "FERIADOS": 2704.7885979512007,
+    "Total": 76161.3365725525
+  },
+  "real_orcado_mes": {
+    "real": 76161.3365725525,
+    "orcado": 67466.89480295284,
+    "var": -8694.441769599667
+  },
+  "serie_total": [
+    {
+      "mes": "janeiro",
+      "real": 85980.53,
+      "orcado": 64090.1527386933,
+      "real_2025": 66317.11
+    },
+    {
+      "mes": "fevereiro",
+      "real": 107597.19,
+      "orcado": 62506.3956223769,
+      "real_2025": 54217.6
+    },
+    {
+      "mes": "março",
+      "real": 93244.38,
+      "orcado": 61619.2251292429,
+      "real_2025": 56679.94
+    },
+    {
+      "mes": "abril",
+      "real": 102451.08,
+      "orcado": 75638.4301235865,
+      "real_2025": 54329.5
+    },
+    {
+      "mes": "maio",
+      "real": 116954.33,
+      "orcado": 77236.6165312815,
+      "real_2025": 52601.38
+    },
+    {
+      "mes": "junho",
+      "real": 115090.08,
+      "orcado": 70024.1330610201,
+      "real_2025": 44152.79
+    },
+    {
+      "mes": "julho",
+      "real": 76363.6820270981,
+      "orcado": 67466.8948029528,
+      "real_2025": 50763.37
+    },
+    {
+      "mes": "agosto",
+      "real": null,
+      "orcado": 65933.819355838,
+      "real_2025": 48467.1
+    },
+    {
+      "mes": "setembro",
+      "real": null,
+      "orcado": 71615.4807260522,
+      "real_2025": 50770.51
+    },
+    {
+      "mes": "outubro",
+      "real": null,
+      "orcado": 75303.5657663945,
+      "real_2025": 52576.79
+    },
+    {
+      "mes": "novembro",
+      "real": null,
+      "orcado": 75034.4979009219,
+      "real_2025": 42597.09
+    },
+    {
+      "mes": "dezembro",
+      "real": null,
+      "orcado": 84963.9111050292,
+      "real_2025": 57058.02
+    }
+  ],
+  "serie_sobreaviso": [
+    {
+      "mes": "janeiro",
+      "real": 72216.46,
+      "orcado": 42503.4884689088
+    },
+    {
+      "mes": "fevereiro",
+      "real": 83652.25,
+      "orcado": 42503.4892923511
+    },
+    {
+      "mes": "março",
+      "real": 73241.44,
+      "orcado": 42503.4884992189
+    },
+    {
+      "mes": "abril",
+      "real": 75983.32,
+      "orcado": 42503.4879607994
+    },
+    {
+      "mes": "maio",
+      "real": 83910.69,
+      "orcado": 42503.4879917344
+    },
+    {
+      "mes": "junho",
+      "real": 89581.89,
+      "orcado": 42503.4885491295
+    },
+    {
+      "mes": "julho",
+      "real": 65121.1919928864,
+      "orcado": 42503.4874594333
+    },
+    {
+      "mes": "agosto",
+      "real": null,
+      "orcado": 42503.4883374702
+    },
+    {
+      "mes": "setembro",
+      "real": null,
+      "orcado": 42503.4881332936
+    },
+    {
+      "mes": "outubro",
+      "real": null,
+      "orcado": 42503.4880633269
+    },
+    {
+      "mes": "novembro",
+      "real": null,
+      "orcado": 42503.4880175847
+    },
+    {
+      "mes": "dezembro",
+      "real": null,
+      "orcado": 42503.4875945553
+    }
+  ],
+  "faixa_horaria": [
+    {
+      "faixa": "Noite",
+      "horas": 782.316574
+    },
+    {
+      "faixa": "Tarde",
+      "horas": 504.616643
+    },
+    {
+      "faixa": "Dia",
+      "horas": 250.866627
+    },
+    {
+      "faixa": "Madrugada",
+      "horas": 230.04998
+    }
+  ],
+  "sobreaviso_por_ga": [
+    {
+      "gestor": "MIGUEL BARROS DE CARVALHO JUNIOR",
+      "horas_espera": 2892.4,
+      "horas_acionamento": 834.8,
+      "horas_total": 3727.2,
+      "ocorrencias": 972,
+      "tecnicos": 32
+    },
+    {
+      "gestor": "CLAUDIO DE SOUSA VISGUEIRA",
+      "horas_espera": 1702.3,
+      "horas_acionamento": 267.5,
+      "horas_total": 1969.8,
+      "ocorrencias": 438,
+      "tecnicos": 11
+    },
+    {
+      "gestor": "RAFAEL NUNES DO NASCIMENTO",
+      "horas_espera": 1337.9,
+      "horas_acionamento": 546.1,
+      "horas_total": 1884.0,
+      "ocorrencias": 513,
+      "tecnicos": 16
+    },
+    {
+      "gestor": "DEJAMIR SOUSA SILVA",
+      "horas_espera": 473.5,
+      "horas_acionamento": 30.2,
+      "horas_total": 503.7,
+      "ocorrencias": 82,
+      "tecnicos": 2
+    },
+    {
+      "gestor": "WAGNER DA LUZ FIGUEIREDO",
+      "horas_espera": 277.0,
+      "horas_acionamento": 51.6,
+      "horas_total": 328.6,
+      "ocorrencias": 56,
+      "tecnicos": 2
+    },
+    {
+      "gestor": "ANDERSON ADELINO NERES SILVA DE SOUZA",
+      "horas_espera": 93.9,
+      "horas_acionamento": 34.6,
+      "horas_total": 128.5,
+      "ocorrencias": 37,
+      "tecnicos": 2
+    }
+  ],
+  "ocorrencias_por_gestor": [
+    {
+      "gerente": "WELLINGTON MARCIO FIGUEIRA",
+      "pct": 0.8071
+    },
+    {
+      "gerente": "WELLINGTON MARCIO FIGUEIRA",
+      "pct": 0.1435
+    },
+    {
+      "gerente": "WELLINGTON MARCIO FIGUEIRA",
+      "pct": 0.0276
+    },
+    {
+      "gerente": "WELLINGTON MARCIO FIGUEIRA",
+      "pct": 0.0184
+    },
+    {
+      "gerente": "EDUARDO CARLOS",
+      "pct": 0.0034
+    }
+  ],
+  "regional_cluster": [
+    {
+      "regional": "MA, PA, PI E AP",
+      "cluster": "Maranhão",
+      "pct": 0.7348
+    },
+    {
+      "regional": "MA, PA, PI E AP",
+      "cluster": "Piaui",
+      "pct": 0.2228
+    },
+    {
+      "regional": "MA, PA, PI E AP",
+      "cluster": "Norte",
+      "pct": 0.023
+    },
+    {
+      "regional": "DF, MG, SP INT, GO E TO",
+      "cluster": "Centro Oeste",
+      "pct": 0.0196
+    }
+  ],
+  "sintetico_regiao": {
+    "sub_bu": "R7.2- NORTE: AP / MA / PA E PI",
+    "gerente": "WELLINGTON MARCIO FIGUEIRA",
+    "orcado_total": 67466.89480295284,
+    "he_real_total": 76363.68202709805,
+    "hc_c_he": 85.0,
+    "rs_medio_hc": 898.39625914233
+  },
+  "ociosidade": {
+    "horas_espera_total": 6777.0,
+    "horas_acionamento_total": 1764.8,
+    "pct_horas_acionamento": 0.2066,
+    "hc_espera_medio": 36.2,
+    "hc_acionado_medio": 16.6,
+    "dias": 25,
+    "pct_acionamento_hc": 0.4586
+  },
+  "meta": {
+    "base": "orcado",
+    "fator": 0.5,
+    "orcado_mes": 67466.89,
+    "meta_mes": 33733.45
+  },
+  "_fonte": {
+    "pasta": "C:\\Users\\rogerio.fonseca\\Downloads\\hubhoras\\no",
+    "arquivos": 40,
+    "gerado_em": "2026-07-10T15:56:34"
+  }
+}
