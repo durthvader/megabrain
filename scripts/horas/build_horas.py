@@ -480,12 +480,12 @@ def slide3(prs, dados, nar, ctx, blank):
     add_text(slide, "acionamento", 328, y + 2, 100, 14, size=9.5, color=MUTED)
 
     # painel direito — Pareto + tabela
-    add_rect(slide, 700, 150, 522, 150, NAVY, round_corners=True)
-    add_text(slide, "CONCENTRAÇÃO", 722, 166, 300, 14, size=10.5, color="9FC9EE", bold=True)
-    add_text(slide, ctx["top3_ga_pct"], 722, 186, 160, 48, size=38, color=GREEN,
+    add_rect(slide, 700, 150, 522, 172, NAVY, round_corners=True)
+    add_text(slide, "CONCENTRAÇÃO", 722, 164, 300, 14, size=10.5, color="9FC9EE", bold=True)
+    add_text(slide, ctx["top3_ga_pct"], 722, 182, 160, 48, size=36, color=GREEN,
              bold=True, font="Aptos Display")
-    add_text(slide, fmt(s["callout"], ctx), 722, 238, 480, 56, size=11, color=WHITE,
-             line_spacing=1.06)
+    add_text(slide, fmt(s["callout"], ctx), 722, 232, 480, 82, size=10.5, color=WHITE,
+             line_spacing=1.08)
 
     # tabela por GA: frequência de acionamento define o instrumento certo
     intel = dados.get("inteligencia") or {}
@@ -493,7 +493,7 @@ def slide3(prs, dados, nar, ctx, blank):
     classes = {"estrutural": ("TODO DIA", RED),
                "intermediario": ("FREQUENTE", WARN),
                "eventual": ("EVENTUAL", GREEN_DARK)}
-    table = add_table(slide, len(gas_i) + 1, 4, 700, 320, 522, 300, [204, 112, 96, 110])
+    table = add_table(slide, len(gas_i) + 1, 4, 700, 340, 522, 300, [204, 112, 96, 110])
     cabec = ["Área de gestão (GA)", "Aciona em", "Custo", "Padrão"]
     for c, h in enumerate(cabec):
         set_cell(table.cell(0, c), [(h, {"size": 10.5, "bold": True, "color": WHITE})],

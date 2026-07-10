@@ -1,0 +1,82 @@
+{
+  "regiao": "Nordeste",
+  "codigo": "R7.1 NORDESTE: AL / BA / PB / PE / SE / RN",
+  "mes_foto": "julho/2026",
+  "data_foto": "10/07/2026",
+  "fonte": "HUB de Horas Extras · Power BI · {codigo} · foto de {data_foto}",
+  "s1": {
+    "eyebrow": "CUSTO DE HORAS · {regiao} · {data_foto}",
+    "titulo": "A meta é cortar o custo de horas pela metade — e o sobreaviso já estoura o orçado",
+    "lead": "O orçado do ciclo é {orcado}/mês e o realizado já está em {real} — {var_orcado} do orçado. A meta é reduzir para {meta}/mês, {gap_pct} menos que o realizado de hoje.",
+    "decisao": "Atacar o sobreaviso, que responde por {sobreaviso_pct} da cesta. Diferente de outras regionais, o custo aqui está pulverizado: nenhuma GA isolada domina, {n_estruturais} áreas já acionam quase todo dia e as demais têm demanda frequente — o corte tem que ser distribuído, não concentrado em uma área só."
+  },
+  "s2": {
+    "eyebrow": "DIAGNÓSTICO DO CUSTO · ONDE ESTÁ",
+    "titulo": "Paga-se muito plantão em espera — e o acionamento tem dois padrões distintos",
+    "insight": "No dia útil o acionamento é noturno ({h_util_noturno} pós-jornada). No fim de semana é diurno ({h_fds_diurno}), porque não há escala regular de sáb/dom — {pct_fds} das horas acionadas caem no FDS, pagas com adicional maior. Plantão noturno e cobertura de FDS são problemas diferentes, com soluções diferentes."
+  },
+  "s3": {
+    "eyebrow": "ONDE DÓI · POR ÁREA DE GESTÃO (GA)",
+    "titulo": "O custo está pulverizado entre várias áreas com demanda frequente, não concentrado numa só",
+    "callout": "As 3 primeiras GAs concentram {top3_ga_pct} das horas — bem menos concentrado que em outras regionais. {n_estruturais} GAs já acionam quase todo dia: o remédio é redimensionar caso a caso, não mirar uma única área."
+  },
+  "s4": {
+    "eyebrow": "RISCO × CUSTO-BENEFÍCIO",
+    "titulo": "Trocar o instrumento sem perder cobertura: turno fixo onde a demanda é diária"
+  },
+  "s5": {
+    "eyebrow": "PROPOSTA DO PRÓXIMO CICLO · FCA",
+    "titulo": "Fechar o gap de {gap}/mês com ações distribuídas por área — não com corte cego",
+    "alavancas": [
+      {
+        "n": "01",
+        "t": "Converter demanda quase diária em turno fixo",
+        "d": "Nas {n_estruturais} GAs estruturais: turno noturno fixo cobre a mediana de acionados; sobreaviso residual cobre o p90. Hora acionada: {rs_acion_h} → turno: {rs_turno_h}. Economia: {economia_mes}/mês."
+      },
+      {
+        "n": "02",
+        "t": "Escala regular de fim de semana",
+        "d": "{pct_fds} das horas acionadas caem no sáb/dom, de dia ({h_fds_diurno}) — hoje cobertas por sobreaviso, a forma mais cara. Revezamento de FDS (folguista/12x36) nas GAs de maior custo elimina esse gasto recorrente."
+      },
+      {
+        "n": "03",
+        "t": "Redimensionar as demais GAs pelo p90",
+        "d": "Nenhuma área tem pico acima de {pico_max} acionados simultâneos. Ajustar plantão de cada GA intermediária ao seu próprio p90 — sem depender de um único corte central."
+      }
+    ],
+    "fca": [
+      {
+        "fato": "{pct_fds} das horas acionadas caem no fim de semana",
+        "causa": "Sem escala regular de sáb/dom, a cobertura diurna do FDS ({h_fds_diurno}) é feita via acionamento com adicional maior.",
+        "acao": "Implantar revezamento de fim de semana nas GAs de maior custo (folguista/12x36) e retirar o FDS diurno do sobreaviso.",
+        "prazo": "Próximo ciclo",
+        "resp": "Planejamento de escala + Coordenação de campo",
+        "status": "urgent"
+      },
+      {
+        "fato": "{n_estruturais} GAs acionam quase todo dia, sem uma única concentradora",
+        "causa": "Demanda diária pulverizada entre várias áreas — paga como sobreaviso + HE de acionamento em vez de turno fixo.",
+        "acao": "Dimensionar turno noturno fixo pela mediana de acionados em cada GA estrutural; sobreaviso residual para o excedente (p90).",
+        "prazo": "Próximo ciclo",
+        "resp": "Gerência regional + RH + Planejamento",
+        "status": "start"
+      },
+      {
+        "fato": "Custo de horas em {real}/mês, ante meta de {meta}",
+        "causa": "Sobreaviso responde por {sobreaviso_pct} da cesta e o realizado já supera o orçado ({var_orcado}).",
+        "acao": "Definir a meta de {meta}/mês por regional e ratear o gap de {gap} por GA, proporcional ao custo de cada área.",
+        "prazo": "Início imediato",
+        "resp": "Gerência da regional + Planejamento",
+        "status": "start"
+      },
+      {
+        "fato": "Risco de descobertura se houver corte cego",
+        "causa": "O pico de acionados simultâneos chega a {pico_max} técnicos — sem folga se o plantão for cortado sem critério.",
+        "acao": "Regra de piso: nenhuma GA reduz plantão abaixo do p90 de acionados simultâneos sem turno fixo no lugar; pico raro coberto por backup entre GAs vizinhas.",
+        "prazo": "Regra permanente",
+        "resp": "Gerência regional",
+        "status": "validate"
+      }
+    ]
+  }
+}

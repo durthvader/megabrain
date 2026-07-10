@@ -1,0 +1,561 @@
+{
+  "regiao": "mgcosp",
+  "cesta": {
+    "ACIONAMENTO SOBRE AVISO": 33308.89972528233,
+    "BH": 3497.0908034895115,
+    "DSR": 16661.43773311727,
+    "ESPERA SOBRE AVISO": 27448.62267073709,
+    "FERIADOS": 2882.1469952213633,
+    "Total": 83798.1979278477
+  },
+  "real_orcado_mes": {
+    "real": 83798.1979278477,
+    "orcado": 79015.57197318987,
+    "var": -4782.625954657822
+  },
+  "serie_total": [
+    {
+      "mes": "janeiro",
+      "real": 119821.1,
+      "orcado": 74741.8431245893,
+      "real_2025": 170365.11
+    },
+    {
+      "mes": "fevereiro",
+      "real": 101502.44,
+      "orcado": 72737.3824600051,
+      "real_2025": 117453.49
+    },
+    {
+      "mes": "março",
+      "real": 107588.57,
+      "orcado": 71614.5502597741,
+      "real_2025": 94603.35
+    },
+    {
+      "mes": "abril",
+      "real": 145885.14,
+      "orcado": 89357.7539692669,
+      "real_2025": 120443.8
+    },
+    {
+      "mes": "maio",
+      "real": 138809.77,
+      "orcado": 91380.4746881511,
+      "real_2025": 154699.39
+    },
+    {
+      "mes": "junho",
+      "real": 124205.15,
+      "orcado": 82252.0989198895,
+      "real_2025": 122551.27
+    },
+    {
+      "mes": "julho",
+      "real": 83798.1979278476,
+      "orcado": 79015.5719731899,
+      "real_2025": 133771.82
+    },
+    {
+      "mes": "agosto",
+      "real": null,
+      "orcado": 77075.2533130008,
+      "real_2025": 110907.13
+    },
+    {
+      "mes": "setembro",
+      "real": null,
+      "orcado": 84266.166950532,
+      "real_2025": 126278.83
+    },
+    {
+      "mes": "outubro",
+      "real": null,
+      "orcado": 88933.9384912274,
+      "real_2025": 117849.45
+    },
+    {
+      "mes": "novembro",
+      "real": null,
+      "orcado": 88593.3942355334,
+      "real_2025": 137682.72
+    },
+    {
+      "mes": "dezembro",
+      "real": null,
+      "orcado": 101160.413463391,
+      "real_2025": 158228.78
+    }
+  ],
+  "serie_sobreaviso": [
+    {
+      "mes": "janeiro",
+      "real": 64453.57,
+      "orcado": 47420.997763476
+    },
+    {
+      "mes": "fevereiro",
+      "real": 68681.23,
+      "orcado": 47420.998186361
+    },
+    {
+      "mes": "março",
+      "real": 66977.64,
+      "orcado": 47420.9979775799
+    },
+    {
+      "mes": "abril",
+      "real": 85017.57,
+      "orcado": 47420.9978449518
+    },
+    {
+      "mes": "maio",
+      "real": 81549.98,
+      "orcado": 47420.9977347487
+    },
+    {
+      "mes": "junho",
+      "real": 72534.08,
+      "orcado": 47420.9980266902
+    },
+    {
+      "mes": "julho",
+      "real": 60757.5223960194,
+      "orcado": 47420.9979984095
+    },
+    {
+      "mes": "agosto",
+      "real": null,
+      "orcado": 47420.9977795478
+    },
+    {
+      "mes": "setembro",
+      "real": null,
+      "orcado": 47420.9981187971
+    },
+    {
+      "mes": "outubro",
+      "real": null,
+      "orcado": 47420.9981619019
+    },
+    {
+      "mes": "novembro",
+      "real": null,
+      "orcado": 47420.9974587586
+    },
+    {
+      "mes": "dezembro",
+      "real": null,
+      "orcado": 47420.9974993838
+    }
+  ],
+  "faixa_horaria": [
+    {
+      "faixa": "Noite",
+      "horas": 623.366589
+    },
+    {
+      "faixa": "Madrugada",
+      "horas": 288.699971
+    },
+    {
+      "faixa": "Tarde",
+      "horas": 150.266653
+    },
+    {
+      "faixa": "Dia",
+      "horas": 144.016657
+    }
+  ],
+  "sobreaviso_por_ga": [
+    {
+      "gestor": "LUIS CARLOS DE LIMA JUNIOR",
+      "horas_espera": 2827.6,
+      "horas_acionamento": 529.2,
+      "horas_total": 3356.8,
+      "ocorrencias": 755,
+      "tecnicos": 26
+    },
+    {
+      "gestor": "GEAN CARLOS OLIVEIRA VILELA",
+      "horas_espera": 1037.2,
+      "horas_acionamento": 136.1,
+      "horas_total": 1173.3,
+      "ocorrencias": 250,
+      "tecnicos": 9
+    },
+    {
+      "gestor": "LEANDRO SOARES NUNES",
+      "horas_espera": 921.5,
+      "horas_acionamento": 67.3,
+      "horas_total": 988.8,
+      "ocorrencias": 198,
+      "tecnicos": 8
+    },
+    {
+      "gestor": "JOSE FERREIRA DOS SANTOS",
+      "horas_espera": 671.2,
+      "horas_acionamento": 216.9,
+      "horas_total": 888.1,
+      "ocorrencias": 194,
+      "tecnicos": 9
+    },
+    {
+      "gestor": "DIEGO DONIZETTI REIS",
+      "horas_espera": 758.6,
+      "horas_acionamento": 102.2,
+      "horas_total": 860.9,
+      "ocorrencias": 174,
+      "tecnicos": 6
+    },
+    {
+      "gestor": "DENIS PEREIRA DOS SANTOS",
+      "horas_espera": 465.9,
+      "horas_acionamento": 121.8,
+      "horas_total": 587.6,
+      "ocorrencias": 112,
+      "tecnicos": 5
+    },
+    {
+      "gestor": "NATAN VINICIUS DA SILVA REIS",
+      "horas_espera": 96.8,
+      "horas_acionamento": 7.9,
+      "horas_total": 104.7,
+      "ocorrencias": 20,
+      "tecnicos": 1
+    },
+    {
+      "gestor": "ISRAEL KEVIN MARTINS VARGAS",
+      "horas_espera": 53.4,
+      "horas_acionamento": 24.8,
+      "horas_total": 78.2,
+      "ocorrencias": 20,
+      "tecnicos": 1
+    }
+  ],
+  "ocorrencias_por_gestor": [
+    {
+      "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+      "pct": 0.5538
+    },
+    {
+      "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+      "pct": 0.2366
+    },
+    {
+      "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+      "pct": 0.1261
+    },
+    {
+      "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+      "pct": 0.0637
+    },
+    {
+      "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+      "pct": 0.0127
+    },
+    {
+      "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+      "pct": 0.0028
+    },
+    {
+      "gerente": "JOSE NILTON MENDES LIMA",
+      "pct": 0.0028
+    },
+    {
+      "gerente": "WELLINGTON MARCIO FIGUEIRA",
+      "pct": 0.0014
+    }
+  ],
+  "regional_cluster": [
+    {
+      "regional": "DF, MG, SP INT, GO E TO",
+      "cluster": "T.Mineiro",
+      "pct": 0.4434
+    },
+    {
+      "regional": "DF, MG, SP INT, GO E TO",
+      "cluster": "Minas Gerais",
+      "pct": 0.2437
+    },
+    {
+      "regional": "DF, MG, SP INT, GO E TO",
+      "cluster": "SP/Interior",
+      "pct": 0.1728
+    },
+    {
+      "regional": "DF, MG, SP INT, GO E TO",
+      "cluster": "DF",
+      "pct": 0.1261
+    },
+    {
+      "regional": "DF, MG, SP INT, GO E TO",
+      "cluster": "Ribeirao Preto",
+      "pct": 0.0142
+    }
+  ],
+  "sintetico_regiao": {
+    "sub_bu": "R5 - MG / SP INT / DF / GO / TO",
+    "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+    "orcado_total": 79015.57197318986,
+    "he_real_total": 83798.19792784758,
+    "hc_c_he": 108.0,
+    "rs_medio_hc": 775.9092400726628
+  },
+  "ociosidade": {
+    "horas_espera_total": 6832.2,
+    "horas_acionamento_total": 1206.2,
+    "pct_horas_acionamento": 0.1501,
+    "hc_espera_medio": 28.8,
+    "hc_acionado_medio": 11.6,
+    "dias": 25,
+    "pct_acionamento_hc": 0.4028
+  },
+  "inteligencia": {
+    "dias_periodo": 25,
+    "custo_hora": {
+      "espera_rs_h": 4.02,
+      "acionamento_rs_h": 27.61,
+      "turno_noturno_rs_h_estimado": 14.46
+    },
+    "regimes": {
+      "Dia": {
+        "util": 0,
+        "fds": 87.2
+      },
+      "Tarde": {
+        "util": 12.7,
+        "fds": 194.4
+      },
+      "Noite": {
+        "util": 536.6,
+        "fds": 86.8
+      },
+      "Madrugada": {
+        "util": 208.4,
+        "fds": 80.3
+      },
+      "pct_horas_fds": 0.3719,
+      "horas_util_noturno": 745.0,
+      "horas_fds_diurno": 281.6
+    },
+    "gas": [
+      {
+        "gestor": "LUIS CARLOS DE LIMA JUNIOR",
+        "dias_escala": 25,
+        "dias_acionamento": 25,
+        "pct_dias": 1.0,
+        "classe": "estrutural",
+        "horas_acionamento": 529.2,
+        "horas_espera": 2827.6,
+        "custo_total": 26857.4,
+        "custo_acionamento": 15002.56,
+        "custo_espera": 11854.84,
+        "plantao_medio": 12.7,
+        "acionados_max": 10,
+        "acionados_p90": 9,
+        "acionados_mediana": 5
+      },
+      {
+        "gestor": "JOSE FERREIRA DOS SANTOS",
+        "dias_escala": 25,
+        "dias_acionamento": 18,
+        "pct_dias": 0.72,
+        "classe": "intermediario",
+        "horas_acionamento": 216.9,
+        "horas_espera": 671.2,
+        "custo_total": 8981.04,
+        "custo_acionamento": 6326.25,
+        "custo_espera": 2654.79,
+        "plantao_medio": 3.2,
+        "acionados_max": 4,
+        "acionados_p90": 4,
+        "acionados_mediana": 2
+      },
+      {
+        "gestor": "GEAN CARLOS OLIVEIRA VILELA",
+        "dias_escala": 25,
+        "dias_acionamento": 21,
+        "pct_dias": 0.84,
+        "classe": "estrutural",
+        "horas_acionamento": 136.1,
+        "horas_espera": 1037.2,
+        "custo_total": 8335.47,
+        "custo_acionamento": 4189.74,
+        "custo_espera": 4145.74,
+        "plantao_medio": 4.0,
+        "acionados_max": 4,
+        "acionados_p90": 4,
+        "acionados_mediana": 1
+      },
+      {
+        "gestor": "LEANDRO SOARES NUNES",
+        "dias_escala": 25,
+        "dias_acionamento": 13,
+        "pct_dias": 0.52,
+        "classe": "intermediario",
+        "horas_acionamento": 67.3,
+        "horas_espera": 921.5,
+        "custo_total": 5676.63,
+        "custo_acionamento": 1857.93,
+        "custo_espera": 3818.71,
+        "plantao_medio": 3.4,
+        "acionados_max": 3,
+        "acionados_p90": 3,
+        "acionados_mediana": 2
+      },
+      {
+        "gestor": "DIEGO DONIZETTI REIS",
+        "dias_escala": 25,
+        "dias_acionamento": 11,
+        "pct_dias": 0.44,
+        "classe": "intermediario",
+        "horas_acionamento": 102.2,
+        "horas_espera": 758.6,
+        "custo_total": 5241.33,
+        "custo_acionamento": 2468.83,
+        "custo_espera": 2772.5,
+        "plantao_medio": 3.0,
+        "acionados_max": 3,
+        "acionados_p90": 3,
+        "acionados_mediana": 2
+      },
+      {
+        "gestor": "DENIS PEREIRA DOS SANTOS",
+        "dias_escala": 25,
+        "dias_acionamento": 14,
+        "pct_dias": 0.56,
+        "classe": "intermediario",
+        "horas_acionamento": 121.8,
+        "horas_espera": 465.9,
+        "custo_total": 4352.48,
+        "custo_acionamento": 2710.92,
+        "custo_espera": 1641.55,
+        "plantao_medio": 1.8,
+        "acionados_max": 3,
+        "acionados_p90": 2,
+        "acionados_mediana": 1
+      },
+      {
+        "gestor": "ISRAEL KEVIN MARTINS VARGAS",
+        "dias_escala": 9,
+        "dias_acionamento": 4,
+        "pct_dias": 0.4444,
+        "classe": "intermediario",
+        "horas_acionamento": 24.8,
+        "horas_espera": 53.4,
+        "custo_total": 733.4,
+        "custo_acionamento": 551.13,
+        "custo_espera": 182.27,
+        "plantao_medio": 1.0,
+        "acionados_max": 1,
+        "acionados_p90": 1,
+        "acionados_mediana": 1
+      },
+      {
+        "gestor": "NATAN VINICIUS DA SILVA REIS",
+        "dias_escala": 9,
+        "dias_acionamento": 3,
+        "pct_dias": 0.3333,
+        "classe": "eventual",
+        "horas_acionamento": 7.9,
+        "horas_espera": 96.8,
+        "custo_total": 579.78,
+        "custo_acionamento": 201.55,
+        "custo_espera": 378.22,
+        "plantao_medio": 1.0,
+        "acionados_max": 1,
+        "acionados_p90": 1,
+        "acionados_mediana": 1
+      }
+    ],
+    "top_tecnicos": [
+      {
+        "nome": "DIEGO HENRIQUE DA SILVA",
+        "gestor": "DENIS PEREIRA DOS SANTOS",
+        "dias_acionado": 10,
+        "horas": 98.2,
+        "vlr": 2178.26
+      },
+      {
+        "nome": "WASHINGTON GASPAR RODRIGUES DOS SANTOS",
+        "gestor": "LUIS CARLOS DE LIMA JUNIOR",
+        "dias_acionado": 8,
+        "horas": 47.3,
+        "vlr": 1181.12
+      },
+      {
+        "nome": "WELINGTON OLIVEIRA DA CRUZ",
+        "gestor": "LUIS CARLOS DE LIMA JUNIOR",
+        "dias_acionado": 9,
+        "horas": 43.3,
+        "vlr": 1680.12
+      },
+      {
+        "nome": "ALISSON DE SOUSA SILVA JUNIOR",
+        "gestor": "LUIS CARLOS DE LIMA JUNIOR",
+        "dias_acionado": 5,
+        "horas": 43.1,
+        "vlr": 1155.55
+      },
+      {
+        "nome": "GUSTAVO HENRIQUE DE OLIVEIRA",
+        "gestor": "GEAN CARLOS OLIVEIRA VILELA",
+        "dias_acionado": 9,
+        "horas": 39.3,
+        "vlr": 1297.76
+      },
+      {
+        "nome": "THIAGO OLIVEIRA DE SOUSA",
+        "gestor": "LUIS CARLOS DE LIMA JUNIOR",
+        "dias_acionado": 8,
+        "horas": 37.9,
+        "vlr": 894.01
+      },
+      {
+        "nome": "IGOR SATIRO DE ALCANTARA",
+        "gestor": "JOSE FERREIRA DOS SANTOS",
+        "dias_acionado": 8,
+        "horas": 36.9,
+        "vlr": 1032.82
+      },
+      {
+        "nome": "LEANDRO VINICIUS DE MIRANDA",
+        "gestor": "LUIS CARLOS DE LIMA JUNIOR",
+        "dias_acionado": 7,
+        "horas": 34.4,
+        "vlr": 1037.74
+      },
+      {
+        "nome": "VALDEMIRO FRANCISCO RABELO FILHO",
+        "gestor": "JOSE FERREIRA DOS SANTOS",
+        "dias_acionado": 6,
+        "horas": 33.1,
+        "vlr": 1247.07
+      },
+      {
+        "nome": "MATHEUS MAURICIO SILVA SATO",
+        "gestor": "LUIS CARLOS DE LIMA JUNIOR",
+        "dias_acionado": 7,
+        "horas": 32.4,
+        "vlr": 907.48
+      }
+    ],
+    "pct_horas_top10": 0.3696,
+    "ofensores_raros": {
+      "qtd": 7,
+      "custo_espera": 3851.28
+    }
+  },
+  "meta": {
+    "base": "orcado",
+    "fator": 0.5,
+    "orcado_mes": 79015.57,
+    "meta_mes": 39507.79
+  },
+  "_fonte": {
+    "pasta": "C:\\Users\\rogerio.fonseca\\Downloads\\hubhoras\\mgcosp",
+    "arquivos": 40,
+    "gerado_em": "2026-07-10T16:44:53"
+  }
+}

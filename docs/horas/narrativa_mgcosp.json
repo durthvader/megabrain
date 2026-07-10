@@ -1,0 +1,82 @@
+{
+  "regiao": "MG/CO/SP",
+  "codigo": "R5 - MG / SP INT / DF / GO / TO",
+  "mes_foto": "julho/2026",
+  "data_foto": "10/07/2026",
+  "fonte": "HUB de Horas Extras · Power BI · {codigo} · foto de {data_foto}",
+  "s1": {
+    "eyebrow": "CUSTO DE HORAS · {regiao} · {data_foto}",
+    "titulo": "A meta é cortar o custo de horas pela metade — e o sobreaviso já estoura o orçado",
+    "lead": "O orçado do ciclo é {orcado}/mês e o realizado já está em {real} — {var_orcado} do orçado. A meta é reduzir para {meta}/mês, {gap_pct} menos que o realizado de hoje.",
+    "decisao": "Atacar o sobreaviso, que responde por {sobreaviso_pct} da cesta. O problema não é difuso: uma única área aciona todo dia e sozinha concentra quase metade do custo — ali o instrumento certo é turno fixo, não sobreaviso."
+  },
+  "s2": {
+    "eyebrow": "DIAGNÓSTICO DO CUSTO · ONDE ESTÁ",
+    "titulo": "Paga-se muito plantão em espera — e o acionamento é majoritariamente noturno em dia útil",
+    "insight": "No dia útil o acionamento é noturno ({h_util_noturno} pós-jornada) e domina o período — só {pct_fds} das horas caem no fim de semana. Aqui o custo não vem de falta de escala de FDS: vem de uma demanda diária concentrada em poucas áreas, que precisa de outro instrumento."
+  },
+  "s3": {
+    "eyebrow": "ONDE DÓI · POR ÁREA DE GESTÃO (GA)",
+    "titulo": "Uma área aciona todo dia e concentra quase metade do custo de sobreaviso",
+    "callout": "As 3 primeiras GAs concentram {top3_ga_pct} das horas. Uma delas aciona 25 de 25 dias — sinal claro de demanda diária, não de plantão eventual."
+  },
+  "s4": {
+    "eyebrow": "RISCO × CUSTO-BENEFÍCIO",
+    "titulo": "Trocar o instrumento sem perder cobertura: turno fixo onde a demanda é diária"
+  },
+  "s5": {
+    "eyebrow": "PROPOSTA DO PRÓXIMO CICLO · FCA",
+    "titulo": "Fechar o gap de {gap}/mês começando pela área que aciona todo dia",
+    "alavancas": [
+      {
+        "n": "01",
+        "t": "Converter a maior área em turno fixo",
+        "d": "Nas {n_estruturais} GAs estruturais: turno noturno fixo cobre a mediana de acionados; sobreaviso residual cobre o p90. Hora acionada: {rs_acion_h} → turno: {rs_turno_h}. Economia: {economia_mes}/mês."
+      },
+      {
+        "n": "02",
+        "t": "Enxugar as GAs intermediárias pelo p90",
+        "d": "A maioria das áreas aciona entre 40% e 80% dos dias — demanda real, mas não diária. Redimensionar o plantão pelo p90 de acionados mantém a cobertura sem pagar espera ociosa."
+      },
+      {
+        "n": "03",
+        "t": "Revisar nominalmente a espera sem retorno",
+        "d": "{ocio_pct_horas} do sobreaviso vira acionamento. Retirar da escala os técnicos em plantão frequente com acionamento raro reduz custo sem tocar em quem de fato é chamado."
+      }
+    ],
+    "fca": [
+      {
+        "fato": "Uma GA aciona 25 de 25 dias, sozinha ~44% do custo de sobreaviso",
+        "causa": "Demanda diária e previsível paga como sobreaviso + HE de acionamento — o instrumento errado para trabalho regular.",
+        "acao": "Dimensionar turno noturno fixo pela mediana de acionados nessa área; sobreaviso residual só para o excedente (p90).",
+        "prazo": "Próximo ciclo",
+        "resp": "Gerência regional + RH + Planejamento",
+        "status": "urgent"
+      },
+      {
+        "fato": "Custo de horas em {real}/mês, ante meta de {meta}",
+        "causa": "Sobreaviso responde por {sobreaviso_pct} da cesta e o realizado já supera o orçado ({var_orcado}).",
+        "acao": "Definir a meta de {meta}/mês por regional e abrir o gap de {gap} em plano de escala por GA.",
+        "prazo": "Início imediato",
+        "resp": "Gerência da regional + Planejamento",
+        "status": "start"
+      },
+      {
+        "fato": "Só {ocio_pct_horas} do sobreaviso vira acionamento",
+        "causa": "{ocio_hc_espera} técnicos/dia em espera para {ocio_hc_acion} acionados nas GAs intermediárias; escala acima da demanda real.",
+        "acao": "Redimensionar plantão pelo p90 de acionados por GA; revisar nominalmente técnicos em plantão frequente com acionamento raro.",
+        "prazo": "Próximo ciclo",
+        "resp": "Gestores das áreas (GA) + Planejamento",
+        "status": "watch"
+      },
+      {
+        "fato": "Risco de descobertura se houver corte cego",
+        "causa": "Na maior GA o pico chegou a {pico_max} técnicos acionados no mesmo dia — margem apertada sobre o plantão atual.",
+        "acao": "Regra de piso: nenhuma GA reduz plantão abaixo do p90 de acionados simultâneos sem turno fixo no lugar; pico raro coberto por backup entre GAs vizinhas.",
+        "prazo": "Regra permanente",
+        "resp": "Gerência regional",
+        "status": "validate"
+      }
+    ]
+  }
+}
