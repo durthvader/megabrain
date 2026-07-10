@@ -1,0 +1,594 @@
+{
+  "regiao": "ceara",
+  "cesta": {
+    "ACIONAMENTO SOBRE AVISO": 31266.716541689006,
+    "BH": 5932.163206283918,
+    "DSR": 63246.50661603831,
+    "ESPERA SOBRE AVISO": 16876.022366449146,
+    "FERIADOS": 1127.5342463022728,
+    "Total": 118448.94297676264
+  },
+  "real_orcado_mes": {
+    "real": 118448.9429767627,
+    "orcado": 125543.75451986883,
+    "var": 7094.811543106131
+  },
+  "serie_total": [
+    {
+      "mes": "janeiro",
+      "real": 173752.28,
+      "orcado": 116576.143061617,
+      "real_2025": 248972.25
+    },
+    {
+      "mes": "fevereiro",
+      "real": 155460.7,
+      "orcado": 112370.160433068,
+      "real_2025": 195600.7
+    },
+    {
+      "mes": "março",
+      "real": 160457.63,
+      "orcado": 110014.102395986,
+      "real_2025": 187260.13
+    },
+    {
+      "mes": "abril",
+      "real": 296107.56,
+      "orcado": 147244.894961845,
+      "real_2025": 275776.97
+    },
+    {
+      "mes": "maio",
+      "real": 243252.26,
+      "orcado": 151489.197449074,
+      "real_2025": 238181.06
+    },
+    {
+      "mes": "junho",
+      "real": 222677.66,
+      "orcado": 132335.010312618,
+      "real_2025": 155067.12
+    },
+    {
+      "mes": "julho",
+      "real": 119066.857522217,
+      "orcado": 125543.754519869,
+      "real_2025": 181845.9
+    },
+    {
+      "mes": "agosto",
+      "real": null,
+      "orcado": 121472.367163569,
+      "real_2025": 150457.47
+    },
+    {
+      "mes": "setembro",
+      "real": null,
+      "orcado": 136561.151155903,
+      "real_2025": 197504.59
+    },
+    {
+      "mes": "outubro",
+      "real": null,
+      "orcado": 146355.595930598,
+      "real_2025": 150214.37
+    },
+    {
+      "mes": "novembro",
+      "real": null,
+      "orcado": 145641.032594832,
+      "real_2025": 162412.25
+    },
+    {
+      "mes": "dezembro",
+      "real": null,
+      "orcado": 172010.568060786,
+      "real_2025": 206706.48
+    }
+  ],
+  "serie_sobreaviso": [
+    {
+      "mes": "janeiro",
+      "real": 87127.04,
+      "orcado": 59248.4543701793
+    },
+    {
+      "mes": "fevereiro",
+      "real": 93831.97,
+      "orcado": 59248.4565569946
+    },
+    {
+      "mes": "março",
+      "real": 88839.34,
+      "orcado": 59248.4544506739
+    },
+    {
+      "mes": "abril",
+      "real": 105606.83,
+      "orcado": 59248.4530207935
+    },
+    {
+      "mes": "maio",
+      "real": 91205.43,
+      "orcado": 59248.4531029477
+    },
+    {
+      "mes": "junho",
+      "real": 101805.34,
+      "orcado": 59248.4545832216
+    },
+    {
+      "mes": "julho",
+      "real": 48142.7389081381,
+      "orcado": 59248.451689316
+    },
+    {
+      "mes": "agosto",
+      "real": null,
+      "orcado": 59248.4540211181
+    },
+    {
+      "mes": "setembro",
+      "real": null,
+      "orcado": 59248.4534788863
+    },
+    {
+      "mes": "outubro",
+      "real": null,
+      "orcado": 59248.4532930758
+    },
+    {
+      "mes": "novembro",
+      "real": null,
+      "orcado": 59248.4531715984
+    },
+    {
+      "mes": "dezembro",
+      "real": null,
+      "orcado": 59248.4520481595
+    }
+  ],
+  "faixa_horaria": [
+    {
+      "faixa": "Dia",
+      "horas": 410.966649
+    },
+    {
+      "faixa": "Noite",
+      "horas": 256.883298
+    },
+    {
+      "faixa": "Madrugada",
+      "horas": 224.333315
+    },
+    {
+      "faixa": "Tarde",
+      "horas": 203.483318
+    }
+  ],
+  "sobreaviso_por_ga": [
+    {
+      "gestor": "MARCOS DAVI FREITAS DE SOUSA",
+      "horas_espera": 1689.4,
+      "horas_acionamento": 300.8,
+      "horas_total": 1990.2,
+      "ocorrencias": 463,
+      "tecnicos": 18
+    },
+    {
+      "gestor": "GUILHERME MAGALHAES DA CRUZ",
+      "horas_espera": 1159.8,
+      "horas_acionamento": 197.6,
+      "horas_total": 1357.3,
+      "ocorrencias": 256,
+      "tecnicos": 17
+    },
+    {
+      "gestor": "DAVID DE SOUSA GARCIA",
+      "horas_espera": 757.6,
+      "horas_acionamento": 183.1,
+      "horas_total": 940.7,
+      "ocorrencias": 223,
+      "tecnicos": 10
+    },
+    {
+      "gestor": "BRUNO SANTOS LOPES",
+      "horas_espera": 235.8,
+      "horas_acionamento": 96.0,
+      "horas_total": 331.8,
+      "ocorrencias": 70,
+      "tecnicos": 5
+    },
+    {
+      "gestor": "LINDEMBERG COSTA DE ALMEIDA",
+      "horas_espera": 156.9,
+      "horas_acionamento": 83.8,
+      "horas_total": 240.7,
+      "ocorrencias": 45,
+      "tecnicos": 3
+    },
+    {
+      "gestor": "MAX WEBER ALVES DE OLIVEIRA",
+      "horas_espera": 86.9,
+      "horas_acionamento": 92.7,
+      "horas_total": 179.6,
+      "ocorrencias": 39,
+      "tecnicos": 3
+    },
+    {
+      "gestor": "FABBIO MARDEM CHAGAS DE QUEIROZ",
+      "horas_espera": 128.2,
+      "horas_acionamento": 23.3,
+      "horas_total": 151.6,
+      "ocorrencias": 29,
+      "tecnicos": 1
+    },
+    {
+      "gestor": "MAURO JOSE DA COSTA JUNIOR",
+      "horas_espera": 116.8,
+      "horas_acionamento": 31.0,
+      "horas_total": 147.8,
+      "ocorrencias": 25,
+      "tecnicos": 2
+    },
+    {
+      "gestor": "PEDRO HENRIQUE MARQUES FERREIRA",
+      "horas_espera": 92.2,
+      "horas_acionamento": 31.5,
+      "horas_total": 123.7,
+      "ocorrencias": 21,
+      "tecnicos": 2
+    },
+    {
+      "gestor": "GABRIEL VIEIRA DO NASCIMENTO",
+      "horas_espera": 92.3,
+      "horas_acionamento": 27.3,
+      "horas_total": 119.5,
+      "ocorrencias": 22,
+      "tecnicos": 2
+    },
+    {
+      "gestor": "MIGUEL BARROS DE CARVALHO JUNIOR",
+      "horas_espera": 82.0,
+      "horas_acionamento": 28.7,
+      "horas_total": 110.7,
+      "ocorrencias": 30,
+      "tecnicos": 1
+    }
+  ],
+  "ocorrencias_por_gestor": [
+    {
+      "gerente": "WELLINGTON MARCIO FIGUEIRA",
+      "pct": 0.1146
+    },
+    {
+      "gerente": "JOSE NILTON MENDES LIMA",
+      "pct": 0.1034
+    },
+    {
+      "gerente": "ADRIANO PEDRO MOREIRA DA SILVA",
+      "pct": 0.089
+    },
+    {
+      "gerente": "ANDRE DE ARAUJO SANTOS",
+      "pct": 0.0781
+    },
+    {
+      "gerente": "JOSE NILTON MENDES LIMA",
+      "pct": 0.0677
+    },
+    {
+      "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+      "pct": 0.0626
+    },
+    {
+      "gerente": "ADRIANO PEDRO MOREIRA DA SILVA",
+      "pct": 0.0527
+    },
+    {
+      "gerente": "FILIPE DE OLIVEIRA BARBOSA",
+      "pct": 0.044
+    },
+    {
+      "gerente": "RAFAEL FRAGA DA SILVA PAIS",
+      "pct": 0.0429
+    },
+    {
+      "gerente": "ADRIANO PEDRO MOREIRA DA SILVA",
+      "pct": 0.0418
+    },
+    {
+      "gerente": "FILIPE DE OLIVEIRA BARBOSA",
+      "pct": 0.028
+    },
+    {
+      "gerente": "JOSE NILTON MENDES LIMA",
+      "pct": 0.0274
+    },
+    {
+      "gerente": "WELLINGTON MARCIO FIGUEIRA",
+      "pct": 0.0274
+    },
+    {
+      "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+      "pct": 0.0267
+    },
+    {
+      "gerente": "ADRIANO PEDRO MOREIRA DA SILVA",
+      "pct": 0.0234
+    },
+    {
+      "gerente": "RAFAEL FRAGA DA SILVA PAIS",
+      "pct": 0.0227
+    },
+    {
+      "gerente": "RAFAEL FRAGA DA SILVA PAIS",
+      "pct": 0.0218
+    },
+    {
+      "gerente": "EDUARDO CARLOS",
+      "pct": 0.0197
+    },
+    {
+      "gerente": "ADRIANO PEDRO MOREIRA DA SILVA",
+      "pct": 0.0197
+    },
+    {
+      "gerente": "FILIPE DE OLIVEIRA BARBOSA",
+      "pct": 0.0182
+    },
+    {
+      "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+      "pct": 0.0143
+    },
+    {
+      "gerente": "MARCIO ROBERTO BERTAGLIA",
+      "pct": 0.0139
+    },
+    {
+      "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+      "pct": 0.0072
+    },
+    {
+      "gerente": "MARCIO ROBERTO BERTAGLIA",
+      "pct": 0.0063
+    },
+    {
+      "gerente": "MARCOS AURELIO BATISTA DE LIMA",
+      "pct": 0.0042
+    },
+    {
+      "gerente": "WELLINGTON MARCIO FIGUEIRA",
+      "pct": 0.0038
+    },
+    {
+      "gerente": "WELLINGTON MARCIO FIGUEIRA",
+      "pct": 0.003
+    },
+    {
+      "gerente": "EDUARDO CARLOS",
+      "pct": 0.0026
+    },
+    {
+      "gerente": "ANDRE DE ARAUJO SANTOS",
+      "pct": 0.0024
+    },
+    {
+      "gerente": "JOSE NILTON MENDES LIMA",
+      "pct": 0.0018
+    },
+    {
+      "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+      "pct": 0.0018
+    },
+    {
+      "gerente": "EDUARDO CARLOS",
+      "pct": 0.0016
+    },
+    {
+      "gerente": "LUCIANO CRUZ",
+      "pct": 0.0014
+    },
+    {
+      "gerente": "MARCOS AURELIO BATISTA DE LIMA",
+      "pct": 0.0011
+    },
+    {
+      "gerente": "JOSE NILTON MENDES LIMA",
+      "pct": 0.001
+    },
+    {
+      "gerente": "FILIPE DE OLIVEIRA BARBOSA",
+      "pct": 0.001
+    },
+    {
+      "gerente": "RAFAEL FRAGA DA SILVA PAIS",
+      "pct": 0.0006
+    },
+    {
+      "gerente": "JERZIO HENRIQUE MOREIRA CABRAL MUTAO",
+      "pct": 0.0003
+    }
+  ],
+  "regional_cluster": [
+    {
+      "regional": "CE",
+      "cluster": "Fortaleza",
+      "pct": 0.1351
+    },
+    {
+      "regional": "RJ LAGOS, RJ NORTE E ES",
+      "cluster": "RJ/Lagos",
+      "pct": 0.1164
+    },
+    {
+      "regional": "MA, PA, PI E AP",
+      "cluster": "Maranhão",
+      "pct": 0.1049
+    },
+    {
+      "regional": "RJ LAGOS, RJ NORTE E ES",
+      "cluster": "Espirito Santo",
+      "pct": 0.0693
+    },
+    {
+      "regional": "CE",
+      "cluster": "CE/Interior",
+      "pct": 0.0685
+    },
+    {
+      "regional": "RJ SUL E SERRANA",
+      "cluster": "Serrana",
+      "pct": 0.0552
+    },
+    {
+      "regional": "AL, BA, PB, PE, RN E SE",
+      "cluster": "Pernambuco",
+      "pct": 0.052
+    },
+    {
+      "regional": "DF, MG, SP INT, GO E TO",
+      "cluster": "T.Mineiro",
+      "pct": 0.0501
+    },
+    {
+      "regional": "SP LITORAL E VALE",
+      "cluster": "Litoral Norte",
+      "pct": 0.0471
+    },
+    {
+      "regional": "RJ LAGOS, RJ NORTE E ES",
+      "cluster": "RJ/Norte",
+      "pct": 0.0421
+    },
+    {
+      "regional": "MA, PA, PI E AP",
+      "cluster": "Piaui",
+      "pct": 0.0397
+    },
+    {
+      "regional": "SP LITORAL E VALE",
+      "cluster": "Litoral Sul",
+      "pct": 0.0368
+    },
+    {
+      "regional": "RJ SUL E SERRANA",
+      "cluster": "RJ/Sul",
+      "pct": 0.0359
+    },
+    {
+      "regional": "DF, MG, SP INT, GO E TO",
+      "cluster": "Minas Gerais",
+      "pct": 0.028
+    },
+    {
+      "regional": "SP METRO E CAPITAL",
+      "cluster": "ABC_Suzano",
+      "pct": 0.0231
+    },
+    {
+      "regional": "DF, MG, SP INT, GO E TO",
+      "cluster": "SP/Interior",
+      "pct": 0.0195
+    },
+    {
+      "regional": "AL, BA, PB, PE, RN E SE",
+      "cluster": "Sergipe",
+      "pct": 0.0184
+    },
+    {
+      "regional": "DF, MG, SP INT, GO E TO",
+      "cluster": "DF",
+      "pct": 0.0143
+    },
+    {
+      "regional": "MS E PR",
+      "cluster": "Parana/Sul",
+      "pct": 0.0139
+    },
+    {
+      "regional": "MS E PR",
+      "cluster": "Mato Grosso do Sul",
+      "pct": 0.0063
+    },
+    {
+      "regional": "SP LITORAL E VALE",
+      "cluster": "Vale do Paraiba",
+      "pct": 0.005
+    },
+    {
+      "regional": "AL, BA, PB, PE, RN E SE",
+      "cluster": "Bahia",
+      "pct": 0.005
+    },
+    {
+      "regional": "MA, PA, PI E AP",
+      "cluster": "Norte",
+      "pct": 0.0032
+    },
+    {
+      "regional": "DF, MG, SP INT, GO E TO",
+      "cluster": "Centro Oeste",
+      "pct": 0.0027
+    },
+    {
+      "regional": "AL, BA, PB, PE, RN E SE",
+      "cluster": "Rio Grande Do Norte",
+      "pct": 0.0027
+    },
+    {
+      "regional": "AL, BA, PB, PE, RN E SE",
+      "cluster": "Paraiba",
+      "pct": 0.0026
+    },
+    {
+      "regional": "DF, MG, SP INT, GO E TO",
+      "cluster": "Ribeirao Preto",
+      "pct": 0.0016
+    },
+    {
+      "regional": "AL, BA, PB, PE, RN E SE",
+      "cluster": "Alagoas",
+      "pct": 0.0006
+    },
+    {
+      "regional": "SP METRO E CAPITAL",
+      "cluster": "Sao Paulo",
+      "pct": 0.0002
+    },
+    {
+      "regional": "SP METRO E CAPITAL",
+      "cluster": "Guarulhos",
+      "pct": 0.0
+    }
+  ],
+  "sintetico_regiao": {
+    "sub_bu": "R6 - CEARA",
+    "gerente": "JOSE NILTON MENDES LIMA",
+    "orcado_total": 125543.75451986883,
+    "he_real_total": 113073.4597382443,
+    "hc_c_he": 185.0,
+    "rs_medio_hc": 611.2078904769962
+  },
+  "ociosidade": {
+    "horas_espera_total": 4597.9,
+    "horas_acionamento_total": 1095.8,
+    "pct_horas_acionamento": 0.1925,
+    "hc_espera_medio": 24.8,
+    "hc_acionado_medio": 8.7,
+    "dias": 25,
+    "pct_acionamento_hc": 0.3508
+  },
+  "meta": {
+    "base": "orcado",
+    "fator": 0.5,
+    "orcado_mes": 125543.75,
+    "meta_mes": 62771.88
+  },
+  "_fonte": {
+    "pasta": "C:\\Users\\rogerio.fonseca\\Downloads\\hubhoras\\ce",
+    "arquivos": 40,
+    "gerado_em": "2026-07-10T15:50:33"
+  }
+}

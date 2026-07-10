@@ -1,0 +1,70 @@
+{
+  "regiao": "Ceará",
+  "codigo": "R6 - CEARA",
+  "mes_foto": "julho/2026",
+  "data_foto": "10/07/2026",
+  "fonte": "HUB de Horas Extras · Power BI · SUB BU R6 - CEARA · foto de {data_foto}",
+  "s1": {
+    "eyebrow": "CUSTO DE HORAS · {regiao} · {data_foto}",
+    "titulo": "A meta é cortar o custo de horas pela metade — e o dinheiro está no sobreaviso",
+    "lead": "O orçado do ciclo é {orcado}/mês e o realizado já está em {real} — {var_orcado} abaixo do orçado. Mas a meta é dobrar essa economia: {meta}/mês, {gap_pct} menos que o realizado de hoje.",
+    "decisao": "Atacar o sobreaviso, que responde por {sobreaviso_pct} da cesta e é a parte mais controlável do custo. É onde o realizado historicamente estoura o orçado e onde há mais gordura de plantão ocioso para cortar sem afetar a operação."
+  },
+  "s2": {
+    "eyebrow": "DIAGNÓSTICO DO CUSTO · ONDE ESTÁ",
+    "titulo": "Paga-se muito plantão em espera e aciona-se pouco: só {ocio_pct_horas} do sobreaviso vira trabalho",
+    "insight": "A cada dia há em média {ocio_hc_espera} técnicos de sobreaviso e apenas {ocio_hc_acion} são acionados ({ocio_pct_hc}). Em horas, são {ocio_horas_espera} pagas em espera para {ocio_horas_acion} de acionamento efetivo. Redimensionar a escala pela demanda real é o maior lever de custo."
+  },
+  "s3": {
+    "eyebrow": "ONDE DÓI · POR ÁREA DE GESTÃO (GA)",
+    "titulo": "O custo de sobreaviso está concentrado em poucas áreas — a recuperação começa por elas",
+    "callout": "As 3 primeiras GAs concentram {top3_ga_pct} de todas as horas de sobreaviso da regional. Não é problema difuso: é onde a escala precisa ser revista primeiro."
+  },
+  "s4": {
+    "eyebrow": "PROPOSTA DO PRÓXIMO CICLO · FCA",
+    "titulo": "Fechar o gap de {gap}/mês com três alavancas sobre a escala de sobreaviso",
+    "alavancas": [
+      {
+        "n": "01",
+        "t": "Dimensionar o plantão pela demanda real",
+        "d": "Só {ocio_pct_hc} dos técnicos de sobreaviso são acionados por dia. Reduzir o nº de plantonistas nas faixas de baixo acionamento, ajustando a escala ao histórico de chamados por dia e faixa horária."
+      },
+      {
+        "n": "02",
+        "t": "Concentrar a escala na faixa que aciona",
+        "d": "O acionamento se concentra na faixa Dia. Enxugar plantão nas faixas de menor acionamento (madrugada/tarde) e manter cobertura só onde a demanda real justifica."
+      },
+      {
+        "n": "03",
+        "t": "Cobrar as GAs que concentram o custo",
+        "d": "Meta global de redução distribuída como acompanhamento pelas áreas líderes de horas de sobreaviso, com revisão semanal de escala versus acionamento efetivo."
+      }
+    ],
+    "fca": [
+      {
+        "fato": "Custo de horas em {real}/mês, ante meta de {meta}",
+        "causa": "Cesta puxada por DSR ({dsr_pct}) e sobreaviso ({sobreaviso_pct}); o sobreaviso é a parte controlável e onde o realizado supera o orçado.",
+        "acao": "Definir a meta de {meta}/mês por regional e abrir o gap de {gap} em plano de escala por GA.",
+        "prazo": "Início imediato",
+        "resp": "Gerência da regional + Planejamento",
+        "status": "urgent"
+      },
+      {
+        "fato": "Só {ocio_pct_horas} do sobreaviso vira acionamento",
+        "causa": "{ocio_hc_espera} técnicos/dia em espera para {ocio_hc_acion} acionados; escala dimensionada acima da demanda real.",
+        "acao": "Redimensionar a escala de sobreaviso pela demanda por dia e faixa horária; reduzir plantonistas nas faixas de baixo acionamento.",
+        "prazo": "Próximo ciclo",
+        "resp": "Coordenação de campo + Planejamento",
+        "status": "start"
+      },
+      {
+        "fato": "Custo concentrado em poucas GAs",
+        "causa": "As 3 primeiras áreas concentram {top3_ga_pct} das horas de sobreaviso.",
+        "acao": "Revisão semanal de escala versus acionamento nas GAs líderes; meta de redução acompanhada por área.",
+        "prazo": "Semanal",
+        "resp": "Gestores das áreas (GA)",
+        "status": "watch"
+      }
+    ]
+  }
+}
