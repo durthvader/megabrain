@@ -1,6 +1,7 @@
 """Gera outputs/3ps/3Ps_MaranhaoPiaui_Executivo.pptx com a identidade visual Alloha.
 
-Espelha build_3ps_presentation.py, adaptado para a regional R7.2 (MA/PI).
+Espelha a versão final revisada manualmente (3Ps_MaranhaoPiaui_Executivo (VF).pptx),
+sem comparações com o Ceará -- cada painel regional é autônomo.
 Uso: python scripts/build_3ps_presentation_mapi.py
 """
 
@@ -89,7 +90,8 @@ def chrome(slide, number, total, source):
              align=PP_ALIGN.RIGHT, font="Aptos Display")
     add_text(slide, "F I B R A", 1090, 66, 130, 14, size=8, color=GREEN_DARK,
              bold=True, align=PP_ALIGN.RIGHT)
-    add_text(slide, source, 56, 688, 1040, 16, size=9, color="8B94A6")
+    if source:
+        add_text(slide, source, 56, 688, 1040, 16, size=9, color="8B94A6")
     add_text(slide, f"{number} / {total}", 1150, 688, 74, 16, size=9,
              color="8B94A6", align=PP_ALIGN.RIGHT)
 
@@ -156,12 +158,9 @@ chrome(slide, 1, 4, "Fonte: exportações de BI operacional da regional R7.2 (MA
 title_block(
     slide,
     "OPERAÇÕES · MARANHÃO/PIAUÍ (R7.2) · 09/07/2026",
-    "Maranhão volta a cumprir o Prazo 24h; Produção e Cumprimento de Agenda seguem abaixo do ideal",
+    "Maranhão volta a cumprir o Prazo 24h; Produção segue abaixo do ideal",
     "No fechamento de 08/07, o Maranhão (C.32) passou a cumprir a meta de Prazo 24h, mas segue abaixo do esperado "
-    "em Produção; o Piauí (C.31) está com folga confortável em Produção e Prazo. O Cumprimento de Agenda caiu nos "
-    "dois clusters e é hoje o principal ponto de atenção — a fila de ordens, porém, está dentro do limite de 1 dia "
-    "nos dois clusters. Na visão semanal, a Produção 11 OK da regional caiu de 3,25 para 3,02 OS/dia (-7,1%) entre "
-    "a semana fechada (S27) e a semana em curso (S28).",
+    "em Produção; o Piauí (C.31) está com Presença, Produção e Prazo na meta.",
     title_size=28,
     lead_top=152,
 )
@@ -172,7 +171,7 @@ headers = [
     ("Presença", "meta mínima 95%"),
     ("Produção", "% da meta esperada, 08/07"),
     ("Prazo 24h", "meta 85% das ordens"),
-    ("Fila acumulada", "em dias de trabalho, 08/07"),
+    ("Fila acumulada", "em dias de trabalho, 09/07"),
 ]
 for col, (head, sub) in enumerate(headers):
     lines = [(head, {"size": 13, "bold": True, "color": WHITE})]
@@ -185,49 +184,38 @@ row_c31 = [
     [("114,3%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("19,3 p.p. acima da meta", {"size": 10, "color": MUTED})],
     [("144,8%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("acima do esperado", {"size": 10, "color": MUTED})],
     [("92,0%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("7,0 p.p. acima da meta", {"size": 10, "color": MUTED})],
-    [("0,79 dia", {"size": 16, "bold": True, "color": GREEN_DARK}), ("dentro do limite", {"size": 10, "color": MUTED})],
+    [("0,74", {"size": 16, "bold": True, "color": GREEN_DARK}), ("dentro da meta", {"size": 10, "color": MUTED})],
 ]
 row_c32 = [
     [("C.32", {"size": 16, "bold": True, "color": NAVY}), ("Maranhão", {"size": 10, "color": MUTED})],
     [("100,0%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("5,0 p.p. acima da meta", {"size": 10, "color": MUTED})],
     [("88,4%", {"size": 16, "bold": True, "color": RED}), ("abaixo do esperado", {"size": 10, "color": MUTED})],
     [("89,4%", {"size": 16, "bold": True, "color": GREEN_DARK}), ("4,4 p.p. acima da meta", {"size": 10, "color": MUTED})],
-    [("0,68 dia", {"size": 16, "bold": True, "color": GREEN_DARK}), ("dentro do limite", {"size": 10, "color": MUTED})],
+    [("0,72", {"size": 16, "bold": True, "color": GREEN_DARK}), ("dentro da meta", {"size": 10, "color": MUTED})],
 ]
 for col, lines in enumerate(row_c31):
     set_cell(table.cell(1, col), lines, fill=WHITE)
 for col, lines in enumerate(row_c32):
     set_cell(table.cell(2, col), lines, fill="EAF2FB")
 
-add_text(
-    slide,
-    "Como ler: Presença mede o quadro efetivamente disponível para operar frente à necessidade mínima do dia; "
-    "Fila indica quantos dias de trabalho seriam necessários para zerar as ordens em aberto, sem entrada de novas "
-    "OS. A regional R7.2 fechou 08/07 com Prazo 24h em 90,3% (acima da meta) e Cumprimento de Agenda em 75,0% — "
-    "abaixo da meta de 85%, puxado pelo Maranhão.",
-    56, 416, 1130, 34, size=10.5, color=MUTED,
-)
-
 add_rect(slide, 56, 470, 545, 168, NAVY, round_corners=True)
 add_text(slide, "DECISÃO OPERACIONAL", 80, 484, 320, 18, size=11, color="9FC9EE", bold=True)
 add_text(
     slide,
-    "Manter o foco no Maranhão — Produção segue abaixo do esperado e Cumprimento de Agenda caiu nos dois clusters "
-    "— sustentando o ganho recém-conquistado em Prazo 24h. Execução também nominal: 1 GA concentra o maior gap, "
-    "8 técnicos concentram os maiores desvios.",
+    "Manter o foco no Maranhão: Produção segue abaixo do esperado. Execução também nominal: 1 GA concentra o "
+    "maior gap; 9 técnicos exigem decisão individual (8 com maior desvio de produção e 1 sem nenhuma baixa).",
     80, 506, 498, 118, size=14, color=WHITE, bold=True,
 )
 
 kpis = [
-    ("18 de 68", "técnicos estão em Q1/NP (produtividade baixa ou sem classificação) no quartil 11 OK"),
-    ("419 OS", "de gap estimado em 9 dias (01–09/07), considerando meta por tempo de casa"),
-    ("-7,1%", "queda de Produção 11 OK entre a semana fechada e a semana em curso"),
+    ("18 de 68", "técnicos estão em Q3/Q4 de produtividade (1:1 OK) — abaixo da mediana ou sem produção"),
+    ("-7,1%", "queda de Produção 1:1 OK entre a semana fechada e a semana em curso"),
 ]
 for index, (value, label) in enumerate(kpis):
-    left = 625 + index * 202
-    add_rect(slide, left, 470, 190, 168, WHITE, line=LINE, round_corners=True)
-    add_text(slide, value, left + 15, 486, 162, 32, size=23, color=BLUE, bold=True)
-    add_text(slide, label, left + 15, 522, 162, 104, size=11, color=MUTED)
+    left = 625 + index * 320
+    add_rect(slide, left, 470, 290, 168, WHITE, line=LINE, round_corners=True)
+    add_text(slide, value, left + 18, 486, 254, 32, size=23, color=BLUE, bold=True)
+    add_text(slide, label, left + 18, 522, 254, 104, size=11, color=MUTED)
 
 # ---------------------------------------------------------------- Slide 2
 slide = prs.slides.add_slide(blank)
@@ -244,7 +232,7 @@ add_text(slide, "68 técnicos elegíveis", 78, 166, 330, 20, size=15, color=NAVY
 add_text(slide, "Perfil quase todo veterano", 340, 168, 306, 18, size=12, color=MUTED, align=PP_ALIGN.RIGHT)
 add_text(
     slide,
-    "Quartil de produtividade (11 OK), média das semanas S27 e S28. Quadro concentrado em >90 dias de casa: "
+    "Quartil de produtividade (1:1 OK), média das semanas S27 e S28. Quadro concentrado em >90 dias de casa: "
     "16 de 18 no Piauí, 46 de 50 no Maranhão.",
     78, 190, 566, 28, size=10, color=MUTED,
 )
@@ -256,39 +244,23 @@ for pct, color in segments:
     add_rect(slide, offset, 222, seg_width, 20, color)
     offset += seg_width
 legend = [
-    ("35,6%", "Q3 — acima da mediana", GREEN_DARK),
+    ("35,6%", "Q1 — acima da mediana", GREEN_DARK),
     ("31,1%", "Q2 — mediana", AMBER),
-    ("28,8%", "Q1 — abaixo da mediana", ORANGE),
-    ("4,5%", "NP — sem produção", RED),
+    ("28,8%", "Q3 — abaixo da mediana", ORANGE),
+    ("4,5%", "Q4 — baixa ou sem produção", RED),
 ]
 for index, (count, label, color) in enumerate(legend):
     left = 78 + index * 144
     add_rect(slide, left, 252, 7, 28, color)
     add_text(slide, [(count, {"size": 14, "bold": True}), (label, {"size": 8.5, "color": MUTED})],
              left + 12, 250, 132, 34)
-add_rect(slide, 78, 292, 566, 46, "FDF4EA")
-add_rect(slide, 78, 292, 5, 46, ORANGE)
+add_rect(slide, 78, 292, 566, 66, "FDF4EA")
+add_rect(slide, 78, 292, 5, 66, ORANGE)
 add_text(
     slide,
-    "Diferente do Ceará (68% do time abaixo da meta), a maior parte do quadro aqui está em Q2/Q3. O risco não é "
-    "generalizado: está concentrado em poucos nomes e em uma área específica.",
-    92, 298, 544, 36, size=10.5, color="5A4632",
-)
-add_text(slide, "Gap estimado por cluster (01–09/07)", 78, 350, 380, 18, size=13, color=NAVY, bold=True)
-add_text(slide, "419 OS em 9 dias", 430, 351, 216, 16, size=12, color=RED, bold=True, align=PP_ALIGN.RIGHT)
-hbar(slide, "C.32 Maranhão", "369", 78, 378, 120, 380, 1.0)
-hbar(slide, "C.31 Piauí", "50", 78, 402, 120, 380, 0.136, color="78A9D8")
-add_text(
-    slide,
-    "Gap = máximo(meta por faixa de tempo de casa × dias trabalhados − volume OK, 0), estimado a partir do "
-    "Analítico Nominal (dias trabalhados inferidos por Volume OK / Prod. OK).",
-    78, 430, 566, 30, size=9.5, color=MUTED,
-)
-add_text(
-    slide,
-    "1 técnico (Israel Costa da Silva, C.32) ficou sem nenhuma baixa no período "
-    "inteiro — confirmar com RH/escala.",
-    78, 462, 566, 30, size=9.5, color=MUTED,
+    "A maior parte do quadro está em Q1/Q2. O risco não é generalizado: está concentrado em poucos nomes e em "
+    "uma área específica.",
+    92, 300, 544, 56, size=10.5, color="5A4632",
 )
 
 add_rect(slide, 686, 150, 538, 372, WHITE, line=LINE, round_corners=True)
@@ -307,24 +279,30 @@ causes = [
 ]
 for index, (label, value, ratio) in enumerate(causes):
     hbar(slide, label, value, 708, 236 + index * 34, 190, 240, ratio, color=ORANGE)
-add_rect(slide, 708, 380, 494, 92, "F1F9F1")
-add_rect(slide, 708, 380, 5, 92, GREEN)
-add_text(slide, "74%", 724, 392, 90, 30, size=19, color=GREEN_DARK, bold=True)
+add_rect(slide, 708, 380, 494, 78, "F1F9F1")
+add_rect(slide, 708, 380, 5, 78, GREEN)
+add_text(slide, "74%", 724, 390, 90, 30, size=19, color=GREEN_DARK, bold=True)
 add_text(
     slide,
-    "das improdutivas classificadas estão nos 5 principais motivos, com “Abertura indevida” e “Falha massiva” à "
-    "frente — mesmo padrão do Ceará: parte relevante nasce antes do despacho.",
-    822, 388, 368, 48, size=10.5, color="4A5B52",
+    "das improdutivas classificadas estão nos 5 principais motivos, com “Abertura indevida” e “Falha massiva”, "
+    "parte relevante nasce antes do despacho.",
+    822, 388, 368, 60, size=10.5, color="4A5B52",
+)
+add_text(
+    slide,
+    "Como ler: Abertura indevida são os casos de Serviço não é mais necessário (19), Cliente não solicitou "
+    "serviço (12), Demanda não é técnica (5) e Serviço não autorizado (3).",
+    708, 466, 494, 44, size=8.5, color=MUTED,
 )
 solutions = [
     ("01", "Reverter a queda S27→S28",
-     "Produção 11 OK caiu de 3,25 para 3,02 OS/dia. Acompanhamento diário para retomar o patamar da semana "
+     "Produção 1:1 OK caiu de 3,25 para 3,02 OS/dia. Acompanhamento diário para retomar o patamar da semana "
      "anterior até o fim da S28."),
     ("02", "Plano individual nominal",
-     "Foco nos 8 maiores gaps individuais e na GA com maior concentração de perda. Detalhe na página seguinte."),
+     "Foco nos 8 maiores gaps individuais e no GA com maior concentração de perda. Detalhe na página seguinte."),
     ("03", "Qualidade da demanda",
-     "Mesma frente do Ceará: travar abertura de OS sem validação técnica e tratar falha massiva antes do despacho "
-     "— os dois motivos somam 76 das 174 baixas classificadas."),
+     "Travar abertura de OS sem validação técnica e tratar falha massiva antes do despacho — os dois motivos "
+     "somam 76 das 174 baixas classificadas."),
 ]
 for index, (number, head, body) in enumerate(solutions):
     left = 56 + index * 398
@@ -348,26 +326,25 @@ add_rect(slide, 56, 148, 452, 400, WHITE, line=LINE, round_corners=True)
 add_text(slide, "Gap por área de gestão (GA)", 78, 164, 300, 20, size=14, color=NAVY, bold=True)
 add_text(slide, "em OS não executadas (estimado)", 300, 166, 188, 18, size=9.5, color=MUTED, align=PP_ALIGN.RIGHT)
 gas = [
-    ("Naan Carlos Cabral Oliveira · C.32", "95", 1.0, BLUE),
-    ("Leonardo Cardoso Silva · C.31/C.32", "23 + 60", 0.874, BLUE),
-    ("Francisco Sales Furtado Jr. · C.32", "80", 0.842, BLUE),
-    ("Roberval Silva Rodrigues · C.32", "76", 0.8, "78A9D8"),
-    ("Ruan Labre Gabriel da Silva · C.32", "49", 0.516, "78A9D8"),
+    ("Naan Carlos Oliveira · C.32", "95", 1.0, BLUE),
+    ("Leonardo Silva · C.31/C.32", "83", 0.874, BLUE),
+    ("Francisco Sales Jr. · C.32", "80", 0.842, BLUE),
+    ("Roberval Silva · C.32", "76", 0.8, "78A9D8"),
+    ("Ruan Labre da Silva · C.32", "49", 0.516, "78A9D8"),
 ]
 for index, (label, value, ratio, color) in enumerate(gas):
     hbar(slide, label, value, 78, 202 + index * 32, 172, 180, ratio, color=color)
-add_rect(slide, 78, 366, 408, 168, "F1F9F1")
-add_rect(slide, 78, 366, 5, 168, GREEN)
+add_rect(slide, 78, 366, 408, 96, "F1F9F1")
+add_rect(slide, 78, 366, 5, 96, GREEN)
 add_text(slide, "1 técnico", 94, 378, 120, 30, size=18, color=GREEN_DARK, bold=True)
 add_text(
     slide,
     "ficou sem nenhuma baixa no período inteiro (01–09/07): Israel Costa da Silva (C.32, GA Naan Carlos Cabral "
-    "Oliveira) — capacidade fora de campo a confirmar com RH/escala, mesmo padrão do Ceará, mas em escala muito "
-    "menor (1 caso, não 7).",
-    94, 410, 376, 116, size=10.5, color="4A5B52",
+    "Oliveira).",
+    94, 410, 376, 44, size=10.5, color="4A5B52",
 )
 
-table = add_table(slide, 4, 3, 528, 148, 696, 396, [232, 240, 224])
+table = add_table(slide, 3, 3, 528, 148, 696, 264, [232, 240, 224])
 set_cell(table.cell(0, 0), [("TÉCNICOS", {"size": 9.5, "bold": True, "color": WHITE})], fill=NAVY, v_margin=4)
 set_cell(table.cell(0, 1), [("O QUE OS DADOS MOSTRAM", {"size": 9.5, "bold": True, "color": WHITE})], fill=NAVY, v_margin=4)
 set_cell(table.cell(0, 2), [("AÇÃO IMEDIATA", {"size": 9.5, "bold": True, "color": WHITE})], fill=NAVY, v_margin=4)
@@ -375,8 +352,8 @@ nominal_rows = [
     (
         [("1 técnico sem baixa no período", {"size": 10, "bold": True, "color": NAVY}),
          ("Israel Costa da Silva (C.32)", {"size": 8, "color": MUTED})],
-        [("Nenhuma OS concluída entre 01 e 09/07. Não é baixa produtividade: é capacidade fora de campo.", {"size": 8.5})],
-        [("Confirmar com RH e escala em 24h se é férias, atestado ou vaga a repor.", {"size": 8.5})],
+        [("Sem escada para atividade.", {"size": 8.5})],
+        [("Escada enviada para Grajaú-MA, previsão para 13/07.", {"size": 8.5})],
         WHITE,
     ),
     (
@@ -385,13 +362,6 @@ nominal_rows = [
         [("Concentram boa parte do gap do Maranhão; a maioria com poucos dias trabalhados no período (4 a 7 de 9).", {"size": 8.5})],
         [("Conversa individual gestor-técnico esta semana, com plano simples de recuperação e verificação da escala real.", {"size": 8.5})],
         "F8FAFD",
-    ),
-    (
-        [("Referências a replicar", {"size": 10, "bold": True, "color": GREEN_DARK}),
-         ("Emisson Barbosa Paiva (5,86) e Lucas Sousa Silva (5,29) — C.32; Werbert Pereira dos Santos (5,57), Claudiomir de Sousa (5,50) e Rafael Costa Lima (5,43) — C.31", {"size": 8, "color": MUTED})],
-        [("Bem acima da meta de 4 OS/dia, nas mesmas condições de campo.", {"size": 8.5})],
-        [("Mapear rota, carga e método desses técnicos e usar como padrão, priorizando a GA de Naan Carlos Cabral Oliveira.", {"size": 8.5})],
-        "F1F9F1",
     ),
 ]
 for row_index, (col_a, col_b, col_c, fill) in enumerate(nominal_rows, start=1):
@@ -417,58 +387,38 @@ for index, (count, label, color) in enumerate(tiers):
 
 # ---------------------------------------------------------------- Slide 4
 slide = prs.slides.add_slide(blank)
-chrome(slide, 4, 4, "Causas não comprovadas pelos dados permanecem marcadas como “em validação”")
+chrome(slide, 4, 4, "Fonte: Analítico Nominal 01–09/07/2026 e apontamento operacional da regional R7.2")
 title_block(
     slide,
     "FCA · FATO, CAUSA E AÇÃO",
-    "Quatro frentes colocam a recuperação do Maranhão/Piauí em execução nesta semana",
+    "Duas frentes colocam o Maranhão em recuperação da produção",
     title_size=27,
 )
 
-table = add_table(slide, 5, 6, 42, 148, 1196, 452, [200, 258, 268, 116, 216, 138])
+table = add_table(slide, 3, 6, 42, 148, 1196, 280, [200, 258, 268, 116, 216, 138])
 fca_heads = ["FATO", "CAUSA", "AÇÃO", "PRAZO", "RESPONSÁVEL", "STATUS"]
 for col, head in enumerate(fca_heads):
     set_cell(table.cell(0, col), [(head, {"size": 10.5, "bold": True, "color": WHITE})], fill=NAVY)
 
 fca_rows = [
     (
-        [("Maranhão volta a cumprir o Prazo 24h, mas Produção e Agenda seguem abaixo", {"size": 11, "bold": True, "color": NAVY}),
-         ("Prazo 24h 89,4% (meta 85%) · Produção 88,4% do esperado · Cumprimento de Agenda 72,3%, em 08/07", {"size": 9, "color": MUTED})],
-        [("O gap de produção segue concentrado em poucas áreas de gestão e técnicos específicos, detalhados na página anterior; a queda de Cumprimento de Agenda é mais recente e ainda em apuração.", {"size": 9.5})],
-        [("Controle diário de Produção e Agenda nas áreas críticas, sustentando o ganho de Prazo 24h, com lista nominal e providência no mesmo dia.", {"size": 9.5})],
-        [("10/07", {"size": 11, "bold": True, "color": NAVY}), ("1ª revisão 17/07", {"size": 9, "color": MUTED})],
-        [("Gestores de operação do Maranhão", {"size": 9.5})],
-        ("Em andamento", BLUE_LIGHT, "114F88"),
+        [("Produção abaixo da meta", {"size": 11, "bold": True, "color": NAVY}),
+         ("Desvio em 11,6pp", {"size": 9, "color": MUTED})],
+        [("Um técnico sem escada em cidade Grajaú-MA.", {"size": 9.5})],
+        [("Fornecimento de escada. CD de Teresina.", {"size": 9.5})],
+        [("14/07", {"size": 11, "bold": True, "color": NAVY})],
+        [("Naan Carlos (GA)", {"size": 9.5})],
+        ("Em Andamento", BLUE_LIGHT, "114F88"),
         WHITE,
     ),
     (
-        [("419 OS de gap estimado em 9 dias", {"size": 11, "bold": True, "color": NAVY}),
-         ("concentrado em 1 GA e 8 técnicos críticos", {"size": 9, "color": MUTED})],
-        [("1 técnico sem nenhuma baixa no período; 8 com maior desvio individual, a maioria com 4 a 7 dos 9 dias trabalhados.", {"size": 9.5})],
-        [("Confirmar com RH a situação do técnico parado; plano individual para os 8 críticos; ajuste de carga e rota para os demais.", {"size": 9.5})],
-        [("10/07", {"size": 11, "bold": True, "color": NAVY}), ("planos até 12/07", {"size": 9, "color": MUTED})],
-        [("GA Naan Carlos Cabral Oliveira e GO Walmir Fernandes da Silva", {"size": 9.5})],
-        ("Imediato", RED_LIGHT, "8A1717"),
-        "F8FAFD",
-    ),
-    (
-        [("273 visitas improdutivas no período", {"size": 11, "bold": True, "color": NAVY}),
-         ("174 com motivo registrado", {"size": 9, "color": MUTED})],
-        [("Abertura indevida (39) e Falha massiva (37) lideram os motivos registrados — 74% das classificadas nascem antes do despacho.", {"size": 9.5})],
-        [("Travar abertura de OS sem validação técnica; confirmar o cliente antes do despacho; suspender despacho em área com falha massiva ativa.", {"size": 9.5})],
-        [("10/07", {"size": 11, "bold": True, "color": NAVY}), ("travas até 12/07", {"size": 9, "color": MUTED})],
-        [("Equipe de BI/Performance regional", {"size": 9.5})],
-        ("Em validação", "FFF0C7", "765400"),
-        WHITE,
-    ),
-    (
-        [("Recuperação parcial da Produção 11 OK (S27→S28)", {"size": 11, "bold": True, "color": NAVY}),
-         ("3,25 → 3,02 OS/dia (-7,1%)", {"size": 9, "color": MUTED})],
-        [("Concentrada no Maranhão, mesma regional que segue abaixo da meta de Produção e de Cumprimento de Agenda no fechamento diário.", {"size": 9.5})],
-        [("Acompanhar o fechamento da S28 frente à S27, priorizando as GAs com maior gap identificado (Naan Carlos Cabral Oliveira, Leonardo Cardoso Silva, Francisco Sales Furtado Jr.).", {"size": 9.5})],
-        [("12/07", {"size": 11, "bold": True, "color": NAVY}), ("fechamento da S28", {"size": 9, "color": MUTED})],
-        [("Gestores de operação da regional R7.2", {"size": 9.5})],
-        ("Atenção", "FFE5CB", "8A4C00"),
+        [("Gap concentrado em 8 técnicos", {"size": 11, "bold": True, "color": NAVY}),
+         ("122 OS de desvio (29% do gap total)", {"size": 9, "color": MUTED})],
+        [("8 técnicos com maior desvio individual devido a baixa demanda nas cidades de atuação e falta de materiais para preventivas.", {"size": 9.5})],
+        [("Complementar rota dos técnicos com preventivas, clean up e presets.", {"size": 9.5})],
+        [("16/07", {"size": 11, "bold": True, "color": NAVY})],
+        [("Wellington Figueira (GG)", {"size": 9.5})],
+        ("Em Andamento", BLUE_LIGHT, "114F88"),
         "F8FAFD",
     ),
 ]
@@ -484,15 +434,17 @@ for row_index, (fato, causa, acao, prazo, resp, status, fill) in enumerate(fca_r
         [(status_text, {"size": 10, "bold": True, "color": status_color, "align": PP_ALIGN.CENTER})],
         fill=status_fill,
     )
+for row in table.rows:
+    row.height = px(90)
 
-add_rect(slide, 42, 618, 1196, 48, NAVY)
-add_rect(slide, 42, 618, 7, 48, GREEN)
-add_text(slide, "DECISÕES SOLICITADAS", 64, 634, 200, 18, size=11.5, color=WHITE, bold=True)
+add_rect(slide, 42, 460, 1196, 68, NAVY)
+add_rect(slide, 42, 460, 7, 68, GREEN)
+add_text(slide, "DECISÕES SOLICITADAS", 64, 476, 200, 18, size=11.5, color=WHITE, bold=True)
 add_text(
     slide,
-    "Confirmar responsáveis e prazos   ·   Ratificar 85% como meta do Prazo 24h e do Cumprimento de Agenda para a regional   ·   "
-    "Priorizar a GA de Naan Carlos Cabral Oliveira na recuperação",
-    270, 634, 940, 18, size=10.5, color="D5DEF3",
+    "Confirmar entrega da escada em Grajaú-MA até 14/07   ·   Aprovar plano de rota complementar para os 8 "
+    "técnicos até 16/07   ·   Validar responsáveis e prazos",
+    64, 496, 1146, 28, size=10.5, color="D5DEF3",
 )
 
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
