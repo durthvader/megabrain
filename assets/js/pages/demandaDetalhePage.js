@@ -18,7 +18,11 @@ import {
 import { listarRespostasPorDemanda } from "../services/formularioService.js";
 import { listarAnalisesPorDemanda } from "../services/analiseService.js";
 import { listarPlanosPorDemanda } from "../services/planoService.js";
-import { limparDemanda } from "../services/limpezaService.js";
+import {
+  limparDemanda,
+  apagarDemandaCompleta,
+  resumirImpactoDemanda,
+} from "../services/limpezaService.js";
 import { exportarArrayParaCsv } from "../services/exportService.js";
 import { montarLinkPublico, obterParametroUrl } from "../utils/tokens.js";
 import { formatarDataBR } from "../utils/datas.js";
@@ -305,6 +309,49 @@ function configurarAcoes() {
       ]);
     } catch (erro) {
       mostrarErro(`Erro na limpeza: ${erro.message}`);
+    }
+  });
+
+  el("btn-apagar-demanda").addEventListener("click", async () => {
+    let resumo;
+    try {
+      resumo = await resumirImpactoDemanda(demanda.id);
+    } catch (erro) {
+      mostrarErro(`Erro ao calcular o impacto: ${erro.message}`);
+      return;
+    }
+
+    // Só lista o que existe, para a confirmação não virar um muro de zeros.
+    const itens = [
+      [resumo.bases, `${resumo.bases} base(s) e ${formatarNumero(resumo.linhas)} linha(s)`],
+      [resumo.arquivos, `${resumo.arquivos} arquivo(s) no Storage`],
+      [resumo.respostas, `${formatarNumero(resumo.respostas)} resposta(s)`],
+      [resumo.analises, `${resumo.analises} análise(s)`],
+      [resumo.planos, `${resumo.planos} plano(s) de ação`],
+    ]
+      .filter(([quantidade]) => quantidade > 0)
+      .map(([, texto]) => `· ${texto}`);
+
+    const detalhe = itens.length ? itens.join("\n") : "· nada além da própria demanda (ela está vazia)";
+    const mantidas = resumo.basesMantidas
+      ? `\n\n${resumo.basesMantidas} base(s) serão mantidas: outras demandas ainda as usam.`
+      : "";
+
+    const confirmacao = window.prompt(
+      `APAGAR a demanda "${demanda.nome}" de vez. Isto é irreversível e vai remover:\n\n${detalhe}${mantidas}\n\nExporte antes, se precisar. Digite o nome da demanda para confirmar:`
+    );
+    if (confirmacao === null) return;
+    if (confirmacao.trim() !== demanda.nome.trim()) {
+      mostrarAviso("Nome não confere. Exclusão cancelada.");
+      return;
+    }
+
+    try {
+      await apagarDemandaCompleta(demanda.id);
+      mostrarSucesso("Demanda apagada. Voltando para a lista…");
+      window.location.href = "demandas.html";
+    } catch (erro) {
+      mostrarErro(`Erro ao apagar: ${erro.message}`);
     }
   });
 
