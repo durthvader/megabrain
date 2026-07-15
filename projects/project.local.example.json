@@ -3,7 +3,7 @@
   "resultado_principal": {
     "tipo": "url",
     "rotulo": "Abrir resultado",
-    "href": "https://portal-protegido.exemplo.com",
+    "href": "https://site.exemplo.com/p/k7mx4pq9vr2ct8wj/",
     "caminho_local": null
   },
   "artefatos": [
@@ -13,5 +13,10 @@
       "href": null,
       "caminho_local": "C:\\Resultados\\exemplo-projeto\\resultado.pptx"
     }
-  ]
+  ],
+  "compartilhamento": {
+    "visibilidade": "nao_listado",
+    "publico_descricao": "Acesso pelo link não listado",
+    "modo_acesso": "link_secreto"
+  }
 }

@@ -44,10 +44,14 @@ Módulos JavaScript precisam de HTTP; não abra `index.html` com duplo clique.
 Na raiz do workspace:
 
 ```powershell
-python -m http.server 5500
+.\iniciar-megabrain.ps1
 ```
 
 Depois abra `http://127.0.0.1:5500/`.
+
+O script usa `python -m http.server 5500 --bind 127.0.0.1`, abre o navegador e
+impede que o servidor escute na rede local. As páginas administrativas também
+recusam execução fora de `localhost`/`127.0.0.1`.
 
 O catálogo funciona sem conexão com o Supabase. Para usar Upload, Bases ou as
 ferramentas legadas somente no ambiente local, crie a configuração a partir do
@@ -93,13 +97,22 @@ catálogo oferece copiar o caminho e tenta abrir o arquivo apenas como conveniê
 
 ## Compartilhamento e acesso
 
-Um card oculto, um endereço difícil de adivinhar ou um token na URL não são
-controle de acesso. Cada portal compartilhável deve ser implantado como aplicação
-independente e protegido na hospedagem — preferencialmente com Microsoft Entra e
-uma lista explícita de usuários ou grupos.
+O Megabrain central é local e não precisa de login. Cada portal compartilhável
+deve ser implantado separadamente, sem publicar o catálogo central.
 
-O Megabrain central deve permanecer privado. Publicar todos os sandboxes como
-subpastas do mesmo GitHub Pages não separa permissões entre projetos.
+Para páginas estáticas, somente leitura e sem dados sensíveis, o padrão atual é
+um link não listado com identificador aleatório de 16 caracteres. Gere uma vez:
+
+```powershell
+python scripts\compartilhamento\gerar_token.py
+```
+
+Use o identificador no endereço implantado e guarde a URL completa apenas em
+`project.local.json`. O link funciona como uma chave compartilhável: qualquer
+pessoa que o receber pode abrir e repassar. Ele não substitui autenticação para
+dados pessoais, conteúdo sensível ou ferramentas com escrita.
+
+Veja [docs/links-nao-listados.md](docs/links-nao-listados.md).
 
 ## Excluir um projeto
 
@@ -116,8 +129,8 @@ no Supabase/hospedagem. O `README.md` do sandbox registra essa dependência.
   específico estão ignorados no repositório central atual.
 - Não armazene `service_role`, senha ou connection string no frontend.
 - A chave pública do Supabase só é aceitável com RLS restritiva.
-- Antes de compartilhar um portal, configure autenticação na hospedagem e teste
-  com uma conta sem acesso.
+- Links não listados devem usar `noindex`, política de referência restrita e
+  somente conteúdo compatível com compartilhamento por link.
 
 Veja também [docs/seguranca.md](docs/seguranca.md) e
 [docs/arquitetura.md](docs/arquitetura.md).

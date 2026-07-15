@@ -6,7 +6,7 @@
 // Sem caracteres ambíguos (0/O, 1/l/I) para facilitar leitura em voz alta.
 const ALFABETO = "abcdefghjkmnpqrstuvwxyz23456789";
 
-export function gerarTokenCurto(tamanho = 12) {
+export function gerarTokenCurto(tamanho = 16) {
   const aleatorios = new Uint32Array(tamanho);
   crypto.getRandomValues(aleatorios);
   let token = "";

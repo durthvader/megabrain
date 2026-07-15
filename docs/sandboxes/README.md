@@ -50,9 +50,10 @@ remove o projeto sem apagar o Megabrain nem uma biblioteca compartilhada.
    privado próprio; não remova essas proteções do repositório central público.
 
 5. O conteúdo de `public/` deve funcionar sem depender do portal Megabrain. Isso
-   permite hospedar e autorizar cada portal separadamente.
-6. Restringir ou ocultar um card não controla acesso. O acesso deve ser aplicado
-   na hospedagem do projeto; o catálogo apenas descreve essa política.
+   permite hospedar cada portal separadamente.
+6. Para conteúdo estático e não sensível, o endereço não listado é guardado
+   somente no manifesto local. Ele reduz descoberta, mas pode ser repassado.
+   Conteúdo sensível ou com escrita exige autenticação real.
 7. Arquivos gerados não devem apontar para fora do sandbox por caminhos relativos
    com `..`. Dependências compartilhadas devem ser empacotadas no build.
 
@@ -72,16 +73,12 @@ remove o projeto sem apagar o Megabrain nem uma biblioteca compartilhada.
   "criado_em": "2026-07-15",
   "atualizado_em": "2026-07-15",
   "tags": ["calendario", "operacao"],
-  "resultado_principal": {
-    "tipo": "url",
-    "rotulo": "Abrir portal",
-    "href": "https://calendario.exemplo.com"
-  },
+  "resultado_principal": null,
   "artefatos": [],
   "compartilhamento": {
-    "visibilidade": "restrito",
-    "publico_descricao": "Somente convidados deste projeto",
-    "modo_acesso": "entra"
+    "visibilidade": "nao_listado",
+    "publico_descricao": "Link guardado somente no catálogo local",
+    "modo_acesso": "link_secreto"
   }
 }
 ```
@@ -101,7 +98,8 @@ somente `resultado_principal`, `artefatos` e partes de `compartilhamento`:
   "resultado_principal": {
     "tipo": "url",
     "rotulo": "Abrir portal",
-    "href": "https://endereco-privado.exemplo.com/?token=..."
+    "href": "https://site.exemplo.com/p/k7mx4pq9vr2ct8wj/",
+    "caminho_local": null
   },
   "artefatos": [
     {
@@ -110,13 +108,18 @@ somente `resultado_principal`, `artefatos` e partes de `compartilhamento`:
       "href": null,
       "caminho_local": "C:\\Resultados\\calendario.pptx"
     }
-  ]
+  ],
+  "compartilhamento": {
+    "visibilidade": "nao_listado",
+    "publico_descricao": "Acesso pelo link não listado",
+    "modo_acesso": "link_secreto"
+  }
 }
 ```
 
-Esse arquivo não é uma proteção para segredos em produção: ele serve apenas ao
-catálogo executado localmente. Credenciais reais devem permanecer no provedor de
-identidade ou no cofre da hospedagem.
+Esse arquivo serve ao catálogo executado localmente e mantém o endereço fora do
+Git. O link ainda pode ser repassado por quem o recebeu; não use essa modalidade
+para conteúdo sensível.
 
 ## Sincronização do catálogo
 
@@ -154,4 +157,5 @@ deve permanecer ignorado pelo Git.
 - Excluir: remova apenas `projects/<project-id>` e sincronize novamente. O card
   some do catálogo; bibliotecas em `packages/` e o Megabrain permanecem.
 - Publicar: faça o deploy somente de `public/` (ou do artefato de build do
-  sandbox) e configure a lista de acesso no ambiente daquele projeto.
+  sandbox), gere o link não listado quando adequado e registre a URL final apenas
+  no manifesto local.

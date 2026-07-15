@@ -37,9 +37,17 @@ O card passa a apontar diretamente ao resultado.
 ## 5. Compartilhar
 
 Se houver portal, implante somente o `public/` daquele sandbox em uma aplicação
-independente. Configure autenticação e usuários/grupos no provedor antes de enviar
-o link. Arquivos podem ser compartilhados por OneDrive/SharePoint com a opção de
-pessoas específicas.
+independente. Para conteúdo estático e não sensível, gere um identificador de 16
+caracteres, componha o endereço não listado e guarde a URL somente em
+`project.local.json`:
+
+```powershell
+python scripts\compartilhamento\gerar_token.py
+```
+
+Adicione `noindex` e política `no-referrer` à página. Se houver dados sensíveis,
+escrita ou acesso individualizado, o link não listado não basta: use autenticação
+adequada antes de compartilhar.
 
 ## 6. Arquivar ou excluir
 

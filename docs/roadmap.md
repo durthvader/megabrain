@@ -14,11 +14,9 @@
 
 ## Próxima prioridade
 
-1. Tornar o repositório central privado e revisar o histórico que já expôs
-   entregáveis/tokens.
-2. Escolher a hospedagem protegida por projeto — preferência: Azure Static Web
-   Apps + Microsoft Entra.
-3. Implantar um projeto piloto e validar concessão/revogação de acesso.
+1. Manter o Megabrain administrativo somente em `127.0.0.1`.
+2. Implantar um projeto piloto estático com link não listado de 16 caracteres.
+3. Validar geração, armazenamento local, `noindex`, revogação e exclusão do link.
 4. Corrigir RLS/autenticação das ferramentas Supabase antes de uso sensível.
 
 ## Depois

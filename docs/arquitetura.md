@@ -62,13 +62,18 @@ deve inventariar IDs e recursos privados antes de qualquer limpeza destrutiva.
 ## Compartilhamento
 
 ```text
-Megabrain privado          Projeto A protegido          Projeto B protegido
-catálogo completo    ───►  usuários/grupo A       ───►  usuários/grupo B
+Megabrain local            Projeto A não listado        Projeto B não listado
+catálogo completo    ───►  link independente      ───►  link independente
 ```
 
-Cada projeto compartilhável precisa de implantação e política de acesso próprias.
-Subpastas em um único site, cards ocultos e tokens não formam uma fronteira de
-autorização.
+Cada projeto compartilhável recebe implantação e ciclo de vida próprios. Para
+conteúdo estático e não sensível, a URL não listada contém um identificador
+aleatório de 16 caracteres e fica somente no manifesto local. Esse endereço
+reduz descoberta acidental, mas não identifica a pessoa que o abriu.
+
+Projetos com dados sensíveis, escrita ou permissões por pessoa continuam exigindo
+autenticação e autorização próprias. Escala e Duplas permanecem legados: seus
+tokens selecionam a instância no Supabase, mas não corrigem policies permissivas.
 
 ## Decisões atuais
 
@@ -78,3 +83,5 @@ autorização.
 3. Metadados seguros e privados separados.
 4. Projetos específicos não dependem do ciclo de vida do Megabrain.
 5. Ferramentas compartilhadas e SQL permanecem fora dos sandboxes.
+6. O catálogo central executa somente em loopback (`127.0.0.1`/`localhost`).
+7. Links não listados são aceitos apenas para conteúdo não sensível.

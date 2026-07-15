@@ -21,8 +21,8 @@ Antes de compartilhar:
 
 1. valide a vinculação das bases;
 2. implante o snapshot como aplicação independente;
-3. proteja a aplicação com autenticação e usuários/grupos explícitos;
-4. teste com uma conta autorizada e outra não autorizada;
+3. mantenha somente dados operacionais mínimos e não sensíveis;
+4. use o link não listado guardado no manifesto local;
 5. só então envie o link.
 
 O token seleciona a instância no banco, mas não substitui autenticação.

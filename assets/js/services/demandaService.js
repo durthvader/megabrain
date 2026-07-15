@@ -7,7 +7,7 @@ import { supabase } from "../supabaseClient.js";
 import { gerarTokenCurto } from "../utils/tokens.js";
 
 export function gerarTokenPublico() {
-  return gerarTokenCurto(12);
+  return gerarTokenCurto();
 }
 
 export async function criarDemanda(dados) {

@@ -2,21 +2,25 @@
 
 ## Fronteiras de acesso
 
-O Megabrain central e cada portal de projeto são aplicações diferentes. Ocultar
-um card, usar uma subpasta ou acrescentar token à URL não restringe acesso.
+O Megabrain central e cada portal de projeto são aplicações diferentes.
 
-- mantenha o catálogo central privado;
+- execute o catálogo central somente em `127.0.0.1`;
 - implante cada `public/` separadamente;
-- aplique autenticação e uma lista explícita de usuários/grupos na hospedagem;
-- compartilhe arquivos por links de "pessoas específicas" no OneDrive ou
-  SharePoint;
-- teste sempre a negação de acesso.
+- use link não listado somente para página estática, leitura e conteúdo não
+  sensível;
+- aplique autenticação real quando houver dados sensíveis, escrita ou acesso por
+  pessoa;
+- trate o link como uma chave: quem o recebe pode abrir e repassar.
+
+O identificador padrão possui 16 caracteres aleatórios. `noindex`, `robots.txt`
+e `Referrer-Policy` reduzem descoberta e vazamento acidentais, mas não transformam
+o link em autenticação.
 
 ## Manifests
 
 `project.json` é seguro para versionamento e não pode conter tokens, caminhos
 absolutos ou URLs assinadas. `project.local.json` é ignorado e serve ao catálogo
-local, mas não é cofre de produção.
+local. A URL não listada completa deve ficar somente nele.
 
 Dados, entregáveis, código específico e snapshots dos sandboxes também estão
 ignorados no repositório central público atual. Projetos que precisem de histórico
@@ -47,8 +51,9 @@ interna não apropriada para dados sensíveis.
 ## Antes de compartilhar
 
 - [ ] O projeto está em aplicação independente?
-- [ ] O acesso exige identidade?
-- [ ] Somente usuários/grupos autorizados foram atribuídos?
-- [ ] Uma conta sem permissão recebeu bloqueio?
+- [ ] O conteúdo é compatível com acesso por qualquer pessoa que receba o link?
+- [ ] A página usa identificador aleatório de 16 caracteres?
+- [ ] A página usa `noindex` e não envia o endereço como referência?
 - [ ] Não há token, caminho local ou dado sensível no manifesto público?
+- [ ] APIs e bancos não permitem operações além das necessárias?
 - [ ] Existe plano de revogação/encerramento?

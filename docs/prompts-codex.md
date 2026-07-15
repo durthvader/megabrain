@@ -11,11 +11,12 @@
 > Atualize o sandbox `<id>` com os arquivos em `<caminho>`, preserve a versão
 > anterior em `archive/`, valide o resultado e atualize status/data no catálogo.
 
-## Portal com acesso restrito
+## Portal com link não listado
 
 > Prepare `public/` do projeto `<id>` para implantação independente. Não exponha
-> tokens nem caminhos locais e liste os passos necessários para liberar somente
-> o grupo `<grupo>`.
+> caminhos locais ou o endereço final no manifesto público. Gere um identificador
+> de 16 caracteres, aplique `noindex`/`no-referrer` e registre a URL completa
+> somente em `project.local.json`. Confirme antes que não há dados sensíveis.
 
 ## Excluir um projeto
 
