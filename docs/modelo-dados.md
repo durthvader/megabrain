@@ -10,7 +10,7 @@ Unidade central de organização.
 |---|---|---|
 | id | uuid PK | `gen_random_uuid()` |
 | nome | text | obrigatório |
-| tipo | text | `escala` \| `custos` \| `indicadores` \| `formulario` \| `analise_livre` |
+| tipo | text | identificador livre, como `indicadores`, `duplas` ou `formulario` |
 | descricao, responsavel | text | livres |
 | token_publico | text unique | usado em `formulario.html?token=…` |
 | data_inicio, data_fim | date | período da demanda |
@@ -36,7 +36,9 @@ Os dados importados, **uma linha da planilha por registro**, no campo `dados jso
 
 ## formulario_respostas
 
-Respostas dos formulários públicos. Campos estruturados de uso comum (respondente, supervisor, tecnico, empresa, cidade, data_referencia) + `dados jsonb` para campos dinâmicos (`tipo_folga`, `observacao`, extras).
+Respostas dos formulários públicos. Campos estruturados de uso comum
+(respondente, supervisor, tecnico, empresa, cidade, data_referencia) +
+`dados jsonb` para campos dinâmicos (`observacao` e extras).
 
 ## analises
 
@@ -56,7 +58,6 @@ Trilha de importações/limpezas: tipo, mensagem, detalhes (jsonb). Pode ser apa
 |---|---|
 | `view_resumo_demandas` | contagens de bases/linhas/respostas/análises/planos por demanda |
 | `view_base_linhas_flat` | `base_linhas` pronta para consultas ad hoc (`dados->>'campo'`) |
-| `view_respostas_escala` | respostas de escala com `tipo_folga` e `observacao` já extraídos do JSONB |
 
 ## Consultas úteis (para o Codex)
 
@@ -67,12 +68,5 @@ where demanda_id = 'UUID' limit 5;
 
 -- Campos distintos usados numa base
 select distinct jsonb_object_keys(dados) from base_linhas
-where demanda_id = 'UUID' and tipo_base = 'custos';
-
--- Custo total por técnico direto no SQL
-select dados->>'tecnico' as tecnico,
-       sum((dados->>'valor')::numeric) as total
-from base_linhas
-where demanda_id = 'UUID' and tipo_base = 'custos'
-group by 1 order by 2 desc;
+where demanda_id = 'UUID' and tipo_base = 'tipo_da_base';
 ```

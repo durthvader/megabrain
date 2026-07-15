@@ -9,8 +9,9 @@ interna nem compartilhar o ciclo de vida do projeto.
 ```text
 projects/
   <project-id>/
-    project.json          # metadados seguros e versionáveis
+    project.json          # metadados locais do card
     project.local.json    # destinos privados; nunca versionar nem publicar
+    resources.local.json  # recursos externos; nunca versionar nem publicar
     README.md             # objetivo, operação e decisões do projeto
     src/                  # código exclusivo do projeto
     data/
@@ -32,32 +33,28 @@ remove o projeto sem apagar o Megabrain nem uma biblioteca compartilhada.
    absoluto, `file://` nem outro dado privado.
 3. Caminhos locais e links com credenciais ficam somente em
    `project.local.json`.
-4. No repositório central público atual, todo o conteúdo operacional do sandbox
-   permanece local. Estão ignorados:
+4. Bases, registros, deploys ou outros recursos fora do sandbox devem ser
+   registrados em `resources.local.json`. Um inventário vazio torna a exclusão
+   uma operação local; um inventário preenchido exige limpeza assistida.
+5. No repositório central público, o sandbox inteiro permanece local. A regra é:
 
    ```gitignore
-   projects/*/project.local.json
-   projects/*/data/
-   projects/*/deliverables/
-   projects/*/public/
-   projects/*/src/
-   projects/*/content/
-   projects/*/docs/
-   projects/*/archive/
+   projects/*/
    ```
 
-   Se um projeto precisar de histórico ou deploy contínuo, use um repositório
-   privado próprio; não remova essas proteções do repositório central público.
+   Isso inclui `project.json`, `README.md`, fontes e resultados. Se um projeto
+   precisar de histórico ou deploy contínuo, use um repositório próprio; não
+   remova essa proteção do repositório central público.
 
-5. O conteúdo de `public/` deve funcionar sem depender do portal Megabrain. Isso
+6. O conteúdo de `public/` deve funcionar sem depender do portal Megabrain. Isso
    permite hospedar cada portal separadamente.
-6. Para conteúdo estático e não sensível, o endereço não listado é guardado
+7. Para conteúdo estático e não sensível, o endereço não listado é guardado
    somente no manifesto local. Ele reduz descoberta, mas pode ser repassado.
    Conteúdo sensível ou com escrita exige autenticação real.
-7. Arquivos gerados não devem apontar para fora do sandbox por caminhos relativos
+8. Arquivos gerados não devem apontar para fora do sandbox por caminhos relativos
    com `..`. Dependências compartilhadas devem ser empacotadas no build.
 
-## Manifesto público
+## Manifesto do catálogo
 
 `project.json` segue [project.schema.json](project.schema.json). Exemplo:
 
@@ -150,12 +147,16 @@ deve permanecer ignorado pelo Git.
 
 ## Criar, arquivar e excluir
 
-- Criar: copie a estrutura, defina um `id` único, preencha `project.json` e rode
-  o sincronizador.
+- Criar: use `python scripts/projetos/gerenciar.py criar --help`. O comando cria
+  a estrutura adequada ao tipo e sincroniza o catálogo.
 - Arquivar: mude `status` para `arquivado`, mova versões antigas para `archive/`
   se necessário e sincronize.
-- Excluir: remova apenas `projects/<project-id>` e sincronize novamente. O card
-  some do catálogo; bibliotecas em `packages/` e o Megabrain permanecem.
+- Excluir: use `python scripts/projetos/gerenciar.py excluir <id> --confirmar
+  <id>`. O comando valida que o alvo é um sandbox direto, verifica o inventário,
+  remove somente essa pasta e sincroniza o catálogo.
 - Publicar: faça o deploy somente de `public/` (ou do artefato de build do
   sandbox), gere o link não listado quando adequado e registre a URL final apenas
   no manifesto local.
+
+O modelo do inventário fica em
+[`projects/resources.local.example.json`](../../projects/resources.local.example.json).

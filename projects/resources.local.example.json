@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "project_id": "exemplo-projeto",
+  "external_resources": [
+    {
+      "type": "servico_externo",
+      "reference": "identificador-sem-segredos",
+      "description": "Recurso que precisa ser removido antes de apagar o sandbox"
+    }
+  ]
+}

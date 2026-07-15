@@ -8,7 +8,7 @@ Há dois caminhos válidos.
 caminho da pasta ou do arquivo, por exemplo:
 
 ```text
-C:\Users\rogerio.fonseca\Downloads
+C:\Users\<usuario>\Downloads
 ```
 
 O material processado deve ser copiado ou referenciado dentro do sandbox do

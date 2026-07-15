@@ -6,12 +6,12 @@
 
 -- ------------------------------------------------------------
 -- DEMANDAS: unidade central de organização do Megabrain.
--- Cada trabalho (escala, custos, formulário…) é uma demanda.
+-- Cada trabalho legado armazenado aqui é uma demanda.
 -- ------------------------------------------------------------
 create table if not exists public.demandas (
   id uuid primary key default gen_random_uuid(),
   nome text not null,
-  tipo text not null,                     -- escala | custos | indicadores | formulario | analise_livre
+  tipo text not null,                     -- identificador livre da categoria
   descricao text,
   responsavel text,
   token_publico text unique not null,     -- usado nos links públicos: formulario.html?token=...
@@ -70,7 +70,7 @@ create table if not exists public.formulario_respostas (
   id uuid primary key default gen_random_uuid(),
   demanda_id uuid references public.demandas(id) on delete cascade,
   token_publico text not null,
-  tipo_formulario text,                   -- generico | escala_folga | ...
+  tipo_formulario text,                   -- generico | dupla | dupla_sozinho | ...
   respondente_nome text,
   respondente_perfil text,
   supervisor text,

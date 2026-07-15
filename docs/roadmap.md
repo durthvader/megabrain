@@ -8,7 +8,7 @@
 - Um manifesto e um sandbox para cada projeto atual.
 - Catálogo gerado automaticamente dos sandboxes.
 - Metadados privados separados e ignorados pelo Git.
-- Código compartilhado de 3Ps e Custo de Horas iniciado em `packages/`.
+- Componentes reutilizados por famílias de projetos separados em `packages/`.
 - Cópias legadas de `outputs/`, scripts e documentação removidas da raiz; a
   versão intermediária do PPT Nordeste foi preservada no `archive/` do sandbox.
 
@@ -21,7 +21,7 @@
 
 ## Depois
 
-- extrair completamente Escala, Duplas e Custos para pacotes independentes;
+- extrair completamente Duplas para um pacote independente;
 - automatizar build de `public/` sem dependências externas ao sandbox;
 - inventariar recursos externos no manifesto privado e criar exclusão assistida;
 - criar template de novo sandbox;

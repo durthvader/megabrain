@@ -82,11 +82,6 @@ delete from public.demandas where status = 'arquivada';
 -- Apagar logs com mais de 30 dias:
 delete from public.logs where criado_em < now() - interval '30 days';
 
--- Apagar os dados de demonstração do 005:
--- delete from public.demandas where id in
---   ('a1111111-1111-1111-1111-111111111111',
---    'a2222222-2222-2222-2222-222222222222');
-
 -- ------------------------------------------------------------
 -- 4) Recuperar espaço físico depois de apagar muita coisa.
 -- ------------------------------------------------------------

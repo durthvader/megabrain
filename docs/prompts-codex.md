@@ -14,7 +14,7 @@
 ## Portal com link não listado
 
 > Prepare `public/` do projeto `<id>` para implantação independente. Não exponha
-> caminhos locais ou o endereço final no manifesto público. Gere um identificador
+> caminhos locais ou o endereço final no manifesto do catálogo. Gere um identificador
 > de 16 caracteres, aplique `noindex`/`no-referrer` e registre a URL completa
 > somente em `project.local.json`. Confirme antes que não há dados sensíveis.
 
@@ -26,6 +26,6 @@
 
 ## Usar um caminho local
 
-> Os arquivos desta demanda estão em `C:\Users\rogerio.fonseca\Downloads\<pasta>`.
+> Os arquivos desta demanda estão em `C:\Users\<usuario>\Downloads\<pasta>`.
 > Leia o conteúdo sem fazer upload ao Supabase, a menos que a ferramenta realmente
 > precise da base online.

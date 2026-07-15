@@ -34,14 +34,6 @@
   --serie-7: #e87ba4;
   --serie-8: #eb6834;
 
-  /* Escala (grade de 30 dias) */
-  --escala-disponivel: #ffffff;
-  --escala-ferias: #b7d3f6;
-  --escala-treinamento: #ffd28a;
-  --escala-exame: #d9cff2;
-  --escala-folga: #bfe8c5;
-  --escala-conflito: #f5b5b4;
-
   --raio: 8px;
   --sombra: 0 1px 3px rgba(15, 23, 42, 0.08);
 }

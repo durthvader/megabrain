@@ -1,7 +1,7 @@
 # Páginas com token — infraestrutura legada
 
-Escala, Duplas e o formulário genérico ainda usam um token na URL para selecionar
-uma demanda do Supabase. Esse mecanismo faz parte da infraestrutura anterior e
+Duplas e o formulário genérico ainda usam um token na URL para selecionar uma
+demanda do Supabase. Esse mecanismo faz parte da infraestrutura anterior e
 não é o cadastro oficial do portfólio.
 
 O token:

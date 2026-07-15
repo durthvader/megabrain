@@ -33,7 +33,7 @@ o servidor continua entregando a mesma página.
 - salve a URL final apenas em `projects/<id>/project.local.json`;
 - marque a sobreposição local como `visibilidade: "nao_listado"` e
   `modo_acesso: "link_secreto"`;
-- nunca grave o identificador em `project.json`, catálogo público, documentação,
+- nunca grave o identificador em `project.json`, catálogo versionado, documentação,
   código versionado ou mensagem de log;
 - não regenere o valor ao sincronizar o catálogo.
 
@@ -57,5 +57,5 @@ troque o identificador ou remova a implantação e atualize o manifesto local.
 
 Não use esse modelo para CPF, endereço, salário, informação médica ou bancária,
 dados de clientes, páginas administrativas ou ferramentas que alterem dados.
-Escala e Duplas usam tokens legados para selecionar instâncias no Supabase; isso
-não impede acesso direto às APIs enquanto as policies continuarem permissivas.
+Duplas usa um token legado para selecionar sua instância no Supabase; isso não
+impede acesso direto às APIs enquanto as policies continuarem permissivas.

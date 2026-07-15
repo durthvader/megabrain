@@ -37,20 +37,3 @@ select
   dados,
   criado_em
 from public.base_linhas;
-
--- ------------------------------------------------------------
--- Respostas de escala com os campos úteis já extraídos do JSONB.
--- ------------------------------------------------------------
-create or replace view public.view_respostas_escala
-  with (security_invoker = true) as
-select
-  demanda_id,
-  supervisor,
-  tecnico,
-  empresa,
-  cidade,
-  data_referencia,
-  coalesce(dados->>'tipo_folga', 'folga') as tipo_folga,
-  dados->>'observacao' as observacao
-from public.formulario_respostas
-where tipo_formulario in ('escala', 'escala_folga');

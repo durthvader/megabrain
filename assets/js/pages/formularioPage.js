@@ -2,10 +2,6 @@
 // MEGABRAIN — pages/formularioPage.js
 // Página PÚBLICA de preenchimento genérico (sem login, via token).
 // formulario.html?token=TOKEN
-//
-// Demandas do tipo "escala" são redirecionadas automaticamente
-// para o painel completo (escala-publica.html), que tem a UX de
-// clique instantâneo na grade em vez deste formulário linha a linha.
 // ============================================================
 
 import { buscarDemandaPorToken } from "../services/demandaService.js";
@@ -97,13 +93,6 @@ async function iniciar() {
     mostrarErroToken(
       `Esta demanda está com status "${demandaAtual.status}" e não aceita mais respostas.`
     );
-    return;
-  }
-
-  // Links antigos de demandas de escala continuam funcionando: redireciona
-  // para o painel completo em vez do formulário linha a linha.
-  if (demandaAtual.tipo === "escala") {
-    window.location.replace(`escala-publica.html?token=${encodeURIComponent(token)}`);
     return;
   }
 

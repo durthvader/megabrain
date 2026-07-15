@@ -6,8 +6,8 @@
 Conversa com o Codex
         │ cria e executa a demanda
         ▼
-projects/<id>/                 um sandbox por projeto
-  project.json                 metadados seguros
+projects/<id>/                 um sandbox local por projeto
+  project.json                 metadados do card
   project.local.json           links, tokens e caminhos privados
   data/src/public/deliverables ciclo de vida do resultado
         │
@@ -27,10 +27,10 @@ permite arquivar ou excluir um sandbox sem alterar os demais trabalhos.
 
 - `assets/js/pages/`: renderização das páginas Início, Projetos, Upload e
   Bases/armazenamento.
-- `assets/js/services/catalogoService.js`: leitura e mesclagem do catálogo seguro
-  com os destinos locais.
-- `data/catalogo-projetos.json`: artefato gerado dos `project.json`.
-- `data/catalogo-projetos.local.json`: artefato privado gerado dos
+- `assets/js/services/catalogoService.js`: leitura e mesclagem dos dois catálogos
+  locais.
+- `data/catalogo-projetos.json`: artefato local gerado dos `project.json`.
+- `data/catalogo-projetos.local.json`: artefato local gerado dos
   `project.local.json`.
 - `scripts/catalogo/sincronizar_catalogo.py`: validação e consolidação.
 
@@ -44,15 +44,16 @@ Cada sandbox segue [o contrato de sandboxes](sandboxes/README.md). O conteúdo
 do Megabrain. Dependências verdadeiramente comuns ficam em `packages/` e são
 empacotadas ao publicar.
 
-O repositório central atual ignora conteúdo operacional dos sandboxes. Isso evita
-que dados, apresentações e tokens novos sejam publicados acidentalmente no
-repositório público existente. Um projeto que precise de histórico próprio deve
-receber um repositório privado ou armazenamento protegido independente.
+O repositório central público ignora cada sandbox inteiro, os componentes
+compartilhados e os catálogos gerados. Isso evita que nomes, status, dados,
+apresentações e tokens novos sejam publicados acidentalmente. Um projeto que
+precise de histórico próprio deve receber um repositório ou armazenamento
+independente adequado à sua exposição.
 
 ## Supabase
 
-Supabase continua como infraestrutura compartilhada para Upload, Bases e para as
-instâncias legadas das ferramentas Escala/Duplas/Custos. As tabelas `demandas`,
+Supabase continua como infraestrutura compartilhada para Upload, Bases e para a
+instância legada da ferramenta Duplas. As tabelas `demandas`,
 `demanda_bases`, `base_linhas`, `formulario_respostas` e correlatas não são mais o
 cadastro oficial do portfólio.
 
@@ -72,8 +73,8 @@ aleatório de 16 caracteres e fica somente no manifesto local. Esse endereço
 reduz descoberta acidental, mas não identifica a pessoa que o abriu.
 
 Projetos com dados sensíveis, escrita ou permissões por pessoa continuam exigindo
-autenticação e autorização próprias. Escala e Duplas permanecem legados: seus
-tokens selecionam a instância no Supabase, mas não corrigem policies permissivas.
+autenticação e autorização próprias. Duplas permanece como legado: seu token
+seleciona a instância no Supabase, mas não corrige policies permissivas.
 
 ## Decisões atuais
 

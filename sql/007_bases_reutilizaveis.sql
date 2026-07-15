@@ -24,7 +24,7 @@ create index if not exists idx_demanda_bases_base on public.demanda_bases (base_
 
 -- ------------------------------------------------------------
 -- Nome do arquivo (na raiz do projeto) da página de resultado
--- gerada pela IA para esta demanda, ex.: "resultado-escala-abc.html".
+-- gerada pela IA para esta demanda, ex.: "resultado-projeto.html".
 -- Enquanto for null, o link público (resultado.html?token=...)
 -- mostra só título + descrição, sem conteúdo gerado.
 -- ------------------------------------------------------------

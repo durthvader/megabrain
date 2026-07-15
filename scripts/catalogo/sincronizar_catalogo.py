@@ -336,9 +336,11 @@ def _validar_local(local: dict[str, Any], project_id: str, caminho: Path) -> Non
         )
 
 
-def _coletar_projetos(raiz: Path) -> tuple[list[dict[str, Any]], list[Path]]:
+def _coletar_projetos(
+    raiz: Path, *, permitir_vazio: bool = False
+) -> tuple[list[dict[str, Any]], list[Path]]:
     manifests = sorted((raiz / "projects").glob("*/project.json"))
-    if not manifests:
+    if not manifests and not permitir_vazio:
         raise ErroContrato(
             f"nenhum manifesto encontrado em {raiz / 'projects' / '*' / 'project.json'}; "
             "o catálogo existente não será sobrescrito"
@@ -412,6 +414,11 @@ def _coletar_locais(
             "project.local.json sem project.json correspondente: "
             + ", ".join(map(str, sem_manifesto))
         )
+    if not locais_existentes and not manifests:
+        _verificar_ignorados_pelo_git(
+            raiz, [raiz / "data" / "catalogo-projetos.local.json"]
+        )
+        return []
     if not locais_existentes:
         raise ErroContrato(
             "--incluir-local foi usado, mas nenhum project.local.json foi encontrado; "
@@ -473,6 +480,11 @@ def _criar_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="também consolida project.local.json (deve estar ignorado pelo Git)",
     )
+    parser.add_argument(
+        "--permitir-vazio",
+        action="store_true",
+        help="permite gerar catálogos vazios após excluir deliberadamente o último projeto",
+    )
     return parser
 
 
@@ -480,7 +492,9 @@ def main(argv: list[str] | None = None) -> int:
     args = _criar_parser().parse_args(argv)
     raiz = args.raiz.expanduser().resolve()
     try:
-        projetos, manifests = _coletar_projetos(raiz)
+        projetos, manifests = _coletar_projetos(
+            raiz, permitir_vazio=args.permitir_vazio
+        )
         locais = _coletar_locais(raiz, manifests) if args.incluir_local else None
     except ErroContrato as exc:
         print(f"ERRO: {exc}", file=sys.stderr)

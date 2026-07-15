@@ -56,9 +56,8 @@ create policy mvp_demandas_delete on public.demandas
   for delete to anon, authenticated using (true);
 
 -- ------------------------------------------------------------
--- BASES e BASE_LINHAS — MVP: aberto (o painel de escala público
--- por token precisaria de SELECT; custos não precisa ser público,
--- mas sem auth não há como diferenciar — risco documentado).
+-- BASES e BASE_LINHAS — MVP: aberto para as ferramentas legadas.
+-- Sem auth não há como diferenciar consumidores — risco documentado.
 -- Evite subir bases sensíveis.
 -- ------------------------------------------------------------
 drop policy if exists mvp_bases_tudo on public.bases;
@@ -130,8 +129,8 @@ create policy mvp_logs_tudo on public.logs
 -- -- create policy demandas_escrita_auth on public.demandas
 -- --   for all to authenticated using (true) with check (true);
 --
--- -- base_linhas público apenas para bases de escala:
--- -- create policy linhas_escala_publico on public.base_linhas
+-- -- Exemplo: leitura pública somente de tipos explicitamente permitidos:
+-- -- create policy linhas_publicas_por_tipo on public.base_linhas
 -- --   for select to anon
--- --   using (tipo_base in ('tecnicos','ferias','treinamentos','exames','folgas'));
+-- --   using (tipo_base in ('tipo_publico_1','tipo_publico_2'));
 -- ============================================================

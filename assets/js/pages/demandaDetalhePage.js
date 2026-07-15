@@ -59,12 +59,6 @@ function renderizarCabecalho() {
   el("btn-ir-upload").href = `upload.html?demanda=${demanda.id}`;
   el("btn-abrir-formulario").href = link;
 
-  const botaoEscalaPublica = el("btn-abrir-escala-publica");
-  botaoEscalaPublica.classList.toggle("oculto", demanda.tipo !== "escala");
-  if (demanda.tipo === "escala") {
-    botaoEscalaPublica.href = `escala-publica.html?token=${encodeURIComponent(demanda.token_publico)}`;
-  }
-
   const botaoDuplasPublica = el("btn-abrir-duplas-publica");
   botaoDuplasPublica.classList.toggle("oculto", demanda.tipo !== "duplas");
   if (demanda.tipo === "duplas") {
@@ -77,8 +71,6 @@ function renderizarCabecalho() {
     botaoDuplasResultado.href = `duplas-resultado.html?token=${encodeURIComponent(demanda.token_publico)}`;
   }
 
-  el("btn-abrir-escala").href = `escala.html?demanda=${demanda.id}`;
-  el("btn-abrir-custos").href = `custos.html?demanda=${demanda.id}`;
   el("link-novo-plano").href = `planos.html?demanda=${demanda.id}`;
 }
 

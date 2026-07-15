@@ -4,16 +4,16 @@
    ============================================================ */
 
 /* Mais contraste que o fundo padrão claro — só nas páginas de duplas. */
-.pagina-publica-escala { background: #e6eaf0; }
+.pagina-publica-ampla { background: #e6eaf0; }
 
-.pagina-publica-escala .campo select,
-.pagina-publica-escala .campo input {
+.pagina-publica-ampla .campo select,
+.pagina-publica-ampla .campo input {
   border: 1.5px solid #a9b4c4;
   background: #ffffff;
 }
 
-.pagina-publica-escala .campo select:focus,
-.pagina-publica-escala .campo input:focus {
+.pagina-publica-ampla .campo select:focus,
+.pagina-publica-ampla .campo input:focus {
   border-color: var(--cor-primaria);
 }
 
@@ -180,17 +180,17 @@
   border-color: #a01f1f;
 }
 
-.pagina-publica-escala .kpi,
-.pagina-publica-escala .cartao-item,
-.pagina-publica-escala .vazio,
-.pagina-publica-escala .alerta {
+.pagina-publica-ampla .kpi,
+.pagina-publica-ampla .cartao-item,
+.pagina-publica-ampla .vazio,
+.pagina-publica-ampla .alerta {
   border: 1.5px solid #a9b4c4;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
 }
 
-.pagina-publica-escala .alerta-erro { border-color: var(--cor-erro); }
+.pagina-publica-ampla .alerta-erro { border-color: var(--cor-erro); }
 
-.pagina-publica-escala .alerta-info { border-color: var(--cor-primaria); }
+.pagina-publica-ampla .alerta-info { border-color: var(--cor-primaria); }
 
 @media (max-width: 560px) {
   .duplas-pessoa { flex: 1 1 calc(50% - 0.5rem); }

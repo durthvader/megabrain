@@ -51,16 +51,3 @@ const ROTULOS_STATUS = {
 export function formatarStatus(status) {
   return ROTULOS_STATUS[status] || status || "—";
 }
-
-const ROTULOS_TIPO_CUSTO = {
-  hora_extra: "Hora extra",
-  banco_horas: "Banco de horas",
-  sobreaviso: "Sobreaviso",
-  acionamento_sobreaviso: "Acionamento em sobreaviso",
-  adicional_noturno: "Adicional noturno",
-  outros: "Outros",
-};
-
-export function formatarTipoCusto(tipo) {
-  return ROTULOS_TIPO_CUSTO[tipo] || tipo || "—";
-}

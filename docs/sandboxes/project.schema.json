@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://megabrain.local/schemas/project.schema.json",
-  "title": "Manifesto público de um sandbox Megabrain",
+  "title": "Manifesto local de um sandbox Megabrain",
   "type": "object",
   "additionalProperties": false,
   "required": [

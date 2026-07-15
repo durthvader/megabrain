@@ -1,0 +1,34 @@
+{
+  "folders": [
+    {
+      "name": "MEGABRAIN - sistema",
+      "path": "."
+    },
+    {
+      "name": "PROJETOS",
+      "path": "projects"
+    },
+    {
+      "name": "PROJETOS - compartilhado",
+      "path": "packages"
+    }
+  ],
+  "settings": {
+    "explorer.compactFolders": false,
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+      "project.json": "project.local.json, resources.local.json, README.md",
+      "index.html": "configuracoes.html, resultados.html, upload.html, analises.html, demandas.html, demanda-detalhe.html, formulario.html, planos.html, robots.txt, .nojekyll",
+      "resultados.html": "resultado.html, duplas-publica.html, duplas-resultado.html"
+    },
+    "files.exclude": {
+      "projects": true,
+      "packages": true,
+      ".claude": true,
+      ".env": true,
+      ".mcp.json": true,
+      "**/__pycache__": true,
+      "node_modules": true
+    }
+  }
+}

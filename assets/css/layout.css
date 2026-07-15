@@ -138,8 +138,8 @@
   color: var(--cor-primaria-escura);
 }
 
-/* ---------- Painel público de escala (mais largo, sem sidebar) ---------- */
-.pagina-publica-escala {
+/* ---------- Painel público amplo, sem sidebar ---------- */
+.pagina-publica-ampla {
   min-height: 100vh;
 }
 

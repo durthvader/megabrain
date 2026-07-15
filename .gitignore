@@ -1,22 +1,18 @@
-# Segredos — NUNCA versionar (contém senha do banco / connection string)
+# Dados locais e segredos — nunca publicar
 .env
 .env.local
 .mcp.json
 .claude/
 assets/js/config.js
+data/catalogo-projetos.json
 data/catalogo-projetos.local.json
 
-# Sandboxes: somente o manifesto seguro e a documentação estrutural são públicos.
-# Resultados, bases, código específico, tokens e caminhos locais ficam no computador
-# ou no repositório privado/deploy protegido de cada projeto.
-projects/*/project.local.json
-projects/*/data/
-projects/*/deliverables/
-projects/*/public/
-projects/*/src/
-projects/*/content/
-projects/*/docs/
-projects/*/archive/
+# Cada sandbox inteiro é local. O repositório público guarda apenas o sistema,
+# a documentação e os exemplos que ficam diretamente em projects/.
+projects/*/
+
+# Componentes compartilhados também pertencem aos projetos, não ao portal.
+packages/*/
 
 # Dependências e artefatos
 node_modules/

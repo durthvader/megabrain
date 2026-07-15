@@ -18,13 +18,18 @@ o link em autenticação.
 
 ## Manifests
 
-`project.json` é seguro para versionamento e não pode conter tokens, caminhos
-absolutos ou URLs assinadas. `project.local.json` é ignorado e serve ao catálogo
-local. A URL não listada completa deve ficar somente nele.
+`project.json` serve ao catálogo local e não pode conter tokens, caminhos
+absolutos ou URLs assinadas. `project.local.json` guarda os destinos privados. A
+URL não listada completa deve ficar somente nele.
 
-Dados, entregáveis, código específico e snapshots dos sandboxes também estão
-ignorados no repositório central público atual. Projetos que precisem de histórico
-devem usar repositório privado próprio.
+O sandbox inteiro, inclusive esses dois manifests, e os componentes em
+`packages/*/` estão ignorados no repositório central público. Projetos que
+precisem de histórico devem usar um repositório próprio com a visibilidade
+adequada.
+
+Não use `git clean -fdX` neste workspace. Como os projetos são deliberadamente
+ignorados, esse comando os trataria como descartáveis e apagaria seus arquivos
+locais.
 
 ## Supabase
 
@@ -36,8 +41,8 @@ devem usar repositório privado próprio.
 
 As policies permissivas do MVP legado não atendem ao requisito de compartilhar
 com pessoas específicas. Enquanto não forem substituídas por autenticação e RLS
-por usuário/grupo, trate Escala, Duplas, formulários e bases como infraestrutura
-interna não apropriada para dados sensíveis.
+por usuário/grupo, trate Duplas, formulários e bases como infraestrutura interna
+não apropriada para dados sensíveis.
 
 ## Dados
 
@@ -54,6 +59,6 @@ interna não apropriada para dados sensíveis.
 - [ ] O conteúdo é compatível com acesso por qualquer pessoa que receba o link?
 - [ ] A página usa identificador aleatório de 16 caracteres?
 - [ ] A página usa `noindex` e não envia o endereço como referência?
-- [ ] Não há token, caminho local ou dado sensível no manifesto público?
+- [ ] Não há token, caminho local ou dado sensível no manifesto compartilhado?
 - [ ] APIs e bancos não permitem operações além das necessárias?
 - [ ] Existe plano de revogação/encerramento?
