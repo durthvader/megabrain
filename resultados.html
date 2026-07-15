@@ -18,13 +18,65 @@
       </header>
       <main class="conteudo">
         <section class="secao">
-          <p class="texto-suave">Cada card abre o link de resultado daquela demanda.</p>
-          <div class="grade-cards" id="grade-demandas"></div>
-          <div class="vazio oculto" id="demandas-vazio">Nenhuma demanda cadastrada ainda.</div>
+          <p class="texto-suave">
+            Cada card abre direto o resultado publicado. Esta lista é curada:
+            os painéis 3Ps são por regional e não correspondem a uma demanda do
+            banco, então são mantidos aqui à mão.
+          </p>
+        </section>
+
+        <section class="secao">
+          <h2>3Ps · Painéis executivos</h2>
+          <p class="texto-suave">Produção, Prazo e Produtividade por regional. Páginas estáticas, com o fechamento congelado na data da análise.</p>
+          <div class="grade-cards">
+            <a class="card-acesso" href="resultado-3ps.html">
+              <div class="card-acesso-icone">📊</div>
+              <div class="card-acesso-titulo">3Ps Ceará</div>
+              <div class="card-acesso-descricao">Painel executivo · regional Ceará</div>
+            </a>
+            <a class="card-acesso" href="resultado-nordeste.html">
+              <div class="card-acesso-icone">📊</div>
+              <div class="card-acesso-titulo">3Ps Nordeste</div>
+              <div class="card-acesso-descricao">Painel executivo · Sergipe e Pernambuco</div>
+            </a>
+            <a class="card-acesso" href="resultado-mapi.html">
+              <div class="card-acesso-icone">📊</div>
+              <div class="card-acesso-titulo">3Ps Maranhão / Piauí</div>
+              <div class="card-acesso-descricao">Painel executivo · regional MA/PI</div>
+            </a>
+          </div>
+        </section>
+
+        <section class="secao">
+          <h2>Operação · Painéis ao vivo</h2>
+          <p class="texto-suave">Leem o banco a cada abertura. O link carrega o token público da demanda.</p>
+          <div class="grade-cards">
+            <!-- Tokens públicos por design: são os mesmos links compartilhados
+                 com os supervisores. Se a demanda for recriada, atualizar aqui. -->
+            <a class="card-acesso" href="escala-publica.html?token=ra2jn8evcw27">
+              <div class="card-acesso-icone">🗓️</div>
+              <div class="card-acesso-titulo">Escala 15/07 a 14/08</div>
+              <div class="card-acesso-descricao">Grade técnico × dia, consolidado e conflitos</div>
+            </a>
+            <a class="card-acesso" href="duplas-resultado.html?token=yfgdwd6k8ztx">
+              <div class="card-acesso-icone">👥</div>
+              <div class="card-acesso-titulo">Duplas</div>
+              <div class="card-acesso-descricao">Quem está trabalhando duplado</div>
+            </a>
+          </div>
+        </section>
+
+        <section class="secao">
+          <h2>Ainda sem página publicada</h2>
+          <p class="texto-suave">
+            Existem só como deck em <code>outputs/</code>, fora do site: <strong>3Ps MG/CO/SP</strong>
+            e os quatro painéis de <strong>Custo de Horas</strong> (Ceará, Norte, Nordeste, MG/CO/SP).
+            Para entrarem aqui, precisam primeiro virar página HTML.
+          </p>
         </section>
       </main>
     </div>
   </div>
-  <script type="module" src="assets/js/pages/resultadosPage.js"></script>
+  <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>
