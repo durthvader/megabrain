@@ -49,7 +49,7 @@ assistida no inventário daquele sandbox.
 ## Abrir o código organizado
 
 Abra `Megabrain.code-workspace` em vez da pasta raiz. O Explorer passa a mostrar
-dois blocos separados:
+três blocos separados:
 
 - **MEGABRAIN - sistema:** portal, infraestrutura, scripts e documentação;
 - **PROJETOS:** somente os sandboxes em `projects/`.
