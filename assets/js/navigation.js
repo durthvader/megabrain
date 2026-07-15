@@ -4,16 +4,13 @@
 // o item ativo a partir de <body data-page="...">.
 // ============================================================
 
-// Escala, Custos e Planos deixaram de ser seções de topo: são painéis
-// acessados como cards dentro de Demandas (demandas.html), não concorrem
-// no menu principal com Demandas/Upload/Análises.
+// O Megabrain é um catálogo administrativo. As ferramentas e os portais
+// de cada projeto são abertos pelos cards de Resultados.
 const LINKS = [
   { pagina: "index", rotulo: "Início", href: "index.html", icone: "🏠" },
-  { pagina: "demandas", rotulo: "Demandas", href: "demandas.html", icone: "📋" },
-  { pagina: "upload", rotulo: "Upload de bases", href: "upload.html", icone: "📤" },
-  { pagina: "analises", rotulo: "Análises", href: "analises.html", icone: "🔎" },
-  { pagina: "resultados", rotulo: "Resultados", href: "resultados.html", icone: "📊" },
-  { pagina: "configuracoes", rotulo: "Configurações", href: "configuracoes.html", icone: "⚙️" },
+  { pagina: "resultados", rotulo: "Projetos e resultados", href: "resultados.html", icone: "🗂️" },
+  { pagina: "upload", rotulo: "Upload de arquivos", href: "upload.html", icone: "📤" },
+  { pagina: "configuracoes", rotulo: "Bases e armazenamento", href: "configuracoes.html", icone: "🗄️" },
 ];
 
 export function initNavigation() {
@@ -32,7 +29,7 @@ export function initNavigation() {
         </a>`
       ).join("")}
     </nav>
-    <div class="sidebar-rodape">Portal leve de demandas operacionais</div>
+    <div class="sidebar-rodape">Catálogo privado de projetos</div>
   `;
 
   const botaoMenu = document.getElementById("btn-menu");

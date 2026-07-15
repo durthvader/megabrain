@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Megabrain · Configurações</title>
+  <title>Megabrain · Bases e armazenamento</title>
   <link rel="stylesheet" href="assets/css/global.css" />
   <link rel="stylesheet" href="assets/css/layout.css" />
   <link rel="stylesheet" href="assets/css/cards.css" />
-  <link rel="stylesheet" href="assets/css/formularios.css" />
 </head>
 <body data-page="configuracoes">
   <div class="layout">
@@ -15,66 +14,37 @@
     <div class="area-principal">
       <header class="topo">
         <button class="btn-menu" id="btn-menu" aria-label="Abrir menu">☰</button>
-        <h1 class="topo-titulo">Configurações</h1>
+        <h1 class="topo-titulo">Bases e armazenamento</h1>
       </header>
       <main class="conteudo">
         <section class="secao card">
-          <h2 class="card-titulo">Conexão com o Supabase</h2>
-          <p>Status: <span class="badge" id="status-conexao">…</span></p>
+          <div class="secao-titulo">
+            <h2 class="card-titulo">Infraestrutura Supabase</h2>
+            <span class="badge" id="status-conexao">…</span>
+          </div>
           <p class="texto-mudo">
-            A URL e a chave pública ficam em <code>assets/js/config.js</code>.
-            Nunca coloque ali a service_role key.
+            Esta página monitora apenas a infraestrutura reutilizada pelas ferramentas.
+            A criação e a gestão de projetos acontecem no catálogo do Megabrain.
           </p>
           <button class="btn" id="btn-testar-conexao" type="button">Testar conexão</button>
         </section>
 
         <section class="secao">
-          <h2>Uso aproximado</h2>
+          <h2>Uso conhecido</h2>
           <div class="grade-kpis">
-            <div class="kpi"><div class="kpi-valor" id="contagem-demandas">…</div><div class="kpi-rotulo">Demandas</div></div>
-            <div class="kpi"><div class="kpi-valor" id="contagem-bases">…</div><div class="kpi-rotulo">Bases</div></div>
-            <div class="kpi"><div class="kpi-valor" id="contagem-linhas">…</div><div class="kpi-rotulo">Linhas importadas</div></div>
-            <div class="kpi"><div class="kpi-valor" id="contagem-respostas">…</div><div class="kpi-rotulo">Respostas</div></div>
-            <div class="kpi"><div class="kpi-valor" id="contagem-analises">…</div><div class="kpi-rotulo">Análises</div></div>
-            <div class="kpi"><div class="kpi-valor" id="contagem-planos">…</div><div class="kpi-rotulo">Planos</div></div>
-            <div class="kpi"><div class="kpi-valor" id="contagem-estimativa">…</div><div class="kpi-rotulo">Estimativa em linhas (~1 KB/linha)</div></div>
+            <div class="kpi"><div class="kpi-valor" id="contagem-bases">…</div><div class="kpi-rotulo">Bases importadas</div></div>
+            <div class="kpi"><div class="kpi-valor" id="contagem-linhas">…</div><div class="kpi-rotulo">Linhas no catálogo</div></div>
+            <div class="kpi"><div class="kpi-valor" id="contagem-tamanho">…</div><div class="kpi-rotulo">Tamanho das fontes</div></div>
+            <div class="kpi"><div class="kpi-valor" id="contagem-originais">…</div><div class="kpi-rotulo">Originais no Storage</div></div>
           </div>
+          <p class="texto-mudo" id="status-uso"></p>
         </section>
 
-        <section class="secao card">
-          <h2 class="card-titulo">Limpeza</h2>
-          <p class="texto-suave">Exporte os resultados antes de apagar. As ações abaixo são definitivas.</p>
-
-          <div class="linha-campos">
-            <div class="campo">
-              <label for="select-demanda-limpeza">Limpar dados de uma demanda</label>
-              <select id="select-demanda-limpeza"><option value="">Carregando…</option></select>
-            </div>
-            <div class="campo" style="align-self: end;">
-              <button class="btn btn-perigo" id="btn-limpar-demanda" type="button">🧹 Limpar dados da demanda</button>
-            </div>
-          </div>
-
-          <hr style="border: none; border-top: 1px solid var(--cor-borda); margin: 1rem 0;" />
-
-          <button class="btn btn-perigo" id="btn-limpar-arquivadas" type="button">
-            🗑️ Apagar todas as demandas arquivadas (e seus dados)
-          </button>
-        </section>
-
-        <section class="secao">
-          <h2>Plano gratuito do Supabase</h2>
-          <div class="alerta alerta-aviso">
-            <strong>Para continuar no plano gratuito:</strong>
-            <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem;">
-              <li>Use dados <strong>temporários por demanda</strong>: exporte e limpe ao concluir.</li>
-              <li>Não guarde o arquivo original no Storage (opção do upload) sem necessidade.</li>
-              <li>Evite bases enormes — importe só as colunas úteis.</li>
-              <li>Arquive demandas encerradas e use o botão de limpeza acima.</li>
-              <li>Projetos gratuitos <strong>pausam após ~7 dias sem uso</strong> — abra o painel do Supabase para reativar.</li>
-              <li>Estratégia completa em <code>docs/supabase-free.md</code>.</li>
-            </ul>
-          </div>
+        <section class="secao alerta alerta-info">
+          <strong>Arquivos locais não precisam ser enviados.</strong>
+          Quando a fonte já estiver no seu computador ou no OneDrive, informe o caminho ao
+          Codex. O upload é necessário somente quando uma ferramenta precisar consultar a
+          base pelo Supabase.
         </section>
       </main>
     </div>

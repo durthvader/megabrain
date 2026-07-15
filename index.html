@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="assets/css/global.css" />
   <link rel="stylesheet" href="assets/css/layout.css" />
   <link rel="stylesheet" href="assets/css/cards.css" />
+  <link rel="stylesheet" href="assets/css/tabelas.css" />
+  <link rel="stylesheet" href="assets/css/catalogo.css" />
 </head>
 <body data-page="index">
   <div class="layout">
@@ -18,49 +20,68 @@
       </header>
       <main class="conteudo">
         <section class="secao">
-          <p class="texto-suave">
-            Portal leve de demandas operacionais: crie uma demanda, suba bases,
-            colete respostas por link público, consolide, exporte e limpe.
-          </p>
+          <div class="catalogo-cabecalho">
+            <div>
+              <h2>Visão geral do portfólio</h2>
+              <p class="texto-suave">
+                O Megabrain concentra o status e o destino dos projetos. Novas
+                demandas são criadas com o Codex e recebem um sandbox próprio; o
+                portal apenas apresenta o catálogo resultante.
+              </p>
+            </div>
+            <a class="btn btn-primario" href="resultados.html">Ver todos os resultados</a>
+          </div>
         </section>
 
         <section class="secao">
-          <h2>Indicadores</h2>
+          <h2>Projetos</h2>
           <div class="grade-kpis">
-            <div class="kpi"><div class="kpi-valor" id="kpi-demandas">…</div><div class="kpi-rotulo">Demandas ativas</div></div>
-            <div class="kpi"><div class="kpi-valor" id="kpi-bases">…</div><div class="kpi-rotulo">Bases carregadas</div></div>
-            <div class="kpi"><div class="kpi-valor" id="kpi-respostas">…</div><div class="kpi-rotulo">Respostas recebidas</div></div>
-            <div class="kpi"><div class="kpi-valor" id="kpi-planos">…</div><div class="kpi-rotulo">Planos pendentes</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-projetos">…</div><div class="kpi-rotulo">Projetos catalogados</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-andamento">…</div><div class="kpi-rotulo">Em andamento / aguardando</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-publicados">…</div><div class="kpi-rotulo">Publicados</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-concluidos">…</div><div class="kpi-rotulo">Concluídos</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-restritos">…</div><div class="kpi-rotulo">Privados ou restritos</div></div>
           </div>
+        </section>
+
+        <section class="secao">
+          <div class="secao-titulo">
+            <h2>Status dos projetos</h2>
+            <span class="texto-mudo" id="status-atualizado">Carregando catálogo…</span>
+          </div>
+          <div class="tabela-container">
+            <table class="tabela-status-projetos">
+              <thead>
+                <tr><th>Projeto</th><th>Status</th><th>Tipo</th><th>Acesso</th><th>Atualizado</th></tr>
+              </thead>
+              <tbody id="status-projetos-corpo"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="secao">
+          <h2>Bases e armazenamento</h2>
+          <div class="grade-kpis">
+            <div class="kpi"><div class="kpi-valor" id="kpi-bases">…</div><div class="kpi-rotulo">Bases no Supabase</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-linhas">…</div><div class="kpi-rotulo">Linhas importadas</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-armazenamento">…</div><div class="kpi-rotulo">Tamanho das fontes</div></div>
+            <div class="kpi"><div class="kpi-valor" id="kpi-originais">…</div><div class="kpi-rotulo">Originais no Storage</div></div>
+          </div>
+          <p class="texto-mudo" id="status-infraestrutura"></p>
         </section>
 
         <section class="secao">
           <h2>Acesso rápido</h2>
           <div class="grade-cards">
-            <a class="card-acesso" href="demandas.html">
-              <div class="card-acesso-icone">📋</div>
-              <div class="card-acesso-titulo">Demandas</div>
-              <div class="card-acesso-descricao">Criar e gerenciar demandas com token público</div>
+            <a class="card-acesso" href="resultados.html">
+              <div class="card-acesso-icone">🗂️</div>
+              <div class="card-acesso-titulo">Projetos e resultados</div>
+              <div class="card-acesso-descricao">Encontrar o portal, arquivo, pasta ou ferramenta de cada projeto</div>
             </a>
             <a class="card-acesso" href="upload.html">
               <div class="card-acesso-icone">📤</div>
-              <div class="card-acesso-titulo">Upload de bases</div>
-              <div class="card-acesso-descricao">Importar CSV/Excel com prévia e normalização</div>
-            </a>
-            <a class="card-acesso" href="analises.html">
-              <div class="card-acesso-icone">🔎</div>
-              <div class="card-acesso-titulo">Análises</div>
-              <div class="card-acesso-descricao">Menu em cards das demandas criadas, com suas análises</div>
-            </a>
-            <a class="card-acesso" href="resultados.html">
-              <div class="card-acesso-icone">📊</div>
-              <div class="card-acesso-titulo">Resultados</div>
-              <div class="card-acesso-descricao">Cards com o link de resultado de cada demanda</div>
-            </a>
-            <a class="card-acesso" href="configuracoes.html">
-              <div class="card-acesso-icone">⚙️</div>
-              <div class="card-acesso-titulo">Configurações</div>
-              <div class="card-acesso-descricao">Conexão, contagens e rotinas de limpeza</div>
+              <div class="card-acesso-titulo">Upload de arquivos</div>
+              <div class="card-acesso-descricao">Importar CSV/Excel quando o arquivo precisar ir para o Supabase</div>
             </a>
           </div>
         </section>

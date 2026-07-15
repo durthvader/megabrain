@@ -1,0 +1,17 @@
+{
+  "id": "exemplo-projeto",
+  "resultado_principal": {
+    "tipo": "url",
+    "rotulo": "Abrir resultado",
+    "href": "https://portal-protegido.exemplo.com",
+    "caminho_local": null
+  },
+  "artefatos": [
+    {
+      "tipo": "pptx",
+      "rotulo": "Copiar caminho do PowerPoint",
+      "href": null,
+      "caminho_local": "C:\\Resultados\\exemplo-projeto\\resultado.pptx"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+/* ============================================================
+   MEGABRAIN — catalogo.css
+   Visão de portfólio e cards de resultados.
+   ============================================================ */
+
+.catalogo-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.catalogo-cabecalho p { max-width: 760px; }
+
+.catalogo-filtros {
+  display: grid;
+  grid-template-columns: minmax(220px, 2fr) repeat(3, minmax(150px, 1fr));
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.catalogo-filtros .campo { margin: 0; }
+
+.catalogo-contagem {
+  margin-top: 0.75rem;
+  color: var(--cor-texto-mudo);
+  font-size: 0.85rem;
+}
+
+.catalogo-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 1rem;
+}
+
+.projeto-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-width: 0;
+  padding: 1.1rem 1.2rem;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  scroll-margin-top: 5rem;
+}
+
+.projeto-card:target {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px var(--cor-primaria-clara);
+}
+
+.projeto-card-topo {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.projeto-card-titulo {
+  margin: 0 0 0.2rem;
+  font-size: 1.08rem;
+}
+
+.projeto-badges,
+.projeto-metadados,
+.projeto-acoes,
+.grupo-acoes-locais {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.projeto-badges { justify-content: flex-end; }
+
+.projeto-card-descricao {
+  margin: 0;
+  color: var(--cor-texto-suave);
+}
+
+.projeto-meta,
+.projeto-tag {
+  font-size: 0.76rem;
+  color: var(--cor-texto-suave);
+}
+
+.projeto-meta + .projeto-meta::before { content: "· "; }
+
+.projeto-tag {
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: #eef1f5;
+}
+
+.projeto-acesso {
+  padding: 0.55rem 0.65rem;
+  border-radius: 6px;
+  background: #f8f9fb;
+  color: var(--cor-texto-suave);
+  font-size: 0.8rem;
+}
+
+.projeto-acoes { margin-top: auto; }
+
+.badge-aguardando,
+.badge-backlog { background: #fdf0dc; color: var(--cor-aviso); }
+
+.badge-cancelado,
+.badge-arquivado { background: #eef1f5; color: var(--cor-texto-suave); }
+
+.badge-publicado { background: #e2f3e5; color: var(--cor-sucesso-texto); }
+
+.badge-acesso-privado,
+.badge-acesso-restrito { background: #eee8fa; color: #56348b; }
+
+.badge-acesso-publico { background: #e2f3e5; color: var(--cor-sucesso-texto); }
+
+.tabela-status-projetos td { vertical-align: middle; }
+
+.tabela-status-projetos a { font-weight: 600; }
+
+@media (max-width: 900px) {
+  .catalogo-filtros { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .catalogo-filtros,
+  .catalogo-grade { grid-template-columns: 1fr; }
+
+  .projeto-card-topo { flex-direction: column; }
+
+  .projeto-badges { justify-content: flex-start; }
+}

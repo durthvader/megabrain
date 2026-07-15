@@ -1,6 +1,22 @@
 # Segredos — NUNCA versionar (contém senha do banco / connection string)
 .env
 .env.local
+.mcp.json
+.claude/
+assets/js/config.js
+data/catalogo-projetos.local.json
+
+# Sandboxes: somente o manifesto seguro e a documentação estrutural são públicos.
+# Resultados, bases, código específico, tokens e caminhos locais ficam no computador
+# ou no repositório privado/deploy protegido de cada projeto.
+projects/*/project.local.json
+projects/*/data/
+projects/*/deliverables/
+projects/*/public/
+projects/*/src/
+projects/*/content/
+projects/*/docs/
+projects/*/archive/
 
 # Dependências e artefatos
 node_modules/
@@ -9,9 +25,8 @@ node_modules/
 .DS_Store
 Thumbs.db
 
-# Observação: assets/js/config.js contém apenas a URL do projeto e a chave
-# publishable/anon, que são públicas por design (protegidas por RLS).
-# Ela é versionada de propósito para o GitHub Pages funcionar.
+# A configuração real do Supabase permanece somente no ambiente local.
+# Use assets/js/config.example.js como modelo em novos clones.
 
 # Python e artefatos de inspecao
 __pycache__/

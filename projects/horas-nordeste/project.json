@@ -1,0 +1,20 @@
+{
+  "$schema": "../../docs/sandboxes/project.schema.json",
+  "id": "horas-nordeste",
+  "titulo": "Custo de Horas — Nordeste",
+  "descricao": "Apresentação executiva regional reproduzível pelo pipeline atual.",
+  "status": "concluido",
+  "tipo": "pptx",
+  "responsavel": "Operações / Performance",
+  "criado_em": "2026-07-10",
+  "atualizado_em": "2026-07-10",
+  "tags": ["custo-de-horas", "nordeste", "executivo"],
+  "resultado_principal": null,
+  "artefatos": [],
+  "compartilhamento": {
+    "visibilidade": "restrito",
+    "publico_descricao": "Somente convidados deste projeto",
+    "modo_acesso": "pendente"
+  },
+  "ordem": 80
+}

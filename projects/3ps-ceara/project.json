@@ -1,0 +1,20 @@
+{
+  "$schema": "../../docs/sandboxes/project.schema.json",
+  "id": "3ps-ceara",
+  "titulo": "3Ps Ceará",
+  "descricao": "Painel executivo de Presença, Produção e Prazo. HTML e PowerPoint ainda representam fechamentos diferentes.",
+  "status": "em_andamento",
+  "tipo": "portal",
+  "responsavel": "Operações / Performance",
+  "criado_em": "2026-07-06",
+  "atualizado_em": "2026-07-13",
+  "tags": ["3ps", "ceara", "executivo"],
+  "resultado_principal": null,
+  "artefatos": [],
+  "compartilhamento": {
+    "visibilidade": "restrito",
+    "publico_descricao": "Somente convidados deste projeto",
+    "modo_acesso": "pendente"
+  },
+  "ordem": 10
+}

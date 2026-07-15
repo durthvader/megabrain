@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://megabrain.local/schemas/project.schema.json",
+  "title": "Manifesto público de um sandbox Megabrain",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "titulo",
+    "descricao",
+    "status",
+    "tipo",
+    "responsavel",
+    "criado_em",
+    "atualizado_em",
+    "tags",
+    "resultado_principal",
+    "artefatos",
+    "compartilhamento"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "titulo": {
+      "type": "string",
+      "minLength": 1
+    },
+    "descricao": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "backlog",
+        "aguardando",
+        "em_andamento",
+        "concluido",
+        "publicado",
+        "arquivado",
+        "cancelado"
+      ]
+    },
+    "tipo": {
+      "enum": [
+        "portal",
+        "pptx",
+        "planilha",
+        "documento",
+        "dashboard",
+        "formulario",
+        "ferramenta",
+        "pasta",
+        "pdf",
+        "arquivo",
+        "outro"
+      ]
+    },
+    "responsavel": {
+      "type": "string",
+      "minLength": 1
+    },
+    "criado_em": {
+      "type": "string",
+      "format": "date"
+    },
+    "atualizado_em": {
+      "type": "string",
+      "format": "date"
+    },
+    "tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    },
+    "resultado_principal": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/destinoPublico"
+        }
+      ]
+    },
+    "artefatos": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/destinoPublico"
+      }
+    },
+    "compartilhamento": {
+      "$ref": "#/$defs/compartilhamento"
+    },
+    "ordem": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "$defs": {
+    "destinoPublico": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tipo", "rotulo", "href"],
+      "properties": {
+        "tipo": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rotulo": {
+          "type": "string",
+          "minLength": 1
+        },
+        "href": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "compartilhamento": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "visibilidade",
+        "publico_descricao",
+        "modo_acesso"
+      ],
+      "properties": {
+        "visibilidade": {
+          "enum": ["privado", "restrito", "nao_listado", "publico"]
+        },
+        "publico_descricao": {
+          "type": "string",
+          "minLength": 1
+        },
+        "modo_acesso": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Megabrain · Resultados publicados</title>
+  <title>Megabrain · Projetos e resultados</title>
   <link rel="stylesheet" href="assets/css/global.css" />
   <link rel="stylesheet" href="assets/css/layout.css" />
   <link rel="stylesheet" href="assets/css/cards.css" />
+  <link rel="stylesheet" href="assets/css/formularios.css" />
+  <link rel="stylesheet" href="assets/css/catalogo.css" />
 </head>
 <body data-page="resultados">
   <div class="layout">
@@ -14,69 +16,84 @@
     <div class="area-principal">
       <header class="topo">
         <button class="btn-menu" id="btn-menu" aria-label="Abrir menu">☰</button>
-        <h1 class="topo-titulo">Resultados</h1>
+        <h1 class="topo-titulo">Projetos e resultados</h1>
       </header>
       <main class="conteudo">
-        <section class="secao">
-          <p class="texto-suave">
-            Cada card abre direto o resultado publicado. Esta lista é curada:
-            os painéis 3Ps são por regional e não correspondem a uma demanda do
-            banco, então são mantidos aqui à mão.
-          </p>
-        </section>
-
-        <section class="secao">
-          <h2>3Ps · Painéis executivos</h2>
-          <p class="texto-suave">Produção, Prazo e Produtividade por regional. Páginas estáticas, com o fechamento congelado na data da análise.</p>
-          <div class="grade-cards">
-            <a class="card-acesso" href="resultado-3ps.html">
-              <div class="card-acesso-icone">📊</div>
-              <div class="card-acesso-titulo">3Ps Ceará</div>
-              <div class="card-acesso-descricao">Painel executivo · regional Ceará</div>
-            </a>
-            <a class="card-acesso" href="resultado-nordeste.html">
-              <div class="card-acesso-icone">📊</div>
-              <div class="card-acesso-titulo">3Ps Nordeste</div>
-              <div class="card-acesso-descricao">Painel executivo · Sergipe e Pernambuco</div>
-            </a>
-            <a class="card-acesso" href="resultado-mapi.html">
-              <div class="card-acesso-icone">📊</div>
-              <div class="card-acesso-titulo">3Ps Maranhão / Piauí</div>
-              <div class="card-acesso-descricao">Painel executivo · regional MA/PI</div>
-            </a>
+        <section class="secao catalogo-cabecalho">
+          <div>
+            <h2>Catálogo de projetos</h2>
+            <p class="texto-suave">
+              Cada card leva ao resultado principal da demanda — portal, ferramenta,
+              PowerPoint, documento ou pasta local. Este catálogo não cria demandas.
+            </p>
+            <p class="texto-mudo">Catálogo atualizado em <span id="catalogo-atualizado">…</span>.</p>
           </div>
+          <a class="btn" href="upload.html">📤 Upload de arquivo</a>
         </section>
 
-        <section class="secao">
-          <h2>Operação · Painéis ao vivo</h2>
-          <p class="texto-suave">Leem o banco a cada abertura. O link carrega o token público da demanda.</p>
-          <div class="grade-cards">
-            <!-- Tokens públicos por design: são os mesmos links compartilhados
-                 com os supervisores. Se a demanda for recriada, atualizar aqui. -->
-            <a class="card-acesso" href="escala-publica.html?token=ra2jn8evcw27">
-              <div class="card-acesso-icone">🗓️</div>
-              <div class="card-acesso-titulo">Escala 15/07 a 14/08</div>
-              <div class="card-acesso-descricao">Grade técnico × dia, consolidado e conflitos</div>
-            </a>
-            <a class="card-acesso" href="duplas-resultado.html?token=yfgdwd6k8ztx">
-              <div class="card-acesso-icone">👥</div>
-              <div class="card-acesso-titulo">Duplas</div>
-              <div class="card-acesso-descricao">Quem está trabalhando duplado</div>
-            </a>
+        <section class="secao card">
+          <div class="catalogo-filtros">
+            <div class="campo">
+              <label for="filtro-busca">Buscar</label>
+              <input id="filtro-busca" type="search" placeholder="Projeto, regional, tema…" />
+            </div>
+            <div class="campo">
+              <label for="filtro-status">Status</label>
+              <select id="filtro-status">
+                <option value="">Todos</option>
+                <option value="backlog">Backlog</option>
+                <option value="em_andamento">Em andamento</option>
+                <option value="aguardando">Aguardando</option>
+                <option value="publicado">Publicado</option>
+                <option value="concluido">Concluído</option>
+                <option value="arquivado">Arquivado</option>
+                <option value="cancelado">Cancelado</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="filtro-tipo">Resultado</label>
+              <select id="filtro-tipo">
+                <option value="">Todos</option>
+                <option value="portal">Portal</option>
+                <option value="ferramenta">Ferramenta</option>
+                <option value="pptx">PowerPoint</option>
+                <option value="planilha">Planilha</option>
+                <option value="documento">Documento</option>
+                <option value="pasta">Pasta</option>
+                <option value="dashboard">Dashboard</option>
+                <option value="formulario">Formulário</option>
+                <option value="pdf">PDF</option>
+                <option value="arquivo">Arquivo</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="filtro-acesso">Acesso</label>
+              <select id="filtro-acesso">
+                <option value="">Todos</option>
+                <option value="privado">Privado</option>
+                <option value="restrito">Restrito</option>
+                <option value="nao_listado">Não listado</option>
+                <option value="publico">Público</option>
+              </select>
+            </div>
           </div>
+          <div class="catalogo-contagem" id="catalogo-contagem">Carregando…</div>
         </section>
 
         <section class="secao">
-          <h2>Ainda sem página publicada</h2>
-          <p class="texto-suave">
-            Existem só como deck em <code>outputs/</code>, fora do site: <strong>3Ps MG/CO/SP</strong>
-            e os quatro painéis de <strong>Custo de Horas</strong> (Ceará, Norte, Nordeste, MG/CO/SP).
-            Para entrarem aqui, precisam primeiro virar página HTML.
-          </p>
+          <div class="catalogo-grade" id="catalogo-projetos"></div>
+          <div class="vazio oculto" id="catalogo-vazio">Nenhum projeto corresponde aos filtros.</div>
+        </section>
+
+        <section class="secao alerta alerta-aviso">
+          <strong>Acesso restrito é aplicado na hospedagem.</strong>
+          O selo do card é apenas informativo. Ocultar o card ou usar um token na URL
+          não impede acesso direto ao projeto.
         </section>
       </main>
     </div>
   </div>
-  <script type="module" src="assets/js/main.js"></script>
+  <script type="module" src="assets/js/pages/resultadosPage.js"></script>
 </body>
 </html>

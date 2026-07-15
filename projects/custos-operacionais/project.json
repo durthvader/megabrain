@@ -1,0 +1,20 @@
+{
+  "$schema": "../../docs/sandboxes/project.schema.json",
+  "id": "custos-operacionais",
+  "titulo": "Custos operacionais",
+  "descricao": "Ferramenta genérica de custos. Ainda não está associada a um resultado real ativo.",
+  "status": "backlog",
+  "tipo": "ferramenta",
+  "responsavel": "Operações",
+  "criado_em": "2026-07-03",
+  "atualizado_em": "2026-07-03",
+  "tags": ["custos", "ferramenta", "interno"],
+  "resultado_principal": null,
+  "artefatos": [],
+  "compartilhamento": {
+    "visibilidade": "privado",
+    "publico_descricao": "Uso interno",
+    "modo_acesso": "local"
+  },
+  "ordem": 120
+}

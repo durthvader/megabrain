@@ -1,0 +1,23 @@
+{
+  "versao": 1,
+  "atualizado_em": "2026-07-15T00:00:00-03:00",
+  "projetos": [
+    {
+      "id": "exemplo-projeto",
+      "resultado_principal": {
+        "tipo": "url",
+        "rotulo": "Abrir resultado",
+        "href": "https://portal-protegido.exemplo.com",
+        "caminho_local": null
+      },
+      "artefatos": [
+        {
+          "tipo": "pptx",
+          "rotulo": "Copiar caminho do PowerPoint",
+          "href": null,
+          "caminho_local": "C:\\caminho\\privado\\resultado.pptx"
+        }
+      ]
+    }
+  ]
+}

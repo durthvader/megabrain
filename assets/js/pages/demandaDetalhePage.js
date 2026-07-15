@@ -1,7 +1,7 @@
 // ============================================================
 // MEGABRAIN — pages/demandaDetalhePage.js
-// Tudo de uma demanda: dados, token, bases, respostas, análises,
-// planos e ações (exportar, limpar, arquivar).
+// Ferramenta administrativa legada: dados, token, bases, respostas,
+// planos e ações (exportar, limpar, arquivar). Não aparece no catálogo.
 // demanda-detalhe.html?id=UUID
 // ============================================================
 
@@ -16,7 +16,6 @@ import {
   desvincularBase,
 } from "../services/baseService.js";
 import { listarRespostasPorDemanda } from "../services/formularioService.js";
-import { listarAnalisesPorDemanda } from "../services/analiseService.js";
 import { listarPlanosPorDemanda } from "../services/planoService.js";
 import {
   limparDemanda,
@@ -80,7 +79,6 @@ function renderizarCabecalho() {
 
   el("btn-abrir-escala").href = `escala.html?demanda=${demanda.id}`;
   el("btn-abrir-custos").href = `custos.html?demanda=${demanda.id}`;
-  el("link-nova-analise").href = `analises.html?demanda=${demanda.id}`;
   el("link-novo-plano").href = `planos.html?demanda=${demanda.id}`;
 }
 
@@ -217,26 +215,6 @@ async function renderizarRespostas() {
   };
 }
 
-async function renderizarAnalises() {
-  const analises = await listarAnalisesPorDemanda(demanda.id);
-  const lista = el("lista-analises");
-  lista.innerHTML = "";
-  el("analises-vazio").classList.toggle("oculto", analises.length > 0);
-
-  for (const analise of analises) {
-    const item = document.createElement("div");
-    item.className = "cartao-item";
-    item.innerHTML = `
-      <div class="cartao-item-topo">
-        <h3>${analise.titulo}</h3>
-        <span class="texto-mudo">${formatarDataBR(analise.criado_em)}</span>
-      </div>
-      <p class="texto-suave">${analise.resumo || analise.pergunta || ""}</p>
-    `;
-    lista.appendChild(item);
-  }
-}
-
 async function renderizarPlanos() {
   const planos = await listarPlanosPorDemanda(demanda.id);
   const corpo = el("tabela-planos-corpo");
@@ -304,7 +282,6 @@ function configurarAcoes() {
         renderizarBases(),
         renderizarSelecaoVincular(),
         renderizarRespostas(),
-        renderizarAnalises(),
         renderizarPlanos(),
       ]);
     } catch (erro) {
@@ -349,7 +326,7 @@ function configurarAcoes() {
     try {
       await apagarDemandaCompleta(demanda.id);
       mostrarSucesso("Demanda apagada. Voltando para a lista…");
-      window.location.href = "demandas.html";
+      window.location.href = "resultados.html";
     } catch (erro) {
       mostrarErro(`Erro ao apagar: ${erro.message}`);
     }
@@ -386,7 +363,6 @@ async function iniciar() {
       renderizarBases(),
       renderizarSelecaoVincular(),
       renderizarRespostas(),
-      renderizarAnalises(),
       renderizarPlanos(),
     ]);
   } catch (erro) {

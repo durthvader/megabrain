@@ -1,155 +1,123 @@
-# 🧠 Megabrain
+# Megabrain
 
-Portal leve de demandas operacionais e análises com bases de dados.
+Megabrain é o catálogo privado dos trabalhos produzidos com o Codex. Ele não é
+o lugar onde demandas são abertas, analisadas ou encerradas.
 
-Megabrain **não** é um sistema corporativo gigante. É uma ferramenta rápida para:
+As demandas são criadas nesta conversa. Cada uma recebe um sandbox independente
+em `projects/`; o portal apenas mostra status, infraestrutura e um card que leva
+ao resultado correspondente.
 
-1. **Subir bases** (CSV/Excel) para uma biblioteca reutilizável, independente de qualquer demanda.
-2. Criar uma **demanda** operacional (ex.: "Escala próximos 30 dias", "Redução de custos Q3") e vincular a ela as bases necessárias.
-3. Guardar os dados no **Supabase** de forma **temporária**.
-4. Gerar **páginas públicas de resultado** (sem login, via token na URL) — em branco até o Claude Code gerar o conteúdo daquela demanda.
-5. **Consolidar** respostas e dados.
-6. Exibir **painéis simples** (escala 30 dias, custos operacionais), acessados a partir do detalhe da demanda.
-7. **Exportar** resultados em CSV.
-8. **Limpar** tudo quando a demanda acabar, para caber no plano gratuito do Supabase.
+## O que existe no portal
 
-**Stack:** HTML puro + CSS puro + JavaScript modular (ES Modules) + Supabase + Chart.js/PapaParse/SheetJS via CDN. Sem React, sem build, sem backend próprio.
+- **Início:** visão geral dos projetos, status, bases e armazenamento.
+- **Projetos:** catálogo pesquisável de resultados — portal, PowerPoint,
+  planilha, documento, pasta ou ferramenta.
+- **Upload:** envio opcional de CSV/Excel às bases reutilizáveis do Supabase.
+- **Bases e armazenamento:** consulta da infraestrutura compartilhada.
 
----
+Não há criação de demanda nem seção de Análises na interface.
 
-## 1. O que é o Megabrain
+## Organização
 
-Um portal estático (abre direto no navegador) que conversa com o Supabase usando a chave pública (anon/publishable). Cada trabalho é uma **demanda**, com token público próprio. Bases são independentes de demanda e reutilizáveis entre várias — vinculadas via `demanda_bases`. Respostas de formulário, análises e planos de ação ficam vinculados à demanda e são apagados junto com ela; as bases, não (continuam disponíveis para outras demandas).
-
-## 2. Como abrir no VS Code
-
-1. Abra o VS Code → `File → Open Folder` → selecione a pasta `megabrain`.
-2. Instale a extensão **Live Server** (Ritwick Dey) se ainda não tiver.
-
-## 3. Como rodar com Live Server
-
-1. Clique com o botão direito em `index.html` → **Open with Live Server**.
-2. O portal abre em `http://127.0.0.1:5500/index.html` (ou porta similar).
-3. Todas as páginas usam caminhos relativos — funciona também em qualquer servidor estático simples.
-
-> ⚠️ Abrir o arquivo com duplo clique (`file://`) **não funciona** porque os módulos ES exigem um servidor HTTP.
-
-## 4. Como criar o projeto no Supabase
-
-1. Acesse [supabase.com](https://supabase.com) → crie conta gratuita → **New project**.
-2. Escolha nome (ex.: `megabrain`), senha do banco e região (São Paulo / `sa-east-1`).
-3. Aguarde o provisionamento (~2 min).
-4. Em **Project Settings → API**, copie:
-   - **Project URL** (ex.: `https://xxxx.supabase.co`)
-   - **Publishable/anon key** (chave pública — pode ficar no frontend)
-
-## 5. Como preencher o config.js
-
-Edite [assets/js/config.js](assets/js/config.js):
-
-```js
-export const SUPABASE_URL = "https://SEU_PROJETO.supabase.co";
-export const SUPABASE_ANON_KEY = "sb_publishable_...";
+```text
+Megabrain/
+  index.html, resultados.html     catálogo central
+  assets/                         interface do Megabrain
+  data/
+    catalogo-projetos.json        catálogo gerado, sem segredos
+    catalogo-projetos.local.json  destinos privados; ignorado pelo Git
+  projects/
+    <project-id>/                 sandbox de um único projeto
+      project.json                metadados seguros
+      project.local.json          caminhos, tokens e links privados
+      src/ data/ public/ deliverables/ ...
+  packages/                       código compartilhado entre projetos
+  scripts/catalogo/               validação e sincronização do catálogo
+  sql/                            infraestrutura legada/reutilizável do Supabase
 ```
 
-Use `assets/js/config.example.js` como referência. **Nunca** coloque ali a `service_role` key nem a senha do banco.
+O contrato completo está em [docs/sandboxes/README.md](docs/sandboxes/README.md).
 
-## 6. Onde executar os SQLs
+## Abrir localmente
 
-No painel do Supabase: **SQL Editor → New query**. Cole e execute **na ordem**:
+Módulos JavaScript precisam de HTTP; não abra `index.html` com duplo clique.
+Na raiz do workspace:
 
-| Ordem | Arquivo | O que faz |
-|---|---|---|
-| 1 | `sql/001_tabelas_base.sql` | Tabelas, índices e triggers |
-| 2 | `sql/002_rls.sql` | Row Level Security e policies |
-| 3 | `sql/003_storage.sql` | Bucket `megabrain-bases` e policies |
-| 4 | `sql/004_views.sql` | Views de resumo |
-| 5 | `sql/005_dados_exemplo.sql` | (Opcional) dados de demonstração |
-| 6 | `sql/006_limpeza.sql` | Função e consultas de limpeza manual |
-| 7 | `sql/007_bases_reutilizaveis.sql` | Bases independentes de demanda (`demanda_bases`) e `pagina_resultado` |
+```powershell
+python -m http.server 5500
+```
 
-## 7. Como subir a primeira base
+Depois abra `http://127.0.0.1:5500/`.
 
-1. Abra **Upload de bases**.
-2. Selecione o tipo de base (ex.: `tecnicos`) e o arquivo CSV/Excel — não precisa escolher uma demanda ainda.
-3. Confira a prévia (primeiras 20 linhas) e as colunas normalizadas.
-4. Deixe **desmarcada** a opção de guardar o arquivo original (economiza Storage).
-5. Clique em **Importar para o Supabase**. A base entra na biblioteca, pronta para ser vinculada a qualquer demanda.
+O catálogo funciona sem conexão com o Supabase. Para usar Upload, Bases ou as
+ferramentas legadas somente no ambiente local, crie a configuração a partir do
+modelo:
 
-## 8. Como criar a primeira demanda
+```powershell
+Copy-Item assets\js\config.example.js assets\js\config.js
+```
 
-1. Abra **Demandas** no menu lateral.
-2. Preencha nome (ex.: "Escala próximos 30 dias"), tipo (`escala`), responsável e período (ou marque "indeterminada").
-3. Marque no checklist as bases já importadas que esta demanda vai usar.
-4. Clique em **Criar demanda**. Um token público é gerado automaticamente.
-5. O link público de **resultado** aparece na lista — botão **Copiar link** (`resultado.html?token=...`, em branco até alguém gerar o resultado).
+`config.js` é ignorado pelo Git e não é publicado pelo repositório central.
 
-## 9. Como abrir o link público de resultado ou o formulário
+## Criar uma nova demanda
 
-- **Link de resultado** (`resultado.html?token=SEU_TOKEN`): o que é gerado automaticamente na criação da demanda. Mostra só título/descrição até `pagina_resultado` ser preenchido no detalhe da demanda.
-- **Formulário de preenchimento** (`formulario.html?token=SEU_TOKEN`): compartilhe este link diretamente com supervisores/técnicos quando a demanda precisar de respostas. Eles preenchem **sem login**. Quem tem o token só enxerga aquela demanda.
+Descreva a demanda ao Codex nesta conversa. O fluxo esperado é:
 
-## 10. Como exportar o resultado
+1. criar `projects/<id>/project.json`;
+2. produzir o trabalho inteiramente dentro daquele sandbox;
+3. guardar caminhos locais ou links restritos em `project.local.json`;
+4. sincronizar o catálogo;
+5. publicar apenas o `public/` do projeto, se houver, com acesso próprio.
 
-- **Escala:** botão *Exportar CSV* na página Escala (grade técnico × dia).
-- **Custos:** botão *Exportar CSV* na página Custos (registros filtrados).
-- **Respostas/bases:** botões de exportação no detalhe da demanda.
+O catálogo é reconstruído com:
 
-Os CSVs saem com separador `;` e BOM UTF-8 — abrem direto no Excel brasileiro.
+```powershell
+python scripts\catalogo\sincronizar_catalogo.py --incluir-local
+```
 
-## 11. Como limpar dados antigos
+O sincronizador recusa caminhos absolutos, tokens e URLs suspeitas no manifesto
+público.
 
-- **Detalhe da demanda → Limpar dados da demanda:** desvincula as bases (sem apagá-las — continuam disponíveis para outras demandas) e apaga respostas, análises, planos e logs daquela demanda.
-- **Configurações → Limpar demandas arquivadas:** apaga as demandas com status `arquivada` (e seus vínculos/respostas/análises/planos/logs). Bases não são afetadas.
-- Ou rode as consultas de `sql/006_limpeza.sql` no SQL Editor.
+## Arquivos recebidos
 
-**Regra de ouro: exporte antes de apagar.**
+O upload do portal continua disponível quando uma ferramenta baseada no
+Supabase realmente precisar da base. Na maioria dos trabalhos, basta informar ao
+Codex o caminho local, por exemplo:
 
-## 12. Como publicar no GitHub Pages
+```text
+C:\Users\rogerio.fonseca\Downloads
+```
 
-1. Crie um repositório no GitHub e faça push do projeto.
-2. Em **Settings → Pages**, escolha `Deploy from a branch` → branch `main` → pasta `/ (root)`.
-3. O portal fica em `https://SEU_USUARIO.github.io/megabrain/`.
-4. Como `config.js` contém apenas chaves públicas, pode ser versionado.
+O navegador normalmente não pode abrir caminhos `C:\` diretamente. Por isso o
+catálogo oferece copiar o caminho e tenta abrir o arquivo apenas como conveniência.
 
-## 13. Cuidados com dados sensíveis
+## Compartilhamento e acesso
 
-- **Não suba** CPF, telefone, endereço, salário ou dados médicos sem autorização.
-- Prefira matrícula/nome a documentos pessoais.
-- Lembre: com o token, qualquer pessoa acessa os dados públicos da demanda.
-- Detalhes em [docs/seguranca.md](docs/seguranca.md).
+Um card oculto, um endereço difícil de adivinhar ou um token na URL não são
+controle de acesso. Cada portal compartilhável deve ser implantado como aplicação
+independente e protegido na hospedagem — preferencialmente com Microsoft Entra e
+uma lista explícita de usuários ou grupos.
 
-## 14. Limitações do MVP
+O Megabrain central deve permanecer privado. Publicar todos os sandboxes como
+subpastas do mesmo GitHub Pages não separa permissões entre projetos.
 
-- **Sem autenticação:** as páginas administrativas usam a mesma chave pública. As policies do MVP são permissivas — qualquer pessoa com a URL do projeto pode, tecnicamente, ler/escrever nas tabelas. Aceitável para dados operacionais não sensíveis e uso interno; veja [docs/seguranca.md](docs/seguranca.md).
-- `base_linhas` usa JSONB genérico — flexível, mas não performático para grandes volumes.
-- Consultas do frontend são paginadas e limitadas (~20 mil linhas por leitura).
-- Sem edição em massa; a análise pesada é feita pelo Codex/Claude no VS Code.
+## Excluir um projeto
 
-## 15. O que fazer quando chegar no limite do Supabase Free
+Para projetos somente locais, excluir `projects/<id>/` e sincronizar remove o
+sandbox e seu card sem afetar o Megabrain ou os demais projetos.
 
-1. **Exporte** os resultados das demandas concluídas (CSV).
-2. **Arquive** e depois **limpe** as demandas antigas (Configurações).
-3. Apague arquivos do Storage (bucket `megabrain-bases`).
-4. Rode `sql/006_limpeza.sql` para conferir contagens e liberar espaço.
-5. Se o volume for recorrente e alto, considere: uma demanda por vez, importar só as colunas úteis, ou migrar para o plano pago.
+Ferramentas com estado externo, como Escala e Duplas, exigem uma etapa adicional:
+excluir a pasta não remove automaticamente registros, respostas, bases ou deploys
+no Supabase/hospedagem. O `README.md` do sandbox registra essa dependência.
 
-Estratégia completa em [docs/supabase-free.md](docs/supabase-free.md).
+## Segurança
 
----
+- `project.local.json`, bases, entregáveis, snapshots publicados e código
+  específico estão ignorados no repositório central atual.
+- Não armazene `service_role`, senha ou connection string no frontend.
+- A chave pública do Supabase só é aceitável com RLS restritiva.
+- Antes de compartilhar um portal, configure autenticação na hospedagem e teste
+  com uma conta sem acesso.
 
-## Documentação
-
-| Doc | Conteúdo |
-|---|---|
-| [docs/arquitetura.md](docs/arquitetura.md) | Visão geral da arquitetura |
-| [docs/modelo-dados.md](docs/modelo-dados.md) | Tabelas e views |
-| [docs/fluxo-demanda.md](docs/fluxo-demanda.md) | Ciclo de vida de uma demanda |
-| [docs/fluxo-upload.md](docs/fluxo-upload.md) | Fluxo de importação de bases |
-| [docs/formularios-publicos.md](docs/formularios-publicos.md) | Links públicos com token |
-| [docs/exemplo-escala.md](docs/exemplo-escala.md) | Exemplo completo: escala 30 dias |
-| [docs/exemplo-custos.md](docs/exemplo-custos.md) | Exemplo completo: custos operacionais |
-| [docs/seguranca.md](docs/seguranca.md) | Segurança e riscos |
-| [docs/supabase-free.md](docs/supabase-free.md) | Estratégia para o plano gratuito |
-| [docs/prompts-codex.md](docs/prompts-codex.md) | Prompts prontos para o Codex/Claude |
-| [docs/roadmap.md](docs/roadmap.md) | Fases de evolução |
+Veja também [docs/seguranca.md](docs/seguranca.md) e
+[docs/arquitetura.md](docs/arquitetura.md).
