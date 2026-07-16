@@ -3,8 +3,6 @@
 .env.local
 .mcp.json
 .claude/
-assets/js/config.js
-data/catalogo-projetos.json
 data/catalogo-projetos.local.json
 
 # Cada sandbox inteiro é local. O repositório público guarda apenas o sistema,
