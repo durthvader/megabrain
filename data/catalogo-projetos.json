@@ -1,6 +1,6 @@
 {
   "versao": 1,
-  "atualizado_em": "2026-07-16T09:14:55-03:00",
+  "atualizado_em": "2026-07-16T13:43:46-03:00",
   "projetos": [
     {
       "$schema": "../../docs/sandboxes/project.schema.json",
@@ -242,6 +242,30 @@
         "modo_acesso": "pendente"
       },
       "ordem": 110
+    },
+    {
+      "$schema": "../../docs/sandboxes/project.schema.json",
+      "id": "escala-operacional",
+      "titulo": "Escala e Disponibilidade",
+      "descricao": "Planejamento de disponibilidade e escala operacional por ciclo (15 a 14), com importacao de hierarquia e eventos.",
+      "status": "em_andamento",
+      "tipo": "ferramenta",
+      "responsavel": "Operações",
+      "criado_em": "2026-07-16",
+      "atualizado_em": "2026-07-16",
+      "tags": [
+        "escala",
+        "disponibilidade",
+        "operacao"
+      ],
+      "resultado_principal": null,
+      "artefatos": [],
+      "compartilhamento": {
+        "visibilidade": "privado",
+        "publico_descricao": "Uso local",
+        "modo_acesso": "local"
+      },
+      "ordem": 120
     }
   ]
 }
