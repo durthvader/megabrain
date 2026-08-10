@@ -1,6 +1,6 @@
 {
   "versao": 1,
-  "atualizado_em": "2026-07-16T13:43:46-03:00",
+  "atualizado_em": "2026-08-10",
   "projetos": [
     {
       "$schema": "../../docs/sandboxes/project.schema.json",
@@ -252,7 +252,7 @@
       "tipo": "ferramenta",
       "responsavel": "Operações",
       "criado_em": "2026-07-16",
-      "atualizado_em": "2026-07-16",
+      "atualizado_em": "2026-07-17",
       "tags": [
         "escala",
         "disponibilidade",
@@ -261,11 +261,37 @@
       "resultado_principal": null,
       "artefatos": [],
       "compartilhamento": {
-        "visibilidade": "privado",
-        "publico_descricao": "Uso local",
-        "modo_acesso": "local"
+        "visibilidade": "restrito",
+        "publico_descricao": "Login por código enviado ao e-mail corporativo",
+        "modo_acesso": "cloudflare_access_email"
       },
       "ordem": 120
+    },
+    {
+      "$schema": "../../docs/sandboxes/project.schema.json",
+      "id": "acompanhamento-implantacao",
+      "titulo": "Acompanhamento de Implantacao",
+      "descricao": "Painel de acompanhamento de obras LD e FTTA: uma tela de preenchimento que substitui o Acompanhamento26.xlsx e um dashboard que substitui o INDICADORES para a apresentacao da diretoria.",
+      "status": "publicado",
+      "tipo": "ferramenta",
+      "responsavel": "Gerencia Executiva de Implantacao Nacional",
+      "criado_em": "2026-08-10",
+      "atualizado_em": "2026-08-10",
+      "tags": [
+        "implantacao",
+        "obras",
+        "ld",
+        "ftta",
+        "indicadores"
+      ],
+      "resultado_principal": "https://implantacao.alloha-ops.workers.dev/",
+      "artefatos": [],
+      "compartilhamento": {
+        "visibilidade": "restrito",
+        "publico_descricao": "Login com e-mail corporativo @alloha.com",
+        "modo_acesso": "cloudflare_access_email"
+      },
+      "ordem": 130
     }
   ]
 }
