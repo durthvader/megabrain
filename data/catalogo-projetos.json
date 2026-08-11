@@ -1,6 +1,6 @@
 {
   "versao": 1,
-  "atualizado_em": "2026-08-11",
+  "atualizado_em": "2026-08-11T16:19:04-03:00",
   "projetos": [
     {
       "$schema": "../../docs/sandboxes/project.schema.json",
@@ -8,7 +8,7 @@
       "titulo": "3Ps — apresentação executiva regional",
       "descricao": "Gerador único do deck de Presença, Produção e Prazo 24h. Consolidou os cinco sandboxes por regional: um motor, uma narrativa por regional, sem portal HTML.",
       "status": "em_andamento",
-      "tipo": "gerador",
+      "tipo": "pptx",
       "responsavel": "Operações / Performance",
       "criado_em": "2026-07-06",
       "atualizado_em": "2026-08-11",
@@ -92,7 +92,7 @@
         "ftta",
         "indicadores"
       ],
-      "resultado_principal": "https://implantacao.alloha-ops.workers.dev/",
+      "resultado_principal": null,
       "artefatos": [],
       "compartilhamento": {
         "visibilidade": "restrito",
@@ -100,6 +100,30 @@
         "modo_acesso": "cloudflare_access_email"
       },
       "ordem": 130
+    },
+    {
+      "$schema": "../../docs/sandboxes/project.schema.json",
+      "id": "robo-whatsapp",
+      "titulo": "Robô WhatsApp",
+      "descricao": "Motor único de automação de mensagens, compartilhado por todos os projetos: lê um indicador já apurado, desenha o cartão em PNG e envia para grupos autorizados nos horários programados.",
+      "status": "em_andamento",
+      "tipo": "ferramenta",
+      "responsavel": "Operações",
+      "criado_em": "2026-08-11",
+      "atualizado_em": "2026-08-11",
+      "tags": [
+        "whatsapp",
+        "automacao",
+        "compartilhado"
+      ],
+      "resultado_principal": null,
+      "artefatos": [],
+      "compartilhamento": {
+        "visibilidade": "privado",
+        "publico_descricao": "Uso local",
+        "modo_acesso": "local"
+      },
+      "ordem": 140
     }
   ]
 }
