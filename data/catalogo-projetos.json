@@ -4,18 +4,19 @@
   "projetos": [
     {
       "$schema": "../../docs/sandboxes/project.schema.json",
-      "id": "3ps-ceara",
-      "titulo": "3Ps Ceará",
-      "descricao": "Painel executivo de Presença, Produção e Prazo. HTML e PowerPoint ainda representam fechamentos diferentes.",
+      "id": "3ps",
+      "titulo": "3Ps — apresentação executiva regional",
+      "descricao": "Gerador único do deck de Presença, Produção e Prazo 24h. Consolidou os cinco sandboxes por regional: um motor, uma narrativa por regional, sem portal HTML.",
       "status": "em_andamento",
-      "tipo": "portal",
+      "tipo": "gerador",
       "responsavel": "Operações / Performance",
       "criado_em": "2026-07-06",
-      "atualizado_em": "2026-07-13",
+      "atualizado_em": "2026-08-11",
       "tags": [
         "3ps",
-        "ceara",
-        "executivo"
+        "executivo",
+        "powerpoint",
+        "regional"
       ],
       "resultado_principal": null,
       "artefatos": [],
@@ -25,103 +26,6 @@
         "modo_acesso": "pendente"
       },
       "ordem": 10
-    },
-    {
-      "$schema": "../../docs/sandboxes/project.schema.json",
-      "id": "3ps-nordeste",
-      "titulo": "3Ps Nordeste",
-      "descricao": "Painel executivo regional. O HTML publicado e o PowerPoint atual precisam ser reconciliados.",
-      "status": "em_andamento",
-      "tipo": "portal",
-      "responsavel": "Operações / Performance",
-      "criado_em": "2026-07-07",
-      "atualizado_em": "2026-07-14",
-      "tags": [
-        "3ps",
-        "nordeste",
-        "executivo"
-      ],
-      "resultado_principal": null,
-      "artefatos": [],
-      "compartilhamento": {
-        "visibilidade": "restrito",
-        "publico_descricao": "Somente convidados deste projeto",
-        "modo_acesso": "pendente"
-      },
-      "ordem": 20
-    },
-    {
-      "$schema": "../../docs/sandboxes/project.schema.json",
-      "id": "3ps-mapi",
-      "titulo": "3Ps Maranhão / Piauí",
-      "descricao": "Painel executivo regional. O HTML está congelado em uma foto anterior ao PowerPoint atual.",
-      "status": "em_andamento",
-      "tipo": "portal",
-      "responsavel": "Operações / Performance",
-      "criado_em": "2026-07-07",
-      "atualizado_em": "2026-07-15",
-      "tags": [
-        "3ps",
-        "maranhao",
-        "piaui",
-        "executivo"
-      ],
-      "resultado_principal": null,
-      "artefatos": [],
-      "compartilhamento": {
-        "visibilidade": "restrito",
-        "publico_descricao": "Somente convidados deste projeto",
-        "modo_acesso": "pendente"
-      },
-      "ordem": 30
-    },
-    {
-      "$schema": "../../docs/sandboxes/project.schema.json",
-      "id": "3ps-comgsp",
-      "titulo": "3Ps MG / CO / SP",
-      "descricao": "Apresentação executiva regional disponível em PowerPoint.",
-      "status": "concluido",
-      "tipo": "pptx",
-      "responsavel": "Operações / Performance",
-      "criado_em": "2026-07-14",
-      "atualizado_em": "2026-07-14",
-      "tags": [
-        "3ps",
-        "mgcosp",
-        "executivo"
-      ],
-      "resultado_principal": null,
-      "artefatos": [],
-      "compartilhamento": {
-        "visibilidade": "restrito",
-        "publico_descricao": "Somente convidados deste projeto",
-        "modo_acesso": "pendente"
-      },
-      "ordem": 40
-    },
-    {
-      "$schema": "../../docs/sandboxes/project.schema.json",
-      "id": "3ps-modelo",
-      "titulo": "3Ps — Modelo executivo",
-      "descricao": "Modelo editável usado como referência para novas regionais.",
-      "status": "concluido",
-      "tipo": "pptx",
-      "responsavel": "Performance",
-      "criado_em": "2026-07-10",
-      "atualizado_em": "2026-07-10",
-      "tags": [
-        "3ps",
-        "modelo",
-        "interno"
-      ],
-      "resultado_principal": null,
-      "artefatos": [],
-      "compartilhamento": {
-        "visibilidade": "privado",
-        "publico_descricao": "Uso interno",
-        "modo_acesso": "local"
-      },
-      "ordem": 50
     },
     {
       "$schema": "../../docs/sandboxes/project.schema.json",
