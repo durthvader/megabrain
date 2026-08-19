@@ -1,6 +1,6 @@
 {
   "versao": 1,
-  "atualizado_em": "2026-08-13T16:34:13-03:00",
+  "atualizado_em": "2026-08-19T14:12:40-03:00",
   "projetos": [
     {
       "$schema": "../../docs/sandboxes/project.schema.json",
@@ -110,7 +110,7 @@
       "tipo": "ferramenta",
       "responsavel": "VP de Redes e SC / Diretoria de Redes",
       "criado_em": "2026-08-13",
-      "atualizado_em": "2026-08-19",
+      "atualizado_em": "2026-08-13",
       "tags": [
         "fust",
         "bndes",
@@ -151,6 +151,57 @@
         "modo_acesso": "local"
       },
       "ordem": 140
+    },
+    {
+      "$schema": "../../docs/sandboxes/project.schema.json",
+      "id": "databricks",
+      "titulo": "Databricks — acesso e mapa dos dados",
+      "descricao": "Camada de acesso compartilhada ao lakehouse da Alloha: roda SQL por linha de comando, grava CSV e mantem o mapa das 706 tabelas. Nao responde pergunta de negocio — quem responde sao os projetos que a consomem.",
+      "status": "em_andamento",
+      "tipo": "ferramenta",
+      "responsavel": "Operações",
+      "criado_em": "2026-08-13",
+      "atualizado_em": "2026-08-19",
+      "tags": [
+        "databricks",
+        "dados",
+        "sql",
+        "compartilhado",
+        "atrix"
+      ],
+      "resultado_principal": null,
+      "artefatos": [],
+      "compartilhamento": {
+        "visibilidade": "privado",
+        "publico_descricao": "Uso local; a credencial fica no .env da raiz",
+        "modo_acesso": "local"
+      },
+      "ordem": 150
+    },
+    {
+      "$schema": "../../docs/sandboxes/project.schema.json",
+      "id": "reparos",
+      "titulo": "Reparos",
+      "descricao": "Visoes de gestao de reparo sobre o Atrix: CMO, campo, historico e o que esta aberto agora. Consome o acesso do sandbox databricks e nunca recalcula numero que ja existe.",
+      "status": "em_andamento",
+      "tipo": "ferramenta",
+      "responsavel": "Operações",
+      "criado_em": "2026-08-19",
+      "atualizado_em": "2026-08-19",
+      "tags": [
+        "reparo",
+        "atrix",
+        "operacao",
+        "databricks"
+      ],
+      "resultado_principal": null,
+      "artefatos": [],
+      "compartilhamento": {
+        "visibilidade": "privado",
+        "publico_descricao": "Uso local",
+        "modo_acesso": "local"
+      },
+      "ordem": 160
     }
   ]
 }
