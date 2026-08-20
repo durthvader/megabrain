@@ -1,6 +1,6 @@
 {
   "versao": 1,
-  "atualizado_em": "2026-08-19T14:12:40-03:00",
+  "atualizado_em": "2026-08-20T10:46:27-03:00",
   "projetos": [
     {
       "$schema": "../../docs/sandboxes/project.schema.json",
@@ -182,24 +182,47 @@
       "$schema": "../../docs/sandboxes/project.schema.json",
       "id": "reparos",
       "titulo": "Reparos",
-      "descricao": "Visoes de gestao de reparo sobre o Atrix: CMO, campo, historico e o que esta aberto agora. Consome o acesso do sandbox databricks e nunca recalcula numero que ja existe.",
+      "descricao": "Gestao de reparo sobre o Atrix, do analista ao CEO: historico do CMO, fila aberta, telao de gestao a vista do escritorio de servicos e produtividade por analista. Consome o acesso do sandbox databricks.",
       "status": "em_andamento",
       "tipo": "ferramenta",
       "responsavel": "Operações",
       "criado_em": "2026-08-19",
-      "atualizado_em": "2026-08-19",
+      "atualizado_em": "2026-08-20",
       "tags": [
         "reparo",
         "atrix",
         "operacao",
-        "databricks"
+        "databricks",
+        "escritorio",
+        "produtividade",
+        "telao"
       ],
-      "resultado_principal": null,
-      "artefatos": [],
+      "resultado_principal": {
+        "tipo": "painel",
+        "rotulo": "Painel de gestao",
+        "href": "https://reparos.alloha-ops.workers.dev/"
+      },
+      "artefatos": [
+        {
+          "tipo": "painel",
+          "rotulo": "Telao — gestao a vista do escritorio",
+          "href": "https://reparos.alloha-ops.workers.dev/tv"
+        },
+        {
+          "tipo": "painel",
+          "rotulo": "Fila aberta (supervisao)",
+          "href": "https://reparos.alloha-ops.workers.dev/fila"
+        },
+        {
+          "tipo": "painel",
+          "rotulo": "Visao executiva",
+          "href": "https://reparos.alloha-ops.workers.dev/executivo"
+        }
+      ],
       "compartilhamento": {
-        "visibilidade": "privado",
-        "publico_descricao": "Uso local",
-        "modo_acesso": "local"
+        "visibilidade": "restrito",
+        "publico_descricao": "Qualquer e-mail @alloha.com, via Cloudflare Access",
+        "modo_acesso": "link"
       },
       "ordem": 160
     }
