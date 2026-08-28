@@ -25,3 +25,6 @@ Thumbs.db
 # Python e artefatos de inspecao
 __pycache__/
 *.inspect.ndjson
+
+# Arquivos de trabalho temporarios
+tmp/

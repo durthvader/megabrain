@@ -3,6 +3,8 @@
 Megabrain é o catálogo privado dos trabalhos produzidos com o Codex. Ele não é
 o lugar onde demandas são abertas, analisadas ou encerradas.
 
+Todos os entregáveis seguem a [diretriz global de linguagem](AGENTS.md): comunicação natural, direta e executiva, sem redação genérica ou com "cara de IA".
+
 As demandas são criadas nesta conversa. Cada uma recebe um sandbox independente
 em `projects/`; o portal apenas mostra status, infraestrutura e um card que leva
 ao resultado correspondente.

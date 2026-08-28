@@ -1,6 +1,6 @@
 {
   "versao": 1,
-  "atualizado_em": "2026-08-20T10:46:27-03:00",
+  "atualizado_em": "2026-08-27T21:24:12-03:00",
   "projetos": [
     {
       "$schema": "../../docs/sandboxes/project.schema.json",
@@ -74,6 +74,32 @@
         "modo_acesso": "cloudflare_access_email"
       },
       "ordem": 120
+    },
+    {
+      "$schema": "../../docs/sandboxes/project.schema.json",
+      "id": "bnb-fase2",
+      "titulo": "BNB - Fase 2",
+      "descricao": "Portal operacional da CMO para acompanhar os 115 novos postos BNB, seus links, equipamentos, validações e migrações.",
+      "status": "publicado",
+      "tipo": "ferramenta",
+      "responsavel": "CMO",
+      "criado_em": "2026-08-27",
+      "atualizado_em": "2026-08-27",
+      "tags": [
+        "bnb",
+        "cmo",
+        "atrix",
+        "ofs",
+        "migracao"
+      ],
+      "resultado_principal": null,
+      "artefatos": [],
+      "compartilhamento": {
+        "visibilidade": "restrito",
+        "publico_descricao": "Acesso simples por e-mail e telas liberadas pelo administrador",
+        "modo_acesso": "cloudflare_access_email"
+      },
+      "ordem": 125
     },
     {
       "$schema": "../../docs/sandboxes/project.schema.json",
@@ -225,6 +251,32 @@
         "modo_acesso": "link"
       },
       "ordem": 160
+    },
+    {
+      "$schema": "../../docs/sandboxes/project.schema.json",
+      "id": "apresentacao-implantacao-ceo",
+      "titulo": "Apresentação Executiva de Implantação",
+      "descricao": "Apresentação executiva da área de Implantação para o CEO, com estrutura reutilizável nos ritos semanais e mensais da diretoria.",
+      "status": "em_andamento",
+      "tipo": "pptx",
+      "responsavel": "Gerência Executiva de Implantação Nacional",
+      "criado_em": "2026-08-20",
+      "atualizado_em": "2026-08-21",
+      "tags": [
+        "implantacao",
+        "diretoria",
+        "ceo",
+        "indicadores",
+        "ritmos-de-gestao"
+      ],
+      "resultado_principal": null,
+      "artefatos": [],
+      "compartilhamento": {
+        "visibilidade": "privado",
+        "publico_descricao": "Uso local",
+        "modo_acesso": "local"
+      },
+      "ordem": 170
     }
   ]
 }
