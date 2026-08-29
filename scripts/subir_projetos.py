@@ -28,6 +28,8 @@ PROJETOS = {
     "bnb-fase2": "Portal da CMO para os 115 novos postos do BNB (fase 2)",
     "reparos": "Painel de reparos da CMO: telão, gestão e fila",
     "databricks": "Camada de acesso ao lakehouse: dbx.py, inventário e mapa do Atrix",
+    "acompanhamento-implantacao": "Painel LD/FTTA que aposentou o Acompanhamento26.xlsx",
+    "fust": "Portal do programa FUST/BNDES: preenchimento, gerencial e executivo",
 }
 
 
