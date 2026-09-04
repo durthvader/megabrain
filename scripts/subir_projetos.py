@@ -10,14 +10,22 @@ então o código de cada projeto precisa do seu próprio repositório privado.
 
 O push usa o gerenciador de credenciais do Git (o mesmo login que já publica no
 `painel-bnb`), não o PAT do `.env`: os PATs da conta são fine-grained e enxergam
-só uma lista fixa de repositórios, então dão 404 em repositório novo. O script
-não cria o repositório — crie vazio e privado em https://github.com/new com o
-nome exato da tabela abaixo, e rode.
+só uma lista fixa de repositórios, então dão 404 em repositório novo. O mesmo
+vale para criar: `POST /user/repos` com esses PATs volta 403, e a criação sai
+pelo token do gerenciador, que é OAuth e tem a conta inteira.
+
+Repositório que ainda não existe é criado aqui, vazio e privado, com a descrição
+da tabela abaixo. Antes valia a pena abrir https://github.com/new à mão porque
+era uma vez por sandbox; virou a etapa que fazia o script parar no meio de um
+push que ele já sabia fazer.
 """
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[1]
@@ -38,6 +46,62 @@ def git(pasta: Path, *args: str) -> subprocess.CompletedProcess:
                           encoding="utf-8", errors="replace")
 
 
+# O que o `git credential fill` espera na entrada: os pares do pedido e uma
+# linha em branco fechando o bloco.
+PEDIDO_CREDENCIAL = "protocol=https\nhost=github.com\n\n"
+
+
+def token_do_gerenciador() -> str | None:
+    """O token que o Git já usa para falar com o GitHub nesta máquina.
+
+    `git credential fill` lê o gerenciador de credenciais do Windows e devolve
+    o mesmo `gho_...` dos pushes. Com o cofre vazio ele abriria um prompt e o
+    script ficaria pendurado esperando alguém digitar, por isso o timeout.
+    """
+    try:
+        r = subprocess.run(["git", "credential", "fill"],
+                           input=PEDIDO_CREDENCIAL,
+                           capture_output=True, text=True, timeout=20,
+                           encoding="utf-8", errors="replace")
+    except subprocess.TimeoutExpired:
+        return None
+    for linha in r.stdout.splitlines():
+        if linha.startswith("password="):
+            return linha.split("=", 1)[1].strip()
+    return None
+
+
+def criar_repo(nome: str, descricao: str) -> bool:
+    token = token_do_gerenciador()
+    if not token:
+        print("  nao achei credencial do github no gerenciador do Git.")
+        print(f"  crie '{nome}' vazio e privado em https://github.com/new e rode de novo.")
+        return False
+
+    corpo = json.dumps({"name": nome, "description": descricao, "private": True}).encode()
+    req = urllib.request.Request(
+        "https://api.github.com/user/repos", data=corpo, method="POST",
+        headers={"Authorization": f"Bearer {token}",
+                 "Accept": "application/vnd.github+json",
+                 "Content-Type": "application/json",
+                 "User-Agent": "megabrain-subir-projetos"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            criado = json.load(resp)
+        print(f"  repositorio criado: {criado['full_name']} (privado)")
+        return True
+    except urllib.error.HTTPError as erro:
+        detalhe = erro.read().decode("utf-8", "replace")[:200]
+        print(f"  falha ao criar ({erro.code}): {detalhe}")
+        # 403 aqui é token sem permissao de administracao; 422 costuma ser
+        # nome ja em uso por um repositorio que o token nao enxerga.
+        print(f"  crie '{nome}' vazio e privado em https://github.com/new e rode de novo.")
+        return False
+    except urllib.error.URLError as erro:
+        print(f"  falha ao criar: {erro.reason}")
+        return False
+
+
 def subir(nome: str) -> bool:
     pasta = RAIZ / "projects" / nome
     url = f"https://github.com/{DONO}/{nome}.git"
@@ -47,9 +111,9 @@ def subir(nome: str) -> bool:
         return False
 
     if git(pasta, "ls-remote", url).returncode != 0:
-        print(f"  repositorio nao encontrado. Crie vazio e privado como '{nome}'")
-        print("  em https://github.com/new e rode de novo.")
-        return False
+        print("  repositorio nao encontrado, criando...")
+        if not criar_repo(nome, PROJETOS[nome]):
+            return False
 
     if git(pasta, "remote", "get-url", "origin").returncode != 0:
         git(pasta, "remote", "add", "origin", url)
