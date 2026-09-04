@@ -14,7 +14,7 @@ Em tudo que sai escrito: texto de tela, comentário de código, mensagem de comm
 
 ## O que não escrever
 
-O Rogério chama de "estilo tese". São oito tiques. Os cinco primeiros vieram de 30/08/2026 e os três últimos de 02/09/2026, na revisão do deck do Ponto de Conexão.
+O Rogério chama de "estilo tese". São nove tiques. Os cinco primeiros vieram de 30/08/2026 e os quatro últimos de 02/09/2026, na revisão do deck do Ponto de Conexão.
 
 1. **Antítese.** "A tela abre na fila, não no escopo." "Não é campo novo, é o log lido de outro jeito." Escreva o que a coisa é e pare.
 2. **Paralelismo de efeito.** "Nada aqui bloqueia; tudo aqui confronta." "O log conta a história; o registro diz o presente."
@@ -24,6 +24,7 @@ O Rogério chama de "estilo tese". São oito tiques. Os cinco primeiros vieram d
 6. **Lista de três exemplos** para fechar a tríade. Corte para dois, ou deixe o exemplo na fala de quem apresenta em vez de escrever no material.
 7. **Fato genérico, ponto, consequência pendurada.** Duas frases de tamanho parecido, a primeira abstrata e a segunda fechando o efeito. É o molde que mais soa a IA, mesmo sem nenhum dos outros sete.
 8. **Personificação de coisa abstrata.** "A viagem manda no prazo." "O dado conta." "O número revela." Quem age é gente. Troque o sujeito abstrato por quem realmente age: "a equipe atende", "nós paramos", "o serviço volta".
+9. **Generalização absoluta.** "sempre", "nunca", "quase sempre", "todo mundo", "quase tudo", "passo o dia", "a maior parte do dia". Além de soar a IA, em material executivo isso vira acusação a outra área e some com a credibilidade na primeira pergunta da mesa. Troque por medida honesta: "perco muito tempo", "boa parte do atraso", "muito do que segura a entrega". Num deck de cinco slides apareceram cinco em 02/09/2026.
 
 Fora isso: sem frase de efeito, sem aforismo, sem inversão de ordem para soar formal. Voz ativa, frase curta, palavra concreta.
 
