@@ -1,6 +1,6 @@
 {
   "versao": 1,
-  "atualizado_em": "2026-08-27T21:24:12-03:00",
+  "atualizado_em": "2026-09-03T21:47:49-03:00",
   "projetos": [
     {
       "$schema": "../../docs/sandboxes/project.schema.json",
@@ -275,6 +275,38 @@
         "visibilidade": "privado",
         "publico_descricao": "Uso local",
         "modo_acesso": "local"
+      },
+      "ordem": 170
+    },
+    {
+      "$schema": "../../docs/sandboxes/project.schema.json",
+      "id": "ativacao",
+      "titulo": "Ativação B2B",
+      "descricao": "Acompanhamento diário de ativações B2B: reconciliação operacional Atrix × OFS, funil de execução, pendências de abertura no campo e auditoria de divergências.",
+      "status": "em_andamento",
+      "tipo": "dashboard",
+      "responsavel": "Operações",
+      "criado_em": "2026-09-01",
+      "atualizado_em": "2026-09-03",
+      "tags": [
+        "ativacao",
+        "b2b",
+        "atrix",
+        "ofs",
+        "reconciliacao",
+        "campo",
+        "operacao"
+      ],
+      "resultado_principal": {
+        "tipo": "dashboard",
+        "rotulo": "Painel operacional de ativação",
+        "href": "https://ativacao.alloha-ops.workers.dev/"
+      },
+      "artefatos": [],
+      "compartilhamento": {
+        "visibilidade": "restrito",
+        "publico_descricao": "Equipes de Operações e Implantação B2B",
+        "modo_acesso": "link"
       },
       "ordem": 170
     }
